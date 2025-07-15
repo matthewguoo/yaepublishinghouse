@@ -64,3 +64,50 @@
   margin-bottom: 12px;
   opacity: 0.65;
 }
+/* reuse the existing colour + spacing tokens where possible */
+
+/* compact list wrapper */
+.compactList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* each compact item is one row */
+.compactItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px solid #dedede;
+}
+
+.compactDate {
+  font-size: 0.875rem;
+  opacity: 0.6;
+}
+
+/* dark‑mode tweak */
+@media (prefers-color-scheme: dark) {
+  .compactItem {
+    border-color: #343539;
+  }
+}
+
+.desktopOnly {
+  display: block;
+}
+
+.mobileOnly {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none;
+  }
+
+  .mobileOnly {
+    display: block;
+  }
+}

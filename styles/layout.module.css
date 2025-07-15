@@ -1,0 +1,19 @@
+.footer {
+  border-top: 1px solid #dedede;
+  font-size: 0.75rem;
+  padding: 6px 0;
+  text-align: center;
+  opacity: 0.6;
+  margin-top: 40px;
+}
+
+.powered {
+  margin-left: 8px;
+  opacity: 0.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer {
+    border-color: #343539;
+  }
+}

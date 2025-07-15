@@ -29,4 +29,28 @@ a {
 
 h1 {
   font-weight: 800;
+  margin-top: 200;
+}
+
+:root {
+  --pink: #f4c9db;
+  --pink-dark: #e8a9c3;
+  --ink: #AAAAAA;
+  --white: #fff;
+}
+
+/* compact list wrapper */
+.compactList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* each compact item is one row */
+.compactItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px solid #dedede;
 }
