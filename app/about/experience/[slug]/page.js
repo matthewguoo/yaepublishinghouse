@@ -4,10 +4,10 @@ import Link from 'next/link';
 
 import {
   getTimelineDatabase, getBlocks, getPageFromSlug,
-} from '../../../lib/notion';
-import Text from '../../../components/text';
-import { renderBlock } from '../../../components/notion/renderer';
-import styles from '../../../styles/post.module.css';
+} from '../../../../lib/notion';
+import Text from '../../../../components/text';
+import { renderBlock } from '../../../../components/notion/renderer';
+import styles from '../../../../styles/post.module.css';
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {

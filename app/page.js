@@ -3,7 +3,6 @@ import ProjectsList from '../components/ProjectsList';
 import ProjectsAccordion from '../components/ProjectsAccordion';
 import ProjectsCards from '../components/ProjectsCards';
 import styles from './index.module.css';
-import FieldGrid from '../components/fieldGrid';
 
 export const databaseId = process.env.NOTION_DATABASE_ID ?? 'NOTION_DATABASE_ID';
 

@@ -1,6 +1,4 @@
-import Link from 'next/link';
 import { getArticleDatabase } from '../../lib/notion';
-import Text from '../../components/text';
 import styles from './../index.module.css';
 
 export const articleDatabaseId = process.env?.NOTION_ARTICLE_DATABASE_ID ?? 'NOTION_ARTICLE_DATABASE_ID';
