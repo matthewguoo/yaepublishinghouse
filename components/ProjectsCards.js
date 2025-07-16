@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import styles from './ProjectsCards.module.css';
 
@@ -15,6 +16,9 @@ export default function ProjectsCards({ posts }) {
 
         const preview = post.properties?.['preview-image']?.files?.[0] ?? null;
         const imgUrl = preview?.file?.url ?? preview?.external?.url ?? '';
+
+        const slug =
+          post.properties?.Slug?.rich_text?.[0]?.text?.content ?? 'untitled';
 
         return (
           <div key={post.id} className={styles.card}>
@@ -44,6 +48,11 @@ export default function ProjectsCards({ posts }) {
                 ))}
               </ul>
             )}
+
+            {/* new — link to the case study */}
+            <Link href={`/case-study/${slug}`} className={styles.caseLink}>
+              Case Study →
+            </Link>
           </div>
         );
       })}

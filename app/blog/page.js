@@ -3,8 +3,8 @@ import { getArticleDatabase } from '../../lib/notion';
 import Text from '../../components/text';
 import styles from '../index.module.css'; // ← remove extra “./” segment
 
-export const articleDatabaseId =
-  process.env.NOTION_ARTICLE_DATABASE_ID ?? 'NOTION_ARTICLE_DATABASE_ID';
+// const articleDatabaseId =
+//   process.env.NOTION_ARTICLE_DATABASE_ID ?? 'NOTION_ARTICLE_DATABASE_ID';
 
 async function getPosts() {
   return getArticleDatabase();
@@ -35,15 +35,16 @@ export default async function Page() {
             post.properties?.Slug?.rich_text?.[0]?.text?.content ?? 'untitled';
 
           return (
-            <li key={post.id} className={styles.post}>
-              <h3 className={styles.postTitle}>
-                <Link href={`/blog/article/${slug}`}>
-                  <Text title={post.properties?.Title?.title} />
-                </Link>
-              </h3>
-              <p className={styles.postDescription}>{edited}</p>
-              <Link href={`/blog/article/${slug}`}>Read post →</Link>
-            </li>
+            <div></div>
+            // <li key={post.id} className={styles.post}>
+            //   <h3 className={styles.postTitle}>
+            //     <Link href={`/blog/article/${slug}`}>
+            //       <Text title={post.properties?.Title?.title} />
+            //     </Link>
+            //   </h3>
+            //   <p className={styles.postDescription}>{edited}</p>
+            //   <Link href={`/blog/article/${slug}`}>Read post →</Link>
+            // </li>
           );
         })}
       </ol>

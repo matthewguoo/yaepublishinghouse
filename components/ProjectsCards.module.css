@@ -54,4 +54,17 @@
     font-size: 0.85rem;
     color: #333;
   }
+
+  .caseLink {
+    display: inline-block;
+    margin-top: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #0066ee;
+  }
+  
+  .caseLink:hover {
+    text-decoration: underline;
+  }
+  
   

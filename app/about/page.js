@@ -1,8 +1,6 @@
 import Text from '../../components/text';
-import { getDatabase } from '../../lib/notion';
+import { getTimelineDatabase } from '../../lib/notion';
 import styles from '../index.module.css';
-
-export const databaseId = process.env.NOTION_DATABASE_ID ?? 'NOTION_DATABASE_ID';
 
 // Helper: extract sortable year from “From” field
 function extractYear(from) {
@@ -15,7 +13,7 @@ function extractYear(from) {
 }
 
 async function getPosts() {
-  return getDatabase();
+  return getTimelineDatabase();
 }
 
 export default async function Page() {

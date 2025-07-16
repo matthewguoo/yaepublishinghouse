@@ -4,7 +4,7 @@ import ProjectsAccordion from '../components/ProjectsAccordion';
 import ProjectsCards from '../components/ProjectsCards';
 import styles from './index.module.css';
 
-export const databaseId =
+const databaseId =
   process.env.NOTION_DATABASE_ID ?? 'NOTION_DATABASE_ID';
 
 async function getPosts() {
@@ -22,6 +22,7 @@ export default async function Page() {
 
   return (
     <main className={styles.container}>
+      <div className={styles.marginOnDesktop}></div>
       <header className={styles.header}>
         <h1 className={styles.heading}>Matthew Guo</h1>
         <p>I design hardware that is enjoyable to work with.</p>

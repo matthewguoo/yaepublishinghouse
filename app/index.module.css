@@ -102,6 +102,10 @@
   display: none;
 }
 
+.marginOnDesktop{
+  height: 200px
+}
+
 @media (max-width: 768px) {
   .desktopOnly {
     display: none;
@@ -110,4 +114,9 @@
   .mobileOnly {
     display: block;
   }
+
+  .marginOnDesktop{
+    height: 0px
+  }  
 }
+
