@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import { Inter } from 'next/font/google';
 import Nav from '../components/nav';
 import styles from '../styles/layout.module.css';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={inter.className}>
+        <SpeedInsights>
         <Nav />
         {children}
         <footer className={styles.footer}>
@@ -37,6 +39,7 @@ export default function RootLayout({ children }) {
             service
           </span>
         </footer>
+        </SpeedInsights>
       </body>
     </html>
   );
