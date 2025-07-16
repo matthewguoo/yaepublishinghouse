@@ -1,10 +1,18 @@
+import Text from '../../components/text';
 import { getDatabase } from '../../lib/notion';
-// import ProjectsList from '../components/ProjectsList';
-// import ProjectsAccordion from '../components/ProjectsAccordion';
 import styles from '../index.module.css';
 
-export const databaseId =
-  process.env.NOTION_DATABASE_ID ?? 'NOTION_DATABASE_ID';
+export const databaseId = process.env.NOTION_DATABASE_ID ?? 'NOTION_DATABASE_ID';
+
+// Helper: extract sortable year from “From” field
+function extractYear(from) {
+  if (!from) return 0;
+  const four = from.match(/\b(19|20)\d{2}\b/);
+  if (four) return parseInt(four[0], 10);
+  const two = from.match(/\b(\d{2})\b/);
+  if (two) return 2000 + parseInt(two[1], 10);
+  return 0;
+}
 
 async function getPosts() {
   return getDatabase();
@@ -19,11 +27,14 @@ export default async function Page() {
       <header className={styles.header}>
         <h1>About</h1>
         <p>
-          I am a hardware designer with {yearsExperience} years of experience
-          delivering PCBA projects—from initial ideation and schematic capture
-          to bring‑up and rework. I’ve designed boards with modern high‑speed
-          interfaces such as PCIe and GbE, many of which have run reliably for
-          years in harsh, hot, and dusty environments.
+          I am a hardware designer with
+          {' '}
+          {yearsExperience}
+          {' '}
+          years of experience delivering PCBA projects—from initial ideation
+          and schematic capture to bring‑up and rework. I’ve designed boards
+          with modern high‑speed interfaces such as PCIe and GbE, many of which
+          have run reliably for years in harsh, hot, and dusty environments.
           <br />
           In addition to hardware development, I contribute scripting, basic
           RTOS firmware, and embedded OS bring‑up experience, enabling hardware
@@ -40,18 +51,18 @@ export default async function Page() {
         {[...posts]
           .sort((a, b) => {
             const yearA = extractYear(
-              a.properties?.From?.rich_text?.[0]?.plain_text
+              a.properties?.From?.rich_text?.[0]?.plain_text,
             );
             const yearB = extractYear(
-              b.properties?.From?.rich_text?.[0]?.plain_text
+              b.properties?.From?.rich_text?.[0]?.plain_text,
             );
             if (yearA !== yearB) return yearB - yearA;
             return (
-              new Date(b.last_edited_time).getTime() -
-              new Date(a.last_edited_time).getTime()
+              new Date(b.last_edited_time).getTime()
+              - new Date(a.last_edited_time).getTime()
             );
           })
-          .map((post) => {
+          .map(post => {
             const title = post.properties?.Title?.title;
             const role = post.properties?.Role?.rich_text?.[0]?.plain_text ?? '';
             const from = post.properties?.From?.rich_text?.[0]?.plain_text ?? '';

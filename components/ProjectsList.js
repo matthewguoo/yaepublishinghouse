@@ -9,8 +9,7 @@ import styles from '../app/index.module.css';
 export default function ProjectsList({ posts, compact }) {
   const [hoveredPost, setHoveredPost] = useState(null);
 
-  const fmt = iso =>
-    new Date(iso).toLocaleString('en-US', {
+  const fmt = iso => new Date(iso).toLocaleString('en-US', {
       month: 'short',
       day: '2-digit',
       year: 'numeric',

@@ -1,3 +1,4 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   env: {
     browser: true,
@@ -11,28 +12,40 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:@next/next/recommended',
   ],
-  overrides: [
-    {
-      env: {
-        node: true,
-      },
-      files: [
-        '.eslintrc.{js,cjs}',
-      ],
-      parserOptions: {
-        sourceType: 'script',
-      },
-    },
-  ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+
+  // Only needed if you lint config files themselves:
+  overrides: [
+    {
+      files: ['*.cjs', '.eslintrc.js'],
+      env: { node: true },
+      parserOptions: { sourceType: 'script' },
+    },
+  ],
+
+  plugins: ['react'],
+
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'react/jsx-props-no-spreading': [1, {
-      custom: 'ignore',
-    }],
-    'react/prop-types': [0],
+    /* ---------- stylistic rules relaxed ---------- */
+    'arrow-parens': 'warn',
+    'operator-linebreak': 'warn',
+    'max-len': ['warn', { code: 120 }],
+    'object-curly-newline': 'warn',
+    'comma-dangle': 'warn',
+    'react/jsx-one-expression-per-line': 'off',
+    'react/jsx-indent': 'warn',
+    'no-multi-spaces': 'warn',
+    'indent': ['warn', 2, { SwitchCase: 1 }],
+    'lines-around-directive': 'warn',
+    'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
+    'react/jsx-props-no-spreading': ['warn', { custom: 'ignore' }],
+    'react/prop-types': 'off',
+    'no-undef': 'error',
+    'react/jsx-key': 'error',
+    'react/button-has-type': 'error',
+    '@next/next/no-img-element': 'error',
   },
 };
