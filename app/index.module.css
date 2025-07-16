@@ -87,6 +87,11 @@
   opacity: 0.6;
 }
 
+.compactLink {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* dark‑mode tweak */
 @media (prefers-color-scheme: dark) {
   .compactItem {
