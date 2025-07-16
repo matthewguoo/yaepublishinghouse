@@ -1,4 +1,3 @@
-// components/nav.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -20,7 +19,6 @@ export default function Nav() {
       {/* Desktop & mobile bar */}
       <nav className={styles.nav}>
         <Link href="/" className={styles.logo}>
-          {/* tiny, subtle logo mark – reuse yours or an initial */}
           <span>Yae Publishing House | Matthew Guo</span>
         </Link>
 
@@ -45,6 +43,7 @@ export default function Nav() {
 
         {/* Burger for mobile */}
         <button
+          type="button"
           aria-label="Toggle navigation"
           className={styles.burger}
           onClick={() => setOpen(!open)}
@@ -76,4 +75,3 @@ export default function Nav() {
     </>
   );
 }
-

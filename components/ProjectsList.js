@@ -2,15 +2,14 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Text from './text';                  // same Text component you already have
+import Text from './text';
 import HoverCard from './HoverCard';
-import styles from '../app/index.module.css'; // reuse existing CSS
+import styles from '../app/index.module.css';
 
 export default function ProjectsList({ posts, compact }) {
   const [hoveredPost, setHoveredPost] = useState(null);
 
-  // date helper (runs client‑side now, plain ASCII hyphen)
-  const fmt = (iso) =>
+  const fmt = iso =>
     new Date(iso).toLocaleString('en-US', {
       month: 'short',
       day: '2-digit',
@@ -23,8 +22,9 @@ export default function ProjectsList({ posts, compact }) {
   return (
     <>
       <ListTag className={compact ? styles.compactList : styles.posts}>
-        {posts.map((post) => {
-          const slug = post.properties?.Slug?.rich_text[0].text.content;
+        {posts.map(post => {
+          const slug = post.properties?.Slug?.rich_text?.[0]?.text?.content;
+
           return (
             <li
               key={post.id}
@@ -57,7 +57,6 @@ export default function ProjectsList({ posts, compact }) {
         })}
       </ListTag>
 
-      {/* one floating card per list */}
       <HoverCard post={hoveredPost} visible={!!hoveredPost} />
     </>
   );

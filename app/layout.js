@@ -6,8 +6,8 @@ import styles from '../styles/layout.module.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Notion Next.js blog',
-  description: 'Notion Next.js blog',
+  title: 'Yae Publishing House',
+  description: 'Matthew Guo Portfolio Page',
 };
 
 export default function RootLayout({ children }) {
@@ -19,9 +19,14 @@ export default function RootLayout({ children }) {
         <Nav />
         {children}
         <footer className={styles.footer}>
-          <span>© Matthew Guo {currentYear}</span>
+          <span>
+            © Matthew Guo
+            <br />
+            {currentYear}
+          </span>
           <span className={styles.powered}>
-            · powered by vibe coding and some free AWS credits on a wrapper service
+            · powered by vibe coding and some free AWS credits on a wrapper
+            service
           </span>
         </footer>
       </body>
