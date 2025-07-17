@@ -24,7 +24,7 @@ export default async function Page() {
 
       <h2 className={styles.heading}>Articles</h2>
 
-      <ol className={styles.posts}>
+      <ol className={styles.compactList}>
         {posts.map(post => {
           const edited = new Date(post.last_edited_time).toLocaleString(
             'en-US',
@@ -34,15 +34,14 @@ export default async function Page() {
             post.properties?.Slug?.rich_text?.[0]?.text?.content ?? 'untitled';
 
           return (
-            <li key={post.id} className={styles.post}>
-              <h3 className={styles.postTitle}>
-                <Link href={`/blog/article/${slug}`}>
-                  <Text title={post.properties?.Title?.title} />
-                </Link>
-              </h3>
-              <p className={styles.postDescription}>{edited}</p>
-              <Link href={`/blog/article/${slug}`}>Read post →</Link>
-            </li>
+            <li key={post.id} className={styles.compactItem}>
+
+            <Link href={`/blog/article/${slug}`} className={styles.compactLink}>
+                              <Text title={post.properties?.Title?.title} as="span" />
+                              </Link>
+                            <span className={styles.compactDate}>{edited}</span>
+            
+                          </li>
           );
         })}
       </ol>

@@ -41,8 +41,8 @@ export default async function Page({ params }) {
           {blocks.map((block) => (
             <Fragment key={block.id}>{renderBlock(block)}</Fragment>
           ))}
-          <Link href="/" className={styles.back}>
-            ← Go home
+          <Link href="/blog" className={styles.back}>
+            ← Back to posts
           </Link>
         </section>
       </article>
