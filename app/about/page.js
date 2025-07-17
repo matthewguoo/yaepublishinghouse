@@ -24,7 +24,7 @@ export default async function Page() {
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h1>About</h1>
+        <h1>About me</h1>
         <p>
           I am a hardware designer with
           {' '}

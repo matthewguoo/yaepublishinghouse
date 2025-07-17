@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import {
-  getArticleDatabase, getBlocks, getPageFromSlug,
+  getArticleDatabase, getBlocks, getArticlePageFromSlug,
 } from '../../../../lib/notion';
 import Text from '../../../../components/text';
 import { renderBlock } from '../../../../components/notion/renderer';
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-  const page = await getPageFromSlug(params?.slug);
+  const page = await getArticlePageFromSlug(params?.slug);
   const blocks = await getBlocks(page?.id);
 
   if (!page || !blocks) {

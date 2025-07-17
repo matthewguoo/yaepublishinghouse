@@ -41,13 +41,9 @@ export default function ProjectsCards({ posts }) {
             )}
 
             {tags.length > 0 && (
-              <ul className={styles.tags}>
-                {tags.map(tag => (
-                  <li key={tag.id} className={styles.tag}>
-                    {tag.name}
-                  </li>
-                ))}
-              </ul>
+      <p className={styles.tags}>
+        {tags?.map(tag => tag.name).join(' · ')}
+      </p>
             )}
 
             {/* new — link to the case study */}

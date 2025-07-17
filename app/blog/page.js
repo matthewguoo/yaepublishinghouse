@@ -18,8 +18,7 @@ export default async function Page() {
       <header className={styles.header}>
         <h1>Blog</h1>
         <p>
-          I write about city life, hardware design, and the occasional
-          exploration of low‑latency hardware programming.
+          I write about city life and applying for things.
         </p>
       </header>
 
@@ -35,16 +34,15 @@ export default async function Page() {
             post.properties?.Slug?.rich_text?.[0]?.text?.content ?? 'untitled';
 
           return (
-            <div></div>
-            // <li key={post.id} className={styles.post}>
-            //   <h3 className={styles.postTitle}>
-            //     <Link href={`/blog/article/${slug}`}>
-            //       <Text title={post.properties?.Title?.title} />
-            //     </Link>
-            //   </h3>
-            //   <p className={styles.postDescription}>{edited}</p>
-            //   <Link href={`/blog/article/${slug}`}>Read post →</Link>
-            // </li>
+            <li key={post.id} className={styles.post}>
+              <h3 className={styles.postTitle}>
+                <Link href={`/blog/article/${slug}`}>
+                  <Text title={post.properties?.Title?.title} />
+                </Link>
+              </h3>
+              <p className={styles.postDescription}>{edited}</p>
+              <Link href={`/blog/article/${slug}`}>Read post →</Link>
+            </li>
           );
         })}
       </ol>

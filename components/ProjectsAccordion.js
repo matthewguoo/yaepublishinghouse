@@ -60,13 +60,11 @@ export default function ProjectsAccordion({ posts, autoExpandSelected = false })
                   <p className={styles.description}>{description}</p>
                 )}
 
-                {tags.length > 0 && (
-                  <ul className={styles.tags}>
-                    {tags.map(tag => (
-                      <li key={tag.id}>{tag.name}</li>
-                    ))}
-                  </ul>
-                )}
+            {tags.length > 0 && (
+            <p className={styles.tags}>
+              {tags?.map(tag => tag.name).join(' · ')}
+            </p>
+            )}
               </div>
             )}
           </div>
