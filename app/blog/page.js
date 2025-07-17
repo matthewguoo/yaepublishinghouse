@@ -39,7 +39,7 @@ export default async function Page() {
             <Link href={`/blog/article/${slug}`} className={styles.compactLink}>
                               <Text title={post.properties?.Title?.title} as="span" />
                               </Link>
-                            <span className={styles.compactDate}>{edited}</span>            
+                            <span className={styles.compactDate}>{edited}</span>
                           </li>
           );
         })}
