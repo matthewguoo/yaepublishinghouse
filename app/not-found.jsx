@@ -9,8 +9,8 @@ export default function NotFound() {
   return (
     <div className={styles.wrapper}>
       <Image
-        src="/yae.jpg"
-        alt="Yae"
+        src="/miko.jpg"
+        alt="Yae Miko"
         width={180}
         height={180}
         className={styles.image}
