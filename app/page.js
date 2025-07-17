@@ -16,9 +16,9 @@ export default async function Page() {
   const selectedPosts = posts.filter(
     (post) => post.properties?.Selected?.checkbox === true
   );
-  const nonSelectedPosts = posts.filter(
-    (post) => !post.properties?.Selected?.checkbox
-  );
+  // const nonSelectedPosts = posts.filter(
+  //   (post) => !post.properties?.Selected?.checkbox
+  // );
 
   return (
     <main className={styles.container}>
@@ -50,7 +50,7 @@ export default async function Page() {
           </>
         )}
         <h2 className={styles.heading}>All Projects</h2>
-        <ProjectsAccordion posts={nonSelectedPosts} />
+        <ProjectsAccordion posts={posts} />
       </div>
     </main>
   );

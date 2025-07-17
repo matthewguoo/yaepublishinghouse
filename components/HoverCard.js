@@ -21,13 +21,14 @@ export default function HoverCard({ post, visible }) {
     <div ref={cardRef} className={`${styles.card} ${styles.show}`}>
       {imgUrl && (
         <Image
-          src={imgUrl}
+          src={`/api/image?id=${post.id}`}
           alt=""
           width={400}
           height={230}
           className={styles.img}
           placeholder="blur"
           blurDataURL="/blur.png"
+          unoptimized
           sizes="(max-width: 640px) 60vw, 400px"
         />
       )}

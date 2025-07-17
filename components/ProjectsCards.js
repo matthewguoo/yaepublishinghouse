@@ -24,7 +24,8 @@ export default function ProjectsCards({ posts }) {
           <div key={post.id} className={styles.card}>
             {imgUrl && (
               <Image
-                src={imgUrl}
+                src={`/api/image?id=${post.id}`}
+                unoptimized
                 alt={`Preview of ${title}`}
                 width={640}
                 height={360}

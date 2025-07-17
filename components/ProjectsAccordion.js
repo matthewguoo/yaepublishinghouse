@@ -46,7 +46,8 @@ export default function ProjectsAccordion({ posts, autoExpandSelected = false })
               <div className={styles.body}>
                 {imgUrl && (
                   <Image
-                    src={imgUrl}
+                    src={`/api/image?id=${post.id}`}
+                    unoptimized
                     alt={`Preview of ${title}`}
                     width={640}
                     height={360}
