@@ -37,6 +37,7 @@ module.exports = {
     'comma-dangle': 'warn',
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-indent': 'warn',
+    'react/jsx-closing-tag-location' : 'warn',
     'no-multi-spaces': 'warn',
     'indent': ['warn', 2, { SwitchCase: 1 }],
     'lines-around-directive': 'warn',
@@ -49,5 +50,7 @@ module.exports = {
     'no-undef': 'error',
     'react/button-has-type': 'error',
     '@next/next/no-img-element': 'error',
+    'import/prefer-default-export' : 'warn',
+    'brace-style' : 'warn'
   },
 };

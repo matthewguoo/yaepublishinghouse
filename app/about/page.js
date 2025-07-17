@@ -1,7 +1,7 @@
+import Link from 'next/link';
 import Text from '../../components/text';
 import { getTimelineDatabase } from '../../lib/notion';
 import styles from '../index.module.css';
-import Link from 'next/link';
 
 // Helper: extract sortable year from “From” field
 function extractYear(from) {
@@ -67,7 +67,7 @@ export default async function Page() {
             const from = post.properties?.From?.rich_text?.[0]?.plain_text ?? '';
             const to = post.properties?.To?.rich_text?.[0]?.plain_text ?? '';
             const dateRange = to ? `${from} – ${to}` : from;
-            const link = post.properties?.Link?.rich_text?.[0]?.plain_text ?? ''
+            const link = post.properties?.Link?.rich_text?.[0]?.plain_text ?? '';
 
             return (
               <li key={post.id} className={styles.compactItem}>
@@ -77,7 +77,7 @@ export default async function Page() {
                   {role && (
                     <p className={styles.postDescription}>{role}</p>
                   )}
-                </Link>
+                  </Link>
                 <span className={styles.compactDate}>{dateRange}</span>
 
               </li>
