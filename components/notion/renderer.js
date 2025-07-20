@@ -77,16 +77,15 @@ export function renderBlock(block) {
           {block.children.map((child) => renderBlock(child))}
         </div>
       );
-    case 'image': {
-      const src = value.type === 'external' ? value.external.url : value.file.url;
-      const caption = value.caption ? value.caption[0]?.plain_text : '';
-      return (
-        <figure>
-          <img src={`/api/image?url=${encodeURIComponent(src)}`} alt={caption} />
-          {caption && <figcaption>{caption}</figcaption>}
-        </figure>
-      );
-    }
+      case 'image': {
+        const caption = value.caption ? value.caption[0]?.plain_text : '';
+        return (
+          <figure>
+            <img src={`/api/image?articleId=${(id)}`} alt={caption} />
+            {caption && <figcaption>{caption}</figcaption>}
+          </figure>
+        );
+      }
     case 'divider':
       return <hr key={id} />;
     case 'quote':
