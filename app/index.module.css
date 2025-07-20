@@ -34,12 +34,6 @@
   letter-spacing: 0.5px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .heading {
-    border-color: #343539;
-  }
-}
-
 .posts {
   list-style: none;
   margin: 0;
@@ -90,13 +84,6 @@
 .compactLink {
   color: inherit;
   text-decoration: none;
-}
-
-/* dark‑mode tweak */
-@media (prefers-color-scheme: dark) {
-  .compactItem {
-    border-color: #343539;
-  }
 }
 
 .desktopOnly {
