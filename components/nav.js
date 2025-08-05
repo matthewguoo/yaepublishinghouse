@@ -24,14 +24,14 @@ export default function Nav() {
               About
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               href="/blog"
               className={pathname.startsWith('/blog') ? styles.active : ''}
             >
               Blog
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </nav>

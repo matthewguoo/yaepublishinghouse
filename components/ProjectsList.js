@@ -35,7 +35,7 @@ export default function ProjectsList({ posts, compact }) {
                 <>
                   <Text title={post.properties?.Title?.title} />
                   <span className={styles.compactDate}>
-                    {fmt(post.last_edited_time)}
+                    { }
                   </span>
                 </>
               ) : (
