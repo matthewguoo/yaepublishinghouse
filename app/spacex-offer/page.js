@@ -8,20 +8,8 @@ export default function Page() {
         <h1 className={styles.heading}>SpaceX Offer Letter</h1>
         <p>Redacted for privacy — but still something I’m proud of.</p>
       </header>
-
-      {/* Desktop View */}
-      <div className={styles.desktopOnly}>
-        <iframe
-          src="/spacex-offer-redacted.pdf"
-          className={styles.pdfViewer}
-          title="SpaceX Offer Letter"
-        ></iframe>
-      </div>
-
-      {/* Mobile View */}
-      <div className={styles.mobileOnly}>
-        <p>
-          For mobile, you can{' '}
+      <p>
+          For mobile or a fullscreen, you can{' '}
           <a
             href="/spacex-offer-redacted.pdf"
             target="_blank"
@@ -31,7 +19,17 @@ export default function Page() {
           </a>
           .
         </p>
+      {/* Desktop View */}
+      <div className={styles.desktopOnly}>
+        <iframe
+          src="/spacex-offer-redacted.pdf"
+          className={styles.pdfViewer}
+          title="SpaceX Offer Letter"
+        ></iframe>
       </div>
+
+
+
     </main>
   );
 }
