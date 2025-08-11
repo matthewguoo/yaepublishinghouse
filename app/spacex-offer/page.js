@@ -27,9 +27,6 @@ export default function Page() {
           title="SpaceX Offer Letter"
         ></iframe>
       </div>
-
-
-
     </main>
   );
 }
