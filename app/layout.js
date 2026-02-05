@@ -7,17 +7,17 @@ import styles from '../styles/layout.module.css';
 const inter = Inter({ subsets: ['latin'] });
 
 const SITE_NAME = 'Yae Publishing House';
-const SITE_TAGLINE = 'Matthew Guo Portfolio Page';
-const SITE_DESC = 'Portfolio and personal site of Matthew Guo — hardware engineer, entrepreneur, and creative technologist.';
+const SITE_TAGLINE = 'Miko Portfolio Page';
+const SITE_DESC = '';
 const SITE_KEYWORDS = [
-  'Matthew Guo',
+  '',
   'Yae Publishing House',
   'portfolio',
   'hardware engineer',
   'electronics',
   'PCB design',
   'embedded systems',
-  'entrepreneur',
+  'Yae Miko',
   'technology',
 ];
 const PROD_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://yaepublishing.house';
@@ -30,9 +30,9 @@ export const metadata = {
   },
   description: SITE_DESC,
   applicationName: SITE_NAME,
-  authors: [{ name: 'Matthew Guo', url: `${PROD_URL}/about` }],
-  creator: 'Matthew Guo',
-  publisher: 'Matthew Guo',
+  authors: [{ name: 'Yae Miko', url: `${PROD_URL}/about` }],
+  creator: 'Yae Miko',
+  publisher: 'Yae Miko',
   category: 'personal',
   keywords: SITE_KEYWORDS,
   alternates: {
@@ -78,7 +78,7 @@ export default function RootLayout({ children }) {
   const orgJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Matthew Guo',
+    name: 'Yae Miko',
     url: PROD_URL,
     sameAs: [
       'https://x.com/matthewguoo',
@@ -122,7 +122,7 @@ export default function RootLayout({ children }) {
         <main>{children}</main>
         <footer className={styles.footer}>
           <span>
-            © Matthew Guo
+            © Miko
             <br />
             {currentYear}
           </span>
