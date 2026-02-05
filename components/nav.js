@@ -11,7 +11,7 @@ export default function Nav() {
     <nav className={styles.nav}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          Yae Publishing House | Matthew Guo
+          Yae Publishing House
         </Link>
         <ul className={styles.links}>
           <li>
