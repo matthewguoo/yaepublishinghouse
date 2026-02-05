@@ -24,7 +24,7 @@ export default async function Page() {
     <main className={styles.container}>
       <div className={styles.marginOnDesktop}></div>
       <header className={styles.header}>
-        <h1 className={styles.heading}>Matthew Guo</h1>
+        <h1 className={styles.heading}>Miko</h1>
         <p>I design hardware that is enjoyable to work with.</p>
       </header>
 
