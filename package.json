@@ -1,6 +1,6 @@
 {
-  "name": "nextjs-notion-blog",
-  "version": "0.1.1",
+  "name": "yae-publishing-house",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,22 +10,16 @@
     "predeploy": "yarn build && vercel",
     "deploy": "vercel --prod"
   },
-  "author": "Samuel Kraft <samuelkraft@me.com> (https://github.com/samuelkraft)",
-  "contributors": [
-    "Samuel Kraft <samuelkraft@me.com> (https://github.com/samuelkraft)",
-    "Adam Beleko <bossbele@larven.io> (https://github.com/BossBele)"
-  ],
   "dependencies": {
-    "@notionhq/client": "^2.2.3",
     "@types/react": "^19.1.8",
     "@vercel/speed-insights": "^1.2.0",
-    "classnames": "^2.5.1",
     "next": "^13.4.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.4.16",
+    "@types/node": "25.2.3",
     "encoding": "^0.1.13",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
