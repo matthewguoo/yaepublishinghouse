@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap');
 
 /* ============================================
-   CSS VARIABLES
+   CSS VARIABLES — SAKURA PINK THEME
    ============================================ */
 
 :root {
@@ -9,30 +9,33 @@
   --pink-bright: #e8729a;
   --pink-glow: #ff5c8d;
   --pink-muted: #c4899e;
+  --pink-deep: #3a0a1e;
+  --pink-dark: #4d1230;
+  --pink-mid: #8e2d5a;
+  --pink-light: #e8b0c8;
+  --pink-pale: #f5d5e0;
+  --pink-bg: #28061a;
 
-  --purple-deep: #2a0a3e;
-  --purple-dark: #3d1259;
-  --purple-mid: #7B2D8E;
-  --purple-light: #c4a7d7;
-  --purple-glow: #a855f7;
-  --purple-bg: #1a0628;
+  --rose: #d4708a;
+  --blush: #f0c0d0;
+  --magenta: #c44080;
+  --sakura: #ffb7c5;
 
-  --lavender: #d4bde6;
   --gold: #d4a853;
   --gold-bright: #f5cc5a;
   --gold-light: #f0d590;
   --gold-dim: #a08040;
   --gold-border: #c9a04e;
 
-  --text-primary: #f0e6f6;
-  --text-secondary: #cbb8d9;
-  --text-dim: #8a7a95;
+  --text-primary: #f6e6ee;
+  --text-secondary: #d9b8c8;
+  --text-dim: #957a88;
   --text-gold: #e8c97a;
 
-  --panel-bg: rgba(18, 6, 32, 0.88);
-  --panel-bg-solid: rgba(18, 6, 32, 0.92);
+  --panel-bg: rgba(32, 6, 18, 0.88);
+  --panel-bg-solid: rgba(32, 6, 18, 0.92);
   --panel-border: rgba(200, 160, 78, 0.3);
-  --card-bg: rgba(40, 15, 65, 0.9);
+  --card-bg: rgba(50, 12, 30, 0.9);
 
   --font-display: 'Cormorant Garamond', 'Georgia', serif;
   --font-body: 'Crimson Pro', 'Georgia', serif;
@@ -57,7 +60,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--purple-bg);
+  background-color: var(--pink-bg);
   color: var(--text-primary);
   overflow-x: hidden;
   min-height: 100vh;
@@ -228,8 +231,8 @@ body {
     radial-gradient(1px 1px at 90% 25%, rgba(255,255,255,0.4) 0%, transparent 100%),
     radial-gradient(1px 1px at 15% 60%, rgba(255,255,255,0.2) 0%, transparent 100%),
     radial-gradient(1px 1px at 45% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
-    radial-gradient(2px 2px at 25% 10%, rgba(212,168,83,0.3) 0%, transparent 100%),
-    radial-gradient(2px 2px at 65% 30%, rgba(212,168,83,0.2) 0%, transparent 100%);
+    radial-gradient(2px 2px at 25% 10%, rgba(255,183,197,0.3) 0%, transparent 100%),
+    radial-gradient(2px 2px at 65% 30%, rgba(255,183,197,0.2) 0%, transparent 100%);
   animation: twinkle 6s ease-in-out infinite alternate;
 }
 
@@ -246,7 +249,7 @@ body {
   right: 0;
   height: 40%;
   z-index: 6;
-  background: linear-gradient(to bottom, transparent 0%, var(--purple-bg) 100%);
+  background: linear-gradient(to bottom, transparent 0%, var(--pink-bg) 100%);
   pointer-events: none;
 }
 
@@ -269,13 +272,13 @@ body {
 }
 
 .hero-emblem-svg {
-  color: var(--gold);
-  filter: drop-shadow(0 0 12px rgba(212, 168, 83, 0.4));
+  color: var(--pink-soft);
+  filter: drop-shadow(0 0 12px rgba(255, 183, 197, 0.4));
 }
 
 @keyframes emblemPulse {
-  0%, 100% { filter: drop-shadow(0 0 12px rgba(212, 168, 83, 0.3)); }
-  50% { filter: drop-shadow(0 0 24px rgba(212, 168, 83, 0.6)); }
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(255, 183, 197, 0.3)); }
+  50% { filter: drop-shadow(0 0 24px rgba(255, 183, 197, 0.6)); }
 }
 
 .hero-title {
@@ -287,9 +290,9 @@ body {
   font-family: var(--font-jp);
   font-weight: 600;
   font-size: 3rem;
-  color: var(--gold);
+  color: var(--pink-soft);
   letter-spacing: 0.3em;
-  text-shadow: 0 0 30px rgba(212, 168, 83, 0.3);
+  text-shadow: 0 0 30px rgba(255, 183, 197, 0.3);
   margin-bottom: 0.3rem;
 }
 
@@ -309,7 +312,7 @@ body {
   font-size: 0.85rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--gold-dim);
+  color: var(--rose);
   margin-bottom: 1.5rem;
 }
 
@@ -318,9 +321,9 @@ body {
   font-style: italic;
   font-weight: 400;
   font-size: 1.4rem;
-  color: var(--pink-soft);
+  color: var(--gold-light);
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 20px rgba(255, 183, 197, 0.3);
+  text-shadow: 0 0 20px rgba(240, 213, 144, 0.3);
 }
 
 .hero-desc {
@@ -340,7 +343,7 @@ body {
 
 .scroll-arrow {
   font-size: 1.5rem;
-  color: var(--gold-dim);
+  color: var(--rose);
   opacity: 0.5;
 }
 
@@ -385,13 +388,13 @@ body {
 .scene-fade-top {
   top: 0;
   height: 30%;
-  background: linear-gradient(to bottom, var(--purple-bg) 0%, transparent 100%);
+  background: linear-gradient(to bottom, var(--pink-bg) 0%, transparent 100%);
 }
 
 .scene-fade-bottom {
   bottom: 0;
   height: 30%;
-  background: linear-gradient(to top, var(--purple-bg) 0%, transparent 100%);
+  background: linear-gradient(to top, var(--pink-bg) 0%, transparent 100%);
 }
 
 /* Centered text panel overlay */
@@ -408,7 +411,7 @@ body {
   background: var(--panel-bg-solid);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--panel-border);
+  border: 1px solid rgba(255, 183, 197, 0.25);
   border-radius: 4px;
   padding: 2.5rem 2.2rem;
   text-align: center;
@@ -418,7 +421,7 @@ body {
   content: '';
   position: absolute;
   inset: 4px;
-  border: 1px solid rgba(200, 160, 78, 0.12);
+  border: 1px solid rgba(255, 183, 197, 0.1);
   border-radius: 2px;
   pointer-events: none;
 }
@@ -429,7 +432,7 @@ body {
   font-family: var(--font-jp);
   font-weight: 400;
   font-size: 0.8rem;
-  color: var(--gold);
+  color: var(--pink-soft);
   letter-spacing: 0.5em;
   margin-bottom: 0.5rem;
   opacity: 0.8;
@@ -439,17 +442,17 @@ body {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1.7rem;
-  color: var(--gold-light);
+  color: var(--pink-pale);
   letter-spacing: 0.1em;
   margin: 0;
-  text-shadow: 0 0 20px rgba(212, 168, 83, 0.2);
+  text-shadow: 0 0 20px rgba(255, 183, 197, 0.2);
 }
 
 .scene-rule {
   width: 60px;
   height: 1.5px;
   margin: 1rem auto 1.5rem;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--pink-soft), transparent);
 }
 
 /* Story text */
@@ -462,7 +465,7 @@ body {
   font-weight: 400;
   font-size: 1.05rem;
   line-height: 1.9;
-  color: #e8e0f0;
+  color: #f0e0e8;
   margin-bottom: 0.5rem;
 }
 
@@ -486,22 +489,22 @@ body {
   display: block;
   width: 60px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--pink-soft), transparent);
 }
 
 .divider-diamond {
-  color: var(--gold);
+  color: var(--pink-soft);
   font-size: 0.5rem;
   opacity: 0.7;
 }
 
 /* ============================================
-   GOLD BORDER FRAME
+   GOLD BORDER FRAME — now pink-accented
    ============================================ */
 
 .gold-border-frame {
   position: relative;
-  border: 1px solid var(--panel-border);
+  border: 1px solid rgba(255, 183, 197, 0.25);
   background: var(--panel-bg-solid);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -513,7 +516,7 @@ body {
   content: '';
   position: absolute;
   inset: 4px;
-  border: 1px solid rgba(200, 160, 78, 0.15);
+  border: 1px solid rgba(255, 183, 197, 0.1);
   border-radius: 2px;
   pointer-events: none;
 }
@@ -529,7 +532,7 @@ body {
 .gold-corner::after {
   content: '';
   position: absolute;
-  background: var(--gold);
+  background: var(--pink-soft);
 }
 
 .gold-corner-tl { top: -1px; left: -1px; }
@@ -564,7 +567,7 @@ body {
   flex: 1;
   max-width: 80px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+  background: linear-gradient(90deg, transparent, var(--pink-soft), transparent);
 }
 
 .section-title {
@@ -576,7 +579,7 @@ body {
   font-family: var(--font-jp);
   font-weight: 500;
   font-size: 1.5rem;
-  color: var(--gold);
+  color: var(--pink-soft);
   letter-spacing: 0.2em;
   margin-bottom: 0.15rem;
 }
@@ -613,7 +616,7 @@ body {
 .deep-section {
   position: relative;
   z-index: 10;
-  background: var(--purple-bg);
+  background: var(--pink-bg);
 }
 
 /* ============================================
@@ -645,9 +648,9 @@ body {
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.08em;
-  color: var(--gold);
-  background: linear-gradient(135deg, rgba(200, 160, 78, 0.1) 0%, rgba(200, 160, 78, 0.05) 100%);
-  border: 1px solid var(--gold-border);
+  color: var(--pink-soft);
+  background: linear-gradient(135deg, rgba(255, 183, 197, 0.1) 0%, rgba(255, 183, 197, 0.05) 100%);
+  border: 1px solid rgba(255, 183, 197, 0.35);
   border-radius: 2px;
   padding: 0.9rem 2.5rem;
   cursor: pointer;
@@ -663,7 +666,7 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 183, 197, 0.15), transparent);
   transition: left 0.5s ease;
 }
 
@@ -672,8 +675,8 @@ body {
 }
 
 .omikuji-btn:hover {
-  background: linear-gradient(135deg, rgba(200, 160, 78, 0.18) 0%, rgba(200, 160, 78, 0.08) 100%);
-  box-shadow: 0 0 25px rgba(212, 168, 83, 0.2), inset 0 0 25px rgba(212, 168, 83, 0.05);
+  background: linear-gradient(135deg, rgba(255, 183, 197, 0.18) 0%, rgba(255, 183, 197, 0.08) 100%);
+  box-shadow: 0 0 25px rgba(255, 183, 197, 0.2), inset 0 0 25px rgba(255, 183, 197, 0.05);
   transform: translateY(-2px);
 }
 
@@ -726,7 +729,7 @@ body {
 
 .fortune-card-inner {
   background: var(--card-bg);
-  border: 1px solid rgba(200, 160, 78, 0.25);
+  border: 1px solid rgba(255, 183, 197, 0.2);
   border-radius: 2px;
   padding: 2rem 1.5rem 1.5rem;
   position: relative;
@@ -741,7 +744,7 @@ body {
   transform: translateX(-50%);
   width: 200%;
   height: 200%;
-  background: radial-gradient(ellipse at center, rgba(212, 168, 83, 0.06) 0%, transparent 60%);
+  background: radial-gradient(ellipse at center, rgba(255, 183, 197, 0.06) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -751,7 +754,7 @@ body {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), var(--pink-soft), var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--pink-soft), var(--gold-light), var(--pink-soft), transparent);
 }
 
 .fortune-rank {
@@ -778,7 +781,7 @@ body {
 
 .fortune-rank.great-blessing { color: var(--gold-bright); text-shadow: 0 0 15px rgba(245, 204, 90, 0.3); }
 .fortune-rank.blessing { color: var(--pink-soft); text-shadow: 0 0 15px rgba(255, 183, 197, 0.3); }
-.fortune-rank.small-blessing { color: var(--purple-light); }
+.fortune-rank.small-blessing { color: var(--pink-light); }
 .fortune-rank.uncertain { color: var(--text-dim); }
 .fortune-rank.curse { color: #e06060; }
 
@@ -786,7 +789,7 @@ body {
   font-family: var(--font-display);
   font-size: 3rem;
   font-weight: 300;
-  color: var(--gold);
+  color: var(--pink-soft);
   opacity: 0.2;
   line-height: 0.5;
   margin-bottom: 0.5rem;
@@ -851,7 +854,7 @@ body {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: 0.8rem;
-  color: var(--gold-dim);
+  color: var(--rose);
   letter-spacing: 0.05em;
 }
 
@@ -889,9 +892,9 @@ body {
 }
 
 .social-link:hover {
-  color: var(--gold);
-  border-color: rgba(200, 160, 78, 0.3);
-  background: rgba(200, 160, 78, 0.05);
+  color: var(--pink-soft);
+  border-color: rgba(255, 183, 197, 0.3);
+  background: rgba(255, 183, 197, 0.05);
 }
 
 .social-link svg {
@@ -1024,14 +1027,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--purple-bg);
+  background: var(--pink-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(200, 160, 78, 0.3);
+  background: rgba(255, 183, 197, 0.3);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(200, 160, 78, 0.5);
+  background: rgba(255, 183, 197, 0.5);
 }
