@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 /* =============================================
    FORTUNES DATA
@@ -138,8 +138,7 @@ const CHAPTERS = [
     id: 'fox',
     titleJp: '第一章',
     titleEn: 'The Fox',
-    image: '/scene_fox.jpg',
-    imageAlt: 'A white kitsune on a moonlit hilltop overlooking torii gates',
+    bg: '/scene_fox.jpg',
     lines: [
       'Long before the Sacred Sakura bloomed, before the shrine bells rang their first note —',
       'there was a fox.',
@@ -147,14 +146,12 @@ const CHAPTERS = [
       'Some called her a trickster. Others, a sage.',
       'She preferred to call herself... a storyteller.',
     ],
-    mood: 'indigo',
   },
   {
     id: 'publishing',
     titleJp: '第二章',
     titleEn: 'The Publishing House',
-    image: '/scene_publishing.jpg',
-    imageAlt: 'A traditional Japanese publishing house with floating scrolls and golden light',
+    bg: '/scene_publishing.jpg',
     lines: [
       'Stories, she discovered, were the most powerful things in existence.',
       'More powerful than any divine decree. More enduring than any sacred relic.',
@@ -162,14 +159,12 @@ const CHAPTERS = [
       'Every tale that passed through her doors was refined, polished,',
       'and released into the world like fireflies into the night.',
     ],
-    mood: 'warm',
   },
   {
     id: 'sakura',
     titleJp: '第三章',
     titleEn: 'The Sacred Sakura',
-    image: '/scene_sakura_tree.jpg',
-    imageAlt: 'The Sacred Sakura tree crackling with electro energy atop a mountain shrine',
+    bg: '/scene_sakura_tree.jpg',
     lines: [
       'At the heart of the shrine stands the Sacred Sakura —',
       'ancient, eternal, alive with memory.',
@@ -177,14 +172,12 @@ const CHAPTERS = [
       'Its blossoms carry wishes to the heavens.',
       'The fox tends to it still, as she has for centuries uncounted.',
     ],
-    mood: 'electro',
   },
   {
     id: 'traveler',
     titleJp: '第四章',
     titleEn: 'The Traveler',
-    image: '/scene_traveler.jpg',
-    imageAlt: 'A lone traveler walking through torii gates toward a glowing shrine',
+    bg: '/scene_traveler.jpg',
     lines: [
       'And now... you.',
       'Another traveler drawn by the light of the Sacred Sakura.',
@@ -192,7 +185,6 @@ const CHAPTERS = [
       'Tell me, what tale do you bring to my shrine?',
       'Perhaps the fortune slips will reveal what words cannot.',
     ],
-    mood: 'golden',
   },
 ];
 
@@ -271,71 +263,38 @@ function OrnamentalDivider() {
 }
 
 /* =============================================
-   BRUSH STROKE DIVIDER
+   STORY SCENE — full-bleed background + text overlay
    ============================================= */
 
-function BrushDivider() {
+function StoryScene({ chapter }) {
   return (
-    <div className="brush-divider scroll-reveal">
-      <img src="/brush_divider.jpg" alt="" className="brush-divider-img" />
-    </div>
-  );
-}
+    <section className="story-scene" data-chapter={chapter.id}>
+      {/* Full-bleed background illustration */}
+      <div
+        className="scene-bg"
+        style={{ backgroundImage: `url(${chapter.bg})` }}
+      />
+      {/* Top fade from previous section */}
+      <div className="scene-fade scene-fade-top" />
+      {/* Bottom fade into next section */}
+      <div className="scene-fade scene-fade-bottom" />
 
-/* =============================================
-   STORY CHAPTER COMPONENT
-   ============================================= */
+      {/* Text panel overlay */}
+      <div className="scene-content">
+        <div className="scene-panel scroll-reveal">
+          <div className="gold-corner gold-corner-tl" />
+          <div className="gold-corner gold-corner-tr" />
+          <div className="gold-corner gold-corner-bl" />
+          <div className="gold-corner gold-corner-br" />
 
-function StoryChapter({ chapter, index }) {
-  const isEven = index % 2 === 0;
+          <span className="scene-chapter-num">{chapter.titleJp}</span>
+          <h2 className="scene-chapter-title">{chapter.titleEn}</h2>
+          <div className="scene-rule" />
 
-  return (
-    <section className={`story-chapter chapter-${chapter.mood}`} data-chapter={chapter.id}>
-      {/* Watercolor wash transition overlay */}
-      <div className="chapter-wash" />
-
-      {/* Content: image + text panel side by side on desktop, stacked on mobile */}
-      <div className={`chapter-content ${isEven ? 'content-img-left' : 'content-img-right'}`}>
-        {/* Illustration */}
-        <div className="chapter-image-wrapper scroll-reveal">
-          <div className="chapter-image-frame">
-            <div className="ink-border ink-border-tl" />
-            <div className="ink-border ink-border-tr" />
-            <div className="ink-border ink-border-bl" />
-            <div className="ink-border ink-border-br" />
-            <img
-              src={chapter.image}
-              alt={chapter.imageAlt}
-              className="chapter-image"
-              loading="lazy"
-            />
-            <div className="image-ink-wash" />
-          </div>
-        </div>
-
-        {/* Story text on dark panel */}
-        <div className="chapter-text-panel scroll-reveal">
-          <div className="chapter-panel-inner">
-            <div className="gold-corner gold-corner-tl" />
-            <div className="gold-corner gold-corner-tr" />
-            <div className="gold-corner gold-corner-bl" />
-            <div className="gold-corner gold-corner-br" />
-
-            {/* Chapter header inside panel */}
-            <div className="chapter-header">
-              <span className="chapter-number">{chapter.titleJp}</span>
-              <h2 className="chapter-title-text">{chapter.titleEn}</h2>
-              <div className="chapter-header-rule" />
-            </div>
-
-            {/* Story text */}
-            <div className="chapter-text">
-              {chapter.lines.map((line, i) => (
-                <p key={i} className="story-line">
-                  {line}
-                </p>
-              ))}
-            </div>
+          <div className="scene-text">
+            {chapter.lines.map((line, i) => (
+              <p key={i} className="scene-line">{line}</p>
+            ))}
           </div>
         </div>
       </div>
@@ -372,7 +331,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
     );
 
     document.querySelectorAll('.scroll-reveal').forEach((el) => {
@@ -401,36 +360,35 @@ export default function Home() {
       {/* Paper texture overlay */}
       <div className="paper-texture" />
 
-      {/* Parallax Background Layers */}
-      <div className="parallax-bg">
-        <div
-          className="parallax-layer layer-sky"
-          style={{ transform: `translateY(${scrollY * 0.1}px)` }}
-        />
-        <div
-          className="parallax-layer layer-mountains"
-          style={{ transform: `translateY(${scrollY * 0.25}px)` }}
-        />
-        <div
-          className="parallax-layer layer-shrine"
-          style={{ transform: `translateY(${scrollY * 0.4}px)` }}
-        />
-        <div
-          className="parallax-layer layer-sakura"
-          style={{ transform: `translateY(${scrollY * 0.55}px)` }}
-        />
-        <div
-          className="parallax-layer layer-foreground"
-          style={{ transform: `translateY(${scrollY * 0.7}px)` }}
-        />
-        <div className="parallax-gradient-overlay" />
-      </div>
-
       {/* Floating Sakura Petals */}
       <SakuraPetals />
 
-      {/* ===== HERO SECTION ===== */}
+      {/* ===== HERO SECTION (parallax scene) ===== */}
       <section className="hero-section">
+        <div className="parallax-bg">
+          <div
+            className="parallax-layer layer-sky"
+            style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+          />
+          <div
+            className="parallax-layer layer-mountains"
+            style={{ transform: `translateY(${scrollY * 0.25}px)` }}
+          />
+          <div
+            className="parallax-layer layer-shrine"
+            style={{ transform: `translateY(${scrollY * 0.4}px)` }}
+          />
+          <div
+            className="parallax-layer layer-sakura"
+            style={{ transform: `translateY(${scrollY * 0.55}px)` }}
+          />
+          <div
+            className="parallax-layer layer-foreground"
+            style={{ transform: `translateY(${scrollY * 0.7}px)` }}
+          />
+        </div>
+        <div className="hero-fade" />
+
         <div className="hero-content">
           <div className="hero-emblem">
             <svg viewBox="0 0 100 100" className="hero-emblem-svg">
@@ -455,129 +413,105 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== STORY PROLOGUE ===== */}
-      <section className="story-prologue">
-        <div className="prologue-panel scroll-reveal">
-          <div className="prologue-panel-inner">
-            <div className="prologue-ornament">❖</div>
-            <p className="prologue-jp">物語の始まり</p>
-            <p className="prologue-en">The story begins...</p>
-            <div className="prologue-ornament">❖</div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== STORY CHAPTERS ===== */}
-      {CHAPTERS.map((chapter, i) => (
-        <div key={chapter.id}>
-          <StoryChapter chapter={chapter} index={i} />
-          {i < CHAPTERS.length - 1 && <BrushDivider />}
-        </div>
+      {/* ===== STORY SCENES ===== */}
+      {CHAPTERS.map((chapter) => (
+        <StoryScene key={chapter.id} chapter={chapter} />
       ))}
 
-      {/* ===== TRANSITION TO OMIKUJI ===== */}
-      <section className="story-transition scroll-reveal">
-        <div className="transition-panel">
-          <div className="transition-panel-inner">
-            <div className="prologue-ornament">❖</div>
-            <p className="transition-jp">運命を引く</p>
-            <p className="transition-en">Draw your fate</p>
-            <div className="prologue-ornament">❖</div>
-          </div>
-        </div>
-      </section>
+      {/* ===== DEEP SECTION (omikuji + about + footer) ===== */}
+      <div className="deep-section">
+        {/* ===== OMIKUJI SECTION ===== */}
+        <section className="omikuji-section scroll-reveal">
+          <GoldBorder className="omikuji-frame">
+            <div className="section-header">
+              <span className="section-header-line" />
+              <h2 className="section-title">
+                <span className="section-title-jp">御神籤</span>
+                <span className="section-title-en">Omikuji</span>
+              </h2>
+              <span className="section-header-line" />
+            </div>
 
-      {/* ===== OMIKUJI SECTION ===== */}
-      <section className="omikuji-section scroll-reveal">
-        <GoldBorder className="omikuji-frame">
-          <div className="section-header">
-            <span className="section-header-line" />
-            <h2 className="section-title">
-              <span className="section-title-jp">御神籤</span>
-              <span className="section-title-en">Omikuji</span>
-            </h2>
-            <span className="section-header-line" />
-          </div>
+            <p className="omikuji-desc">
+              The Grand Narukami Shrine offers divine fortunes to those who seek guidance.
+              Each slip carries the blessing — or mischief — of a certain fox.
+            </p>
 
-          <p className="omikuji-desc">
-            The Grand Narukami Shrine offers divine fortunes to those who seek guidance.
-            Each slip carries the blessing — or mischief — of a certain fox.
-          </p>
-
-          <button
-            className={`omikuji-btn ${isDrawing ? 'drawing' : ''}`}
-            onClick={drawFortune}
-            disabled={isDrawing}
-          >
-            <span className="btn-inner">
-              <span className="btn-icon">⛩</span>
-              <span className="btn-text">
-                {isDrawing ? 'Reading the stars...' : fortune ? 'Draw Again' : 'Draw Your Fortune'}
+            <button
+              className={`omikuji-btn ${isDrawing ? 'drawing' : ''}`}
+              onClick={drawFortune}
+              disabled={isDrawing}
+            >
+              <span className="btn-inner">
+                <span className="btn-icon">⛩</span>
+                <span className="btn-text">
+                  {isDrawing ? 'Reading the stars...' : fortune ? 'Draw Again' : 'Draw Your Fortune'}
+                </span>
               </span>
-            </span>
-          </button>
+            </button>
 
-          {fortune && (
-            <div className="fortune-card" key={fortuneKey}>
-              <div className="fortune-card-inner">
-                <div className="fortune-card-glow" />
-                <div className="fortune-card-top-border" />
-                <div className={`fortune-rank ${fortune.class}`}>
-                  <span className="fortune-rank-jp">{fortune.rankJp}</span>
-                  <span className="fortune-rank-divider">—</span>
-                  <span className="fortune-rank-en">{fortune.rank}</span>
-                </div>
-                <div className="fortune-quote-mark">&ldquo;</div>
-                <p className="fortune-text">{fortune.text}</p>
-                <div className="fortune-seal">
-                  <span>🦊</span>
-                  <span className="fortune-seal-text">Guuji Yae</span>
+            {fortune && (
+              <div className="fortune-card" key={fortuneKey}>
+                <div className="fortune-card-inner">
+                  <div className="fortune-card-glow" />
+                  <div className="fortune-card-top-border" />
+                  <div className={`fortune-rank ${fortune.class}`}>
+                    <span className="fortune-rank-jp">{fortune.rankJp}</span>
+                    <span className="fortune-rank-divider">—</span>
+                    <span className="fortune-rank-en">{fortune.rank}</span>
+                  </div>
+                  <div className="fortune-quote-mark">&ldquo;</div>
+                  <p className="fortune-text">{fortune.text}</p>
+                  <div className="fortune-seal">
+                    <span>🦊</span>
+                    <span className="fortune-seal-text">Guuji Yae</span>
+                  </div>
                 </div>
               </div>
+            )}
+          </GoldBorder>
+        </section>
+
+        {/* ===== ABOUT SECTION ===== */}
+        <section className="about-section scroll-reveal">
+          <GoldBorder className="about-frame">
+            <div className="section-header">
+              <span className="section-header-line" />
+              <h2 className="section-title">
+                <span className="section-title-jp">巫女の言葉</span>
+                <span className="section-title-en">Words of the Miko</span>
+              </h2>
+              <span className="section-header-line" />
             </div>
-          )}
-        </GoldBorder>
-      </section>
+            <div className="about-content">
+              <blockquote className="about-quote">
+                &ldquo;People believe what they want to believe. And so, a story well-told
+                is more powerful than any truth. That&rsquo;s why I run a publishing house,
+                not a shrine... though I do that too.&rdquo;
+              </blockquote>
+              <p className="about-attribution">— Yae Miko, Guuji of the Grand Narukami Shrine</p>
+            </div>
+          </GoldBorder>
+        </section>
 
-      {/* ===== ABOUT SECTION ===== */}
-      <section className="about-section scroll-reveal">
-        <GoldBorder className="about-frame">
-          <div className="section-header">
-            <span className="section-header-line" />
-            <h2 className="section-title">
-              <span className="section-title-jp">巫女の言葉</span>
-              <span className="section-title-en">Words of the Miko</span>
-            </h2>
-            <span className="section-header-line" />
+        {/* ===== FOOTER ===== */}
+        <footer className="site-footer scroll-reveal">
+          <div className="footer-inner">
+            <OrnamentalDivider />
+            <a
+              href="https://x.com/pci_yae"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+            >
+              <XIcon />
+              <span>@pci_yae</span>
+            </a>
+            <p className="footer-copy">© {new Date().getFullYear()} Yae Publishing House</p>
+            <p className="footer-blessing">May the Sacred Sakura watch over you 🌸</p>
           </div>
-          <div className="about-content">
-            <blockquote className="about-quote">
-              &ldquo;People believe what they want to believe. And so, a story well-told
-              is more powerful than any truth. That&rsquo;s why I run a publishing house,
-              not a shrine... though I do that too.&rdquo;
-            </blockquote>
-            <p className="about-attribution">— Yae Miko, Guuji of the Grand Narukami Shrine</p>
-          </div>
-        </GoldBorder>
-      </section>
-
-      {/* ===== FOOTER ===== */}
-      <footer className="site-footer scroll-reveal">
-        <div className="footer-inner">
-          <OrnamentalDivider />
-          <a
-            href="https://x.com/pci_yae"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-link"
-          >
-            <XIcon />
-            <span>@pci_yae</span>
-          </a>
-          <p className="footer-copy">© {new Date().getFullYear()} Yae Publishing House</p>
-          <p className="footer-blessing">May the Sacred Sakura watch over you 🌸</p>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 }
