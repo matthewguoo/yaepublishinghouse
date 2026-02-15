@@ -1,0 +1,22 @@
+{
+  "items": [
+    { "id": "torii-1", "type": "torii-gate", "position": [0, 0, 5], "rotation": [0, 0, 0], "addedDate": "2026-02-14" },
+    { "id": "shrine-1", "type": "shrine-building", "position": [0, 0, -4], "rotation": [0, 0, 0], "addedDate": "2026-02-14" },
+    { "id": "offering-1", "type": "offering-box", "position": [0, 0, -1.5], "rotation": [0, 0, 0], "addedDate": "2026-02-14" },
+    { "id": "lantern-1", "type": "lantern", "position": [2.5, 0, 1.5], "rotation": [0, 0, 0], "addedDate": "2026-02-14" },
+    { "id": "lantern-2", "type": "lantern", "position": [-2.5, 0, 1.5], "rotation": [0, 0, 0], "addedDate": "2026-02-14" },
+    { "id": "lantern-3", "type": "lantern", "position": [2.2, 0, -2.5], "rotation": [0, 0.3, 0], "addedDate": "2026-02-14" },
+    { "id": "lantern-4", "type": "lantern", "position": [-2.2, 0, -2.5], "rotation": [0, -0.3, 0], "addedDate": "2026-02-14" },
+    { "id": "sakura-1", "type": "sakura-tree", "position": [5, 0, -2], "rotation": [0, 0.5, 0], "addedDate": "2026-02-14" },
+    { "id": "sakura-2", "type": "sakura-tree", "position": [-5, 0, -1], "rotation": [0, -0.8, 0], "addedDate": "2026-02-14" },
+    { "id": "sakura-3", "type": "sakura-tree", "position": [4, 0, 4], "rotation": [0, 1.2, 0], "addedDate": "2026-02-14" },
+    { "id": "sakura-4", "type": "sakura-tree", "position": [-4.5, 0, 5], "rotation": [0, -0.4, 0], "addedDate": "2026-02-14" },
+    { "id": "fox-1", "type": "fox-statue", "position": [1.5, 0, 3.5], "rotation": [0, -0.3, 0], "addedDate": "2026-02-14" },
+    { "id": "fox-2", "type": "fox-statue", "position": [-1.5, 0, 3.5], "rotation": [0, 0.3, 0], "addedDate": "2026-02-14" },
+    { "id": "stone-1", "type": "stepping-stone", "position": [0, 0, 3.5], "rotation": [0, 0.1, 0], "addedDate": "2026-02-14" },
+    { "id": "stone-2", "type": "stepping-stone", "position": [0.15, 0, 2.5], "rotation": [0, -0.2, 0], "addedDate": "2026-02-14" },
+    { "id": "stone-3", "type": "stepping-stone", "position": [-0.1, 0, 1.5], "rotation": [0, 0.15, 0], "addedDate": "2026-02-14" },
+    { "id": "stone-4", "type": "stepping-stone", "position": [0.1, 0, 0.5], "rotation": [0, -0.1, 0], "addedDate": "2026-02-14" },
+    { "id": "bench-1", "type": "bench", "position": [4, 0, 1], "rotation": [0, -0.8, 0], "addedDate": "2026-02-14" }
+  ]
+}

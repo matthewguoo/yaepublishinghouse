@@ -1,6 +1,12 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import dynamic from 'next/dynamic';
+
+const ShrineScene = dynamic(() => import('./components/ShrineScene'), {
+  ssr: false,
+  loading: () => null,
+});
 
 /* =============================================
    FORTUNES DATA
@@ -130,60 +136,6 @@ const FORTUNES = [
 ];
 
 /* =============================================
-   SAKURA PETALS COMPONENT
-   ============================================= */
-
-function SakuraPetals() {
-  const [petals, setPetals] = useState([]);
-
-  useEffect(() => {
-    const generated = Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      size: 8 + Math.random() * 10,
-      fallDuration: 12 + Math.random() * 18,
-      swayDuration: 3 + Math.random() * 4,
-      delay: Math.random() * 15,
-      opacity: 0.3 + Math.random() * 0.4,
-    }));
-    setPetals(generated);
-  }, []);
-
-  return (
-    <div className="sakura-container" aria-hidden="true">
-      {petals.map((p) => (
-        <div
-          key={p.id}
-          className="sakura-petal"
-          style={{
-            left: p.left,
-            '--petal-size': `${p.size}px`,
-            animationDuration: `${p.fallDuration}s, ${p.swayDuration}s, ${p.fallDuration}s`,
-            animationDelay: `${p.delay}s, ${p.delay}s, ${p.delay}s`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-/* =============================================
-   TORII GATE SVG
-   ============================================= */
-
-function ToriiGate() {
-  return (
-    <svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="60">
-      <rect x="15" y="8" width="70" height="5" rx="2" fill="currentColor" />
-      <rect x="10" y="0" width="80" height="4" rx="2" fill="currentColor" />
-      <rect x="20" y="13" width="4" height="65" fill="currentColor" />
-      <rect x="76" y="13" width="4" height="65" fill="currentColor" />
-      <rect x="24" y="28" width="52" height="3" rx="1" fill="currentColor" />
-    </svg>
-  );
-}
-
-/* =============================================
    X (TWITTER) ICON
    ============================================= */
 
@@ -196,44 +148,18 @@ function XIcon() {
 }
 
 /* =============================================
-   SCROLL REVEAL HOOK
+   TORII GATE SVG (for UI)
    ============================================= */
 
-function useScrollReveal() {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return [ref, visible];
-}
-
-/* =============================================
-   REVEAL WRAPPER
-   ============================================= */
-
-function Reveal({ children, className = '' }) {
-  const [ref, visible] = useScrollReveal();
+function ToriiGateSVG() {
   return (
-    <div ref={ref} className={`reveal ${visible ? 'visible' : ''} ${className}`}>
-      {children}
-    </div>
+    <svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="40">
+      <rect x="15" y="8" width="70" height="5" rx="2" fill="currentColor" />
+      <rect x="10" y="0" width="80" height="4" rx="2" fill="currentColor" />
+      <rect x="20" y="13" width="4" height="65" fill="currentColor" />
+      <rect x="76" y="13" width="4" height="65" fill="currentColor" />
+      <rect x="24" y="28" width="52" height="3" rx="1" fill="currentColor" />
+    </svg>
   );
 }
 
@@ -245,6 +171,13 @@ export default function Home() {
   const [fortune, setFortune] = useState(null);
   const [fortuneKey, setFortuneKey] = useState(0);
   const [lastIndex, setLastIndex] = useState(-1);
+  const [shrineItems, setShrineItems] = useState([]);
+  useEffect(() => {
+    fetch('/shrine-state.json')
+      .then((r) => r.json())
+      .then((data) => setShrineItems(data.items || []))
+      .catch(() => {});
+  }, []);
 
   const drawFortune = useCallback(() => {
     let idx;
@@ -259,75 +192,41 @@ export default function Home() {
 
   return (
     <>
-      <SakuraPetals />
+      {/* 3D Shrine Background */}
+      <ShrineScene items={shrineItems} />
 
-      <div className="page-wrapper">
-        {/* ── Hero ── */}
-        <section className="hero">
-          <div className="hero-content">
-            <div className="torii-gate fade-in fade-in-delay-1">
-              <ToriiGate />
-            </div>
+      {/* UI Overlay */}
+      <div className="overlay-wrapper">
+        {/* Header */}
+        <header className="overlay-header">
+          <div className="overlay-header-icon">
+            <ToriiGateSVG />
+          </div>
+          <div className="overlay-header-text">
+            <h1 className="overlay-title">Yae Publishing House</h1>
+            <p className="overlay-subtitle">Grand Narukami Shrine</p>
+          </div>
+        </header>
 
-            <h1 className="hero-title fade-in fade-in-delay-2">
-              Yae Publishing House
-            </h1>
-
-            <p className="hero-subtitle fade-in fade-in-delay-2">
-              — Grand Narukami Shrine —
-            </p>
-
-            <div className="hero-divider fade-in fade-in-delay-3" />
-
-            <p className="hero-greeting fade-in fade-in-delay-3">
-              Ara ara~ A visitor? How delightful.
-            </p>
-            <p className="hero-greeting-sub fade-in fade-in-delay-4">
-              Do stay a while… I promise I won&rsquo;t bite.
-              <br />
-              Much.
+        {/* Main content panel */}
+        <div className="overlay-panel">
+          {/* Greeting */}
+          <div className="overlay-greeting">
+            <p className="greeting-main">Ara ara~ A visitor?</p>
+            <p className="greeting-sub">
+              Welcome to my shrine. Draw a fortune, or simply enjoy the view.
             </p>
           </div>
 
-          <div className="scroll-indicator fade-in fade-in-delay-5">
-            <span>scroll</span>
-          </div>
-        </section>
+          {/* Divider */}
+          <div className="overlay-divider" />
 
-        {/* ── About ── */}
-        <section className="section">
-          <Reveal>
-            <div className="section-divider" />
-            <p className="about-text">
-              I am <em>Yae Miko</em> — Guuji of the <strong>Grand Narukami Shrine</strong> and
-              proprietor of the <strong>Yae Publishing House</strong>, Inazuma&rsquo;s
-              finest purveyor of light novels.
-              <br /><br />
-              A kitsune of many talents and even more secrets.
-              I deal in stories — the ones written on paper,
-              and the far more interesting ones people carry in their hearts.
-              <br /><br />
-              You&rsquo;ve wandered into my domain.
-              How fortunate for you.
-            </p>
-          </Reveal>
-        </section>
+          {/* Omikuji */}
+          <div className="overlay-omikuji">
+            <h2 className="omikuji-title">御神籤 Omikuji</h2>
 
-        {/* ── Omikuji ── */}
-        <section className="section omikuji-section">
-          <Reveal>
-            <div className="section-divider" />
-            <h2 className="section-title">御神籤 — Omikuji</h2>
-            <p className="omikuji-description">
-              Every visitor to the shrine deserves a fortune.
-              Draw one and see what fate has in store — though
-              I make no guarantees you&rsquo;ll like what you find.
-            </p>
-
-            <button className="omikuji-draw-btn" onClick={drawFortune}>
-              <span className="btn-text">
-                {fortune ? 'Draw Again' : 'Draw Your Fortune'}
-              </span>
+            <button className="omikuji-btn" onClick={drawFortune}>
+              {fortune ? 'Draw Again' : 'Draw Your Fortune'}
             </button>
 
             {fortune && (
@@ -341,31 +240,24 @@ export default function Home() {
                 </div>
               </div>
             )}
-          </Reveal>
-        </section>
+          </div>
+        </div>
 
-        {/* ── Social ── */}
-        <section className="social-section">
-          <Reveal>
-            <a
-              href="https://x.com/pci_yae"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-            >
-              <XIcon />
-              <span>@pci_yae</span>
-            </a>
-          </Reveal>
-        </section>
-
-        {/* ── Footer ── */}
-        <footer className="site-footer">
-          <div className="footer-fox">🦊</div>
-          <p className="footer-text">
+        {/* Footer bar */}
+        <div className="overlay-footer">
+          <a
+            href="https://x.com/pci_yae"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-link"
+          >
+            <XIcon />
+            <span>@pci_yae</span>
+          </a>
+          <span className="footer-copy">
             © {new Date().getFullYear()} Yae Publishing House
-          </p>
-        </footer>
+          </span>
+        </div>
       </div>
     </>
   );

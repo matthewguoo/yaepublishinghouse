@@ -1,11 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
 
 :root {
-  --bg-deep: #080410;
-  --bg-surface: #0e0920;
-  --bg-card: #150d2a;
-  --bg-card-hover: #1c1235;
-
   --pink-soft: #FFB7C5;
   --pink-bright: #e8729a;
   --pink-glow: #ff5c8d;
@@ -21,9 +16,13 @@
   --gold-light: #f0d590;
   --gold-dim: #a08040;
 
-  --text-primary: #f0e8f5;
-  --text-secondary: #c0b0d0;
-  --text-dim: #8a7a9a;
+  --text-primary: #2a1a35;
+  --text-secondary: #4a3a55;
+  --text-dim: #7a6a85;
+
+  --panel-bg: rgba(255, 250, 252, 0.88);
+  --panel-border: rgba(200, 180, 210, 0.35);
+  --card-bg: rgba(255, 245, 248, 0.9);
 
   --font-display: 'Cormorant Garamond', 'Georgia', serif;
   --font-body: 'Crimson Pro', 'Georgia', serif;
@@ -36,339 +35,196 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-deep);
+  background-color: #ddd0e8;
   color: var(--text-primary);
   overflow-x: hidden;
   min-height: 100vh;
+  margin: 0;
 }
 
 ::selection {
   background: var(--pink-bright);
-  color: var(--bg-deep);
+  color: #fff;
 }
 
 /* ============================================
-   SAKURA PETALS
+   OVERLAY WRAPPER
    ============================================ */
 
-.sakura-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.sakura-petal {
-  position: absolute;
-  top: -40px;
-  opacity: 0;
-  animation: sakura-fall linear infinite, sakura-sway ease-in-out infinite, sakura-fade ease-in-out infinite;
-}
-
-.sakura-petal::before {
-  content: '';
-  display: block;
-  width: var(--petal-size, 12px);
-  height: var(--petal-size, 12px);
-  background: radial-gradient(ellipse at 30% 30%, var(--pink-soft), var(--pink-bright));
-  border-radius: 50% 0 50% 0;
-  opacity: 0.6;
-  filter: blur(0.5px);
-}
-
-@keyframes sakura-fall {
-  0% { transform: translateY(-40px) rotate(0deg); }
-  100% { transform: translateY(105vh) rotate(720deg); }
-}
-
-@keyframes sakura-sway {
-  0%, 100% { margin-left: 0; }
-  25% { margin-left: 40px; }
-  75% { margin-left: -40px; }
-}
-
-@keyframes sakura-fade {
-  0% { opacity: 0; }
-  10% { opacity: 0.7; }
-  90% { opacity: 0.5; }
-  100% { opacity: 0; }
-}
-
-/* ============================================
-   PAGE LAYOUT
-   ============================================ */
-
-.page-wrapper {
+.overlay-wrapper {
   position: relative;
-  z-index: 2;
+  z-index: 10;
+  pointer-events: none;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  padding: 1.5rem;
+  gap: 1rem;
+}
+
+.overlay-wrapper > * {
+  pointer-events: auto;
 }
 
 /* ============================================
-   HERO SECTION
+   HEADER
    ============================================ */
 
-.hero {
-  min-height: 100vh;
+.overlay-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem 1.5rem;
-  position: relative;
+  gap: 0.75rem;
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  animation: fadeSlideIn 0.6s ease both;
+  animation-delay: 0.1s;
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(ellipse 600px 400px at 50% 40%, rgba(123, 45, 142, 0.12), transparent),
-    radial-gradient(ellipse 400px 300px at 30% 60%, rgba(232, 114, 154, 0.06), transparent),
-    radial-gradient(ellipse 400px 300px at 70% 30%, rgba(168, 85, 247, 0.06), transparent);
-  pointer-events: none;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 640px;
-}
-
-.torii-gate {
-  margin-bottom: 2rem;
+.overlay-header-icon {
   color: var(--pink-soft);
-  opacity: 0.5;
+  opacity: 0.7;
+  flex-shrink: 0;
 }
 
-.torii-gate svg {
-  width: 60px;
-  height: auto;
-}
-
-.hero-title {
+.overlay-title {
   font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(2.2rem, 6vw, 3.6rem);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
   color: var(--text-primary);
-  margin-bottom: 0.3rem;
   line-height: 1.2;
 }
 
-.hero-subtitle {
+.overlay-subtitle {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(0.75rem, 2vw, 0.9rem);
-  letter-spacing: 0.4em;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold-dim);
-  margin-bottom: 3rem;
+  line-height: 1.3;
 }
 
-.hero-divider {
-  width: 80px;
+/* ============================================
+   MAIN PANEL
+   ============================================ */
+
+.overlay-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 1.8rem 1.6rem;
+  max-width: 360px;
+  width: 100%;
+  animation: fadeSlideIn 0.6s ease both;
+  animation-delay: 0.3s;
+}
+
+/* ============================================
+   GREETING
+   ============================================ */
+
+.overlay-greeting {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.greeting-main {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.3rem;
+  color: var(--pink-bright);
+  margin-bottom: 0.5rem;
+}
+
+.greeting-sub {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ============================================
+   DIVIDER
+   ============================================ */
+
+.overlay-divider {
+  width: 50px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--pink-soft), transparent);
-  margin: 0 auto 2.5rem;
-}
-
-.hero-greeting {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.15rem, 3vw, 1.5rem);
-  color: var(--pink-soft);
-  line-height: 1.7;
-  margin-bottom: 0.8rem;
-}
-
-.hero-greeting-sub {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(0.9rem, 2vw, 1.05rem);
-  color: var(--text-secondary);
-  line-height: 1.8;
-}
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-dim);
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  animation: scroll-bob 2s ease-in-out infinite;
-}
-
-.scroll-indicator::after {
-  content: '';
-  width: 1px;
-  height: 24px;
-  background: linear-gradient(to bottom, var(--text-dim), transparent);
-}
-
-@keyframes scroll-bob {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(6px); }
+  margin: 0 auto 1.4rem;
 }
 
 /* ============================================
-   SECTIONS
+   OMIKUJI
    ============================================ */
 
-.section {
-  padding: 5rem 1.5rem;
-  max-width: 680px;
-  margin: 0 auto;
-  width: 100%;
+.overlay-omikuji {
+  text-align: center;
 }
 
-.section-divider {
-  width: 40px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--purple-light), transparent);
-  margin: 0 auto 3rem;
-}
-
-.section-title {
+.omikuji-title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  letter-spacing: 0.1em;
-  text-align: center;
-  color: var(--text-primary);
-  margin-bottom: 2rem;
-}
-
-/* ============================================
-   ABOUT
-   ============================================ */
-
-.about-text {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 1.05rem;
-  line-height: 1.9;
-  color: var(--text-secondary);
-  text-align: center;
-}
-
-.about-text em {
-  color: var(--pink-soft);
-  font-style: italic;
-}
-
-.about-text strong {
-  color: var(--lavender);
-  font-weight: 500;
-}
-
-/* ============================================
-   OMIKUJI (FORTUNE)
-   ============================================ */
-
-.omikuji-section {
-  padding: 5rem 1.5rem 6rem;
-  text-align: center;
-}
-
-.omikuji-description {
-  font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 0.95rem;
-  color: var(--text-dim);
-  margin-bottom: 2.5rem;
-  line-height: 1.7;
-  max-width: 440px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.omikuji-draw-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.15rem;
   letter-spacing: 0.08em;
-  color: var(--pink-soft);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.omikuji-btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--pink-bright);
   background: transparent;
-  border: 1px solid rgba(255, 183, 197, 0.25);
-  padding: 0.9rem 2.2rem;
+  border: 1px solid rgba(232, 114, 154, 0.35);
+  border-radius: 8px;
+  padding: 0.65rem 1.6rem;
   cursor: pointer;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.omikuji-draw-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 183, 197, 0.05), rgba(123, 45, 142, 0.08));
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.omikuji-draw-btn:hover {
-  border-color: rgba(255, 183, 197, 0.5);
-  color: #fff;
+.omikuji-btn:hover {
+  background: rgba(232, 114, 154, 0.08);
+  border-color: rgba(232, 114, 154, 0.55);
   transform: translateY(-1px);
 }
 
-.omikuji-draw-btn:hover::before {
-  opacity: 1;
-}
-
-.omikuji-draw-btn:active {
+.omikuji-btn:active {
   transform: translateY(0);
 }
 
-.omikuji-draw-btn .btn-text {
-  position: relative;
-  z-index: 1;
-}
+/* ============================================
+   FORTUNE CARD
+   ============================================ */
 
-/* Fortune Card */
 .fortune-card {
-  margin-top: 2.5rem;
-  max-width: 380px;
-  margin-left: auto;
-  margin-right: auto;
-  animation: fortune-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 1.2rem;
+  animation: fortunePop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fortune-reveal {
+@keyframes fortunePop {
   0% {
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(12px) scale(0.96);
   }
   100% {
     opacity: 1;
@@ -377,9 +233,10 @@ body {
 }
 
 .fortune-card-inner {
-  background: linear-gradient(160deg, var(--bg-card), rgba(74, 14, 78, 0.15));
-  border: 1px solid rgba(255, 183, 197, 0.12);
-  padding: 2.5rem 2rem;
+  background: var(--card-bg);
+  border: 1px solid rgba(200, 180, 210, 0.3);
+  border-radius: 10px;
+  padding: 1.5rem 1.2rem;
   position: relative;
   overflow: hidden;
 }
@@ -397,184 +254,153 @@ body {
 .fortune-rank {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.4rem;
-  letter-spacing: 0.15em;
-  margin-bottom: 1.2rem;
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8rem;
 }
 
-.fortune-rank.great-blessing { color: var(--gold-light); }
-.fortune-rank.blessing { color: var(--pink-soft); }
-.fortune-rank.small-blessing { color: var(--lavender); }
-.fortune-rank.uncertain { color: var(--text-secondary); }
-.fortune-rank.curse { color: var(--pink-bright); }
+.fortune-rank.great-blessing { color: #b8860b; }
+.fortune-rank.blessing { color: var(--pink-bright); }
+.fortune-rank.small-blessing { color: #8b6aad; }
+.fortune-rank.uncertain { color: var(--text-dim); }
+.fortune-rank.curse { color: #c0392b; }
 
 .fortune-text {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 400;
-  font-size: 1.1rem;
-  line-height: 1.8;
+  font-size: 0.95rem;
+  line-height: 1.7;
   color: var(--text-secondary);
 }
 
 .fortune-fox {
-  margin-top: 1.5rem;
-  font-size: 0.8rem;
+  margin-top: 1rem;
+  font-size: 0.75rem;
   color: var(--text-dim);
-  letter-spacing: 0.3em;
-  font-family: var(--font-display);
-}
-
-/* Shake animation for redraw */
-.shake {
-  animation: shake 0.4s ease;
-}
-
-@keyframes shake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-2deg); }
-  75% { transform: rotate(2deg); }
-}
-
-/* ============================================
-   SOCIAL / LINKS
-   ============================================ */
-
-.social-section {
-  padding: 3rem 1.5rem 5rem;
-  text-align: center;
-}
-
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: var(--text-secondary);
-  text-decoration: none;
-  padding: 0.7rem 1.6rem;
-  border: 1px solid rgba(192, 176, 208, 0.15);
-  transition: all 0.3s ease;
-}
-
-.social-link:hover {
-  color: var(--pink-soft);
-  border-color: rgba(255, 183, 197, 0.3);
-  background: rgba(255, 183, 197, 0.03);
-}
-
-.social-link svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
+  letter-spacing: 0.2em;
 }
 
 /* ============================================
    FOOTER
    ============================================ */
 
-.site-footer {
-  padding: 3rem 1.5rem;
-  text-align: center;
-  border-top: 1px solid rgba(192, 176, 208, 0.08);
+.overlay-footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  animation: fadeSlideIn 0.6s ease both;
+  animation-delay: 0.5s;
 }
 
-.footer-fox {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  margin-bottom: 0.8rem;
-  letter-spacing: 0.2em;
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.footer-text {
+.social-link:hover {
+  color: var(--pink-bright);
+}
+
+.social-link svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.footer-copy {
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: var(--text-dim);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
 }
 
 /* ============================================
-   ENTRANCE ANIMATIONS
+   ANIMATIONS
    ============================================ */
 
-.fade-in {
-  opacity: 0;
-  transform: translateY(16px);
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-.fade-in-delay-1 { animation-delay: 0.2s; }
-.fade-in-delay-2 { animation-delay: 0.5s; }
-.fade-in-delay-3 { animation-delay: 0.8s; }
-.fade-in-delay-4 { animation-delay: 1.1s; }
-.fade-in-delay-5 { animation-delay: 1.4s; }
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
   }
-}
-
-/* Scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* ============================================
    RESPONSIVE
    ============================================ */
 
-@media (max-width: 640px) {
-  .hero {
-    padding: 2rem 1.25rem;
+@media (max-width: 768px) {
+  .overlay-wrapper {
+    align-items: stretch;
+    padding: 1rem;
   }
 
-  .section {
-    padding: 3.5rem 1.25rem;
+  .overlay-header {
+    align-self: center;
   }
 
-  .omikuji-section {
-    padding: 3.5rem 1.25rem 4rem;
+  .overlay-panel {
+    max-width: 100%;
+    align-self: center;
   }
 
-  .fortune-card-inner {
-    padding: 2rem 1.5rem;
+  .overlay-footer {
+    align-self: center;
+    justify-content: center;
+  }
+
+  @keyframes fadeSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
-@media (min-width: 1024px) {
-  .hero-greeting {
-    font-size: 1.6rem;
+@media (min-width: 769px) {
+  .overlay-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    padding: 2rem;
+    justify-content: center;
   }
 }
 
 /* ============================================
-   BACKGROUND AMBIANCE
+   CANVAS CURSOR
    ============================================ */
 
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(ellipse 800px 600px at 20% 80%, rgba(74, 14, 78, 0.08), transparent),
-    radial-gradient(ellipse 600px 400px at 80% 20%, rgba(123, 45, 142, 0.05), transparent),
-    radial-gradient(ellipse 1000px 800px at 50% 50%, rgba(8, 4, 16, 0.9), transparent);
-  pointer-events: none;
-  z-index: 0;
+canvas {
+  cursor: grab;
+}
+
+canvas:active {
+  cursor: grabbing;
 }
