@@ -1,12 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import dynamic from 'next/dynamic';
-
-const ShrineScene = dynamic(() => import('./components/ShrineScene'), {
-  ssr: false,
-  loading: () => null,
-});
 
 /* =============================================
    FORTUNES DATA
@@ -136,7 +130,7 @@ const FORTUNES = [
 ];
 
 /* =============================================
-   X (TWITTER) ICON
+   SVG ICONS
    ============================================= */
 
 function XIcon() {
@@ -148,18 +142,64 @@ function XIcon() {
 }
 
 /* =============================================
-   TORII GATE SVG (for UI)
+   SAKURA PETALS COMPONENT
    ============================================= */
 
-function ToriiGateSVG() {
+function SakuraPetals() {
+  const petals = Array.from({ length: 30 }, (_, i) => {
+    const size = 8 + Math.random() * 14;
+    const left = Math.random() * 100;
+    const delay = Math.random() * 12;
+    const duration = 8 + Math.random() * 10;
+    const swayDuration = 3 + Math.random() * 4;
+    const opacity = 0.3 + Math.random() * 0.5;
+    const rotation = Math.random() * 360;
+    return (
+      <div
+        key={i}
+        className="sakura-petal"
+        style={{
+          '--size': `${size}px`,
+          '--left': `${left}%`,
+          '--delay': `${delay}s`,
+          '--duration': `${duration}s`,
+          '--sway-duration': `${swayDuration}s`,
+          '--opacity': opacity,
+          '--rotation': `${rotation}deg`,
+        }}
+      />
+    );
+  });
+  return <div className="sakura-container">{petals}</div>;
+}
+
+/* =============================================
+   GOLD ORNAMENTAL BORDER
+   ============================================= */
+
+function GoldBorder({ children, className = '' }) {
   return (
-    <svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="40">
-      <rect x="15" y="8" width="70" height="5" rx="2" fill="currentColor" />
-      <rect x="10" y="0" width="80" height="4" rx="2" fill="currentColor" />
-      <rect x="20" y="13" width="4" height="65" fill="currentColor" />
-      <rect x="76" y="13" width="4" height="65" fill="currentColor" />
-      <rect x="24" y="28" width="52" height="3" rx="1" fill="currentColor" />
-    </svg>
+    <div className={`gold-border-frame ${className}`}>
+      <div className="gold-corner gold-corner-tl" />
+      <div className="gold-corner gold-corner-tr" />
+      <div className="gold-corner gold-corner-bl" />
+      <div className="gold-corner gold-corner-br" />
+      {children}
+    </div>
+  );
+}
+
+/* =============================================
+   DECORATIVE DIVIDER
+   ============================================= */
+
+function OrnamentalDivider() {
+  return (
+    <div className="ornamental-divider">
+      <span className="divider-line" />
+      <span className="divider-diamond">◆</span>
+      <span className="divider-line" />
+    </div>
   );
 }
 
@@ -171,80 +211,186 @@ export default function Home() {
   const [fortune, setFortune] = useState(null);
   const [fortuneKey, setFortuneKey] = useState(0);
   const [lastIndex, setLastIndex] = useState(-1);
-  const [shrineItems, setShrineItems] = useState([]);
+  const [scrollY, setScrollY] = useState(0);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const heroRef = useRef(null);
+
   useEffect(() => {
-    fetch('/shrine-state.json')
-      .then((r) => r.json())
-      .then((data) => setShrineItems(data.items || []))
-      .catch(() => {});
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Intersection observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll('.scroll-reveal').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const drawFortune = useCallback(() => {
-    let idx;
-    do {
-      idx = Math.floor(Math.random() * FORTUNES.length);
-    } while (idx === lastIndex && FORTUNES.length > 1);
-
-    setLastIndex(idx);
-    setFortune(FORTUNES[idx]);
-    setFortuneKey((k) => k + 1);
+    setIsDrawing(true);
+    setTimeout(() => {
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * FORTUNES.length);
+      } while (idx === lastIndex && FORTUNES.length > 1);
+      setLastIndex(idx);
+      setFortune(FORTUNES[idx]);
+      setFortuneKey((k) => k + 1);
+      setIsDrawing(false);
+    }, 800);
   }, [lastIndex]);
 
   return (
-    <>
-      {/* 3D Shrine Background */}
-      <ShrineScene items={shrineItems} />
+    <div className="site-wrapper">
+      {/* Parallax Background Layers */}
+      <div className="parallax-bg">
+        <div
+          className="parallax-layer layer-sky"
+          style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+        />
+        <div
+          className="parallax-layer layer-mountains"
+          style={{ transform: `translateY(${scrollY * 0.25}px)` }}
+        />
+        <div
+          className="parallax-layer layer-shrine"
+          style={{ transform: `translateY(${scrollY * 0.4}px)` }}
+        />
+        <div
+          className="parallax-layer layer-sakura"
+          style={{ transform: `translateY(${scrollY * 0.55}px)` }}
+        />
+        <div
+          className="parallax-layer layer-foreground"
+          style={{ transform: `translateY(${scrollY * 0.7}px)` }}
+        />
+        <div className="parallax-gradient-overlay" />
+      </div>
 
-      {/* UI Overlay */}
-      <div className="overlay-wrapper">
-        {/* Header */}
-        <header className="overlay-header">
-          <div className="overlay-header-icon">
-            <ToriiGateSVG />
+      {/* Floating Sakura Petals */}
+      <SakuraPetals />
+
+      {/* ===== HERO SECTION ===== */}
+      <section className="hero-section" ref={heroRef}>
+        <div className="hero-content">
+          <div className="hero-emblem">
+            <svg viewBox="0 0 100 100" className="hero-emblem-svg">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
+              <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" strokeWidth="0.3" opacity="0.2" />
+              <text x="50" y="55" textAnchor="middle" fontSize="24" fill="currentColor" fontFamily="serif">狐</text>
+            </svg>
           </div>
-          <div className="overlay-header-text">
-            <h1 className="overlay-title">Yae Publishing House</h1>
-            <p className="overlay-subtitle">Grand Narukami Shrine</p>
-          </div>
-        </header>
-
-        {/* Main content panel */}
-        <div className="overlay-panel">
-          {/* Greeting */}
-          <div className="overlay-greeting">
-            <p className="greeting-main">Ara ara~ A visitor?</p>
-            <p className="greeting-sub">
-              Welcome to my shrine. Draw a fortune, or simply enjoy the view.
-            </p>
-          </div>
-
-          {/* Divider */}
-          <div className="overlay-divider" />
-
-          {/* Omikuji */}
-          <div className="overlay-omikuji">
-            <h2 className="omikuji-title">御神籤 Omikuji</h2>
-
-            <button className="omikuji-btn" onClick={drawFortune}>
-              {fortune ? 'Draw Again' : 'Draw Your Fortune'}
-            </button>
-
-            {fortune && (
-              <div className="fortune-card" key={fortuneKey}>
-                <div className="fortune-card-inner">
-                  <div className={`fortune-rank ${fortune.class}`}>
-                    {fortune.rankJp} — {fortune.rank}
-                  </div>
-                  <p className="fortune-text">&ldquo;{fortune.text}&rdquo;</p>
-                  <div className="fortune-fox">🦊</div>
-                </div>
-              </div>
-            )}
+          <h1 className="hero-title">
+            <span className="hero-title-jp">八重堂</span>
+            <span className="hero-title-en">Yae Publishing House</span>
+          </h1>
+          <p className="hero-subtitle">Grand Narukami Shrine</p>
+          <OrnamentalDivider />
+          <p className="hero-greeting">Ara ara~ A visitor?</p>
+          <p className="hero-desc">
+            Welcome to my shrine. Draw a fortune, or simply enjoy the view.
+          </p>
+          <div className="scroll-indicator">
+            <span className="scroll-arrow">⌄</span>
           </div>
         </div>
+      </section>
 
-        {/* Footer bar */}
-        <div className="overlay-footer">
+      {/* ===== OMIKUJI SECTION ===== */}
+      <section className="omikuji-section scroll-reveal">
+        <GoldBorder className="omikuji-frame">
+          <div className="section-header">
+            <span className="section-header-line" />
+            <h2 className="section-title">
+              <span className="section-title-jp">御神籤</span>
+              <span className="section-title-en">Omikuji</span>
+            </h2>
+            <span className="section-header-line" />
+          </div>
+
+          <p className="omikuji-desc">
+            The Grand Narukami Shrine offers divine fortunes to those who seek guidance.
+            Each slip carries the blessing — or mischief — of a certain fox.
+          </p>
+
+          <button
+            className={`omikuji-btn ${isDrawing ? 'drawing' : ''}`}
+            onClick={drawFortune}
+            disabled={isDrawing}
+          >
+            <span className="btn-inner">
+              <span className="btn-icon">⛩</span>
+              <span className="btn-text">
+                {isDrawing ? 'Reading the stars...' : fortune ? 'Draw Again' : 'Draw Your Fortune'}
+              </span>
+            </span>
+          </button>
+
+          {fortune && (
+            <div className="fortune-card" key={fortuneKey}>
+              <div className="fortune-card-inner">
+                <div className="fortune-card-glow" />
+                <div className="fortune-card-top-border" />
+                <div className={`fortune-rank ${fortune.class}`}>
+                  <span className="fortune-rank-jp">{fortune.rankJp}</span>
+                  <span className="fortune-rank-divider">—</span>
+                  <span className="fortune-rank-en">{fortune.rank}</span>
+                </div>
+                <div className="fortune-quote-mark">"</div>
+                <p className="fortune-text">{fortune.text}</p>
+                <div className="fortune-seal">
+                  <span>🦊</span>
+                  <span className="fortune-seal-text">Guuji Yae</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </GoldBorder>
+      </section>
+
+      {/* ===== ABOUT SECTION ===== */}
+      <section className="about-section scroll-reveal">
+        <GoldBorder className="about-frame">
+          <div className="section-header">
+            <span className="section-header-line" />
+            <h2 className="section-title">
+              <span className="section-title-jp">巫女の言葉</span>
+              <span className="section-title-en">Words of the Miko</span>
+            </h2>
+            <span className="section-header-line" />
+          </div>
+          <div className="about-content">
+            <blockquote className="about-quote">
+              "People believe what they want to believe. And so, a story well-told
+              is more powerful than any truth. That's why I run a publishing house,
+              not a shrine... though I do that too."
+            </blockquote>
+            <p className="about-attribution">— Yae Miko, Guuji of the Grand Narukami Shrine</p>
+          </div>
+        </GoldBorder>
+      </section>
+
+      {/* ===== FOOTER ===== */}
+      <footer className="site-footer scroll-reveal">
+        <div className="footer-inner">
+          <OrnamentalDivider />
           <a
             href="https://x.com/pci_yae"
             target="_blank"
@@ -254,11 +400,10 @@ export default function Home() {
             <XIcon />
             <span>@pci_yae</span>
           </a>
-          <span className="footer-copy">
-            © {new Date().getFullYear()} Yae Publishing House
-          </span>
+          <p className="footer-copy">© {new Date().getFullYear()} Yae Publishing House</p>
+          <p className="footer-blessing">May the Sacred Sakura watch over you 🌸</p>
         </div>
-      </div>
-    </>
+      </footer>
+    </div>
   );
 }
