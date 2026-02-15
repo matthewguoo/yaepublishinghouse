@@ -22,8 +22,7 @@ body{font-family:var(--font-body);background-color:var(--pink-bg);color:var(--te
 .parallax-bg::after{content:'';position:absolute;inset:0;z-index:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(1px 1px at 50% 15%,rgba(255,255,255,0.5) 0%,transparent 100%),radial-gradient(1px 1px at 70% 35%,rgba(255,255,255,0.3) 0%,transparent 100%),radial-gradient(1px 1px at 90% 25%,rgba(255,255,255,0.4) 0%,transparent 100%),radial-gradient(2px 2px at 25% 10%,rgba(255,183,197,0.3) 0%,transparent 100%),radial-gradient(2px 2px at 65% 30%,rgba(255,183,197,0.2) 0%,transparent 100%);animation:twinkle 6s ease-in-out infinite alternate}
 @keyframes twinkle{0%{opacity:0.6}100%{opacity:1}}
 .hero-fade{position:absolute;bottom:0;left:0;right:0;height:40%;z-index:6;background:linear-gradient(to bottom,transparent 0%,var(--pink-bg) 100%);pointer-events:none}
-.craft-hero-clouds{position:absolute;top:0;left:-5%;right:-5%;z-index:7;pointer-events:none;opacity:0.6}
-.craft-hero-clouds .craft-img{width:100%;height:auto;mix-blend-mode:screen}
+/* removed hero clouds - now using CSS clouds */
 .hero-content{position:relative;z-index:10;animation:heroFadeIn 1.5s ease-out both}
 @keyframes heroFadeIn{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
 .hero-emblem{margin:0 auto 1.5rem;width:80px;height:80px;animation:emblemPulse 4s ease-in-out infinite}
@@ -39,22 +38,54 @@ body{font-family:var(--font-body);background-color:var(--pink-bg);color:var(--te
 .scroll-arrow{font-size:1.5rem;color:var(--rose);opacity:0.5}
 @keyframes scrollBounce{0%,100%{transform:translateY(0);opacity:0.5}50%{transform:translateY(8px);opacity:1}}
 
-/* PAPERCRAFT ELEMENTS */
-.craft-element{position:absolute;z-index:2;pointer-events:none}
-.craft-img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 4px 20px rgba(0,0,0,0.3))}
-.craft-left{left:-8%;top:50%;transform:translateY(-50%) translateX(-60px);width:38%;max-width:340px;opacity:0;transition:transform 1.2s cubic-bezier(0.22,1,0.36,1),opacity 1s ease}
-.craft-left.craft-visible{transform:translateY(-50%) translateX(0);opacity:1}
-.craft-right{right:-8%;top:50%;transform:translateY(-50%) translateX(60px);width:38%;max-width:340px;opacity:0;transition:transform 1.2s cubic-bezier(0.22,1,0.36,1) 0.15s,opacity 1s ease 0.15s}
-.craft-right.craft-visible{transform:translateY(-50%) translateX(0);opacity:1}
-.craft-center{left:50%;bottom:0;transform:translateX(-50%) translateY(40px);width:50%;max-width:400px;opacity:0;transition:transform 1s cubic-bezier(0.22,1,0.36,1),opacity 0.8s ease}
-.craft-center.craft-visible{transform:translateX(-50%) translateY(0);opacity:1}
-.craft-top-wide{top:-5%;left:-10%;right:-10%;width:120%;opacity:0;transition:opacity 1.2s ease}
-.craft-top-wide .craft-img{width:100%;height:auto;opacity:0.5}
-.craft-top-wide.craft-visible{opacity:1}
+/* SVG/CSS DECORATIVE ELEMENTS */
+.deco{position:absolute;z-index:2;pointer-events:none;opacity:0;transition:transform 1.2s cubic-bezier(0.22,1,0.36,1),opacity 1s ease}
+.deco.craft-visible{opacity:1}
+
+/* Branches */
+.deco-branch-left{left:0;top:0;width:18%;max-width:160px;height:100%;transform:translateX(-40px);opacity:0}
+.deco-branch-left.craft-visible{transform:translateX(0);opacity:1}
+.deco-branch-right{right:0;top:0;width:18%;max-width:160px;height:100%;transform:translateX(40px);transition-delay:0.15s}
+.deco-branch-right.craft-visible{transform:translateX(0);opacity:1}
+
+/* Clouds */
+.deco-cloud-left{left:0;top:10%;transform:translateX(-50px)}
+.deco-cloud-left.craft-visible{transform:translateX(0)}
+.deco-cloud-right{right:0;top:15%;transform:translateX(50px);transition-delay:0.2s}
+.deco-cloud-right.craft-visible{transform:translateX(0)}
+
+.cloud{position:absolute;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,183,197,0.15) 0%,rgba(255,183,197,0.05) 60%,transparent 100%)}
+.cloud-1{width:120px;height:40px;top:0;left:-20px}
+.cloud-2{width:80px;height:30px;top:25px;left:20px}
+.cloud-3{width:60px;height:25px;top:10px;left:60px}
+.cloud-4{width:100px;height:35px;top:0;right:-10px}
+.cloud-5{width:70px;height:28px;top:20px;right:25px}
+
+/* Torii gates */
+.deco-torii-left{left:0;top:50%;width:12%;max-width:100px;transform:translateY(-50%) translateX(-30px)}
+.deco-torii-left.craft-visible{transform:translateY(-50%) translateX(0)}
+.deco-torii-right{right:0;top:50%;width:12%;max-width:100px;transform:translateY(-50%) translateX(30px);transition-delay:0.15s}
+.deco-torii-right.craft-visible{transform:translateY(-50%) translateX(0)}
+
+/* Fox */
+.deco-fox{left:50%;bottom:5%;width:28%;max-width:220px;transform:translateX(-50%) translateY(20px);transition-delay:0.1s}
+.deco-fox.craft-visible{transform:translateX(-50%) translateY(0)}
+
+/* Lanterns */
+.deco-lanterns-left{left:2%;top:5%;width:10%;max-width:70px;transform:translateY(-30px)}
+.deco-lanterns-left.craft-visible{transform:translateY(0)}
+.deco-lanterns-right{right:2%;top:8%;width:10%;max-width:70px;transform:translateY(-30px);transition-delay:0.2s}
+.deco-lanterns-right.craft-visible{transform:translateY(0)}
+
+/* Scrolls & Books */
+.deco-scroll-left{left:0;top:50%;width:12%;max-width:90px;transform:translateY(-50%) translateX(-30px)}
+.deco-scroll-left.craft-visible{transform:translateY(-50%) translateX(0)}
+.deco-book-right{right:0;top:50%;width:12%;max-width:90px;transform:translateY(-50%) translateX(30px);transition-delay:0.15s}
+.deco-book-right.craft-visible{transform:translateY(-50%) translateX(0)}
 
 /* STORY SCENE */
 .story-scene{position:relative;z-index:10;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 1.5rem;overflow:hidden}
-.scene-content{position:relative;z-index:10;width:100%;max-width:520px;margin:0 auto}
+.scene-content{position:relative;z-index:10;width:100%;max-width:480px;margin:0 auto;padding:0 1rem}
 .scene-panel{position:relative;background:var(--panel-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--panel-border);border-radius:4px;padding:2.5rem 2.2rem;text-align:center}
 .scene-panel::before{content:'';position:absolute;inset:4px;border:1px solid rgba(255,183,197,0.08);border-radius:2px;pointer-events:none}
 .scene-chapter-num{display:block;font-family:var(--font-jp);font-weight:400;font-size:0.8rem;color:var(--pink-soft);letter-spacing:0.5em;margin-bottom:0.5rem;opacity:0.8}
@@ -152,11 +183,14 @@ body{font-family:var(--font-body);background-color:var(--pink-bg);color:var(--te
   .scene-panel{padding:2rem 1.4rem}
   .scene-chapter-title{font-size:1.4rem}
   .scene-line{font-size:0.95rem}
-  .craft-left,.craft-right{width:28%}
-  .craft-left{left:-3%}
-  .craft-right{right:-3%}
-  .craft-center{width:55%}
-  .craft-top-wide{left:-15%;right:-15%;width:130%}
+  .deco-branch-left,.deco-branch-right{width:14%;max-width:100px}
+  .deco-torii-left,.deco-torii-right{width:10%;max-width:70px}
+  .deco-fox{width:35%;max-width:180px}
+  .deco-scroll-left,.deco-book-right{width:10%;max-width:60px}
+  .deco-lanterns-left,.deco-lanterns-right{width:8%;max-width:50px}
+  .cloud-1{width:80px;height:30px}
+  .cloud-2{width:50px;height:20px}
+  .cloud-4{width:70px;height:25px}
 }
 @media (min-width:641px) and (max-width:1024px){
   .hero-title-jp{font-size:2.6rem}
