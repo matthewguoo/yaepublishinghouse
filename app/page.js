@@ -294,17 +294,7 @@ function StoryChapter({ chapter, index }) {
       {/* Watercolor wash transition overlay */}
       <div className="chapter-wash" />
 
-      {/* Chapter number and title */}
-      <div className="chapter-header scroll-reveal">
-        <span className="chapter-number">{chapter.titleJp}</span>
-        <div className="chapter-title-divider">
-          <span className="brush-line brush-line-left" />
-          <span className="chapter-title-text">{chapter.titleEn}</span>
-          <span className="brush-line brush-line-right" />
-        </div>
-      </div>
-
-      {/* Content: image + text side by side on desktop, stacked on mobile */}
+      {/* Content: image + text panel side by side on desktop, stacked on mobile */}
       <div className={`chapter-content ${isEven ? 'content-img-left' : 'content-img-right'}`}>
         {/* Illustration */}
         <div className="chapter-image-wrapper scroll-reveal">
@@ -323,17 +313,30 @@ function StoryChapter({ chapter, index }) {
           </div>
         </div>
 
-        {/* Story text with staggered reveal */}
-        <div className="chapter-text">
-          {chapter.lines.map((line, i) => (
-            <p
-              key={i}
-              className="story-line scroll-reveal"
-              style={{ '--line-delay': `${i * 0.15}s` }}
-            >
-              <span className="story-line-inner">{line}</span>
-            </p>
-          ))}
+        {/* Story text on dark panel */}
+        <div className="chapter-text-panel scroll-reveal">
+          <div className="chapter-panel-inner">
+            <div className="gold-corner gold-corner-tl" />
+            <div className="gold-corner gold-corner-tr" />
+            <div className="gold-corner gold-corner-bl" />
+            <div className="gold-corner gold-corner-br" />
+
+            {/* Chapter header inside panel */}
+            <div className="chapter-header">
+              <span className="chapter-number">{chapter.titleJp}</span>
+              <h2 className="chapter-title-text">{chapter.titleEn}</h2>
+              <div className="chapter-header-rule" />
+            </div>
+
+            {/* Story text */}
+            <div className="chapter-text">
+              {chapter.lines.map((line, i) => (
+                <p key={i} className="story-line">
+                  {line}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -454,12 +457,13 @@ export default function Home() {
 
       {/* ===== STORY PROLOGUE ===== */}
       <section className="story-prologue">
-        <div className="prologue-content scroll-reveal">
-          <div className="prologue-brush-mark" />
-          <p className="prologue-text">
-            <span className="prologue-jp">物語の始まり</span>
-            <span className="prologue-en">The story begins...</span>
-          </p>
+        <div className="prologue-panel scroll-reveal">
+          <div className="prologue-panel-inner">
+            <div className="prologue-ornament">❖</div>
+            <p className="prologue-jp">物語の始まり</p>
+            <p className="prologue-en">The story begins...</p>
+            <div className="prologue-ornament">❖</div>
+          </div>
         </div>
       </section>
 
@@ -473,12 +477,13 @@ export default function Home() {
 
       {/* ===== TRANSITION TO OMIKUJI ===== */}
       <section className="story-transition scroll-reveal">
-        <div className="transition-content">
-          <div className="transition-brush" />
-          <p className="transition-text">
-            <span className="transition-jp">運命を引く</span>
-            <span className="transition-en">Draw your fate</span>
-          </p>
+        <div className="transition-panel">
+          <div className="transition-panel-inner">
+            <div className="prologue-ornament">❖</div>
+            <p className="transition-jp">運命を引く</p>
+            <p className="transition-en">Draw your fate</p>
+            <div className="prologue-ornament">❖</div>
+          </div>
         </div>
       </section>
 
