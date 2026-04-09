@@ -2,19 +2,18 @@ import '../styles/globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const SITE_NAME = 'Yae Publishing House';
-const SITE_TAGLINE = 'Grand Narukami Shrine';
-const SITE_DESC = 'Welcome to Yae Publishing House — the domain of the Guuji of the Grand Narukami Shrine.';
+const SITE_DESC = 'Matthew Guo — Hardware engineer, builder, CMU ECE \'30.';
 const PROD_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://yaepublishing.house';
 
 export const metadata = {
   metadataBase: new URL(PROD_URL),
-  title: `${SITE_NAME}`,
+  title: `${SITE_NAME} — Matthew Guo`,
   description: SITE_DESC,
   applicationName: SITE_NAME,
-  creator: 'Yae Miko',
+  creator: 'Matthew Guo',
   publisher: 'Yae Publishing House',
   category: 'personal',
-  keywords: ['Yae Miko', 'Yae Publishing House', 'Narukami', 'kitsune', 'shrine'],
+  keywords: ['Matthew Guo', 'hardware engineer', 'CMU', 'robotics', 'Yae Publishing House'],
   alternates: {
     canonical: '/',
   },
@@ -31,7 +30,7 @@ export const metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
   openGraph: {
-    title: SITE_NAME,
+    title: `${SITE_NAME} — Matthew Guo`,
     description: SITE_DESC,
     url: PROD_URL,
     siteName: SITE_NAME,
@@ -47,16 +46,24 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const orgJsonLd = {
+  const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: SITE_NAME,
+    '@type': 'Person',
+    name: 'Matthew Guo',
+    alternateName: '郭子玉',
     url: PROD_URL,
+    sameAs: [
+      'https://x.com/pci_yae',
+      'https://github.com/matthewguoo',
+      'https://instagram.com/yuuko.koro',
+    ],
+    jobTitle: 'Hardware Engineer',
   };
 
   return (
     <html lang="en">
       <head>
+        <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -64,7 +71,7 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/site.webmanifest" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body>

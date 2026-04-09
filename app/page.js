@@ -1,185 +1,382 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
-const FORTUNES = [
-  { rank: 'Great Blessing', rankJp: '大吉', class: 'great-blessing', text: 'The stars align most favorably. Even I must admit — your luck today is rather... impressive. Do try not to waste it on something boring.' },
-  { rank: 'Great Blessing', rankJp: '大吉', class: 'great-blessing', text: 'My my, the highest fortune! The Electro Archon herself would be envious. Go forth boldly — today, the world bends to your whim.' },
-  { rank: 'Blessing', rankJp: '吉', class: 'blessing', text: 'A gentle wind carries good news your way. Not the most dramatic fortune, but then again, the most beautiful stories unfold quietly.' },
-  { rank: 'Blessing', rankJp: '吉', class: 'blessing', text: 'Fortune smiles upon you — softly, like moonlight on the Sacred Sakura. Take this as permission to pursue what your heart desires.' },
-  { rank: 'Blessing', rankJp: '吉', class: 'blessing', text: 'The threads of fate weave kindly today. A good day to begin something new, or perhaps... to finish something long overdue.' },
-  { rank: 'Small Blessing', rankJp: '小吉', class: 'small-blessing', text: 'A modest fortune, but fortune nonetheless. The fox knows that small blessings, gathered patiently, become great ones. Keep your eyes open.' },
-  { rank: 'Small Blessing', rankJp: '小吉', class: 'small-blessing', text: 'Not every day needs to be extraordinary. Sometimes the warmth of tea and the company of a good book is blessing enough, wouldn\'t you agree?' },
-  { rank: 'Small Blessing', rankJp: '小吉', class: 'small-blessing', text: 'Hmm, a small blessing. The sakura doesn\'t bloom all at once — it takes its time. Your moment will come. Patience, dear visitor.' },
-  { rank: 'Small Blessing', rankJp: '小吉', class: 'small-blessing', text: 'A quiet kind of luck. The sort that doesn\'t announce itself but is there when you need it most. Rather like a certain fox, wouldn\'t you say?' },
-  { rank: 'Uncertain', rankJp: '末吉', class: 'uncertain', text: 'The future is... unclear. How delightful — I do so love a good mystery. Perhaps the uncertainty itself is the most interesting part.' },
-  { rank: 'Uncertain', rankJp: '末吉', class: 'uncertain', text: 'Neither here nor there. The path ahead has many branches, and which you take matters more than what fortune says. Choose wisely... or don\'t. That\'s fun too.' },
-  { rank: 'Uncertain', rankJp: '末吉', class: 'uncertain', text: 'Ara, how ambiguous. Even the great Guuji cannot read this one clearly. But between you and me — the most interesting stories come from uncertain beginnings.' },
-  { rank: 'Small Curse', rankJp: '小凶', class: 'curse', text: 'Oh? A small misfortune. Don\'t look so worried — tie this fortune to the nearest tree and the bad luck stays behind. That\'s the rule, you know.' },
-  { rank: 'Small Curse', rankJp: '小凶', class: 'curse', text: 'A minor curse... how dramatic. I wouldn\'t lose sleep over it. Even kitsune have their unlucky days. The trick is to be charming enough that luck comes crawling back.' },
-  { rank: 'Curse', rankJp: '凶', class: 'curse', text: 'My my... a curse. How unfortunate. But you know what they say — the darkest nights produce the brightest stars. Or was it the other way around? I can never remember.' },
-  { rank: 'Curse', rankJp: '凶', class: 'curse', text: 'Oh dear. Well, I did warn you that fortune-telling is a gamble. Perhaps visit the shrine more often? A few offerings couldn\'t hurt. I accept fried tofu.' },
-  { rank: 'Great Blessing', rankJp: '大吉', class: 'great-blessing', text: 'Exceptional fortune! It seems the Sacred Sakura has taken a liking to you. Use this luck well — opportunities this golden don\'t come around twice. Usually.' },
-  { rank: 'Blessing', rankJp: '吉', class: 'blessing', text: 'Good fortune follows those who move with purpose. Today, let your instincts guide you — they know the way even when the mind hesitates.' },
-  { rank: 'Small Curse', rankJp: '小凶', class: 'curse', text: 'Tsk, a small curse. But fortunes are just paper and ink, aren\'t they? What truly matters is the story you write yourself. Make it a good one.' },
-  { rank: 'Uncertain', rankJp: '末吉', class: 'uncertain', text: 'The fox sees many paths before you, each more tantalizing than the last. This fortune says: the choice itself is your blessing. Or your curse. Fufu~' },
-];
-
-const CHAPTERS = [
-  { id: 'fox', titleJp: '第一章', titleEn: 'The Fox', lines: ['Long before the Sacred Sakura bloomed, before the shrine bells rang their first note —', 'there was a fox.', 'She walked between the world of mortals and the world of spirits, belonging fully to neither.', 'Some called her a trickster. Others, a sage.', 'She preferred to call herself... a storyteller.'] },
-  { id: 'publishing', titleJp: '第二章', titleEn: 'The Publishing House', lines: ['Stories, she discovered, were the most powerful things in existence.', 'More powerful than any divine decree. More enduring than any sacred relic.', 'And so she built a house — not of worship, but of words.', 'Every tale that passed through her doors was refined, polished,', 'and released into the world like fireflies into the night.'] },
-  { id: 'sakura', titleJp: '第三章', titleEn: 'The Sacred Sakura', lines: ['At the heart of the shrine stands the Sacred Sakura —', 'ancient, eternal, alive with memory.', 'Its roots drink from the dreams of a thousand generations.', 'Its blossoms carry wishes to the heavens.', 'The fox tends to it still, as she has for centuries uncounted.'] },
-  { id: 'traveler', titleJp: '第四章', titleEn: 'The Traveler', lines: ['And now... you.', 'Another traveler drawn by the light of the Sacred Sakura.', 'Every visitor carries a story — whether they know it or not.', 'Tell me, what tale do you bring to my shrine?', 'Perhaps the fortune slips will reveal what words cannot.'] },
-];
-
+/* ===== SVG Icons ===== */
 function XIcon() {
   return <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>;
 }
-
-function SakuraPetals() {
-  const petals = Array.from({ length: 25 }, (_, i) => ({
-    size: 8 + Math.random() * 14, left: Math.random() * 100,
-    delay: Math.random() * 12, duration: 8 + Math.random() * 10,
-    swayDuration: 3 + Math.random() * 4, opacity: 0.25 + Math.random() * 0.4,
-    rotation: Math.random() * 360,
-  }));
-  return (
-    <div className="sakura-container">
-      {petals.map((p, i) => <div key={i} className="sakura-petal" style={{ '--size': `${p.size}px`, '--left': `${p.left}%`, '--delay': `${p.delay}s`, '--duration': `${p.duration}s`, '--sway-duration': `${p.swayDuration}s`, '--opacity': p.opacity, '--rotation': `${p.rotation}deg` }} />)}
-    </div>
-  );
+function GitHubIcon() {
+  return <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" /></svg>;
+}
+function InstagramIcon() {
+  return <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>;
+}
+function LinkedInIcon() {
+  return <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>;
+}
+function ArrowIcon() {
+  return <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M1 13L13 1M13 1H4M13 1v9" /></svg>;
 }
 
-function GoldBorder({ children, className = '' }) {
-  return (
-    <div className={`panel ${className}`}>
-      <div className="corner corner-tl" /><div className="corner corner-tr" />
-      <div className="corner corner-bl" /><div className="corner corner-br" />
-      {children}
-    </div>
-  );
-}
+/* ===== MARQUEE DATA ===== */
+const MARQUEE_ITEMS = [
+  'Embedded Systems',
+  'HDMI & USB Architecture',
+  'Rockchip SoC',
+  'PCB Design',
+  'Robotics',
+  'Options Trading',
+  'Rust',
+  'TypeScript',
+  'Embedded Linux',
+  'Carnegie Mellon ECE \'30',
+  'Hardware Engineering',
+  'SpaceX Alumni',
+  'Startup Leadership',
+  'Cosplay & Making',
+];
 
-function Divider() {
-  return <div className="divider"><span className="divider-line" /><span className="divider-dot">◆</span><span className="divider-line" /></div>;
-}
+/* ===== TIMELINE DATA ===== */
+const TIMELINE = [
+  { year: '2026', title: 'CMU ECE — Class of 2030', desc: 'Admitted to Carnegie Mellon University\'s Electrical & Computer Engineering program.' },
+  { year: '2025–26', title: 'Head of Hardware — Corvus Robotics', desc: 'Leading hardware engineering for autonomous drone systems. Rockchip SoC, embedded Linux, HDMI/USB architecture.' },
+  { year: '2025', title: 'SpaceX Offer', desc: 'Received an offer from SpaceX before turning 18.' },
+  { year: '2024', title: 'AIME Qualifier', desc: 'Qualified for the American Invitational Mathematics Examination. 1560 SAT.' },
+  { year: '2024', title: 'YouTube — OSU Mania Robot', desc: 'Built a physical robot that plays osu!mania. 632 subscribers and counting.' },
+];
 
+/* ===== PROJECTS DATA ===== */
+const PROJECTS = [
+  {
+    icon: '⚡',
+    title: 'Archon',
+    tag: 'Trading',
+    desc: 'Full-stack options trading platform with real-time payoff visualization, Black-Scholes pricing, and custom DSL for automated strategies.',
+    tech: ['Rust', 'TypeScript', 'Perspective', 'WebGL'],
+  },
+  {
+    icon: '🤖',
+    title: 'Corvus Flight Systems',
+    tag: 'Robotics',
+    desc: 'Autonomous drone hardware platform. Custom PCB design, Rockchip SoC integration, HDMI/USB pipeline architecture.',
+    tech: ['Embedded C', 'Linux', 'KiCad', 'SoC'],
+  },
+  {
+    icon: '🎹',
+    title: 'OSU Mania Robot',
+    tag: 'Maker',
+    desc: 'Physical robot that plays osu!mania rhythm game in real-time using computer vision and solenoid actuators.',
+    tech: ['Python', 'OpenCV', 'Arduino', 'CAD'],
+  },
+  {
+    icon: '📊',
+    title: 'Narukami Dashboard',
+    tag: 'Finance',
+    desc: 'Public-facing market data dashboard with real-time quotes, technical indicators, and options analytics.',
+    tech: ['TypeScript', 'Perspective', 'D3', 'WebSocket'],
+  },
+  {
+    icon: '🦊',
+    title: 'Yae Publishing House',
+    tag: 'Web',
+    desc: 'This site. Japanese-influenced editorial design, built with Next.js. Because every builder needs a home.',
+    tech: ['Next.js', 'React', 'CSS', 'Vercel'],
+  },
+  {
+    icon: '📖',
+    title: 'Kangxi Alt-History',
+    tag: 'Writing',
+    desc: 'Alternate history novel exploring a different Qing Dynasty timeline. Multiple perspectives, deep world-building.',
+    tech: ['Fiction', 'Historical Research'],
+  },
+];
+
+/* ===== WRITING DATA ===== */
+const WRITING = [
+  { date: 'Coming Soon', title: 'On Building Things Before You\'re Ready', tag: 'Essay' },
+  { date: 'Coming Soon', title: 'The Gap Year Thesis: Why I\'m Not Going Straight to College', tag: 'Personal' },
+  { date: 'Coming Soon', title: 'Hardware Engineering at 17: What They Don\'t Tell You', tag: 'Technical' },
+];
+
+/* ===== CONNECT LINKS ===== */
+const CONNECT = [
+  { platform: 'X / Twitter', handle: '@pci_yae', url: 'https://x.com/pci_yae', Icon: XIcon },
+  { platform: 'GitHub', handle: 'matthewguoo', url: 'https://github.com/matthewguoo', Icon: GitHubIcon },
+  { platform: 'Cosplay', handle: '@yuuko.koro', url: 'https://instagram.com/yuuko.koro', Icon: InstagramIcon },
+  { platform: 'LinkedIn', handle: 'Matthew Guo', url: 'https://linkedin.com/in/matthewguo', Icon: LinkedInIcon },
+];
+
+/* ===== MAIN COMPONENT ===== */
 export default function Home() {
-  const [fortune, setFortune] = useState(null);
-  const [fortuneKey, setFortuneKey] = useState(0);
-  const [lastIndex, setLastIndex] = useState(-1);
-  const [scrollY, setScrollY] = useState(0);
-  const [isDrawing, setIsDrawing] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+  const timelineRef = useRef(null);
 
   useEffect(() => {
-    const h = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', h, { passive: true });
-    return () => window.removeEventListener('scroll', h);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+
+      const sections = ['about', 'work', 'projects', 'writing', 'connect'];
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200 && rect.bottom > 200) {
+            setActiveSection(id);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  /* Timeline intersection observer */
   useEffect(() => {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach((el) => obs.observe(el));
-    return () => obs.disconnect();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -60px 0px' }
+    );
+
+    const items = document.querySelectorAll('.timeline-item');
+    items.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
   }, []);
 
-  const drawFortune = useCallback(() => {
-    setIsDrawing(true);
-    setTimeout(() => {
-      let idx;
-      do { idx = Math.floor(Math.random() * FORTUNES.length); } while (idx === lastIndex && FORTUNES.length > 1);
-      setLastIndex(idx); setFortune(FORTUNES[idx]); setFortuneKey((k) => k + 1); setIsDrawing(false);
-    }, 800);
-  }, [lastIndex]);
+  const scrollTo = useCallback((id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
 
   return (
-    <div className="site">
-      <SakuraPetals />
+    <>
+      <div className="grain" />
+
+      {/* Navigation */}
+      <nav className={`nav ${scrolled ? 'nav-scrolled' : ''}`}>
+        <div className="nav-brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ cursor: 'pointer' }}>
+          <span className="nav-kanji">八重堂</span>
+          <span className="nav-sep" />
+          <span className="nav-name">Matthew Guo</span>
+        </div>
+        <ul className="nav-links">
+          {['about', 'work', 'projects', 'writing', 'connect'].map((s) => (
+            <li key={s} className={`nav-link ${activeSection === s ? 'nav-link-active' : ''}`} onClick={() => scrollTo(s)}>
+              {s}
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       {/* Hero */}
       <section className="hero">
-        <div className="parallax">
-          <div className="parallax-layer layer-sky" style={{ transform: `translateY(${scrollY * 0.1}px)` }} />
-          <div className="parallax-layer layer-mountains" style={{ transform: `translateY(${scrollY * 0.25}px)` }} />
-          <div className="parallax-layer layer-shrine" style={{ transform: `translateY(${scrollY * 0.4}px)` }} />
-          <div className="parallax-layer layer-sakura" style={{ transform: `translateY(${scrollY * 0.55}px)` }} />
-          <div className="parallax-layer layer-foreground" style={{ transform: `translateY(${scrollY * 0.7}px)` }} />
-        </div>
-        <div className="hero-fade" />
-        <div className="hero-content">
-          <div className="emblem">
-            <svg viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-              <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" strokeWidth="0.3" opacity="0.2" />
-              <text x="50" y="55" textAnchor="middle" fontSize="24" fill="currentColor" fontFamily="serif">狐</text>
-            </svg>
+        <div className="hero-bg-grain" />
+        <div className="hero-bg-gradient" />
+        <div className="hero-grid">
+          <div className="hero-left">
+            <div className="hero-label">
+              <span className="hero-label-dot" />
+              <span>Building things that matter</span>
+            </div>
+            <h1 className="hero-name">
+              Matthew
+              <br />
+              Guo
+              <span className="hero-name-jp">郭子玉</span>
+            </h1>
+            <p className="hero-tagline">
+              Hardware engineer, builder, and the kind of person who gets a SpaceX offer before their 18th birthday.
+            </p>
+            <div className="hero-meta">
+              <div className="hero-meta-item">
+                <span className="hero-meta-label">Currently</span>
+                <span className="hero-meta-value">Head of HW @ Corvus Robotics</span>
+              </div>
+              <div className="hero-meta-item">
+                <span className="hero-meta-label">Next</span>
+                <span className="hero-meta-value">CMU ECE '30</span>
+              </div>
+              <div className="hero-meta-item">
+                <span className="hero-meta-label">Location</span>
+                <span className="hero-meta-value">Mountain View, CA</span>
+              </div>
+            </div>
           </div>
-          <h1 className="hero-title">
-            <span className="title-jp">八重堂</span>
-            <span className="title-en">Yae Publishing House</span>
-          </h1>
-          <p className="hero-sub">Grand Narukami Shrine</p>
-          <Divider />
-          <p className="hero-greeting">Ara ara~ A visitor?</p>
-          <p className="hero-desc">Welcome to my shrine. Scroll down, and let me tell you a story.</p>
-          <div className="scroll-hint"><span>⌄</span></div>
+          <div className="hero-right">
+            <div className="hero-visual">
+              <div className="hero-visual-frame" />
+              <img className="hero-visual-img" src="/miko.jpg" alt="Matthew Guo" />
+              <div className="hero-visual-tag">
+                <span>Available for interesting conversations</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Story */}
-      <div className="story">
-        {CHAPTERS.map((ch) => (
-          <section key={ch.id} className="chapter reveal">
-            <GoldBorder>
-              <span className="ch-num">{ch.titleJp}</span>
-              <h2 className="ch-title">{ch.titleEn}</h2>
-              <div className="ch-rule" />
-              {ch.lines.map((line, i) => <p key={i} className="ch-line">{line}</p>)}
-            </GoldBorder>
-          </section>
-        ))}
+      {/* Marquee */}
+      <div className="marquee-strip">
+        <div className="marquee-track">
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+            <span key={i} className="marquee-item">
+              <span className="marquee-dot" />
+              {item}
+            </span>
+          ))}
+        </div>
       </div>
 
-      {/* Omikuji + About + Footer */}
-      <div className="bottom">
-        <section className="omikuji reveal">
-          <GoldBorder>
-            <div className="sec-header"><span className="sec-line" /><h2 className="sec-title"><span className="sec-jp">御神籤</span><span className="sec-en">Omikuji</span></h2><span className="sec-line" /></div>
-            <p className="omikuji-desc">The Grand Narukami Shrine offers divine fortunes to those who seek guidance. Each slip carries the blessing — or mischief — of a certain fox.</p>
-            <button className={`draw-btn ${isDrawing ? 'drawing' : ''}`} onClick={drawFortune} disabled={isDrawing}>
-              <span className="draw-inner"><span className="draw-icon">⛩</span>{isDrawing ? 'Reading the stars...' : fortune ? 'Draw Again' : 'Draw Your Fortune'}</span>
-            </button>
-            {fortune && (
-              <div className="fortune" key={fortuneKey}>
-                <div className="fortune-inner">
-                  <div className="fortune-glow" /><div className="fortune-top-bar" />
-                  <div className={`fortune-rank ${fortune.class}`}><span className="rank-jp">{fortune.rankJp}</span><span className="rank-div">—</span><span className="rank-en">{fortune.rank}</span></div>
-                  <div className="fortune-q">&ldquo;</div>
-                  <p className="fortune-text">{fortune.text}</p>
-                  <div className="fortune-seal"><span>🦊</span><span className="seal-name">Guuji Yae</span></div>
-                </div>
+      {/* About */}
+      <section className="section" id="about">
+        <div className="section-header">
+          <span className="section-number">01</span>
+          <span className="section-line" />
+          <h2 className="section-title">About</h2>
+        </div>
+        <div className="about-grid">
+          <div className="about-prose">
+            <p>
+              I'm a <strong>hardware engineer</strong> who started building before most people start applying.
+              At 17, I'm leading hardware at a robotics startup, designing systems around Rockchip SoCs,
+              embedded Linux, and custom HDMI/USB architectures.
+            </p>
+            <p>
+              Before that, I had a SpaceX offer, built a <em>robot that plays rhythm games</em> on YouTube,
+              and qualified for AIME. I trade options for fun, write alternate history fiction for therapy,
+              and make cosplay for the soul.
+            </p>
+            <p>
+              I believe the best engineers are the ones who also care about
+              beauty, craft, and the things that make life worth living.
+              This fall, I'm headed to <strong>Carnegie Mellon</strong> to study ECE.
+            </p>
+          </div>
+          <div className="about-stats">
+            <div className="about-stat">
+              <span className="about-stat-value">17</span>
+              <span className="about-stat-label">Years Old</span>
+            </div>
+            <div className="about-stat">
+              <span className="about-stat-value">1560</span>
+              <span className="about-stat-label">SAT Score</span>
+            </div>
+            <div className="about-stat">
+              <span className="about-stat-value">$200K</span>
+              <span className="about-stat-label">Current Comp</span>
+            </div>
+            <div className="about-stat">
+              <span className="about-stat-value">CMU</span>
+              <span className="about-stat-label">ECE '30</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Work Timeline */}
+      <section className="section" id="work">
+        <div className="section-header">
+          <span className="section-number">02</span>
+          <span className="section-line" />
+          <h2 className="section-title">Work</h2>
+        </div>
+        <div className="timeline" ref={timelineRef}>
+          {TIMELINE.map((item, i) => (
+            <div key={i} className="timeline-item" style={{ transitionDelay: `${i * 0.1}s` }}>
+              <div className="timeline-year">{item.year}</div>
+              <div className="timeline-title">{item.title}</div>
+              <div className="timeline-desc">{item.desc}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section className="section" id="projects">
+        <div className="section-header">
+          <span className="section-number">03</span>
+          <span className="section-line" />
+          <h2 className="section-title">Projects</h2>
+        </div>
+        <div className="projects-grid">
+          {PROJECTS.map((project, i) => (
+            <div key={i} className="project-card">
+              <div className="project-card-header">
+                <span className="project-card-icon">{project.icon}</span>
+                <span className="project-card-tag">{project.tag}</span>
               </div>
-            )}
-          </GoldBorder>
-        </section>
+              <h3 className="project-card-title">{project.title}</h3>
+              <p className="project-card-desc">{project.desc}</p>
+              <div className="project-card-tech">
+                {project.tech.map((t, j) => (
+                  <span key={j} className="project-tech-tag">{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <section className="about reveal">
-          <GoldBorder>
-            <div className="sec-header"><span className="sec-line" /><h2 className="sec-title"><span className="sec-jp">巫女の言葉</span><span className="sec-en">Words of the Miko</span></h2><span className="sec-line" /></div>
-            <blockquote className="quote">&ldquo;People believe what they want to believe. And so, a story well-told is more powerful than any truth. That&rsquo;s why I run a publishing house, not a shrine... though I do that too.&rdquo;</blockquote>
-            <p className="attribution">— Yae Miko, Guuji of the Grand Narukami Shrine</p>
-          </GoldBorder>
-        </section>
+      {/* Writing */}
+      <section className="section" id="writing">
+        <div className="section-header">
+          <span className="section-number">04</span>
+          <span className="section-line" />
+          <h2 className="section-title">Writing</h2>
+        </div>
+        <div className="writing-list">
+          {WRITING.map((post, i) => (
+            <div key={i} className="writing-item">
+              <span className="writing-date">{post.date}</span>
+              <span className="writing-title">{post.title}</span>
+              <span className="writing-tag">{post.tag}</span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <footer className="footer reveal">
-          <Divider />
-          <a href="https://x.com/pci_yae" target="_blank" rel="noopener noreferrer" className="social"><XIcon /><span>@pci_yae</span></a>
-          <p className="copy">© {new Date().getFullYear()} Yae Publishing House</p>
-          <p className="blessing">May the Sacred Sakura watch over you 🌸</p>
-        </footer>
-      </div>
-    </div>
+      {/* Connect */}
+      <section className="section" id="connect">
+        <div className="section-header">
+          <span className="section-number">05</span>
+          <span className="section-line" />
+          <h2 className="section-title">Connect</h2>
+        </div>
+        <div className="connect-grid">
+          {CONNECT.map((link, i) => (
+            <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="connect-card">
+              <div className="connect-card-icon">
+                <link.Icon />
+              </div>
+              <div className="connect-card-info">
+                <span className="connect-card-platform">{link.platform}</span>
+                <span className="connect-card-handle">{link.handle}</span>
+              </div>
+              <span className="connect-card-arrow"><ArrowIcon /></span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="site-footer">
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <span className="footer-kanji">八重堂</span>
+            <span className="footer-copy">© {new Date().getFullYear()} Matthew Guo</span>
+          </div>
+          <div className="footer-right">
+            <a href="/typography" className="footer-link">Typography</a>
+            <a href="https://x.com/pci_yae" target="_blank" rel="noopener noreferrer" className="footer-link">@pci_yae</a>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }
