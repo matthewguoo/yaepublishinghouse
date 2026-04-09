@@ -232,10 +232,7 @@ export default function Home() {
 
         {/* ===== LINKS ===== */}
         <div className="links">
-          <a href="https://x.com/pci_yae" target="_blank" rel="noopener noreferrer" className="link-item">Twitter</a>
-          <a href="https://github.com/matthewguoo" target="_blank" rel="noopener noreferrer" className="link-item">GitHub</a>
-          <a href="https://instagram.com/yuuko.koro" target="_blank" rel="noopener noreferrer" className="link-item">Cosplay</a>
-          <a href="/typography" className="link-item">Typography</a>
+          <a href="https://instagram.com/yuuko.koro" target="_blank" rel="noopener noreferrer" className="link-item">@yuuko.koro</a>
         </div>
 
         {/* ===== THE WHISPER ===== */}
