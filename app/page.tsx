@@ -151,8 +151,8 @@ export default async function HomePage() {
           <Link href="/signup" className="primary-button">
             start with email
           </Link>
-          <Link href="/typography" className="ghost-button">
-            old typography page still exists
+          <Link href="/@yuuko" className="ghost-button">
+            peek at the demo page
           </Link>
         </div>
       </section>
