@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --cream: #fffaf7;
   --paper: #fff6fb;
@@ -13,40 +17,62 @@
   --radius-xl: 32px;
   --radius-lg: 24px;
   --radius-md: 18px;
+  --background: 337 100% 99%;
+  --foreground: 336 28% 19%;
+  --card: 0 0% 100%;
+  --card-foreground: 336 28% 19%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 336 28% 19%;
+  --primary: 333 85% 67%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 333 100% 97%;
+  --secondary-foreground: 336 28% 19%;
+  --muted: 333 100% 98%;
+  --muted-foreground: 334 15% 45%;
+  --accent: 334 100% 97%;
+  --accent-foreground: 336 28% 19%;
+  --destructive: 342 74% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 334 44% 88%;
+  --input: 334 44% 88%;
+  --ring: 333 78% 76%;
+  --radius: 1.5rem;
 }
 
-* {
-  box-sizing: border-box;
-}
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(255, 179, 210, 0.45), transparent 28%),
-    radial-gradient(circle at 85% 15%, rgba(255, 226, 236, 0.8), transparent 24%),
-    linear-gradient(180deg, #fffdfd 0%, #fff7fb 46%, #fff2f8 100%);
-  color: var(--ink);
-  font-family: var(--font-body), sans-serif;
-}
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, rgba(255, 179, 210, 0.45), transparent 28%),
+      radial-gradient(circle at 85% 15%, rgba(255, 226, 236, 0.8), transparent 24%),
+      linear-gradient(180deg, #fffdfd 0%, #fff7fb 46%, #fff2f8 100%);
+  }
 
-img {
-  max-width: 100%;
-  display: block;
-}
+  img {
+    max-width: 100%;
+    display: block;
+  }
 
-a {
-  color: inherit;
-}
+  a {
+    color: inherit;
+  }
 
-button,
-input,
-textarea {
-  font: inherit;
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
 }
 
 ::selection {
