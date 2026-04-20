@@ -1,3 +1,5 @@
+import type { DefaultProfileTemplate, PublicProfile } from './types';
+
 export const YUUKO_DEMO_PROFILE = {
   handle: 'yuuko',
   displayName: 'Yuuko',
@@ -16,9 +18,9 @@ export const YUUKO_DEMO_PROFILE = {
     { position: 3, imageUrl: '', caption: 'Cherry blossom weekend' },
     { position: 4, imageUrl: '', caption: 'Waiting for pro shots' },
   ],
-};
+} satisfies PublicProfile;
 
-export function getDemoProfile(handle = '') {
+export function getDemoProfile(handle = ''): PublicProfile | null {
   if (handle === 'yuuko') {
     return YUUKO_DEMO_PROFILE;
   }
@@ -26,7 +28,7 @@ export function getDemoProfile(handle = '') {
   return null;
 }
 
-export function getSeedProfileTemplate(handle = '') {
+export function getSeedProfileTemplate(handle = ''): DefaultProfileTemplate | null {
   if (handle !== 'yuuko') {
     return null;
   }
@@ -35,8 +37,8 @@ export function getSeedProfileTemplate(handle = '') {
     displayName: YUUKO_DEMO_PROFILE.displayName,
     bio: YUUKO_DEMO_PROFILE.bio,
     avatarUrl: YUUKO_DEMO_PROFILE.avatarUrl,
-    twitterHandle: YUUKO_DEMO_PROFILE.twitterHandle,
-    instagramHandle: YUUKO_DEMO_PROFILE.instagramHandle,
+    twitterHandle: YUUKO_DEMO_PROFILE.twitterHandle || null,
+    instagramHandle: YUUKO_DEMO_PROFILE.instagramHandle || null,
     tiktokHandle: YUUKO_DEMO_PROFILE.tiktokHandle || null,
     youtubeUrl: YUUKO_DEMO_PROFILE.youtubeUrl || null,
     websiteUrl: YUUKO_DEMO_PROFILE.websiteUrl || null,

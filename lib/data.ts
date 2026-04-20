@@ -1,16 +1,23 @@
 import prisma from './prisma';
 import { getDemoProfile, getSeedProfileTemplate } from './demo-profile';
 import { labelFromHandle, normalizeHandle, validateHandle } from './handles';
+import type {
+  DefaultProfileTemplate,
+  EditableProfilePayload,
+  ProfileRecord,
+  PublicProfile,
+  SocialLink,
+} from './types';
 
-function clampText(value = '', max = 240) {
+function clampText(value = '', max = 240): string {
   return value.trim().slice(0, max);
 }
 
-function cleanSocialHandle(value = '') {
+function cleanSocialHandle(value = ''): string {
   return value.trim().replace(/^@+/, '').slice(0, 40);
 }
 
-function cleanUrl(value = '') {
+function cleanUrl(value = ''): string {
   const trimmed = value.trim();
 
   if (!trimmed) {
@@ -25,7 +32,7 @@ function cleanUrl(value = '') {
   }
 }
 
-function buildDefaultProfile(handle) {
+function buildDefaultProfile(handle: string): DefaultProfileTemplate {
   const seeded = getSeedProfileTemplate(handle);
 
   if (seeded) {
@@ -46,26 +53,41 @@ function buildDefaultProfile(handle) {
   };
 }
 
-function serializeProfile(profile) {
+function serializeProfile(profile: ProfileRecord | null): PublicProfile | null {
   if (!profile) {
     return null;
   }
 
   return {
-    ...profile,
+    id: profile.id,
+    userId: profile.userId,
+    handle: profile.handle,
+    displayName: profile.displayName,
+    bio: profile.bio,
+    avatarUrl: profile.avatarUrl,
+    twitterHandle: profile.twitterHandle,
+    instagramHandle: profile.instagramHandle,
+    tiktokHandle: profile.tiktokHandle,
+    youtubeUrl: profile.youtubeUrl,
+    websiteUrl: profile.websiteUrl,
     characters: profile.characters || [],
     polaroids: (profile.polaroids || [])
       .slice()
-      .sort((a, b) => a.position - b.position),
+      .sort((a, b) => a.position - b.position)
+      .map((polaroid) => ({
+        position: polaroid.position,
+        imageUrl: polaroid.imageUrl,
+        caption: polaroid.caption,
+      })),
   };
 }
 
-export function isDatabaseConfigured() {
+export function isDatabaseConfigured(): boolean {
   return Boolean(process.env.POSTGRES_URL);
 }
 
-export function formatSocialLinks(profile) {
-  const links = [];
+export function formatSocialLinks(profile: PublicProfile): SocialLink[] {
+  const links: SocialLink[] = [];
 
   if (profile.twitterHandle) {
     links.push({ label: 'Twitter', href: `https://x.com/${profile.twitterHandle}`, accent: 'berry' });
@@ -90,7 +112,7 @@ export function formatSocialLinks(profile) {
   return links;
 }
 
-export async function getProfileByHandle(rawHandle) {
+export async function getProfileByHandle(rawHandle: string): Promise<PublicProfile | null> {
   const handle = normalizeHandle(rawHandle);
 
   if (!handle) {
@@ -118,7 +140,7 @@ export async function getProfileByHandle(rawHandle) {
   }
 }
 
-export async function getProfileByUserId(userId) {
+export async function getProfileByUserId(userId: string): Promise<PublicProfile | null> {
   if (!isDatabaseConfigured() || !userId) {
     return null;
   }
@@ -140,7 +162,13 @@ export async function getProfileByUserId(userId) {
   }
 }
 
-export async function prepareHandleReservation({ email, rawHandle }) {
+export async function prepareHandleReservation({
+  email,
+  rawHandle,
+}: {
+  email: string;
+  rawHandle: string;
+}): Promise<{ handle: string }> {
   if (!isDatabaseConfigured()) {
     throw new Error('Database is not configured yet. Add POSTGRES_URL first.');
   }
@@ -153,10 +181,11 @@ export async function prepareHandleReservation({ email, rawHandle }) {
   }
 
   if (!validation.ok) {
-    throw new Error(validation.message);
+    const message = 'message' in validation ? validation.message : 'Invalid handle.';
+    throw new Error(message);
   }
 
-  const { handle } = validation;
+  const handle = validation.handle;
   const now = new Date();
   const expiresAt = new Date(now.getTime() + 30 * 60 * 1000);
 
@@ -194,7 +223,15 @@ export async function prepareHandleReservation({ email, rawHandle }) {
   return { handle };
 }
 
-export async function claimHandleForUser({ userId, email, rawHandle }) {
+export async function claimHandleForUser({
+  userId,
+  email,
+  rawHandle,
+}: {
+  userId: string;
+  email: string;
+  rawHandle: string;
+}): Promise<PublicProfile | null> {
   if (!isDatabaseConfigured()) {
     throw new Error('Database is not configured yet.');
   }
@@ -203,10 +240,11 @@ export async function claimHandleForUser({ userId, email, rawHandle }) {
   const validation = validateHandle(rawHandle);
 
   if (!validation.ok) {
-    throw new Error(validation.message);
+    const message = 'message' in validation ? validation.message : 'Invalid handle.';
+    throw new Error(message);
   }
 
-  const { handle } = validation;
+  const handle = validation.handle;
   const defaults = buildDefaultProfile(handle);
 
   return prisma.$transaction(async (tx) => {
@@ -277,7 +315,13 @@ export async function claimHandleForUser({ userId, email, rawHandle }) {
   });
 }
 
-export async function updateProfileForUser({ userId, payload }) {
+export async function updateProfileForUser({
+  userId,
+  payload,
+}: {
+  userId: string;
+  payload: EditableProfilePayload;
+}): Promise<PublicProfile | null> {
   if (!isDatabaseConfigured()) {
     throw new Error('Database is not configured yet.');
   }

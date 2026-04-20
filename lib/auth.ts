@@ -1,8 +1,9 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import type { NextAuthOptions } from 'next-auth';
 import EmailProvider from 'next-auth/providers/email';
 import prisma from './prisma';
 
-function emailHtml(url) {
+function emailHtml(url: string): string {
   return `
     <div style="background:#fff8fb;padding:32px 20px;font-family:'Helvetica Neue',Arial,sans-serif;color:#3f2b36;">
       <div style="max-width:520px;margin:0 auto;background:#fff;border:1px solid #f5d7e6;border-radius:28px;padding:32px;box-shadow:0 20px 60px rgba(226,143,178,0.14);">
@@ -16,7 +17,7 @@ function emailHtml(url) {
   `;
 }
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     EmailProvider({
