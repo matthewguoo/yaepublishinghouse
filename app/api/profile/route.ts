@@ -2,8 +2,9 @@ import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 import { authOptions } from '../../../lib/auth';
 import { updateProfileForUser } from '../../../lib/data';
+import type { EditableProfilePayload } from '../../../lib/types';
 
-export async function PATCH(request) {
+export async function PATCH(request: Request) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
@@ -11,10 +12,11 @@ export async function PATCH(request) {
   }
 
   try {
-    const payload = await request.json();
+    const payload = (await request.json()) as EditableProfilePayload;
     const profile = await updateProfileForUser({ userId: session.user.id, payload });
     return NextResponse.json({ profile });
   } catch (error) {
-    return NextResponse.json({ error: error.message || 'Could not update profile.' }, { status: 400 });
+    const message = error instanceof Error ? error.message : 'Could not update profile.';
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }

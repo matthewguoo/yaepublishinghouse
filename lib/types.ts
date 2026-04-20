@@ -1,4 +1,5 @@
 import type { Prisma } from '@prisma/client';
+import type { ProfileThemeKey } from './themes';
 
 export type ProfileRecord = Prisma.ProfileGetPayload<{
   include: {
@@ -24,6 +25,7 @@ export type PublicProfile = {
   tiktokHandle: string | null;
   youtubeUrl: string | null;
   websiteUrl: string | null;
+  themeKey: ProfileThemeKey;
   characters: string[];
   polaroids: PolaroidSlot[];
 };
@@ -53,6 +55,7 @@ export type EditableProfilePayload = {
   tiktokHandle?: string;
   youtubeUrl?: string;
   websiteUrl?: string;
+  themeKey?: ProfileThemeKey;
   characters?: string[];
   polaroids?: Array<Partial<EditablePolaroid>>;
 };

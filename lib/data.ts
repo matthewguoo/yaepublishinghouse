@@ -1,6 +1,7 @@
 import prisma from './prisma';
 import { getDemoProfile, getSeedProfileTemplate } from './demo-profile';
 import { labelFromHandle, normalizeHandle, validateHandle } from './handles';
+import { DEFAULT_PROFILE_THEME, isProfileThemeKey } from './themes';
 import type {
   DefaultProfileTemplate,
   EditableProfilePayload,
@@ -32,6 +33,14 @@ function cleanUrl(value = ''): string {
   }
 }
 
+function normalizeThemeKey(value?: string | null) {
+  if (value && isProfileThemeKey(value)) {
+    return value;
+  }
+
+  return DEFAULT_PROFILE_THEME;
+}
+
 function buildDefaultProfile(handle: string): DefaultProfileTemplate {
   const seeded = getSeedProfileTemplate(handle);
 
@@ -48,6 +57,7 @@ function buildDefaultProfile(handle: string): DefaultProfileTemplate {
     tiktokHandle: '',
     youtubeUrl: '',
     websiteUrl: '',
+    themeKey: DEFAULT_PROFILE_THEME,
     characters: [],
     polaroids: Array.from({ length: 5 }, (_, position) => ({ position, imageUrl: '', caption: '' })),
   };
@@ -70,6 +80,7 @@ function serializeProfile(profile: ProfileRecord | null): PublicProfile | null {
     tiktokHandle: profile.tiktokHandle,
     youtubeUrl: profile.youtubeUrl,
     websiteUrl: profile.websiteUrl,
+    themeKey: normalizeThemeKey(profile.themeKey),
     characters: profile.characters || [],
     polaroids: (profile.polaroids || [])
       .slice()
@@ -289,6 +300,7 @@ export async function claimHandleForUser({
         tiktokHandle: defaults.tiktokHandle || null,
         youtubeUrl: defaults.youtubeUrl || null,
         websiteUrl: defaults.websiteUrl || null,
+        themeKey: defaults.themeKey,
         characters: defaults.characters,
         polaroids: {
           create: defaults.polaroids.map((polaroid, position) => ({
@@ -339,6 +351,7 @@ export async function updateProfileForUser({
   const tiktokHandle = cleanSocialHandle(payload.tiktokHandle || '');
   const youtubeUrl = cleanUrl(payload.youtubeUrl || '');
   const websiteUrl = cleanUrl(payload.websiteUrl || '');
+  const themeKey = normalizeThemeKey(payload.themeKey || existingProfile.themeKey);
   const characters = Array.isArray(payload.characters)
     ? payload.characters.map((value) => clampText(value, 30)).filter(Boolean).slice(0, 12)
     : [];
@@ -365,6 +378,7 @@ export async function updateProfileForUser({
         tiktokHandle: tiktokHandle || null,
         youtubeUrl: youtubeUrl || null,
         websiteUrl: websiteUrl || null,
+        themeKey,
         characters,
       },
     });

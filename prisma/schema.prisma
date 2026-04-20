@@ -67,6 +67,7 @@ model Profile {
   tiktokHandle    String?    @db.VarChar(40)
   youtubeUrl      String?
   websiteUrl      String?
+  themeKey        String     @default("blush") @db.VarChar(24)
   characters      String[]   @default([])
   polaroids       Polaroid[]
   user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)

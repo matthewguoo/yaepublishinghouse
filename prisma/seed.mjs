@@ -4,11 +4,11 @@ const prisma = new PrismaClient();
 
 const email = 'yaemikodayoo@gmail.com';
 const polaroids = [
-  { position: 0, imageUrl: null, caption: 'Maid Yae at Japantown' },
-  { position: 1, imageUrl: null, caption: 'Double Yae photo set soon' },
-  { position: 2, imageUrl: null, caption: 'Tingyun mirror moment' },
-  { position: 3, imageUrl: null, caption: 'Cherry blossom weekend' },
-  { position: 4, imageUrl: null, caption: 'Waiting for pro shots' },
+  { position: 0, imageUrl: null, caption: 'maid yae at jtown' },
+  { position: 1, imageUrl: null, caption: 'double yae set soon' },
+  { position: 2, imageUrl: null, caption: 'tingyun mirror break' },
+  { position: 3, imageUrl: null, caption: 'sakura weekend crumbs' },
+  { position: 4, imageUrl: null, caption: 'waiting on pro shots' },
 ];
 
 async function main() {
@@ -29,31 +29,27 @@ async function main() {
     where: { userId: user.id },
   });
 
+  const profileData = {
+    handle: 'yuuko',
+    displayName: 'Yuuko',
+    bio: 'bay area cosplay girlie, fox ears collector, and chronic eyeliner overdoer. cherry blossom festival weekend is still living in my head rent free.',
+    avatarUrl: '/miko.jpg',
+    twitterHandle: 'pci_yae',
+    instagramHandle: 'yuuko.koro',
+    websiteUrl: 'https://yaepublishing.house',
+    themeKey: 'blush',
+    characters: ['Yae Miko', 'Tingyun', 'Takina', 'March 7th'],
+  };
+
   const profile = existingProfile
     ? await prisma.profile.update({
         where: { userId: user.id },
-        data: {
-          handle: 'yuuko',
-          displayName: 'Yuuko',
-          bio: 'Bay Area cosplayer, fox energy enthusiast, and serial over-committer to eyeliner. Fresh off Cherry Blossom Festival weekend in Maid Yae.',
-          avatarUrl: '/miko.jpg',
-          twitterHandle: 'pci_yae',
-          instagramHandle: 'yuuko.koro',
-          websiteUrl: 'https://yaepublishing.house',
-          characters: ['Yae Miko', 'Tingyun', 'Takina', 'March 7th'],
-        },
+        data: profileData,
       })
     : await prisma.profile.create({
         data: {
           userId: user.id,
-          handle: 'yuuko',
-          displayName: 'Yuuko',
-          bio: 'Bay Area cosplayer, fox energy enthusiast, and serial over-committer to eyeliner. Fresh off Cherry Blossom Festival weekend in Maid Yae.',
-          avatarUrl: '/miko.jpg',
-          twitterHandle: 'pci_yae',
-          instagramHandle: 'yuuko.koro',
-          websiteUrl: 'https://yaepublishing.house',
-          characters: ['Yae Miko', 'Tingyun', 'Takina', 'March 7th'],
+          ...profileData,
         },
       });
 
