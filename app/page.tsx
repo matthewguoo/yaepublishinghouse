@@ -1,55 +1,86 @@
 /* eslint-disable @next/next/no-img-element */
+import type { CSSProperties } from 'react';
 import Link from 'next/link';
+import { DoodleArrow, DoodleBow, DoodleHeart, DoodleSakura, DoodleStar } from '../components/scrapbook-doodles';
 import { getProfileByHandle } from '../lib/data';
+import { getProfileTheme } from '../lib/themes';
 import styles from './page.module.css';
+
+function buildThemeVars(themeKey?: string | null): CSSProperties {
+  const theme = getProfileTheme(themeKey);
+
+  return {
+    '--theme-accent': theme.accent,
+    '--theme-accent-deep': theme.accentDeep,
+    '--theme-tint': theme.tint,
+    '--theme-tint-strong': theme.tintStrong,
+    '--theme-paper': theme.paper,
+    '--theme-paper-alt': theme.paperAlt,
+    '--theme-tape': theme.tape,
+    '--theme-ink': theme.ink,
+    '--theme-sticker': theme.sticker,
+  } as CSSProperties;
+}
 
 export default async function HomePage() {
   const demo = await getProfileByHandle('yuuko');
+  const polaroids = (demo?.polaroids || []).slice(0, 4);
 
   return (
     <main className={styles.page}>
-      <section className={styles.heroShell}>
+      <section className={styles.heroShell} style={buildThemeVars(demo?.themeKey)}>
         <header className={styles.topbar}>
           <Link href="/" className={styles.brand}>
-            <span className={styles.brandMark}>✿</span>
+            <span className={styles.brandMark}>yp</span>
             <span>Yae Publishing House</span>
           </Link>
           <nav className={styles.nav}>
-            <Link href="/@yuuko">Demo</Link>
-            <Link href="/signup">Claim a page</Link>
-            <Link href="/login">Login</Link>
+            <Link href="/@yuuko">peek at yuuko</Link>
+            <Link href="/signup">claim a page</Link>
+            <Link href="/login">login</Link>
           </nav>
         </header>
 
         <div className={styles.heroGrid}>
-          <div className={styles.copyStack}>
-            <div className="pill">cute cosplayer pages, not boring link farms</div>
-            <p className={styles.scribble}>claim your cute cosplayer page</p>
+          <div className={styles.copyPaper}>
+            <div className={styles.tapeTop} />
+            <div className="pill">little cosplay scrapbook page</div>
+            <p className={styles.kicker}>not a linktree. not a portfolio. just your stuff.</p>
             <h1 className={styles.heroTitle}>
-              One soft little home for your socials, your photo drops, and the characters you love.
+              a tiny page for <span className="marker-swipe">photos</span>, handles, and whatever else you want pinned up.
             </h1>
             <p className={styles.heroBody}>
-              Built for cosplay people with taste. Show your handle, your current lineup, and a tiny polaroid wall without looking like a beige startup landing page.
+              think taped polaroids, doodles in the margins, soft stickers, and a page color that actually feels like you.
+              it is supposed to look homemade.
             </p>
             <div className={styles.ctaRow}>
               <Link href="/signup" className="primary-button">
-                Claim your page
+                make my page
               </Link>
               <Link href="/@yuuko" className="secondary-button">
-                Peek at @yuuko
+                see the demo
               </Link>
             </div>
-            <div className={styles.miniNotes}>
-              <span>magic link login</span>
-              <span>custom @handles</span>
-              <span>polaroid uploads</span>
+
+            <div className={styles.marginNotes}>
+              <span>magic link only</span>
+              <span>5 photo slots</span>
+              <span>pick a pastel theme</span>
             </div>
+
+            <DoodleArrow className={styles.arrowDoodle} />
+            <DoodleStar className={styles.starDoodle} />
           </div>
 
-          <div className={styles.previewWrap}>
-            <div className={styles.stickerA}>new</div>
-            <div className={styles.stickerB}>cute</div>
-            <div className={styles.previewCard}>
+          <div className={styles.collageBoard}>
+            <div className={`${styles.sticker} ${styles.stickerTop}`}>cute & messy</div>
+            <div className={`${styles.sticker} ${styles.stickerBottom}`}>made with love</div>
+            <DoodleBow className={styles.bowDoodle} />
+            <DoodleHeart className={styles.heartDoodle} />
+
+            <article className={styles.previewCard}>
+              <div className={styles.previewTapeLeft} />
+              <div className={styles.previewTapeRight} />
               <div className={styles.previewHeader}>
                 <div className={styles.previewAvatar}>
                   {demo?.avatarUrl ? <img src={demo.avatarUrl} alt={demo.displayName} /> : <span>Y</span>}
@@ -62,15 +93,19 @@ export default async function HomePage() {
 
               <p className={styles.previewBio}>{demo?.bio}</p>
 
-              <div className={styles.previewLinks}>
-                <span>Twitter</span>
-                <span>Instagram</span>
-                <span>Website</span>
+              <div className={styles.previewThemeRow}>
+                <span className={styles.previewThemeLabel}>page color</span>
+                <div className={styles.swatchRow}>
+                  {['#f29bc0', '#baa5f7', '#87d4b4', '#e8c96b', '#8fc7f8'].map((color) => (
+                    <span key={color} className={styles.swatch} style={{ background: color }} />
+                  ))}
+                </div>
               </div>
 
               <div className={styles.previewPolaroids}>
-                {(demo?.polaroids || []).slice(0, 4).map((polaroid, index) => (
+                {polaroids.map((polaroid, index) => (
                   <article key={index} className={styles.polaroid}>
+                    <div className={styles.polaroidTape} />
                     <div className={styles.polaroidPhoto}>
                       {polaroid.imageUrl ? (
                         <img src={polaroid.imageUrl} alt={polaroid.caption || ''} />
@@ -82,55 +117,42 @@ export default async function HomePage() {
                   </article>
                 ))}
               </div>
-            </div>
+            </article>
           </div>
         </div>
       </section>
 
-      <section className={styles.featureGrid}>
-        <article className={styles.featureCard}>
-          <h2>Actually made for cosplay people</h2>
-          <p>
-            Drop characters, socials, and photo placeholders in one profile instead of stitching together six random cards.
-          </p>
+      <section className={styles.notesGrid}>
+        <article className={styles.noteCard}>
+          <div className={styles.noteTape} />
+          <p className={styles.noteTitle}>what goes on it</p>
+          <p className={styles.noteBody}>your name, bio, handles, character list, and a little wall for con photos or placeholders.</p>
         </article>
-        <article className={styles.featureCard}>
-          <h2>Magic link only</h2>
-          <p>
-            No password soup. You sign in with email, click once, and land in your dashboard.
-          </p>
+        <article className={`${styles.noteCard} ${styles.noteCardTilt}`}>
+          <div className={styles.noteTape} />
+          <p className={styles.noteTitle}>theme colors</p>
+          <p className={styles.noteBody}>pink, lavender, mint, butter yellow, peach, sky blue, matcha, rose. pick one and the whole page shifts with it.</p>
         </article>
-        <article className={styles.featureCard}>
-          <h2>Polaroid wall energy</h2>
-          <p>
-            Your page gets a tiny scrapbook grid for hero shots, con weekends, or placeholders while the pro photos cook.
+        <article className={styles.noteCardWide}>
+          <DoodleSakura className={styles.sakuraDoodle} />
+          <p className={styles.noteTitle}>the point</p>
+          <p className={styles.noteBody}>
+            it should feel like an old tumblr page and a scrapbook had a baby. if it starts looking like startup software, the design failed.
           </p>
         </article>
       </section>
 
-      <section className={styles.band}>
+      <section className={styles.footerCard}>
         <div>
-          <p className={styles.bandLabel}>Why it feels different</p>
-          <h2>This is supposed to look like a little shrine to your cosplay life, not a SaaS pricing page.</h2>
+          <p className={styles.footerKicker}>okay, enough talking</p>
+          <h2>go claim a handle and make your page way cuter than it needs to be.</h2>
         </div>
-        <div className={styles.bandTags}>
-          <span>soft pink</span>
-          <span>rounded</span>
-          <span>sakura</span>
-          <span>scrapbook-ish</span>
-          <span>cute but still clean</span>
-        </div>
-      </section>
-
-      <section className={styles.finalCta}>
-        <p className={styles.scribbleBottom}>your page should be prettier than your form stack</p>
-        <h2>Reserve a handle and make it yours.</h2>
-        <div className={styles.ctaRow}>
+        <div className={styles.footerActions}>
           <Link href="/signup" className="primary-button">
-            Start with email
+            start with email
           </Link>
           <Link href="/typography" className="ghost-button">
-            Keep the old typography page
+            old typography page still exists
           </Link>
         </div>
       </section>

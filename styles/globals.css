@@ -3,38 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --cream: #fffaf7;
-  --paper: #fff6fb;
-  --shell: #fff0f7;
-  --petal: #ffdeea;
-  --petal-strong: #ff8db7;
-  --petal-deep: #db5c94;
-  --berry: #87304f;
-  --ink: #402330;
-  --ink-soft: #71515d;
-  --line: rgba(95, 46, 66, 0.12);
-  --shadow: 0 24px 60px rgba(157, 75, 111, 0.16);
-  --radius-xl: 32px;
+  --cream: #fffcf8;
+  --paper: #fff8fb;
+  --shell: #fff2f7;
+  --petal: #ffdbe8;
+  --petal-strong: #f396bc;
+  --petal-deep: #c9678f;
+  --berry: #6a4251;
+  --ink: #3f2f37;
+  --ink-soft: #74616a;
+  --line: rgba(101, 77, 88, 0.16);
+  --shadow: 0 26px 70px rgba(113, 88, 97, 0.15);
+  --shadow-paper: 0 14px 34px rgba(91, 66, 76, 0.12);
+  --radius-xl: 30px;
   --radius-lg: 24px;
   --radius-md: 18px;
-  --background: 337 100% 99%;
-  --foreground: 336 28% 19%;
+  --background: 35 100% 99%;
+  --foreground: 335 14% 22%;
   --card: 0 0% 100%;
-  --card-foreground: 336 28% 19%;
+  --card-foreground: 335 14% 22%;
   --popover: 0 0% 100%;
-  --popover-foreground: 336 28% 19%;
-  --primary: 333 85% 67%;
+  --popover-foreground: 335 14% 22%;
+  --primary: 334 79% 69%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 333 100% 97%;
-  --secondary-foreground: 336 28% 19%;
-  --muted: 333 100% 98%;
-  --muted-foreground: 334 15% 45%;
-  --accent: 334 100% 97%;
-  --accent-foreground: 336 28% 19%;
+  --secondary: 336 100% 98%;
+  --secondary-foreground: 335 14% 22%;
+  --muted: 340 40% 97%;
+  --muted-foreground: 334 11% 44%;
+  --accent: 336 100% 97%;
+  --accent-foreground: 335 14% 22%;
   --destructive: 342 74% 45%;
   --destructive-foreground: 0 0% 100%;
-  --border: 334 44% 88%;
-  --input: 334 44% 88%;
+  --border: 335 24% 86%;
+  --input: 335 24% 86%;
   --ring: 333 78% 76%;
   --radius: 1.5rem;
 }
@@ -53,10 +54,16 @@
     @apply bg-background text-foreground font-body antialiased;
     margin: 0;
     min-height: 100vh;
-    background:
-      radial-gradient(circle at top left, rgba(255, 179, 210, 0.45), transparent 28%),
-      radial-gradient(circle at 85% 15%, rgba(255, 226, 236, 0.8), transparent 24%),
-      linear-gradient(180deg, #fffdfd 0%, #fff7fb 46%, #fff2f8 100%);
+    background-color: #fffaf6;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(255, 210, 227, 0.55), transparent 20%),
+      radial-gradient(circle at 88% 12%, rgba(255, 242, 198, 0.45), transparent 18%),
+      radial-gradient(circle at 82% 82%, rgba(207, 236, 255, 0.4), transparent 20%),
+      linear-gradient(rgba(247, 201, 221, 0.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247, 201, 221, 0.16) 1px, transparent 1px),
+      linear-gradient(180deg, #fffefb 0%, #fff8fb 46%, #fff3f6 100%);
+    background-size: auto, auto, auto, 22px 22px, 22px 22px, auto;
+    background-attachment: fixed;
   }
 
   img {
@@ -70,14 +77,96 @@
 
   button,
   input,
-  textarea {
+  textarea,
+  select {
     font: inherit;
   }
 }
 
 ::selection {
-  background: var(--petal-strong);
+  background: rgba(243, 150, 188, 0.65);
   color: white;
+}
+
+.scrapbook-doodle {
+  display: block;
+}
+
+.paper-texture {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)),
+    repeating-linear-gradient(0deg, rgba(124, 95, 107, 0.05) 0, rgba(124, 95, 107, 0.05) 1px, transparent 1px, transparent 6px);
+}
+
+.marker-swipe {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+}
+
+.marker-swipe::after {
+  content: '';
+  position: absolute;
+  left: -0.08em;
+  right: -0.08em;
+  bottom: 0.04em;
+  height: 0.5em;
+  border-radius: 999px;
+  background: rgba(255, 226, 120, 0.6);
+  transform: rotate(-1.4deg);
+  z-index: -1;
+}
+
+.tape-strip {
+  position: absolute;
+  width: 78px;
+  height: 18px;
+  border-radius: 4px;
+  background: rgba(255, 214, 228, 0.86);
+  box-shadow: 0 2px 0 rgba(255, 255, 255, 0.45) inset;
+  opacity: 0.92;
+}
+
+.tape-strip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.18) 0,
+    rgba(255, 255, 255, 0.18) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  mix-blend-mode: screen;
+}
+
+.sticker-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(108, 77, 90, 0.15);
+  background: #fff5b8;
+  box-shadow: var(--shadow-paper);
+  font-family: var(--font-note), cursive;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.notebook-rule {
+  position: relative;
+}
+
+.notebook-rule::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(210, 138, 170, 0.22), rgba(210, 138, 170, 0.7), rgba(210, 138, 170, 0.12));
 }
 
 .shell-page {
@@ -91,35 +180,10 @@
   padding: 28px;
   border-radius: var(--radius-xl);
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.84);
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
-}
-
-.shell-card::before,
-.shell-card::after {
-  content: '';
-  position: absolute;
-  border-radius: 999px;
-  background: rgba(255, 171, 202, 0.28);
-  filter: blur(20px);
-  pointer-events: none;
-}
-
-.shell-card::before {
-  width: 180px;
-  height: 180px;
-  top: -70px;
-  right: -40px;
-}
-
-.shell-card::after {
-  width: 120px;
-  height: 120px;
-  bottom: -40px;
-  left: -30px;
 }
 
 .pill {
@@ -129,12 +193,11 @@
   padding: 8px 14px;
   border-radius: 999px;
   border: 1px solid rgba(219, 92, 148, 0.16);
-  background: rgba(255, 236, 244, 0.9);
+  background: rgba(255, 242, 247, 0.96);
   color: var(--berry);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-note), cursive;
+  font-size: 0.98rem;
+  line-height: 1;
 }
 
 .primary-button,
@@ -149,34 +212,37 @@
   text-decoration: none;
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
   cursor: pointer;
+  box-shadow: var(--shadow-paper);
 }
 
 .primary-button:hover,
 .secondary-button:hover,
 .ghost-button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-1px) rotate(-0.4deg);
 }
 
 .primary-button {
-  border: none;
-  background: linear-gradient(135deg, #ff93bc 0%, #ef6ca4 100%);
+  border: 1.5px solid rgba(209, 102, 144, 0.22);
+  background: linear-gradient(180deg, #ffb8d1 0%, #f48db5 100%);
   color: white;
-  font-weight: 700;
-  box-shadow: 0 16px 34px rgba(239, 108, 164, 0.28);
+  font-family: var(--font-note), cursive;
+  font-size: 1.05rem;
 }
 
 .secondary-button {
-  border: 1px solid rgba(135, 48, 79, 0.14);
-  background: rgba(255, 255, 255, 0.88);
+  border: 1.5px solid rgba(118, 88, 101, 0.14);
+  background: rgba(255, 255, 255, 0.9);
   color: var(--ink);
-  font-weight: 700;
+  font-family: var(--font-note), cursive;
+  font-size: 1.02rem;
 }
 
 .ghost-button {
-  border: 1px dashed rgba(135, 48, 79, 0.24);
-  background: rgba(255, 245, 250, 0.92);
+  border: 2px dashed rgba(210, 138, 170, 0.46);
+  background: rgba(255, 249, 252, 0.96);
   color: var(--berry);
-  font-weight: 600;
+  font-family: var(--font-note), cursive;
+  font-size: 1.02rem;
 }
 
 .field {
@@ -185,18 +251,17 @@
 }
 
 .field label {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 0.98rem;
   color: var(--berry);
+  font-family: var(--font-note), cursive;
 }
 
 .field input,
 .field textarea {
   width: 100%;
-  border: 1px solid rgba(135, 48, 79, 0.14);
+  border: 1.5px solid rgba(135, 48, 79, 0.14);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   padding: 14px 16px;
   color: var(--ink);
   outline: none;
@@ -209,20 +274,23 @@
   box-shadow: 0 0 0 4px rgba(255, 171, 202, 0.2);
 }
 
+.helper,
+.error-text,
+.success-text {
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
 .helper {
   color: var(--ink-soft);
-  font-size: 14px;
-  line-height: 1.6;
 }
 
 .error-text {
   color: #b32659;
-  font-size: 14px;
 }
 
 .success-text {
   color: #2c7a57;
-  font-size: 14px;
 }
 
 @media (max-width: 640px) {
@@ -233,5 +301,9 @@
   .shell-card {
     padding: 22px;
     border-radius: 24px;
+  }
+
+  .sticker-bubble {
+    font-size: 0.95rem;
   }
 }

@@ -1,27 +1,33 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Dela_Gothic_One, Yomogi, Zen_Kaku_Gothic_New } from 'next/font/google';
+import { Caveat, Kalam, Newsreader, Patrick_Hand } from 'next/font/google';
 import '../styles/globals.css';
 
-const display = Dela_Gothic_One({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-display',
-});
-
-const body = Zen_Kaku_Gothic_New({
+const body = Newsreader({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
   variable: '--font-body',
 });
 
-const scribble = Yomogi({
+const note = Patrick_Hand({
   subsets: ['latin'],
   weight: '400',
+  variable: '--font-note',
+});
+
+const scribble = Kalam({
+  subsets: ['latin'],
+  weight: ['400', '700'],
   variable: '--font-scribble',
 });
 
+const marker = Caveat({
+  subsets: ['latin'],
+  weight: ['500', '700'],
+  variable: '--font-marker',
+});
+
 const SITE_NAME = 'Yae Publishing House';
-const SITE_DESC = 'Cute profile pages for cosplayers. Claim your cute page, drop your socials, and show off the characters you love.';
+const SITE_DESC = 'handmade little profile pages for cosplay photos, handles, and whatever else you want to pin up.';
 const PROD_URL = process.env.NEXTAUTH_URL || 'https://yaepublishing.house';
 
 export const metadata = {
@@ -32,7 +38,7 @@ export const metadata = {
   },
   description: SITE_DESC,
   applicationName: SITE_NAME,
-  keywords: ['cosplayer profile', 'link in bio', 'anime cosplay', 'Yae Publishing House'],
+  keywords: ['cosplay page', 'scrapbook profile', 'anime cosplay', 'Yae Publishing House'],
   openGraph: {
     title: SITE_NAME,
     description: SITE_DESC,
@@ -47,7 +53,7 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -57,7 +63,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${scribble.variable}`}>
+    <html lang="en" className={`${body.variable} ${note.variable} ${scribble.variable} ${marker.variable}`}>
       <head>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />

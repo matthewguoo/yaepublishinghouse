@@ -30,19 +30,20 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   if (!isDatabaseConfigured()) {
     return (
       <main className="flex min-h-screen items-center justify-center px-4 py-8">
-        <Card className="w-full max-w-2xl rounded-[34px] border-petal-200/70 bg-white/84 shadow-float">
+        <Card className="w-full max-w-2xl rounded-[34px] border-[rgba(111,82,95,0.14)] bg-white/88 shadow-float">
           <CardContent className="grid gap-5 p-6 sm:p-8">
             <Badge className="w-fit">setup still needed</Badge>
             <div className="grid gap-3">
-              <h1 className="font-display text-4xl leading-none tracking-[-0.05em] sm:text-6xl">Hook up Vercel Postgres first.</h1>
+              <p className="font-marker text-3xl text-petal-700 sm:text-4xl">one tiny blocker</p>
+              <h1 className="font-body text-4xl font-semibold leading-none tracking-[-0.04em] sm:text-6xl">hook up Postgres first.</h1>
               <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                The editor is wired, but the database env vars have to exist before profile data can save.
+                the editor is ready, but the database env vars have to exist before profile data can save.
               </p>
             </div>
             <Button asChild variant="secondary" className="w-fit">
               <Link href="/">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back home
+                back home
               </Link>
             </Button>
           </CardContent>

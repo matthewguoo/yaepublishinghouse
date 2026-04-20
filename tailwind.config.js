@@ -63,16 +63,22 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        display: ['var(--font-display)'],
         body: ['var(--font-body)'],
+        display: ['var(--font-body)'],
+        note: ['var(--font-note)'],
         scribble: ['var(--font-scribble)'],
+        marker: ['var(--font-marker)'],
       },
       boxShadow: {
-        petal: '0 20px 60px rgba(191, 86, 136, 0.16)',
-        float: '0 24px 64px rgba(164, 88, 124, 0.18)',
+        petal: '0 18px 44px rgba(157, 109, 130, 0.14)',
+        float: '0 26px 70px rgba(120, 84, 102, 0.17)',
+        paper: '0 12px 30px rgba(82, 54, 64, 0.12)',
       },
       backgroundImage: {
-        'petal-grid': 'radial-gradient(circle at 20% 10%, rgba(255, 201, 224, 0.85), transparent 28%), radial-gradient(circle at 85% 14%, rgba(255, 238, 245, 0.95), transparent 20%), linear-gradient(180deg, rgba(255,255,255,0.86) 0%, rgba(255,245,250,0.92) 100%)',
+        'petal-grid': 'linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), linear-gradient(rgba(247, 187, 212, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(247, 187, 212, 0.15) 1px, transparent 1px)',
+      },
+      backgroundSize: {
+        'petal-grid': '100% 100%, 22px 22px, 22px 22px',
       },
       keyframes: {
         'fade-up': {
