@@ -1,67 +1,63 @@
-import '../styles/globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Dela_Gothic_One, Yomogi, Zen_Kaku_Gothic_New } from 'next/font/google';
+import '../styles/globals.css';
+
+const display = Dela_Gothic_One({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-display',
+});
+
+const body = Zen_Kaku_Gothic_New({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-body',
+});
+
+const scribble = Yomogi({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-scribble',
+});
 
 const SITE_NAME = 'Yae Publishing House';
-const SITE_DESC = 'Matthew Guo — Hardware engineer, builder, CMU ECE \'30.';
-const PROD_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://yaepublishing.house';
+const SITE_DESC = 'Cute profile pages for cosplayers. Claim your cute page, drop your socials, and show off the characters you love.';
+const PROD_URL = process.env.NEXTAUTH_URL || 'https://yaepublishing.house';
 
 export const metadata = {
   metadataBase: new URL(PROD_URL),
-  title: `${SITE_NAME} — Matthew Guo`,
+  title: {
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
+  },
   description: SITE_DESC,
   applicationName: SITE_NAME,
-  creator: 'Matthew Guo',
-  publisher: 'Yae Publishing House',
-  category: 'personal',
-  keywords: ['Matthew Guo', 'hardware engineer', 'CMU', 'robotics', 'Yae Publishing House'],
-  alternates: {
-    canonical: '/',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-    ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
-  },
+  keywords: ['cosplayer profile', 'link in bio', 'anime cosplay', 'Yae Publishing House'],
   openGraph: {
-    title: `${SITE_NAME} — Matthew Guo`,
+    title: SITE_NAME,
     description: SITE_DESC,
     url: PROD_URL,
     siteName: SITE_NAME,
-    locale: 'en_US',
     type: 'website',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: SITE_NAME,
     description: SITE_DESC,
-    creator: '@pci_yae',
   },
 };
 
 export default function RootLayout({ children }) {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: 'Matthew Guo',
-    alternateName: '郭子玉',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    description: SITE_DESC,
     url: PROD_URL,
-    sameAs: [
-      'https://x.com/pci_yae',
-      'https://github.com/matthewguoo',
-      'https://instagram.com/yuuko.koro',
-    ],
-    jobTitle: 'Hardware Engineer',
   };
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${display.variable} ${body.variable} ${scribble.variable}`}>
       <head>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />

@@ -1,248 +1,139 @@
-'use client';
+/* eslint-disable @next/next/no-img-element */
+import Link from 'next/link';
+import { getProfileByHandle } from '../lib/data';
+import styles from './page.module.css';
 
-import { useEffect, useRef, useState } from 'react';
+export default async function HomePage() {
+  const demo = await getProfileByHandle('yuuko');
 
-/* ===== SAKURA PETALS ===== */
-function Petals() {
-  const petals = Array.from({ length: 30 }, (_, i) => ({
-    s: 8 + Math.random() * 16,
-    x: Math.random() * 100,
-    o: 0.15 + Math.random() * 0.35,
-    dur: 10 + Math.random() * 14,
-    del: Math.random() * 16,
-    sway: 3 + Math.random() * 5,
-    rot: Math.random() * 360,
-  }));
   return (
-    <div className="petals">
-      {petals.map((p, i) => (
-        <div key={i} className="petal" style={{
-          '--s': `${p.s}px`, '--x': `${p.x}%`, '--o': p.o,
-          '--dur': `${p.dur}s`, '--del': `${p.del}s`,
-          '--sway': `${p.sway}s`, '--rot': `${p.rot}deg`,
-        }} />
-      ))}
-    </div>
-  );
-}
+    <main className={styles.page}>
+      <section className={styles.heroShell}>
+        <header className={styles.topbar}>
+          <Link href="/" className={styles.brand}>
+            <span className={styles.brandMark}>✿</span>
+            <span>Yae Publishing House</span>
+          </Link>
+          <nav className={styles.nav}>
+            <Link href="/@yuuko">Demo</Link>
+            <Link href="/signup">Claim a page</Link>
+            <Link href="/login">Login</Link>
+          </nav>
+        </header>
 
-/* ===== REVEAL HOOK ===== */
-function useReveal(threshold = 0.2) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold, rootMargin: '0px 0px -40px 0px' }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return [ref, visible];
-}
+        <div className={styles.heroGrid}>
+          <div className={styles.copyStack}>
+            <div className="pill">cute cosplayer pages, not boring link farms</div>
+            <p className={styles.scribble}>claim your cute cosplayer page</p>
+            <h1 className={styles.heroTitle}>
+              One soft little home for your socials, your photo drops, and the characters you love.
+            </h1>
+            <p className={styles.heroBody}>
+              Built for cosplay people with taste. Show your handle, your current lineup, and a tiny polaroid wall without looking like a beige startup landing page.
+            </p>
+            <div className={styles.ctaRow}>
+              <Link href="/signup" className="primary-button">
+                Claim your page
+              </Link>
+              <Link href="/@yuuko" className="secondary-button">
+                Peek at @yuuko
+              </Link>
+            </div>
+            <div className={styles.miniNotes}>
+              <span>magic link login</span>
+              <span>custom @handles</span>
+              <span>polaroid uploads</span>
+            </div>
+          </div>
 
-/* ===== FRAGMENT COMPONENTS ===== */
-function ImgFrag({ src, alt, style, w, h }) {
-  const [ref, vis] = useReveal(0.15);
-  return (
-    <div ref={ref} className={`frag frag-img ${vis ? 'vis' : ''}`} style={{ ...style, width: w, height: h }}>
-      <img src={src} alt={alt || ''} loading="lazy" />
-    </div>
-  );
-}
+          <div className={styles.previewWrap}>
+            <div className={styles.stickerA}>new</div>
+            <div className={styles.stickerB}>cute</div>
+            <div className={styles.previewCard}>
+              <div className={styles.previewHeader}>
+                <div className={styles.previewAvatar}>
+                  {demo?.avatarUrl ? <img src={demo.avatarUrl} alt={demo.displayName} /> : <span>Y</span>}
+                </div>
+                <div>
+                  <p className={styles.previewName}>{demo?.displayName || 'Yuuko'}</p>
+                  <p className={styles.previewHandle}>@{demo?.handle || 'yuuko'}</p>
+                </div>
+              </div>
 
-function TextFrag({ children, jp, style }) {
-  const [ref, vis] = useReveal();
-  return (
-    <div ref={ref} className={`frag frag-text ${vis ? 'vis' : ''}`} style={style}>
-      <p>{children}</p>
-      {jp && <p className="jp-line">{jp}</p>}
-    </div>
-  );
-}
+              <p className={styles.previewBio}>{demo?.bio}</p>
 
-function LabelFrag({ text, style }) {
-  const [ref, vis] = useReveal();
-  return (
-    <div ref={ref} className={`frag frag-label ${vis ? 'vis' : ''}`} style={style}>
-      {text}
-    </div>
-  );
-}
+              <div className={styles.previewLinks}>
+                <span>Twitter</span>
+                <span>Instagram</span>
+                <span>Website</span>
+              </div>
 
-/* ===== POEM ===== */
-function Poem() {
-  const [ref, vis] = useReveal(0.3);
-  return (
-    <div className="poem" ref={ref}>
-      <div className="poem-lines">
-        {[
-          'Stories are the most powerful things in existence.',
-          'More enduring than any sacred relic.',
-          'Every visitor carries one,',
-          'whether they know it or not.',
-        ].map((line, i) => (
-          <p key={i} className={`poem-line ${vis ? 'vis' : ''}`} style={{ transitionDelay: `${i * 0.2}s` }}>
-            {line}
+              <div className={styles.previewPolaroids}>
+                {(demo?.polaroids || []).slice(0, 4).map((polaroid, index) => (
+                  <article key={index} className={styles.polaroid}>
+                    <div className={styles.polaroidPhoto}>
+                      {polaroid.imageUrl ? (
+                        <img src={polaroid.imageUrl} alt={polaroid.caption || ''} />
+                      ) : (
+                        <span>{polaroid.caption || 'photo soon'}</span>
+                      )}
+                    </div>
+                    <p>{polaroid.caption || 'coming soon'}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.featureGrid}>
+        <article className={styles.featureCard}>
+          <h2>Actually made for cosplay people</h2>
+          <p>
+            Drop characters, socials, and photo placeholders in one profile instead of stitching together six random cards.
           </p>
-        ))}
-      </div>
-      <p className={`poem-jp ${vis ? 'vis' : ''}`}>
-        物語は、世界で最も強いものだ
-      </p>
-    </div>
-  );
-}
+        </article>
+        <article className={styles.featureCard}>
+          <h2>Magic link only</h2>
+          <p>
+            No password soup. You sign in with email, click once, and land in your dashboard.
+          </p>
+        </article>
+        <article className={styles.featureCard}>
+          <h2>Polaroid wall energy</h2>
+          <p>
+            Your page gets a tiny scrapbook grid for hero shots, con weekends, or placeholders while the pro photos cook.
+          </p>
+        </article>
+      </section>
 
-/* ===== MAIN ===== */
-export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const h = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', h, { passive: true });
-    return () => window.removeEventListener('scroll', h);
-  }, []);
-
-  return (
-    <>
-      <div className="noise" />
-      <Petals />
-
-      <div className="canvas">
-        {/* ===== OPENING ===== */}
-        <section className="opening">
-          <div className="opening-bg" />
-          <div className="opening-content">
-            <h1 className="opening-kanji">八重堂</h1>
-            <p className="opening-sub">Yae Publishing House</p>
-            <div className="opening-line" />
-          </div>
-
-          {/* ghost kanji */}
-          <span className="ghost" style={{ top: '15%', left: '8%', fontSize: '8rem', transform: `translateY(${scrollY * 0.05}px)` }}>狐</span>
-          <span className="ghost" style={{ bottom: '20%', right: '10%', fontSize: '6rem', transform: `translateY(${scrollY * -0.03}px)` }}>桜</span>
-          <span className="ghost" style={{ top: '60%', left: '75%', fontSize: '5rem', transform: `translateY(${scrollY * 0.04}px)` }}>夢</span>
-        </section>
-
-        {/* ===== DRIFT STRIP ===== */}
-        <div className="strip">
-          <div className="strip-text">物語 ・ 花 ・ 狐 ・ 夢 ・ 桜 ・ 神社 ・ 光 ・ 物語 ・ 花 ・ 狐 ・ 夢 ・ 桜</div>
+      <section className={styles.band}>
+        <div>
+          <p className={styles.bandLabel}>Why it feels different</p>
+          <h2>This is supposed to look like a little shrine to your cosplay life, not a SaaS pricing page.</h2>
         </div>
-
-        {/* ===== FIRST COLLAGE ===== */}
-        <section className="collage">
-          <div className="collage-inner">
-            {/* main miko image */}
-            <ImgFrag
-              src="/miko.jpg" alt=""
-              style={{ top: '0', left: '5%' }}
-              w="340px" h="440px"
-            />
-
-            {/* text fragment */}
-            <TextFrag
-              style={{ top: '60px', right: '10%' }}
-              jp="ある狐が、物語の家を建てた"
-            >
-              Before the shrine bells rang their first note,
-              there was a fox who preferred to call herself a storyteller.
-            </TextFrag>
-
-            {/* shrine layer as secondary image */}
-            <ImgFrag
-              src="/shrine_layer.jpg" alt=""
-              style={{ top: '320px', right: '15%' }}
-              w="280px" h="180px"
-            />
-
-            {/* label */}
-            <LabelFrag
-              text="Grand Narukami Shrine"
-              style={{ top: '510px', right: '18%' }}
-            />
-
-            {/* mountains as accent */}
-            <ImgFrag
-              src="/mountains_layer.jpg" alt=""
-              style={{ top: '480px', left: '8%' }}
-              w="220px" h="160px"
-            />
-
-            {/* small text */}
-            <TextFrag style={{ top: '660px', left: '35%' }}>
-              Every tale that passed through her doors was refined, polished,
-              and released into the world like fireflies into the night.
-            </TextFrag>
-
-            {/* big background kanji */}
-            <span className="frag frag-kanji vis" style={{ top: '100px', left: '42%', fontSize: '18rem', transform: `translateY(${scrollY * 0.02}px)` }}>堂</span>
-          </div>
-        </section>
-
-        {/* ===== POEM ===== */}
-        <Poem />
-
-        {/* ===== SECOND COLLAGE ===== */}
-        <section className="collage">
-          <div className="collage-inner" style={{ minHeight: '600px' }}>
-            <ImgFrag
-              src="/sakura_layer.jpg" alt=""
-              style={{ top: '0', right: '8%' }}
-              w="300px" h="200px"
-            />
-
-            <TextFrag
-              style={{ top: '30px', left: '8%' }}
-              jp="花びらは、言葉よりも多くを語る"
-            >
-              The petals speak more than words ever could.
-              A story well-told is more powerful than any truth.
-            </TextFrag>
-
-            <ImgFrag
-              src="/sky_layer.jpg" alt=""
-              style={{ top: '250px', left: '12%' }}
-              w="260px" h="180px"
-            />
-
-            <LabelFrag
-              text="Inazuma"
-              style={{ top: '250px', right: '12%' }}
-            />
-
-            <TextFrag style={{ top: '320px', right: '8%', maxWidth: '240px' }}>
-              She walked between the world of mortals and the world of spirits,
-              belonging fully to neither.
-            </TextFrag>
-
-            {/* background kanji */}
-            <span className="frag frag-kanji vis" style={{ top: '50px', right: '40%', fontSize: '14rem', transform: `translateY(${scrollY * 0.015}px)` }}>狐</span>
-          </div>
-        </section>
-
-        {/* ===== SECOND STRIP ===== */}
-        <div className="strip">
-          <div className="strip-text" style={{ animationDirection: 'reverse' }}>
-            八重堂 ・ 出版 ・ 巫女 ・ 雷 ・ 稲荷 ・ 八重堂 ・ 出版 ・ 巫女 ・ 雷 ・ 稲荷
-          </div>
+        <div className={styles.bandTags}>
+          <span>soft pink</span>
+          <span>rounded</span>
+          <span>sakura</span>
+          <span>scrapbook-ish</span>
+          <span>cute but still clean</span>
         </div>
+      </section>
 
-        {/* ===== LINKS ===== */}
-        <div className="links">
-          <a href="https://instagram.com/yuuko.koro" target="_blank" rel="noopener noreferrer" className="link-item">@yuuko.koro</a>
+      <section className={styles.finalCta}>
+        <p className={styles.scribbleBottom}>your page should be prettier than your form stack</p>
+        <h2>Reserve a handle and make it yours.</h2>
+        <div className={styles.ctaRow}>
+          <Link href="/signup" className="primary-button">
+            Start with email
+          </Link>
+          <Link href="/typography" className="ghost-button">
+            Keep the old typography page
+          </Link>
         </div>
-
-        {/* ===== THE WHISPER ===== */}
-        <p className="whisper">ft offer at spacex starlink at 16</p>
-
-        {/* ===== FOOTER ===== */}
-        <footer className="floor">
-          <span className="floor-text">八重堂 — {new Date().getFullYear()}</span>
-        </footer>
-      </div>
-    </>
+      </section>
+    </main>
   );
 }

@@ -1,0 +1,288 @@
+.page {
+  padding: 24px 20px 56px;
+  display: grid;
+  gap: 22px;
+}
+
+.topbar,
+.previewCard,
+.editor,
+.section,
+.setupCard {
+  border-radius: 30px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+}
+
+.topbar,
+.setupCard {
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+}
+
+.topbarActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title,
+.setupCard h1,
+.sectionHeader h2,
+.previewName {
+  margin: 10px 0 0;
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.title,
+.setupCard h1 {
+  font-size: clamp(38px, 8vw, 64px);
+  line-height: 0.98;
+}
+
+.subtitle,
+.setupCard p,
+.sectionHeader p,
+.previewHandle,
+.previewBio,
+.avatarMeta span,
+.avatarMeta p,
+.previewPolaroid p,
+.slotCard span {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.previewCard {
+  padding: 18px;
+  position: sticky;
+  top: 18px;
+}
+
+.previewShell {
+  border-radius: 26px;
+  border: 1px dashed rgba(219, 92, 148, 0.2);
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(255, 251, 253, 0.95) 0%, rgba(255, 242, 248, 0.95) 100%);
+}
+
+.previewHead {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.avatarFrame,
+.avatarFrameLarge {
+  background: linear-gradient(135deg, #ffd5e7 0%, #ffc1d9 100%);
+  display: grid;
+  place-items: center;
+  color: var(--berry);
+  overflow: hidden;
+}
+
+.avatarFrame {
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+}
+
+.avatarFrameLarge {
+  width: 120px;
+  height: 120px;
+  border-radius: 28px;
+  font-size: 14px;
+}
+
+.avatarFrame img,
+.avatarFrameLarge img,
+.previewPhoto img,
+.slotPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.previewName {
+  font-size: 34px;
+  line-height: 0.94;
+}
+
+.previewBio {
+  margin-top: 16px;
+  line-height: 1.7;
+}
+
+.previewTags {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.previewTags span {
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 238, 245, 0.92);
+  color: var(--berry);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.previewPolaroids,
+.polaroidGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.previewPolaroid,
+.slotCard {
+  background: white;
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 12px 22px rgba(129, 70, 96, 0.08);
+}
+
+.previewPhoto,
+.slotPhoto {
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffe1ed 0%, #fff3f8 100%);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 14px;
+}
+
+.previewPolaroid p {
+  margin-top: 10px;
+  font-family: var(--font-scribble), cursive;
+  color: var(--berry);
+}
+
+.editor {
+  padding: 18px;
+  display: grid;
+  gap: 18px;
+}
+
+.section {
+  padding: 20px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 18px;
+}
+
+.sectionHeader h2 {
+  font-size: 34px;
+  line-height: 0.98;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.avatarRow {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.avatarMeta {
+  display: grid;
+  gap: 8px;
+}
+
+.avatarMeta p {
+  color: var(--berry);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.inlineButtons,
+.slotActions,
+.footerBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.slotActions {
+  margin: 12px 0;
+}
+
+.footerBar {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setupCard {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .previewCard {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 14px 14px 42px;
+  }
+
+  .topbar,
+  .section,
+  .editor,
+  .previewCard,
+  .setupCard {
+    border-radius: 24px;
+  }
+
+  .topbar,
+  .sectionHeader,
+  .avatarRow,
+  .footerBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .formGrid,
+  .previewPolaroids,
+  .polaroidGrid {
+    grid-template-columns: 1fr;
+  }
+}
