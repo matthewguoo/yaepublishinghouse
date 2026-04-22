@@ -70,9 +70,48 @@ model Profile {
   themeKey        String     @default("blush") @db.VarChar(24)
   characters      String[]   @default([])
   polaroids       Polaroid[]
+  auctions        Auction[]
   user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
+}
+
+model Auction {
+  id           String   @id @default(cuid())
+  profileId    String
+  title        String   @db.VarChar(80)
+  description  String   @default("") @db.VarChar(1000)
+  imageUrl     String?
+  category     String?  @db.VarChar(40)
+  startingBid  Int
+  reservePrice Int?
+  currentBid   Int?
+  bidCount     Int      @default(0)
+  endsAt       DateTime
+  status       String   @default("active") @db.VarChar(20)
+  winnerEmail  String?
+  notifiedAt   DateTime?
+  bids         Bid[]
+  profile      Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([profileId])
+  @@index([endsAt])
+  @@index([status])
+}
+
+model Bid {
+  id          String   @id @default(cuid())
+  auctionId   String
+  bidderId    String?
+  bidderEmail String
+  bidderName  String?
+  amount      Int
+  createdAt   DateTime @default(now())
+  auction     Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+
+  @@index([auctionId, amount])
 }
 
 model Polaroid {
