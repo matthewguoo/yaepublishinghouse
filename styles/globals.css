@@ -88,6 +88,29 @@
   color: white;
 }
 
+:focus-visible {
+  outline: 2px solid rgba(239, 108, 164, 0.7);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@keyframes pageFadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  animation: pageFadeUp 380ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 .scrapbook-doodle {
   display: block;
 }
@@ -208,17 +231,32 @@
   justify-content: center;
   gap: 8px;
   border-radius: 999px;
-  padding: 14px 20px;
+  padding: 13px 22px;
   text-decoration: none;
-  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  transition: transform 180ms cubic-bezier(.2,.8,.2,1), box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
   cursor: pointer;
   box-shadow: var(--shadow-paper);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 
 .primary-button:hover,
 .secondary-button:hover,
 .ghost-button:hover {
-  transform: translateY(-1px) rotate(-0.4deg);
+  transform: translateY(-2px);
+}
+
+.primary-button:active,
+.secondary-button:active,
+.ghost-button:active {
+  transform: translateY(0);
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible,
+.ghost-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 171, 202, 0.65), var(--shadow-paper);
 }
 
 .primary-button {
@@ -227,6 +265,11 @@
   color: white;
   font-family: var(--font-note), cursive;
   font-size: 1.05rem;
+  box-shadow: 0 14px 30px rgba(244, 141, 181, 0.32);
+}
+
+.primary-button:hover {
+  box-shadow: 0 20px 38px rgba(244, 141, 181, 0.42);
 }
 
 .secondary-button {

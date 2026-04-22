@@ -296,6 +296,13 @@
   padding: 12px;
   box-shadow: var(--shadow-paper);
   transform: rotate(var(--rotation));
+  transition: transform 280ms cubic-bezier(.2,.8,.2,1), box-shadow 280ms ease;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) translateY(-4px) scale(1.02);
+  box-shadow: 0 22px 42px rgba(91, 66, 76, 0.18);
+  z-index: 4;
 }
 
 .polaroid:nth-child(1) { --rotation: -3.4deg; }

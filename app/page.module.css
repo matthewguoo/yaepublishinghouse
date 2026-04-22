@@ -64,6 +64,14 @@
   font-family: var(--font-note), cursive;
   font-size: 1.02rem;
   color: var(--ink-soft);
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.nav a:hover {
+  background: rgba(252, 207, 225, 0.45);
+  color: var(--berry);
 }
 
 .heroGrid {
