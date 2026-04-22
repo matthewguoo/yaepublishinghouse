@@ -35,6 +35,7 @@ export default async function HomePage() {
             <span>Yae Publishing House</span>
           </Link>
           <nav className={styles.nav}>
+            <Link href="/auctions">auctions</Link>
             <Link href="/@yuuko">peek at yuuko</Link>
             <Link href="/signup">claim a page</Link>
             <Link href="/login">login</Link>

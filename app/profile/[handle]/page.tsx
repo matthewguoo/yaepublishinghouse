@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DoodleArrow, DoodleBow, DoodleHeart, DoodleSakura, DoodleStar } from '../../../components/scrapbook-doodles';
 import { formatSocialLinks, getProfileByHandle } from '../../../lib/data';
+import { listAuctionsByProfile, formatPrice, formatTimeLeft } from '../../../lib/auctions';
 import { getProfileTheme } from '../../../lib/themes';
 import styles from './profile.module.css';
 
@@ -49,6 +50,8 @@ export default async function ProfilePage({ params }: { params: { handle: string
   const polaroids = Array.from({ length: 5 }, (_, position) => {
     return profile.polaroids?.find((item) => item.position === position) || { position, imageUrl: '', caption: '' };
   });
+  const auctions = profile.id ? await listAuctionsByProfile(profile.id) : [];
+  const activeAuctions = auctions.filter((a) => !a.isOver);
 
   return (
     <main className={styles.page} style={buildThemeVars(profile.themeKey)}>
@@ -143,6 +146,39 @@ export default async function ProfilePage({ params }: { params: { handle: string
           ))}
         </div>
       </section>
+
+      {activeAuctions.length > 0 && (
+        <section className={styles.auctionsCard}>
+          <div className={styles.galleryHeader}>
+            <div>
+              <p className={styles.galleryKicker}>auctions</p>
+              <h2>open listings</h2>
+            </div>
+            <Link href="/auctions" className="secondary-button">browse all</Link>
+          </div>
+          <div className={styles.auctionGrid}>
+            {activeAuctions.map((a) => {
+              const display = a.currentBid ?? a.startingBid;
+              const ms = new Date(a.endsAt).getTime() - Date.now();
+              const urgent = ms > 0 && ms < 60 * 60 * 1000;
+              return (
+                <Link key={a.id} href={`/auctions/${a.id}`} className={styles.auctionTile}>
+                  <div className={styles.auctionImage}>
+                    {a.imageUrl ? <img src={a.imageUrl} alt={a.title} /> : <span>—</span>}
+                    <span className={styles.auctionTimer} data-urgent={urgent ? 'true' : 'false'}>
+                      {formatTimeLeft(a.endsAt)}
+                    </span>
+                  </div>
+                  <div className={styles.auctionMeta}>
+                    <p className={styles.auctionTitle}>{a.title}</p>
+                    <p className={styles.auctionPrice}>{formatPrice(display)} · {a.bidCount} bid{a.bidCount === 1 ? '' : 's'}</p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </main>
   );
 }

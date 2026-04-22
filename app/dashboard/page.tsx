@@ -5,10 +5,12 @@ import { redirect } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { authOptions } from '../../lib/auth';
 import { getProfileByUserId, isDatabaseConfigured } from '../../lib/data';
+import { listAuctionsByProfile } from '../../lib/auctions';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent } from '../../components/ui/card';
 import DashboardEditor from './dashboard-editor';
+import { DashboardAuctions } from './dashboard-auctions';
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -58,11 +60,16 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     redirect('/dashboard/welcome');
   }
 
+  const auctions = profile.id ? await listAuctionsByProfile(profile.id) : [];
+
   return (
-    <DashboardEditor
-      created={searchParams?.created === '1'}
-      email={session.user.email || ''}
-      profile={profile}
-    />
+    <>
+      <DashboardEditor
+        created={searchParams?.created === '1'}
+        email={session.user.email || ''}
+        profile={profile}
+      />
+      <DashboardAuctions auctions={auctions} handle={profile.handle} />
+    </>
   );
 }
