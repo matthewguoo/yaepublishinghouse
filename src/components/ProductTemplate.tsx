@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ProductData } from '@/lib/products';
 import SiteLayout from './SiteLayout';
 import styles from './ProductTemplate.module.css';
@@ -9,15 +9,32 @@ interface ProductTemplateProps {
   product: ProductData;
 }
 
+interface User {
+  email: string;
+}
+
 export default function ProductTemplate({ product }: ProductTemplateProps) {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [user, setUser] = useState<User | null>(null);
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    fetch('/api/auth/me')
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data?.user) {
+          setUser(data.user);
+          setEmail(data.user.email);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleEmailSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     setError('');
     setLoading(true);
 
@@ -56,6 +73,20 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
             <div className={styles.successMessage}>
               {product.cta.successMessage || 'Thanks! Check your email for confirmation.'}
             </div>
+          );
+        }
+        if (user) {
+          return (
+            <>
+              {error && <div className={styles.errorMessage}>{error}</div>}
+              <button 
+                onClick={() => handleEmailSubmit()} 
+                className={styles.ctaButtonFull} 
+                disabled={loading}
+              >
+                {loading ? 'Submitting...' : (product.cta.buttonText || 'Notify Me')}
+              </button>
+            </>
           );
         }
         return (
