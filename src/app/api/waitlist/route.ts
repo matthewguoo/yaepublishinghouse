@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     await sendWaitlistConfirmation(email, {
       name: product.name,
       slug: product.slug,
-      image: product.image,
+      image: product.images[0] || '',
       price: product.price,
       description: product.tagline,
     });
