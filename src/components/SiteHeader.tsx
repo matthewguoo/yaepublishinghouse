@@ -36,6 +36,7 @@ export default function SiteHeader({ lang, setLang }: SiteHeaderProps) {
               Akasha
             </button>
             <div className={styles.headerLinks}>
+              <a href="/news">Editorial</a>
               <a href="/products">Products</a>
               <a href="/tools/png-transparency">PNG Tool</a>
               <a href="/sitemap">{t('sitemap', lang)}</a>
@@ -68,6 +69,7 @@ export default function SiteHeader({ lang, setLang }: SiteHeaderProps) {
             >
               Search (Akasha)
             </button>
+            <a href="/news" onClick={() => setMobileMenuOpen(false)}>Editorial</a>
             <a href="/products" onClick={() => setMobileMenuOpen(false)}>Products</a>
             <a href="/tools/png-transparency" onClick={() => setMobileMenuOpen(false)}>PNG Tool</a>
             <a href="/sitemap" onClick={() => setMobileMenuOpen(false)}>{t('sitemap', lang)}</a>
