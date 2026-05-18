@@ -843,11 +843,31 @@
   color: #fff;
 }
 
+.seizedTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.seizedChibi {
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+  animation: chibiFloat 3s ease-in-out infinite;
+}
+
+@keyframes chibiFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
 .seizedTitle {
   font-family: monospace;
   font-size: 28px;
   font-weight: bold;
-  margin: 0 0 15px;
+  margin: 0;
   text-shadow: 0 0 20px rgba(255,255,255,0.2);
   position: relative;
   z-index: 5;

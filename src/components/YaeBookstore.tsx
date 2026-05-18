@@ -262,7 +262,10 @@ export default function YaeBookstore() {
                   <span className={styles.seizedIcon}>◈</span>
                   <span className={styles.seizedLabel}>STELLARON HUNTERS × IPC</span>
                 </div>
-                <h2 className={styles.seizedTitle}>This Section Has Been Seized</h2>
+                <div className={styles.seizedTitleRow}>
+                  <img src="/silver-wolf-chibi.png" alt="Silver Wolf" className={styles.seizedChibi} />
+                  <h2 className={styles.seizedTitle}>This Section Has Been Seized</h2>
+                </div>
                 <p className={styles.seizedDesc}>
                   The Stellaron Hunters, in collaboration with the Interastral Peace Corporation, 
                   have seized this website in promotion of the 2158th Year of the Trailblaze 
