@@ -1298,6 +1298,14 @@
   border-bottom: 1px solid #e0d0e0;
 }
 
+.sidebarError {
+  color: #b91c1c;
+  font-size: 12px;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  background: #fef2f2;
+}
+
 .loginForm input {
   width: 100%;
   padding: 10px;
