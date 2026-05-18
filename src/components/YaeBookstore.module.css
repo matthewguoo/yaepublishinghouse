@@ -238,6 +238,37 @@
   transition: transform 0.5s ease-in-out;
 }
 
+.carouselArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  font-size: 28px;
+  color: #8b5a8c;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.carouselArrow:hover {
+  background: #8b5a8c;
+  color: #fff;
+}
+
+.carouselArrowLeft {
+  left: 15px;
+}
+
+.carouselArrowRight {
+  right: 15px;
+}
+
 .carouselDots {
   position: absolute;
   bottom: 15px;
@@ -1071,11 +1102,44 @@
   gap: 15px;
   align-items: center;
   border: 1px solid #f0d0e0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.promoCard.clickable {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.promoCard.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 90, 140, 0.15);
 }
 
 .promoCard.alt {
   background: linear-gradient(135deg, #e8f4fc 0%, #f0f8ff 100%);
   border-color: #d0e0f0;
+}
+
+.promoCard.alt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(90, 122, 140, 0.15);
+}
+
+.promoIconImg {
+  width: 60px;
+  height: 60px;
+  background: #8b5a8c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.promoCard.alt .promoIconImg {
+  background: #5a7a8c;
 }
 
 .promoIcon {
@@ -1542,6 +1606,10 @@
   }
   
   .carouselDots {
+    display: none;
+  }
+  
+  .carouselArrow {
     display: none;
   }
 }

@@ -153,6 +153,13 @@ export default function YaeBookstore() {
         <div className={styles.content}>
           {/* Banner Carousel */}
           <div className={styles.carousel}>
+            <button 
+              className={`${styles.carouselArrow} ${styles.carouselArrowLeft}`}
+              onClick={() => setCurrentSlide(prev => prev === 0 ? banners.length - 1 : prev - 1)}
+              aria-label="Previous slide"
+            >
+              ‹
+            </button>
             <div 
               className={styles.carouselTrack} 
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -174,6 +181,13 @@ export default function YaeBookstore() {
                 </a>
               ))}
             </div>
+            <button 
+              className={`${styles.carouselArrow} ${styles.carouselArrowRight}`}
+              onClick={() => setCurrentSlide(prev => prev === banners.length - 1 ? 0 : prev + 1)}
+              aria-label="Next slide"
+            >
+              ›
+            </button>
             <div className={styles.carouselDots}>
               {banners.map((_, index) => (
                 <button
@@ -187,20 +201,33 @@ export default function YaeBookstore() {
 
           {/* Promo strip */}
           <div className={styles.promoStrip}>
-            <div className={styles.promoCard}>
-              <div className={styles.promoIcon}>{lang === 'en' ? 'NEW' : '新'}</div>
-              <div className={styles.promoText}>
-                <h4>{t('newMemberBenefits', lang)}</h4>
-                <p>{t('newMemberDesc', lang)}</p>
+            {user ? (
+              <div className={styles.promoCard}>
+                <div className={styles.promoIconImg}>✓</div>
+                <div className={styles.promoText}>
+                  <h4>Member Perks Active</h4>
+                  <p>Early access to limited drops</p>
+                </div>
               </div>
-            </div>
-            <div className={`${styles.promoCard} ${styles.alt}`}>
-              <div className={styles.promoIcon}>{lang === 'en' ? 'SHOP' : '店'}</div>
+            ) : (
+              <div 
+                className={`${styles.promoCard} ${styles.clickable}`}
+                onClick={() => setShowRegister(true)}
+              >
+                <div className={styles.promoIconImg}>★</div>
+                <div className={styles.promoText}>
+                  <h4>Secure Limited Drops</h4>
+                  <p>Register for early access</p>
+                </div>
+              </div>
+            )}
+            <a href="/products" className={`${styles.promoCard} ${styles.alt}`}>
+              <div className={styles.promoIconImg}>◈</div>
               <div className={styles.promoText}>
                 <h4>{t('storeInventory', lang)}</h4>
                 <p>{t('storeInventoryDesc', lang)}</p>
               </div>
-            </div>
+            </a>
           </div>
 
           {/* Announcement */}
