@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
       slug: product.slug,
       image: product.images[0] || '',
       price: product.price,
-      description: product.tagline,
+      description: product.description,
     });
 
     return NextResponse.json({ success: true });
