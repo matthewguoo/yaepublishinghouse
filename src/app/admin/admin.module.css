@@ -1,0 +1,171 @@
+.shell {
+  min-height: 100vh;
+  background: #f7f0e6;
+  color: #38232f;
+  padding: 32px;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.panel {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(255, 252, 246, 0.94);
+  border: 1px solid #dfc9ad;
+  box-shadow: 0 18px 50px rgba(97, 55, 67, 0.16);
+  padding: 28px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  border-bottom: 1px solid #ead9c4;
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  color: #9b6b74;
+  font-family: var(--font-sans, sans-serif);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(32px, 6vw, 52px);
+  line-height: 0.95;
+  color: #6f3567;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  color: #7a6470;
+  font-family: var(--font-sans, sans-serif);
+}
+
+.buttonRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.button, .ghostButton, .dangerButton {
+  border: 1px solid #7c3b6f;
+  background: #7c3b6f;
+  color: #fff;
+  padding: 10px 14px;
+  text-decoration: none;
+  font-weight: 700;
+  font-family: var(--font-sans, sans-serif);
+  cursor: pointer;
+}
+
+.ghostButton {
+  background: transparent;
+  color: #7c3b6f;
+}
+
+.dangerButton {
+  background: #8d2b2b;
+  border-color: #8d2b2b;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans, sans-serif);
+}
+
+.table th, .table td {
+  border-bottom: 1px solid #ead9c4;
+  padding: 12px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  color: #8a5a69;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.status {
+  display: inline-flex;
+  border: 1px solid #d7bb97;
+  padding: 3px 8px;
+  font-size: 12px;
+  background: #fff7e9;
+}
+
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  font-family: var(--font-sans, sans-serif);
+  font-weight: 700;
+  color: #624658;
+}
+
+.field input, .field textarea {
+  border: 1px solid #d7bb97;
+  background: #fffdf9;
+  padding: 12px;
+  font: inherit;
+  color: #38232f;
+}
+
+.field textarea {
+  min-height: 420px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  line-height: 1.55;
+}
+
+.checks {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-family: var(--font-sans, sans-serif);
+}
+
+.checks label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.previewBox {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #ead9c4;
+}
+
+@media (max-width: 760px) {
+  .shell { padding: 16px; }
+  .panel { padding: 18px; }
+  .topbar, .grid { display: block; }
+  .buttonRow { margin-top: 16px; }
+  .table { font-size: 13px; }
+}

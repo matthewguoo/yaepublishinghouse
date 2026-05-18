@@ -9,6 +9,7 @@
     "lint": "eslint",
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
+    "db:seed:articles": "node prisma/seed-articles.mjs",
     "db:studio": "prisma studio"
   },
   "dependencies": {

@@ -29,7 +29,8 @@ export default function LoginPage() {
       }
 
       // Hard refresh to update auth state
-      window.location.href = '/';
+      const next = new URLSearchParams(window.location.search).get('next');
+      window.location.href = next && next.startsWith('/') ? next : '/';
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {

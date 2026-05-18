@@ -71,6 +71,7 @@ export async function getCurrentUser() {
       id: true,
       email: true,
       emailVerified: true,
+      isAdmin: true,
       createdAt: true,
     },
   });

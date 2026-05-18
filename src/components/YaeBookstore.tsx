@@ -8,6 +8,19 @@ import { LoginModal, RegisterModal } from './AuthModals';
 import { useUser } from '@/hooks/useUser';
 // HackedOverlay only used within carousel banner, not as full overlay
 
+type FeaturedArticle = {
+  slug: string;
+  title: string;
+  date: string;
+  category: string;
+};
+
+const fallbackFeaturedArticles: FeaturedArticle[] = [
+  { slug: 'hiring-writers', title: 'The Guuji seeks editorial staff, reporters, and writers', date: '2026.05.18', category: 'Hiring' },
+  { slug: 'nameless-pass-announcement', title: 'Nameless Honor Pass now available for pre-order', date: '2026.05.17', category: 'Product' },
+  { slug: 'hoyofair-2026', title: 'HoYoFair 2026 Los Angeles: A Report from the Front Row', date: '2026.05.03', category: 'Report' },
+];
+
 export default function YaeBookstore() {
   const [lang, setLang] = useState<Lang>(() => {
     if (typeof window === 'undefined') return 'en';
@@ -26,6 +39,7 @@ export default function YaeBookstore() {
   const { user } = useUser();
   const [glitchPhase, setGlitchPhase] = useState<'idle' | 'glitching' | 'seized'>('idle');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [featuredArticles, setFeaturedArticles] = useState<FeaturedArticle[]>(fallbackFeaturedArticles);
   const totalSlides = 3;
   const { query } = useKBar();
 
@@ -72,6 +86,19 @@ export default function YaeBookstore() {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
     }, 5000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/articles/featured')
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (!cancelled && data?.articles?.length) setFeaturedArticles(data.articles);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const banners = [
@@ -222,21 +249,13 @@ export default function YaeBookstore() {
             <div className={styles.featuredHeader}>
               <span className={styles.featuredLabel}>Featured</span>
             </div>
-            <a href="/news/hiring-writers" className={styles.newsRow}>
-              <span className={styles.newsDate}>2026.05.18</span>
-              <span className={styles.newsTag}>Hiring</span>
-              <span className={styles.newsTitle}>The Guuji seeks editorial staff, reporters, and writers</span>
-            </a>
-            <a href="/news/nameless-pass-announcement" className={styles.newsRow}>
-              <span className={styles.newsDate}>2026.05.17</span>
-              <span className={styles.newsTag}>Product</span>
-              <span className={styles.newsTitle}>Nameless Honor Pass now available for pre-order</span>
-            </a>
-            <a href="/news/hoyofair-2026" className={styles.newsRow}>
-              <span className={styles.newsDate}>2026.05.03</span>
-              <span className={styles.newsTag}>Report</span>
-              <span className={styles.newsTitle}>HoYoFair 2026 Los Angeles: A Report from the Front Row</span>
-            </a>
+            {featuredArticles.map((article) => (
+              <a key={article.slug} href={`/news/${article.slug}`} className={styles.newsRow}>
+                <span className={styles.newsDate}>{article.date.replaceAll('-', '.')}</span>
+                <span className={styles.newsTag}>{article.category}</span>
+                <span className={styles.newsTitle}>{article.title}</span>
+              </a>
+            ))}
           </div>
 
           {/* Mobile-only hiring box */}
