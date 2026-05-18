@@ -6,6 +6,7 @@
   line-height: 1.6;
   min-height: 100vh;
   letter-spacing: 0.02em;
+  overflow-x: hidden;
 }
 
 /* English mode - Japanese site translated feel */

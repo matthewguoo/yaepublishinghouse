@@ -201,26 +201,13 @@ export default function YaeBookstore() {
 
           {/* Promo strip */}
           <div className={styles.promoStrip}>
-            {user ? (
-              <a href="/news" className={styles.promoCard}>
-                <div className={styles.promoIcon}>{lang === 'en' ? 'NEWS' : '報'}</div>
-                <div className={styles.promoText}>
-                  <h4>News & Announcements</h4>
-                  <p>Latest drops and updates</p>
-                </div>
-              </a>
-            ) : (
-              <div 
-                className={`${styles.promoCard} ${styles.clickable}`}
-                onClick={() => setShowRegister(true)}
-              >
-                <div className={styles.promoIcon}>{lang === 'en' ? 'NEW' : '新'}</div>
-                <div className={styles.promoText}>
-                  <h4>Secure Limited Drops</h4>
-                  <p>Register for early access</p>
-                </div>
+            <a href="/news" className={styles.promoCard}>
+              <div className={styles.promoIcon}>{lang === 'en' ? 'NEWS' : '報'}</div>
+              <div className={styles.promoText}>
+                <h4>News & Announcements</h4>
+                <p>Latest drops and updates</p>
               </div>
-            )}
+            </a>
             <a href="/products" className={`${styles.promoCard} ${styles.alt}`}>
               <div className={styles.promoIcon}>{lang === 'en' ? 'SHOP' : '店'}</div>
               <div className={styles.promoText}>
