@@ -30,8 +30,8 @@ export default function LoginPage() {
         return;
       }
 
-      router.push('/');
-      router.refresh();
+      // Hard refresh to update auth state
+      window.location.href = '/';
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {

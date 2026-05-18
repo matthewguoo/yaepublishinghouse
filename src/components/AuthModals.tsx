@@ -36,7 +36,7 @@ export function LoginModal({ isOpen, onClose, lang }: ModalProps) {
 
       if (data.success) {
         onClose();
-        router.refresh();
+        window.location.reload();
       } else {
         setError(data.error || 'Login failed');
       }
