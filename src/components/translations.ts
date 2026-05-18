@@ -26,8 +26,8 @@ export const translations = {
   
   // Banner 2 - HoYoFair
   hoyofairBadge: { ja: 'HoYoFair 2026', zh: 'HoYoFair 2026', en: 'HoYoFair 2026' },
-  hoyofairTitle: { ja: 'HoYoFair コラボ記念！限定グッズ販売中', zh: 'HoYoFair 联动纪念！限定周边发售中', en: 'HoYoFair Collab! Limited Merch On Sale' },
-  hoyofairDesc: { ja: '人気キャラクター勢揃い！コラボ限定アイテムをお見逃しなく', zh: '人气角色齐聚！别错过联动限定商品', en: 'All your favorite characters! Don\'t miss these collab exclusives' },
+  hoyofairTitle: { ja: 'HoYoFair 2026 ロサンゼルス', zh: 'HoYoFair 2026 洛杉矶', en: 'HoYoFair 2026 Los Angeles' },
+  hoyofairDesc: { ja: '最前列からのレポート', zh: '来自前排的报道', en: 'A Report from the Front Row' },
   
   // Banner 3 - IPC Takeover
   ipcBadge: { ja: '【星際和平公司】', zh: '【星际和平公司】', en: '【IPC NOTICE】' },
