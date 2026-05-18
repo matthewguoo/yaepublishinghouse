@@ -485,13 +485,12 @@ export default function YaeBookstore() {
           </div>
 
           <div className={styles.hiringBox}>
-            <div className={styles.hiringBadge}>Recruitment</div>
             <h3 className={styles.hiringTitle}>The Guuji seeks talented writers</h3>
             <p className={styles.hiringDesc}>Cover HoYoverse news and events for our publication. Contributors receive free merchandise and store vouchers.</p>
             {user ? (
               <a href="/contact" className={styles.hiringBtn}>Submit Inquiry</a>
             ) : (
-              <button className={styles.hiringBtn} onClick={() => setShowRegister(true)}>Register to Inquire</button>
+              <button className={styles.hiringBtn} onClick={() => setShowLogin(true)}>Register or Log In to Inquire</button>
             )}
           </div>
 
