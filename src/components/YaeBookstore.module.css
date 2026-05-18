@@ -1563,15 +1563,17 @@
 
 /* Hiring Box */
 .hiringBox {
-  background: linear-gradient(135deg, #f0e6f5 0%, #e8daf0 100%);
+  background: transparent;
   padding: 20px;
   text-align: center;
-  border: 1px solid #d4c4e0;
+  border: 4px dashed #c4a35a;
+  border-radius: 2px;
+  position: relative;
 }
 
 .hiringBadge {
   display: inline-block;
-  background: #8b5a8c;
+  background: #b8860b;
   color: #fff;
   font-size: 10px;
   font-weight: 700;
@@ -1598,7 +1600,7 @@
 
 .hiringBtn {
   display: inline-block;
-  background: #8b5a8c;
+  background: #b8860b;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -1610,7 +1612,7 @@
 }
 
 .hiringBtn:hover {
-  background: #6d446e;
+  background: #996f0a;
 }
 
 .newsList {
