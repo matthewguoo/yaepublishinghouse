@@ -164,14 +164,28 @@ export default function AccountPage() {
               ) : vouchers.map((voucher) => {
                 const expired = new Date(voucher.expiresAt).getTime() < nowMs;
                 const state = voucher.usedAt ? 'Used' : expired ? 'Expired' : 'Active';
+                const stateKey = voucher.usedAt ? 'used' : expired ? 'expired' : 'active';
                 return (
-                  <article className={styles.voucher} key={voucher.id}>
-                    <div>
-                      <code>{voucher.code}</code>
-                      <span>{state}</span>
+                  <article className={`${styles.voucher} ${styles[`voucher_${stateKey}`]}`} key={voucher.id}>
+                    <div className={styles.voucherStub} aria-hidden="true">
+                      <span className={styles.voucherStubLabel}>福 · 券</span>
+                      <span className={styles.voucherStubKana}>YAE</span>
                     </div>
-                    <strong>${Number(voucher.value).toFixed(2)}</strong>
-                    <small>Expires {new Date(voucher.expiresAt).toLocaleDateString()}</small>
+                    <div className={styles.voucherBody}>
+                      <div className={styles.voucherTopRow}>
+                        <span className={styles.voucherKind}>Shrine Tribute</span>
+                        <span className={`${styles.voucherState} ${styles[`state_${stateKey}`]}`}>{state}</span>
+                      </div>
+                      <div className={styles.voucherValue}>
+                        <span className={styles.voucherCurrency}>$</span>
+                        <span className={styles.voucherAmount}>{Number(voucher.value).toFixed(2)}</span>
+                        <span className={styles.voucherDenom}>store credit</span>
+                      </div>
+                      <div className={styles.voucherMeta}>
+                        <code className={styles.voucherCode}>{voucher.code}</code>
+                        <small>有效期至 {new Date(voucher.expiresAt).toLocaleDateString()}</small>
+                      </div>
+                    </div>
                   </article>
                 );
               })}

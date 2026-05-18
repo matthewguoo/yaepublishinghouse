@@ -79,9 +79,14 @@
 }
 
 .balance {
-  font-family: Georgia, 'Times New Roman', serif;
-  color: #2f7a4f;
-  font-size: 30px;
+  font-family: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  background: linear-gradient(180deg, #f6d27a 0%, #c5973b 45%, #9a6a1f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 32px;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.4);
 }
 
 .field {
@@ -125,44 +130,12 @@
   gap: 12px;
 }
 
-.voucher {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px 16px;
-  padding: 14px;
-  border: 1px dashed #d7a9cf;
-  background: radial-gradient(circle at 15% 0%, rgba(255, 221, 245, 0.9), transparent 34%), #fffdf8;
-}
+/* ============================================================
+   Voucher cards · Chinese premium e-commerce hongbao aesthetic
+   Crimson + gold, 云纹 cloud pattern, perforated stub, shrine vibes
+   ============================================================ */
 
-.voucher::before, .voucher::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  background: #fffaf7;
-  border: 1px solid #e8d7e8;
-}
-
-.voucher::before { left: -8px; }
-.voucher::after { right: -8px; }
-
-.voucher div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-
-.voucher code {
-  color: #5a3156;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-
-.voucher span, .status {
+.status {
   border: 1px solid #d9c2a5;
   background: #fff6e4;
   color: #815463;
@@ -172,13 +145,241 @@
   letter-spacing: 0.06em;
 }
 
-.voucher strong {
-  color: #2f7a4f;
-  font-size: 20px;
+.voucher {
+  position: relative;
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  min-height: 132px;
+  border-radius: 6px;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    /* subtle 云纹 cloud pattern */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='%23c5973b' stroke-width='0.7' opacity='0.18'><path d='M10 40c0-6 5-10 11-10 3-6 11-6 14 0 6 0 10 4 10 10 0 6-4 10-10 10H21c-6 0-11-4-11-10z'/><path d='M48 18c0-4 3-7 7-7 2-4 7-4 9 0 4 0 7 3 7 7s-3 7-7 7H55c-4 0-7-3-7-7z'/><path d='M44 62c0-3 3-6 6-6 2-3 6-3 8 0 3 0 6 3 6 6s-3 6-6 6H50c-3 0-6-3-6-6z'/></g></svg>"),
+    linear-gradient(135deg, #fff8ec 0%, #fef1de 50%, #fde6c4 100%);
+  border: 1px solid #d9b676;
+  box-shadow:
+    0 1px 0 #fff8e1 inset,
+    0 0 0 1px rgba(255, 245, 210, 0.6) inset,
+    0 6px 18px -8px rgba(155, 30, 30, 0.18),
+    0 2px 4px -2px rgba(120, 70, 20, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.voucher small {
-  grid-column: 1 / -1;
+.voucher:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 #fff8e1 inset,
+    0 0 0 1px rgba(255, 245, 210, 0.6) inset,
+    0 12px 28px -10px rgba(155, 30, 30, 0.28),
+    0 4px 8px -2px rgba(120, 70, 20, 0.18);
+}
+
+/* corner gold filigree */
+.voucher::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 36px;
+  height: 36px;
+  border-top: 1px solid rgba(185, 130, 40, 0.55);
+  border-right: 1px solid rgba(185, 130, 40, 0.55);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.voucher::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 84px;
+  width: 36px;
+  height: 36px;
+  border-bottom: 1px solid rgba(185, 130, 40, 0.55);
+  border-left: 1px solid rgba(185, 130, 40, 0.55);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---------- Left stub: crimson with vertical 福券 ---------- */
+.voucherStub {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  color: #fff3d6;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 220, 160, 0.25), transparent 60%),
+    linear-gradient(180deg, #a01818 0%, #8a1212 50%, #6e0e0e 100%);
+  /* perforated edge via masked dots on the right */
+  border-right: 1px dashed rgba(255, 235, 180, 0.45);
+}
+
+.voucherStub::before,
+.voucherStub::after {
+  content: '';
+  position: absolute;
+  right: -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fff8ec;
+  border: 1px solid #d9b676;
+  z-index: 2;
+}
+
+.voucherStub::before { top: -7px; }
+.voucherStub::after  { bottom: -7px; }
+
+.voucherStubLabel {
+  font-family: 'DM Serif Display', 'Songti SC', 'STSong', serif;
+  writing-mode: vertical-rl;
+  font-size: 20px;
+  letter-spacing: 0.4em;
+  color: #ffe6a8;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.voucherStubKana {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: rgba(255, 230, 168, 0.7);
+  text-transform: uppercase;
+}
+
+/* ---------- Right body ---------- */
+.voucherBody {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 6px;
+  padding: 14px 16px 12px 18px;
+  z-index: 1;
+}
+
+.voucherTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.voucherKind {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a1212;
+}
+
+.voucherState {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 2px;
+  border: 1px solid currentColor;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.state_active   { color: #8a1212; }
+.state_used     { color: #6b6b6b; background: rgba(245, 240, 230, 0.7); }
+.state_expired  { color: #8a6b3a; background: rgba(245, 240, 230, 0.7); }
+
+.voucherValue {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: 'DM Serif Display', Georgia, serif;
+  line-height: 1;
+}
+
+.voucherCurrency {
+  font-size: 20px;
+  background: linear-gradient(180deg, #f6d27a 0%, #c5973b 60%, #8a5d18 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-right: 2px;
+}
+
+.voucherAmount {
+  font-size: 42px;
+  background: linear-gradient(180deg, #f9dc8d 0%, #d6a445 45%, #8a5d18 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.35);
+}
+
+.voucherDenom {
+  margin-left: 8px;
+  font-family: Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9a6a1f;
+}
+
+.voucherMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(185, 130, 40, 0.4);
+}
+
+.voucherCode {
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: #6e0e0e;
+  background: linear-gradient(180deg, rgba(255, 245, 215, 0.9), rgba(252, 230, 185, 0.9));
+  border: 1px solid rgba(185, 130, 40, 0.45);
+  padding: 4px 9px;
+  border-radius: 2px;
+}
+
+.voucherMeta small {
+  font-family: 'Songti SC', 'STSong', Georgia, serif;
+  color: #8a6b3a;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- States: dim used/expired ---------- */
+.voucher_used,
+.voucher_expired {
+  filter: grayscale(0.55);
+  opacity: 0.78;
+}
+
+.voucher_used .voucherStub,
+.voucher_expired .voucherStub {
+  background: linear-gradient(180deg, #6b6b6b 0%, #555 100%);
+}
+
+.voucher_used .voucherAmount,
+.voucher_expired .voucherAmount,
+.voucher_used .voucherCurrency,
+.voucher_expired .voucherCurrency {
+  background: linear-gradient(180deg, #b8b8b8 0%, #7a7a7a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 480px) {
+  .voucher { grid-template-columns: 64px 1fr; }
+  .voucher::after { left: 70px; }
+  .voucherStubLabel { font-size: 17px; letter-spacing: 0.3em; }
+  .voucherAmount { font-size: 34px; }
 }
 
 .mediaForm label {
