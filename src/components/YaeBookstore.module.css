@@ -802,6 +802,8 @@
 .booksContainer {
   position: relative;
   min-height: 700px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Danmaku scrolling comments */
@@ -989,11 +991,16 @@
 @media (max-width: 768px) {
   .booksContainer {
     min-height: 600px;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   .seizedSection {
     padding: 25px 20px;
     min-height: 600px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .seizedTitle {
@@ -1012,11 +1019,13 @@
 @media (max-width: 480px) {
   .booksContainer {
     min-height: 500px;
+    max-width: 100%;
   }
 
   .seizedSection {
     padding: 20px 15px;
     min-height: 500px;
+    max-width: 100%;
   }
 
   .seizedTitle {
