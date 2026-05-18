@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Lang, t } from './translations';
 import styles from './AuthModals.module.css';
 

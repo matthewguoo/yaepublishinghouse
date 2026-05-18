@@ -270,6 +270,14 @@
   text-align: center;
 }
 
+.errorMessage {
+  padding: 12px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
 .soldout {
   padding: 14px 30px;
   background: #f5f5f5;

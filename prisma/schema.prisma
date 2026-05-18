@@ -35,3 +35,12 @@ model RateLimit {
   count     Int      @default(0)
   expiresAt DateTime
 }
+
+model Waitlist {
+  id        String   @id @default(cuid())
+  email     String
+  productId String
+  createdAt DateTime @default(now())
+  
+  @@unique([email, productId])
+}

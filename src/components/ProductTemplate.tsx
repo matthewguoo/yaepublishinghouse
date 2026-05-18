@@ -12,13 +12,35 @@ interface ProductTemplateProps {
 export default function ProductTemplate({ product }: ProductTemplateProps) {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: integrate with email service
-    console.log('Email submitted:', email);
-    setSubmitted(true);
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, productId: product.id }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || 'Something went wrong');
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleStripeCheckout = async () => {
@@ -32,24 +54,28 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
         if (submitted) {
           return (
             <div className={styles.successMessage}>
-              {product.cta.successMessage || 'Thanks! We\'ll be in touch.'}
+              {product.cta.successMessage || 'Thanks! Check your email for confirmation.'}
             </div>
           );
         }
         return (
-          <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
-              required
-              className={styles.emailInput}
-            />
-            <button type="submit" className={styles.ctaButton}>
-              {product.cta.buttonText || 'Notify Me'}
-            </button>
-          </form>
+          <>
+            {error && <div className={styles.errorMessage}>{error}</div>}
+            <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                required
+                disabled={loading}
+                className={styles.emailInput}
+              />
+              <button type="submit" className={styles.ctaButton} disabled={loading}>
+                {loading ? 'Submitting...' : (product.cta.buttonText || 'Notify Me')}
+              </button>
+            </form>
+          </>
         );
 
       case 'stripe':
@@ -67,9 +93,17 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
         );
 
       case 'comingsoon':
+        if (submitted) {
+          return (
+            <div className={styles.successMessage}>
+              Thanks! Check your email for confirmation.
+            </div>
+          );
+        }
         return (
           <div className={styles.comingsoon}>
             <p>{product.cta.message || 'Coming Soon'}</p>
+            {error && <div className={styles.errorMessage}>{error}</div>}
             <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
               <input
                 type="email"
@@ -77,10 +111,11 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="notify me at..."
                 required
+                disabled={loading}
                 className={styles.emailInput}
               />
-              <button type="submit" className={styles.ctaButtonSecondary}>
-                Notify Me
+              <button type="submit" className={styles.ctaButtonSecondary} disabled={loading}>
+                {loading ? 'Submitting...' : 'Notify Me'}
               </button>
             </form>
           </div>
