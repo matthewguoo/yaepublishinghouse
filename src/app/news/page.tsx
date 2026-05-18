@@ -19,7 +19,7 @@ const articles = [
   {
     slug: 'hoyofair-2026',
     title: 'HoYoFair 2026 Los Angeles: A Report from the Front Row',
-    date: '2026.01.15',
+    date: '2026.05.03',
     category: 'Event Report',
     excerpt: 'This reporter was fortunate to attend the event with a gifted front-row seat ticket.',
   },

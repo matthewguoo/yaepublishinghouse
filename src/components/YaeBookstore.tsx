@@ -233,7 +233,7 @@ export default function YaeBookstore() {
               <span className={styles.newsTitle}>Nameless Honor Pass now available for pre-order</span>
             </a>
             <a href="/news/hoyofair-2026" className={styles.newsRow}>
-              <span className={styles.newsDate}>2026.01.15</span>
+              <span className={styles.newsDate}>2026.05.03</span>
               <span className={styles.newsTag}>Report</span>
               <span className={styles.newsTitle}>HoYoFair 2026 Los Angeles: A Report from the Front Row</span>
             </a>
