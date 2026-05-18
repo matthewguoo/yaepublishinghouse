@@ -31,7 +31,7 @@ export default function SitemapPage() {
 
             <h2>Products</h2>
             <p><a href="/products">All Products</a> — Browse all available merchandise</p>
-            <p><a href="/products/nameless-pass">Nameless Honor Pass</a> — Limited edition gold ENIG PCB collectible (IPC Authorized)</p>
+            <p><a href="/products/nameless-pass">Nameless Honor Pass</a> — Limited edition gold ENIG collectible</p>
 
             <h2>Tools</h2>
             <p><a href="/tools/png-transparency">PNG Transparency Maker</a> — Free background removal tool</p>

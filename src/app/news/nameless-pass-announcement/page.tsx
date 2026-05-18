@@ -19,7 +19,7 @@ export default function NamelessPassAnnouncementPage() {
           <header className={styles.articleHeader}>
             <div className={styles.articleDate}>May 17, 2026</div>
             <h1 className={styles.articleTitle}>
-              Announcing the Nameless Honor Pass: Limited Edition PCB Collectible
+              Announcing the Nameless Honor Pass: Limited Edition Collectible
             </h1>
             <div className={styles.articleMeta}>
               A collaboration between the Interastral Peace Corporation and xingjitech
@@ -101,7 +101,7 @@ export default function NamelessPassAnnouncementPage() {
             <span className={styles.tag}>Products</span>
             <span className={styles.tag}>Honkai: Star Rail</span>
             <span className={styles.tag}>Limited Edition</span>
-            <span className={styles.tag}>PCB</span>
+            <span className={styles.tag}>Limited</span>
           </div>
         </article>
       </div>

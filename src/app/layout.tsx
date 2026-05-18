@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "genshin impact merch", 
     "honkai merch",
     "anime collectibles",
-    "pcb keychain",
+    "anime keychain",
     "limited edition anime",
     "hoyo merch",
     "nameless honor pass",

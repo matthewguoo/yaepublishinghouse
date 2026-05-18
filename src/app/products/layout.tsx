@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Shop Anime Collectibles - Limited Edition PCB Keychains & Merch",
+  title: "Shop Anime Collectibles - Limited Edition Keychains & Merch",
   description: "Browse limited edition collectibles from Yae Publishing House. Serialized and numbered pieces commemorating moments across the stars.",
   keywords: [
     "anime collectibles shop",
-    "pcb keychain",
+    "anime keychain",
     "star rail merchandise",
     "genshin merch",
     "limited edition anime",

@@ -14,7 +14,7 @@ const articles = [
     title: 'Introducing the Nameless Honor Pass',
     date: '2026.05.17',
     category: 'Product Launch',
-    excerpt: 'Limited edition gold-plated PCB collectible commemorating the 2158th Year of the Trailblaze.',
+    excerpt: 'Limited edition gold-plated collectible commemorating the 2158th Year of the Trailblaze.',
   },
   {
     slug: 'hoyofair-2026',

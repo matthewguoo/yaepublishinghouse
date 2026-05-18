@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "star rail new merch",
     "honkai star rail drop",
     "limited edition release",
-    "pcb keychain drop",
+    "collectible drop",
     "trailblazer collectible",
     "penacony merch"
   ],

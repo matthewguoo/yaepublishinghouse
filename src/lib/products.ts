@@ -36,7 +36,7 @@ export const products: Record<string, ProductData> = {
     slug: 'nameless-pass',
     name: 'Nameless Honor Pass',
     subtitle: 'Amber Era Commemorative Edition',
-    description: 'Limited edition gold-plated PCB collectible commemorating the 2158th Year of the Trailblaze and the Nameless\' contributions to the situation in Penacony.',
+    description: 'Limited edition gold-plated collectible commemorating the 2158th Year of the Trailblaze and the Nameless\' contributions to the situation in Penacony.',
     price: '$15.00',
     images: ['/nameless-pass.png'],
     specs: [

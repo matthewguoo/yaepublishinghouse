@@ -120,8 +120,8 @@ export default function SearchProvider({ children }: { children: React.ReactNode
     {
       id: 'product-nameless-pass',
       name: 'Nameless Honor Pass',
-      subtitle: 'Limited Edition Gold ENIG PCB - 2,158 units',
-      keywords: 'nameless honor pass pcb star rail ipc limited edition',
+      subtitle: 'Limited Edition Gold ENIG - 2,158 units',
+      keywords: 'nameless honor pass star rail ipc limited edition collectible',
       icon: '◈',
       section: 'Products',
       perform: () => router.push('/products/nameless-pass'),
