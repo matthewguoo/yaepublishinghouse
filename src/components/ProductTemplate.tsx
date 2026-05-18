@@ -237,6 +237,24 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
               {renderCTA()}
             </div>
 
+            {/* Timeline */}
+            {product.timeline && product.timeline.length > 0 && (
+              <div className={styles.timeline}>
+                <h3>Timeline</h3>
+                <div className={styles.timelineTrack}>
+                  {product.timeline.map((milestone, i) => (
+                    <div key={i} className={`${styles.timelineMilestone} ${styles[milestone.status]}`}>
+                      <div className={styles.timelineDot} />
+                      <div className={styles.timelineContent}>
+                        <span className={styles.timelineLabel}>{milestone.label}</span>
+                        <span className={styles.timelineDate}>{milestone.date}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {product.serialRange && (
               <p className={styles.serialNote}>
                 Serial numbers {product.serialRange}

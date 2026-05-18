@@ -9,6 +9,12 @@ export interface ProductSpec {
   value: string;
 }
 
+export interface TimelineMilestone {
+  label: string;
+  date: string;
+  status: 'upcoming' | 'active' | 'completed';
+}
+
 export interface ProductData {
   id: string;
   slug: string;
@@ -27,6 +33,7 @@ export interface ProductData {
   featured?: boolean;
   announcementUrl?: string;
   meta?: Record<string, string>; // arbitrary key-value pairs
+  timeline?: TimelineMilestone[];
 }
 
 // Product registry
@@ -55,6 +62,11 @@ export const products: Record<string, ProductData> = {
     serialRange: '0001-2158',
     featured: true,
     announcementUrl: '/news/nameless-pass-announcement',
+    timeline: [
+      { label: 'Order Period', date: 'Jun 1 – Jun 15', status: 'upcoming' },
+      { label: 'Manufacturing', date: 'Late June', status: 'upcoming' },
+      { label: 'Ships from US', date: 'Early July', status: 'upcoming' },
+    ],
   },
   'pompom-pass': {
     id: 'pompom-pass',
