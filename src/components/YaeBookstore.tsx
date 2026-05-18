@@ -202,13 +202,13 @@ export default function YaeBookstore() {
           {/* Promo strip */}
           <div className={styles.promoStrip}>
             {user ? (
-              <div className={styles.promoCard}>
-                <div className={styles.promoIcon}>{lang === 'en' ? 'NEW' : '新'}</div>
+              <a href="/news" className={styles.promoCard}>
+                <div className={styles.promoIcon}>{lang === 'en' ? 'NEWS' : '報'}</div>
                 <div className={styles.promoText}>
-                  <h4>Member Perks Active</h4>
-                  <p>Early access to limited drops</p>
+                  <h4>News & Announcements</h4>
+                  <p>Latest drops and updates</p>
                 </div>
-              </div>
+              </a>
             ) : (
               <div 
                 className={`${styles.promoCard} ${styles.clickable}`}
@@ -230,12 +230,21 @@ export default function YaeBookstore() {
             </a>
           </div>
 
-          {/* Announcement */}
-          <div className={styles.announcement}>
-            <span className={styles.announcementLabel}>{t('important', lang)}</span>
-            <p className={styles.announcementText}>
-              {t('announcementText', lang)}<strong>{t('announcementHighlight', lang)}</strong>{t('announcementEnd', lang)}
-            </p>
+          {/* Featured News */}
+          <div className={styles.featuredNews}>
+            <div className={styles.featuredHeader}>
+              <span className={styles.featuredLabel}>Featured</span>
+            </div>
+            <a href="/news/nameless-pass-announcement" className={styles.newsRow}>
+              <span className={styles.newsDate}>2026.05.17</span>
+              <span className={styles.newsTag}>Product</span>
+              <span className={styles.newsTitle}>Nameless Honor Pass now available for pre-order</span>
+            </a>
+            <a href="/news/hoyofair-2026" className={styles.newsRow}>
+              <span className={styles.newsDate}>2026.01.15</span>
+              <span className={styles.newsTag}>Report</span>
+              <span className={styles.newsTitle}>HoYoFair 2026 Los Angeles: A Report from the Front Row</span>
+            </a>
           </div>
 
           {/* Book sections container - can be seized */}
