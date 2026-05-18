@@ -1469,6 +1469,19 @@
   .bannerDesc {
     font-size: 13px;
   }
+  
+  /* disable carousel on mobile - just show first slide */
+  .carouselTrack {
+    transform: none !important;
+  }
+  
+  .banner:not(:first-child) {
+    display: none;
+  }
+  
+  .carouselDots {
+    display: none;
+  }
 }
 
 /* tablet: show hamburger */
