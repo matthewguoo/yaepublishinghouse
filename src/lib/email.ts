@@ -4,7 +4,7 @@ import { Resend } from 'resend';
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 const FROM_EMAIL = 'Yae Publishing House <noreply@yaepublishing.house>';
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3456';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://yaepublishing.house';
 
 export async function sendVerificationEmail(email: string, token: string) {
   const verifyUrl = `${SITE_URL}/verify?token=${token}`;
