@@ -40,8 +40,9 @@ export default function HiringWritersPage() {
 
             <p>
               Contributors to Yae Publishing House receive free merchandise from our store, 
-              store vouchers for future purchases, and early access to limited edition drops. 
-              Your work will be published under the Yae Publishing House banner and shared 
+              store vouchers for future purchases, early access to limited edition drops, 
+              and direct monetary compensation for published work. 
+              Your writing will be published under the Yae Publishing House banner and shared 
               with our growing community of Travelers.
             </p>
 
