@@ -2,9 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { sendWaitlistConfirmation } from '@/lib/email';
 import { getProduct } from '@/lib/products';
+import { checkRateLimit } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit by IP
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
+    const rateLimit = checkRateLimit(`waitlist:${ip}`, 10, 60 * 60 * 1000); // 10 per hour
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const { email, productId } = body;
 
