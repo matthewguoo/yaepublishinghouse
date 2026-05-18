@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#fff"/>
+  <rect x="2" y="2" width="28" height="28" fill="none" stroke="#c41e3a" stroke-width="2"/>
+  <text x="16" y="24" text-anchor="middle" font-family="serif" font-size="20" fill="#c41e3a">八</text>
+</svg>

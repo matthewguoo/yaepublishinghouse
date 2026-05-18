@@ -1,0 +1,208 @@
+'use client';
+
+import { useState } from 'react';
+import { ProductData } from '@/lib/products';
+import SiteLayout from './SiteLayout';
+import styles from './ProductTemplate.module.css';
+
+interface ProductTemplateProps {
+  product: ProductData;
+}
+
+export default function ProductTemplate({ product }: ProductTemplateProps) {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: integrate with email service
+    console.log('Email submitted:', email);
+    setSubmitted(true);
+  };
+
+  const handleStripeCheckout = async () => {
+    // TODO: integrate with Stripe
+    console.log('Stripe checkout for:', product.id);
+  };
+
+  const renderCTA = () => {
+    switch (product.cta.type) {
+      case 'email':
+        if (submitted) {
+          return (
+            <div className={styles.successMessage}>
+              {product.cta.successMessage || 'Thanks! We\'ll be in touch.'}
+            </div>
+          );
+        }
+        return (
+          <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+              className={styles.emailInput}
+            />
+            <button type="submit" className={styles.ctaButton}>
+              {product.cta.buttonText || 'Notify Me'}
+            </button>
+          </form>
+        );
+
+      case 'stripe':
+        return (
+          <button onClick={handleStripeCheckout} className={styles.ctaButton}>
+            {product.cta.buttonText || 'Buy Now'} — {product.price}
+          </button>
+        );
+
+      case 'soldout':
+        return (
+          <div className={styles.soldout}>
+            {product.cta.message || 'Sold Out'}
+          </div>
+        );
+
+      case 'comingsoon':
+        return (
+          <div className={styles.comingsoon}>
+            <p>{product.cta.message || 'Coming Soon'}</p>
+            <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="notify me at..."
+                required
+                className={styles.emailInput}
+              />
+              <button type="submit" className={styles.ctaButtonSecondary}>
+                Notify Me
+              </button>
+            </form>
+          </div>
+        );
+    }
+  };
+
+  return (
+    <SiteLayout>
+      <div className={styles.container}>
+        <div className={styles.breadcrumb}>
+          <a href="/">Home</a> &gt; <a href="/products">Products</a> &gt; {product.name}
+        </div>
+
+        <div className={styles.productLayout}>
+          {/* Image gallery */}
+          <div className={styles.gallery}>
+            {product.images.length > 0 ? (
+              <>
+                <div className={styles.mainImage}>
+                  {product.badge && (
+                    <span className={`${styles.badge} ${styles[product.badgeType || 'default']}`}>
+                      {product.badge}
+                    </span>
+                  )}
+                  <img src={product.images[currentImage]} alt={product.name} />
+                </div>
+                {product.images.length > 1 && (
+                  <div className={styles.thumbnails}>
+                    {product.images.map((img, i) => (
+                      <button
+                        key={i}
+                        className={`${styles.thumbnail} ${i === currentImage ? styles.active : ''}`}
+                        onClick={() => setCurrentImage(i)}
+                      >
+                        <img src={img} alt={`${product.name} ${i + 1}`} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className={styles.noImage}>
+                <span>Image Coming Soon</span>
+              </div>
+            )}
+          </div>
+
+          {/* Product info */}
+          <div className={styles.info}>
+            <h1 className={styles.title}>{product.name}</h1>
+            {product.subtitle && (
+              <p className={styles.subtitle}>{product.subtitle}</p>
+            )}
+            
+            <div className={styles.priceRow}>
+              <span className={styles.price}>{product.price}</span>
+              {product.originalPrice && (
+                <span className={styles.originalPrice}>{product.originalPrice}</span>
+              )}
+            </div>
+            <div className={styles.shippingNote}>
+              <img src="/komaniya-logo.png" alt="Komaniya Express" className={styles.komaniyaLogo} />
+              <span>All Yae Publishing House products ship for free — courtesy of Komaniya Express</span>
+            </div>
+
+            <p className={styles.description}>{product.description}</p>
+
+            {/* Specs table */}
+            {product.specs.length > 0 && (
+              <div className={styles.specs}>
+                <h3>Specifications</h3>
+                <table>
+                  <tbody>
+                    {product.specs.map((spec, i) => (
+                      <tr key={i}>
+                        <td className={styles.specLabel}>{spec.label}</td>
+                        <td className={styles.specValue}>{spec.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* CTA */}
+            <div className={styles.ctaSection}>
+              {renderCTA()}
+            </div>
+
+            {product.serialRange && (
+              <p className={styles.serialNote}>
+                Serial numbers {product.serialRange}
+              </p>
+            )}
+
+            {product.announcementUrl && (
+              <a href={product.announcementUrl} className={styles.announcementLink}>
+                Read the full announcement →
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Product images gallery */}
+        {product.images.length > 1 && (
+          <div className={styles.imageGallery}>
+            <h3>Product Images</h3>
+            <div className={styles.imageRow}>
+              {product.images.map((img, i) => (
+                <button
+                  key={i}
+                  className={`${styles.galleryThumb} ${i === currentImage ? styles.active : ''}`}
+                  onClick={() => setCurrentImage(i)}
+                >
+                  <img src={img} alt={`${product.name} ${i + 1}`} />
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </SiteLayout>
+  );
+}
