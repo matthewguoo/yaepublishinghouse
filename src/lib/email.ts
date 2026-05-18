@@ -168,7 +168,7 @@ Shipped with care by Komaniya Express
     const result = await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: \`You're on the waitlist for \${product.name} - Yae Publishing House\`,
+      subject: `You're on the waitlist for ${product.name} - Yae Publishing House`,
       html,
       text,
     });

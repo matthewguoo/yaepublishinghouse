@@ -54,37 +54,40 @@ export default function RegisterPage() {
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.icon}>八</div>
-        <h1>Register Free</h1>
+        <h1 className={styles.title}>Register Free</h1>
         
         {error && <div className={styles.error}>{error}</div>}
         {success && <div className={styles.success}>{success}</div>}
         
-        <form onSubmit={handleSubmit}>
-          <label>Email Address</label>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <label className={styles.label}>Email Address</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            className={styles.input}
           />
           
-          <label>Password</label>
+          <label className={styles.label}>Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className={styles.input}
           />
           
-          <label>Confirm Password</label>
+          <label className={styles.label}>Confirm Password</label>
           <input
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            className={styles.input}
           />
           
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} className={styles.submitBtn}>
             {loading ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>

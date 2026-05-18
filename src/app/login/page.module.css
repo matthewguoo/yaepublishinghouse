@@ -28,7 +28,7 @@
   font-weight: bold;
 }
 
-h1 {
+.title {
   text-align: center;
   font-size: 1.5rem;
   font-weight: 500;
@@ -54,31 +54,31 @@ h1 {
   font-size: 0.875rem;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-label {
+.label {
   font-size: 0.875rem;
   color: #666;
   margin-top: 0.5rem;
 }
 
-input {
+.input {
   padding: 0.75rem 1rem;
   border: 1px solid #ddd;
   font-size: 1rem;
   transition: border-color 0.2s;
 }
 
-input:focus {
+.input:focus {
   outline: none;
   border-color: #8b5a8c;
 }
 
-button[type="submit"] {
+.submitBtn {
   margin-top: 1.5rem;
   padding: 0.875rem;
   background: linear-gradient(135deg, #8b5a8c 0%, #a06a8c 100%);
@@ -89,11 +89,11 @@ button[type="submit"] {
   transition: opacity 0.2s;
 }
 
-button[type="submit"]:hover {
+.submitBtn:hover {
   opacity: 0.9;
 }
 
-button[type="submit"]:disabled {
+.submitBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
