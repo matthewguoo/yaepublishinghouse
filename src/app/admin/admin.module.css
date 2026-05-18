@@ -129,6 +129,12 @@
   color: #38232f;
 }
 
+.inlineLink {
+  color: #7c3b6f;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .field textarea {
   min-height: 420px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;

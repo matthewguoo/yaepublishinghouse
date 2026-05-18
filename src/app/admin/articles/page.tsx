@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { prisma } from '@/lib/db';
 import styles from '../admin.module.css';
 
@@ -18,8 +19,9 @@ export default async function AdminArticlesPage() {
             <p className={styles.subtitle}>Publish, hide, and revise Yae Publishing House articles without a redeploy.</p>
           </div>
           <div className={styles.buttonRow}>
-            <a className={styles.ghostButton} href="/">View site</a>
-            <a className={styles.button} href="/admin/articles/new">New article</a>
+            <Link className={styles.ghostButton} href="/">View site</Link>
+            <Link className={styles.ghostButton} href="/admin/media-submissions">Media review</Link>
+            <Link className={styles.button} href="/admin/articles/new">New article</Link>
           </div>
         </div>
 

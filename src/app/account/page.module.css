@@ -1,13 +1,13 @@
 .container {
-  max-width: 600px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 30px 20px 60px;
+  padding: 34px 20px 70px;
 }
 
 .breadcrumb {
   font-size: 12px;
   color: #888;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .breadcrumb a {
@@ -16,36 +16,78 @@
 }
 
 .header {
-  margin-bottom: 30px;
+  margin-bottom: 28px;
+  padding: 24px;
+  border: 1px solid #ead8e8;
+  background: linear-gradient(135deg, #fffaf7 0%, #fff3fb 48%, #f8fff5 100%);
+  box-shadow: 0 14px 35px rgba(111, 53, 103, 0.1);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #9b6b74;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 .header h1 {
-  font-size: 24px;
-  color: #5a3d5a;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(32px, 7vw, 58px);
+  line-height: 0.95;
+  color: #6f3567;
   margin: 0;
 }
 
+.header p:last-child {
+  max-width: 620px;
+  margin: 12px 0 0;
+  color: #765b6c;
+}
+
 .card {
-  background: #faf8fa;
-  border: 1px solid #e8e0e8;
+  background: rgba(255, 252, 249, 0.95);
+  border: 1px solid #e8d7e8;
   padding: 20px;
   margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(90, 61, 90, 0.06);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #e8e0e8;
+  margin-bottom: 12px;
 }
 
 .card h2 {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: #8b5a8c;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 15px;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e8e0e8;
+}
+
+.cardHeader h2 {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.balance {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #2f7a4f;
+  font-size: 30px;
 }
 
 .field {
   display: flex;
   justify-content: space-between;
+  gap: 18px;
   padding: 10px 0;
   border-bottom: 1px solid #f0e8f0;
 }
@@ -54,18 +96,147 @@
   border-bottom: none;
 }
 
-.field label {
+.field label, .field span, .note, .empty, .message, .submission small, .voucher small {
   font-size: 13px;
-  color: #666;
+}
+
+.field label, .note, .empty, .voucher small, .submission small {
+  color: #706270;
 }
 
 .field span {
-  font-size: 13px;
   color: #333;
+  overflow-wrap: anywhere;
 }
 
 .verified {
   color: #2d7a2d !important;
+}
+
+.rewardsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.voucherList, .submissionList, .mediaForm {
+  display: grid;
+  gap: 12px;
+}
+
+.voucher {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 16px;
+  padding: 14px;
+  border: 1px dashed #d7a9cf;
+  background: radial-gradient(circle at 15% 0%, rgba(255, 221, 245, 0.9), transparent 34%), #fffdf8;
+}
+
+.voucher::before, .voucher::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #fffaf7;
+  border: 1px solid #e8d7e8;
+}
+
+.voucher::before { left: -8px; }
+.voucher::after { right: -8px; }
+
+.voucher div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.voucher code {
+  color: #5a3156;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.voucher span, .status {
+  border: 1px solid #d9c2a5;
+  background: #fff6e4;
+  color: #815463;
+  padding: 3px 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.voucher strong {
+  color: #2f7a4f;
+  font-size: 20px;
+}
+
+.voucher small {
+  grid-column: 1 / -1;
+}
+
+.mediaForm label {
+  display: grid;
+  gap: 6px;
+  color: #624658;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mediaForm input, .mediaForm select {
+  border: 1px solid #d7bbd4;
+  background: #fffdf9;
+  padding: 11px 12px;
+  color: #38232f;
+  font: inherit;
+}
+
+.primaryBtn {
+  border: 1px solid #7c3b6f;
+  background: #7c3b6f;
+  color: white;
+  padding: 11px 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.message {
+  margin: 0;
+  color: #2f7a4f;
+}
+
+.submission {
+  display: grid;
+  gap: 8px;
+  padding: 13px 0;
+  border-bottom: 1px solid #f0e8f0;
+}
+
+.submission:last-child {
+  border-bottom: 0;
+}
+
+.submission div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.submission a {
+  color: #6f3567;
+  overflow-wrap: anywhere;
 }
 
 .logoutBtn {
@@ -80,4 +251,10 @@
 .logoutBtn:hover {
   background: #a33;
   color: #fff;
+}
+
+@media (max-width: 820px) {
+  .container { padding-inline: 14px; }
+  .rewardsGrid { grid-template-columns: 1fr; }
+  .field { display: grid; }
 }
