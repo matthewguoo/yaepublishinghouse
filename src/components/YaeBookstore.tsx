@@ -19,11 +19,42 @@ export default function YaeBookstore() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [sidebarEmail, setSidebarEmail] = useState('');
+  const [sidebarPassword, setSidebarPassword] = useState('');
+  const [sidebarError, setSidebarError] = useState('');
+  const [sidebarLoading, setSidebarLoading] = useState(false);
   const { user } = useUser();
   const [glitchPhase, setGlitchPhase] = useState<'idle' | 'glitching' | 'seized'>('idle');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const totalSlides = 3;
   const { query } = useKBar();
+
+  const handleSidebarLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSidebarError('');
+    setSidebarLoading(true);
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: sidebarEmail, password: sidebarPassword }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setSidebarError(data.error || 'Login failed');
+        return;
+      }
+
+      window.location.reload();
+    } catch {
+      setSidebarError('Something went wrong');
+    } finally {
+      setSidebarLoading(false);
+    }
+  };
 
   // Auto-trigger glitching after 10 seconds of idle
   useEffect(() => {
@@ -397,12 +428,27 @@ export default function YaeBookstore() {
         <aside className={styles.sidebar}>
           <div className={styles.sidebarBox}>
             <h3 className={styles.sidebarTitle}>{t('memberLogin', lang)}</h3>
-            <div className={styles.loginForm}>
-              <input type="email" placeholder={t('email', lang)} />
-              <input type="password" placeholder={t('password', lang)} />
-              <button className={styles.loginBtn} onClick={() => setShowLogin(true)}>{t('loginBtn', lang)}</button>
-              <button className={styles.registerBtn} onClick={() => setShowRegister(true)}>{t('registerFree', lang)}</button>
-            </div>
+            <form className={styles.loginForm} onSubmit={handleSidebarLogin}>
+              {sidebarError && <div className={styles.sidebarError}>{sidebarError}</div>}
+              <input 
+                type="email" 
+                placeholder={t('email', lang)} 
+                value={sidebarEmail}
+                onChange={(e) => setSidebarEmail(e.target.value)}
+                required
+              />
+              <input 
+                type="password" 
+                placeholder={t('password', lang)}
+                value={sidebarPassword}
+                onChange={(e) => setSidebarPassword(e.target.value)}
+                required
+              />
+              <button type="submit" className={styles.loginBtn} disabled={sidebarLoading}>
+                {sidebarLoading ? '...' : t('loginBtn', lang)}
+              </button>
+              <button type="button" className={styles.registerBtn} onClick={() => setShowRegister(true)}>{t('registerFree', lang)}</button>
+            </form>
           </div>
 
           <div className={styles.promoBox}>

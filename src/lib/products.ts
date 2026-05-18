@@ -42,7 +42,8 @@ export const products: Record<string, ProductData> = {
     specs: [
       { label: 'Dimensions', value: '100 × 42 mm' },
       { label: 'Thickness', value: '1.0 mm' },
-      { label: 'Material & Finish', value: 'ENIG (Real Gold)' },
+      { label: 'Substrate', value: 'FR-4 fiberglass' },
+      { label: 'Surface Finish', value: "Real 2u' gold-nickel plating, etched pattern with UV silkscreen printing for vibrant, fade-resistant colors" },
       { label: 'Print', value: 'UV Silkscreen' },
       { label: 'Units', value: '2,158 (Serialized)' },
     ],
