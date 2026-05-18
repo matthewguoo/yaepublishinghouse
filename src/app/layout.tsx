@@ -25,10 +25,10 @@ const maShanZheng = Ma_Shan_Zheng({
 
 export const metadata: Metadata = {
   title: {
-    default: "Yae Publishing House | 八重堂書店 - Anime Collectibles & Free Tools",
+    default: "Yae Publishing House | 八重堂書店",
     template: "%s | Yae Publishing House",
   },
-  description: "Shop limited edition anime collectibles, serialized PCB keychains, and use free creator tools. Star Rail Nameless Honor Pass now available. Free shipping on all orders.",
+  description: "The official storefront of Yae Publishing House. Limited edition collectibles, editorial coverage of HoYoverse events, and tools for creators.",
   keywords: [
     "star rail merch",
     "genshin impact merch", 
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Yae Publishing House | 八重堂書店",
-    description: "Limited edition anime collectibles, serialized PCB keychains, and free creator tools. Star Rail Nameless Pass available now. Free shipping.",
+    description: "The official storefront of Yae Publishing House. Limited edition collectibles, editorial coverage, and tools for creators.",
     siteName: "Yae Publishing House",
     type: "website",
     locale: "en_US",

@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Shop Anime Collectibles - Limited Edition PCB Keychains & Merch",
-  description: "Browse exclusive anime collectibles and serialized PCB keychains. Star Rail Nameless Honor Pass, Genshin accessories, and more. Each piece numbered and limited. Free worldwide shipping.",
+  description: "Browse limited edition collectibles from Yae Publishing House. Serialized and numbered pieces commemorating moments across the stars.",
   keywords: [
     "anime collectibles shop",
     "pcb keychain",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Shop Limited Edition Anime Collectibles",
-    description: "Exclusive serialized PCB keychains and anime merch. Nameless Honor Pass available now. Free shipping.",
+    description: "Limited edition collectibles from Yae Publishing House. Serialized pieces commemorating moments across the stars.",
   },
 };
 

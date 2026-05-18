@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Nameless Honor Pass - Star Rail PCB Keychain | Limited to 2,158 Units",
-  description: "Own a piece of Trailblaze history. Real gold ENIG finish PCB keychain commemorating the Nameless. Serialized 0001-2158. UV silkscreen detail. Free shipping worldwide.",
+  description: "Own a piece of Trailblaze history. Real gold ENIG finish commemorating the Nameless. Serialized 0001-2158. Only 2,158 will ever exist.",
   keywords: [
     "nameless honor pass",
     "star rail keychain",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Nameless Honor Pass - Limited Edition Star Rail PCB",
-    description: "Real gold finish PCB keychain. Only 2,158 made. Serialized and numbered. Free shipping.",
+    description: "Own a piece of Trailblaze history. Serialized 0001-2158. Only 2,158 will ever exist.",
     images: ["/nameless-pass.png"],
   },
   twitter: {
