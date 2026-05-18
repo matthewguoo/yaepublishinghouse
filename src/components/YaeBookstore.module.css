@@ -1143,16 +1143,19 @@
 }
 
 .promoIcon {
-  width: 60px;
+  min-width: 60px;
   height: 60px;
+  padding: 0 12px;
   background: #8b5a8c;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 24px;
+  font-size: 18px;
+  font-weight: 700;
   font-family: 'Noto Serif JP', serif;
   flex-shrink: 0;
+  letter-spacing: 0.05em;
 }
 
 .promoCard.alt .promoIcon {

@@ -203,7 +203,7 @@ export default function YaeBookstore() {
           <div className={styles.promoStrip}>
             {user ? (
               <div className={styles.promoCard}>
-                <div className={styles.promoIconImg}>✓</div>
+                <div className={styles.promoIcon}>{lang === 'en' ? 'NEW' : '新'}</div>
                 <div className={styles.promoText}>
                   <h4>Member Perks Active</h4>
                   <p>Early access to limited drops</p>
@@ -214,7 +214,7 @@ export default function YaeBookstore() {
                 className={`${styles.promoCard} ${styles.clickable}`}
                 onClick={() => setShowRegister(true)}
               >
-                <div className={styles.promoIconImg}>★</div>
+                <div className={styles.promoIcon}>{lang === 'en' ? 'NEW' : '新'}</div>
                 <div className={styles.promoText}>
                   <h4>Secure Limited Drops</h4>
                   <p>Register for early access</p>
@@ -222,7 +222,7 @@ export default function YaeBookstore() {
               </div>
             )}
             <a href="/products" className={`${styles.promoCard} ${styles.alt}`}>
-              <div className={styles.promoIconImg}>◈</div>
+              <div className={styles.promoIcon}>{lang === 'en' ? 'SHOP' : '店'}</div>
               <div className={styles.promoText}>
                 <h4>{t('storeInventory', lang)}</h4>
                 <p>{t('storeInventoryDesc', lang)}</p>
