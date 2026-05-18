@@ -286,10 +286,10 @@ export default function YaeBookstore() {
                 <section className={styles.section}>
                   <div className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>{t('recommendedNovels', lang)}</h2>
-                    <a href="#" className={styles.sectionMore}>{t('seeMore', lang)}</a>
+                    <span className={styles.sectionMore}>{t('seeMore', lang)}</span>
                   </div>
                   <div className={styles.bookGrid}>
-                    <a href="#" className={styles.bookCard}>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <span className={`${styles.bookBadge} ${styles.new}`}>{t('new', lang)}</span>
                         <img src="/book-shogun-almighty.png" alt="Shogun Almighty" />
@@ -298,8 +298,8 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('shogunAlmighty', lang)}</div>
                       <div className={styles.bookAuthor}>{t('shogunAuthor', lang)}</div>
                       <div className={styles.bookPrice}>$12.99</div>
-                    </a>
-                    <a href="#" className={styles.bookCard}>
+                    </div>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <span className={styles.bookBadge}>{t('limited', lang)}</span>
                         <img src="/book-kitsune-guuji.png" alt="Kitsune Guuji" />
@@ -308,8 +308,8 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('kitsuneGuuji', lang)}</div>
                       <div className={styles.bookAuthor}>{t('kitsuneAuthor', lang)}</div>
                       <div className={styles.bookPrice}>$14.99</div>
-                    </a>
-                    <a href="#" className={styles.bookCard}>
+                    </div>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <img src="/book-fischl.png" alt="Fischl" />
                       </div>
@@ -317,8 +317,8 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('fischl', lang)}</div>
                       <div className={styles.bookAuthor}>{t('fischlAuthor', lang)}</div>
                       <div className={styles.bookPrice}>$11.99</div>
-                    </a>
-                    <a href="#" className={styles.bookCard}>
+                    </div>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <span className={styles.bookBadge}>{t('limited', lang)}</span>
                         <img src="/book-shogun-first.png" alt="First Edition" />
@@ -327,8 +327,8 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('shogunFirst', lang)}</div>
                       <div className={styles.bookAuthor}>{t('firstEditionBonus', lang)}</div>
                       <div className={styles.bookPrice}>$38.99</div>
-                    </a>
-                    <a href="#" className={styles.bookCard}>
+                    </div>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <span className={`${styles.bookBadge} ${styles.new}`}>{t('new', lang)}</span>
                         <img src="/book-six-kitsune.png" alt="Shrine Daily" />
@@ -337,7 +337,7 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('shrineDaily', lang)}</div>
                       <div className={styles.bookAuthor}>{t('shrineAuthor', lang)}</div>
                       <div className={styles.bookPrice}>$9.99</div>
-                    </a>
+                    </div>
                   </div>
                 </section>
 
@@ -345,10 +345,10 @@ export default function YaeBookstore() {
                 <section className={styles.section}>
                   <div className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>{t('limitedCollectors', lang)}</h2>
-                    <a href="#" className={styles.sectionMore}>{t('seeMore', lang)}</a>
+                    <span className={styles.sectionMore}>{t('seeMore', lang)}</span>
                   </div>
                   <div className={styles.bookGrid}>
-                    <a href="#" className={styles.bookCard}>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <span className={styles.bookBadge}>{t('limited', lang)}</span>
                         <img src="/book-shogun-almighty.png" alt="Box Set" />
@@ -357,8 +357,8 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('boxSet', lang)}</div>
                       <div className={styles.bookAuthor}>{t('boxSetBonus', lang)}</div>
                       <div className={styles.bookPrice}>$149.99</div>
-                    </a>
-                    <a href="#" className={styles.bookCard}>
+                    </div>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <span className={styles.bookBadge}>{t('limited', lang)}</span>
                         <img src="/book-kitsune-guuji.png" alt="Kitsune Deluxe" />
@@ -367,8 +367,8 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('kitsuneDeluxe', lang)}</div>
                       <div className={styles.bookAuthor}>{t('signedCopy', lang)}</div>
                       <div className={styles.bookPrice}>$79.99</div>
-                    </a>
-                    <a href="#" className={styles.bookCard}>
+                    </div>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <span className={styles.bookBadge}>{t('limited', lang)}</span>
                         <img src="/book-fischl.png" alt="Fischl Box" />
@@ -377,8 +377,8 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('fischlBox', lang)}</div>
                       <div className={styles.bookAuthor}>{t('bookmarkSet', lang)}</div>
                       <div className={styles.bookPrice}>$109.99</div>
-                    </a>
-                    <a href="#" className={styles.bookCard}>
+                    </div>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <span className={`${styles.bookBadge} ${styles.new}`}>{t('new', lang)}</span>
                         <img src="/book-generic.png" alt="Artbook" />
@@ -387,8 +387,8 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('artbook', lang)}</div>
                       <div className={styles.bookAuthor}>{t('officialIllustrator', lang)}</div>
                       <div className={styles.bookPrice}>$49.99</div>
-                    </a>
-                    <a href="#" className={styles.bookCard}>
+                    </div>
+                    <div className={styles.bookCard}>
                       <div className={styles.bookCover}>
                         <img src="/book-generic.png" alt="Rare Book" />
                       </div>
@@ -396,7 +396,7 @@ export default function YaeBookstore() {
                       <div className={styles.bookTitle}>{t('rareBook', lang)}</div>
                       <div className={styles.bookAuthor}>{t('specialPaper', lang)}</div>
                       <div className={styles.bookPrice}>$199.99</div>
-                    </a>
+                    </div>
                   </div>
                 </section>
               </>
@@ -407,28 +407,49 @@ export default function YaeBookstore() {
         {/* Sidebar */}
         <aside className={styles.sidebar}>
           <div className={styles.sidebarBox}>
-            <h3 className={styles.sidebarTitle}>{t('memberLogin', lang)}</h3>
-            <form className={styles.loginForm} onSubmit={handleSidebarLogin}>
-              {sidebarError && <div className={styles.sidebarError}>{sidebarError}</div>}
-              <input 
-                type="email" 
-                placeholder={t('email', lang)} 
-                value={sidebarEmail}
-                onChange={(e) => setSidebarEmail(e.target.value)}
-                required
-              />
-              <input 
-                type="password" 
-                placeholder={t('password', lang)}
-                value={sidebarPassword}
-                onChange={(e) => setSidebarPassword(e.target.value)}
-                required
-              />
-              <button type="submit" className={styles.loginBtn} disabled={sidebarLoading}>
-                {sidebarLoading ? '...' : t('loginBtn', lang)}
-              </button>
-              <button type="button" className={styles.registerBtn} onClick={() => setShowRegister(true)}>{t('registerFree', lang)}</button>
-            </form>
+            {user ? (
+              <>
+                <h3 className={styles.sidebarTitle}>Welcome Back</h3>
+                <div className={styles.accountInfo}>
+                  <p className={styles.accountEmail}>{user.email}</p>
+                  <a href="/account" className={styles.accountLink}>My Account</a>
+                  <button 
+                    className={styles.logoutBtn}
+                    onClick={async () => {
+                      await fetch('/api/auth/logout', { method: 'POST' });
+                      window.location.reload();
+                    }}
+                  >
+                    Log Out
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <h3 className={styles.sidebarTitle}>{t('memberLogin', lang)}</h3>
+                <form className={styles.loginForm} onSubmit={handleSidebarLogin}>
+                  {sidebarError && <div className={styles.sidebarError}>{sidebarError}</div>}
+                  <input 
+                    type="email" 
+                    placeholder={t('email', lang)} 
+                    value={sidebarEmail}
+                    onChange={(e) => setSidebarEmail(e.target.value)}
+                    required
+                  />
+                  <input 
+                    type="password" 
+                    placeholder={t('password', lang)}
+                    value={sidebarPassword}
+                    onChange={(e) => setSidebarPassword(e.target.value)}
+                    required
+                  />
+                  <button type="submit" className={styles.loginBtn} disabled={sidebarLoading}>
+                    {sidebarLoading ? '...' : t('loginBtn', lang)}
+                  </button>
+                  <button type="button" className={styles.registerBtn} onClick={() => setShowRegister(true)}>{t('registerFree', lang)}</button>
+                </form>
+              </>
+            )}
           </div>
 
           <div className={styles.promoBox}>

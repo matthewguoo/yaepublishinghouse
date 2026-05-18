@@ -1341,6 +1341,48 @@
   margin-top: 10px;
 }
 
+.accountInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.accountEmail {
+  font-size: 14px;
+  color: #666;
+  word-break: break-all;
+  margin: 0;
+}
+
+.accountLink {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  background: #8b5a8c;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.accountLink:hover {
+  background: #7a4a7a;
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  color: #666;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.logoutBtn:hover {
+  background: #f5f5f5;
+}
+
 .promoBox {
   background: linear-gradient(135deg, #ffe4ec 0%, #ffd0e0 100%);
   padding: 20px;
