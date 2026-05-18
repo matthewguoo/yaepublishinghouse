@@ -61,6 +61,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://yaepublishing.house",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "八重書店 - Yae Publishing House",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -68,6 +76,7 @@ export const metadata: Metadata = {
     description: "Limited edition anime collectibles & free tools. Star Rail Nameless Pass available. Free shipping.",
     creator: "@pci_yae",
     site: "@pci_yae",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
