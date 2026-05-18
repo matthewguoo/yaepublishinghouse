@@ -1615,6 +1615,37 @@
   background: #996f0a;
 }
 
+.hiringEmail {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.hiringEmail a {
+  color: #b8860b;
+  font-weight: 600;
+}
+
+/* Mobile-only hiring box - hidden on desktop */
+.hiringBoxMobile {
+  display: none;
+  background: transparent;
+  padding: 20px;
+  text-align: center;
+  border: 4px dashed #c4a35a;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .hiringBoxMobile {
+    display: block;
+  }
+  
+  .hiringBox {
+    display: none;
+  }
+}
+
 .newsList {
   font-size: 12px;
   line-height: 2;
@@ -1729,6 +1760,24 @@
   
   .carouselArrow {
     display: none;
+  }
+  
+  .carousel {
+    max-width: 100%;
+  }
+  
+  .banner {
+    max-width: 100%;
+    min-width: 0;
+  }
+  
+  .banner img {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .bannerTitle {
+    word-wrap: break-word;
   }
 }
 

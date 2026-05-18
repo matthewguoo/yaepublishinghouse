@@ -3,6 +3,13 @@ import styles from '@/components/SiteLayout.module.css';
 
 const articles = [
   {
+    slug: 'hiring-writers',
+    title: 'The Guuji Seeks Editorial Staff',
+    date: '2026.05.18',
+    category: 'Recruitment',
+    excerpt: 'Writers, reporters, and content creators wanted. Contributors receive free merchandise and store vouchers.',
+  },
+  {
     slug: 'nameless-pass-announcement',
     title: 'Introducing the Nameless Honor Pass',
     date: '2026.05.17',
