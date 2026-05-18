@@ -232,17 +232,18 @@ export default function YaeBookstore() {
               <span className={styles.newsTag}>Product</span>
               <span className={styles.newsTitle}>Nameless Honor Pass now available for pre-order</span>
             </a>
+            <a href="/news/hoyofair-2026" className={styles.newsRow}>
+              <span className={styles.newsDate}>2026.01.15</span>
+              <span className={styles.newsTag}>Report</span>
+              <span className={styles.newsTitle}>HoYoFair 2026 Los Angeles: A Report from the Front Row</span>
+            </a>
           </div>
 
           {/* Mobile-only hiring box */}
           <div className={styles.hiringBoxMobile}>
             <h3 className={styles.hiringTitle}>The Guuji seeks talented writers</h3>
             <p className={styles.hiringDesc}>Cover HoYoverse news and events. Contributors receive free merchandise and store vouchers.</p>
-            {user ? (
-              <p className={styles.hiringEmail}>Send your application to <a href="mailto:yaemikodayoo@gmail.com">yaemikodayoo@gmail.com</a></p>
-            ) : (
-              <button className={styles.hiringBtn} onClick={() => setShowLogin(true)}>Register or Log In to Inquire</button>
-            )}
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcW9rmgzqiSqJCJhAYXyIs3fivJOMu0jjDR7-W4V5M_yVexA/viewform" target="_blank" rel="noopener noreferrer" className={styles.hiringBtn}>Apply Now</a>
           </div>
 
           {/* Book sections container - can be seized */}
@@ -498,11 +499,7 @@ export default function YaeBookstore() {
           <div className={styles.hiringBox}>
             <h3 className={styles.hiringTitle}>The Guuji seeks talented writers</h3>
             <p className={styles.hiringDesc}>Cover HoYoverse news and events for our publication. Contributors receive free merchandise and store vouchers.</p>
-            {user ? (
-              <p className={styles.hiringEmail}>Send your application to <a href="mailto:yaemikodayoo@gmail.com">yaemikodayoo@gmail.com</a></p>
-            ) : (
-              <button className={styles.hiringBtn} onClick={() => setShowLogin(true)}>Register or Log In to Inquire</button>
-            )}
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcW9rmgzqiSqJCJhAYXyIs3fivJOMu0jjDR7-W4V5M_yVexA/viewform" target="_blank" rel="noopener noreferrer" className={styles.hiringBtn}>Apply Now</a>
           </div>
 
           <div className={styles.sidebarBox}>

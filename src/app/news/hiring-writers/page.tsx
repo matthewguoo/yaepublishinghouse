@@ -48,11 +48,11 @@ export default function HiringWritersPage() {
             <h2>How to Apply</h2>
 
             <p>
-              To express your interest, please send an email to{' '}
-              <a href="mailto:yaemikodayoo@gmail.com" style={{ color: '#8b5a8c', fontWeight: 600 }}>
-                yaemikodayoo@gmail.com
-              </a>{' '}
-              with the following:
+              To express your interest, please fill out our{' '}
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcW9rmgzqiSqJCJhAYXyIs3fivJOMu0jjDR7-W4V5M_yVexA/viewform" target="_blank" rel="noopener noreferrer" style={{ color: '#8b5a8c', fontWeight: 600 }}>
+                application form
+              </a>
+              . We'll ask about:
             </p>
 
             <ul style={{ marginLeft: '20px', lineHeight: '1.8' }}>
