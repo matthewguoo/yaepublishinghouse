@@ -28,26 +28,7 @@ export default function SiteHeader({ lang, setLang }: SiteHeaderProps) {
             </div>
           </a>
           <div className={styles.headerRight}>
-            <div className={styles.langSelector}>
-              <button 
-                className={`${styles.langBtn} ${lang === 'ja' ? styles.active : ''}`}
-                onClick={() => setLang('ja')}
-              >
-                JP
-              </button>
-              <button 
-                className={`${styles.langBtn} ${lang === 'zh' ? styles.active : ''}`}
-                onClick={() => setLang('zh')}
-              >
-                CN
-              </button>
-              <button 
-                className={`${styles.langBtn} ${lang === 'en' ? styles.active : ''}`}
-                onClick={() => setLang('en')}
-              >
-                EN
-              </button>
-            </div>
+            {/* Language selector hidden for now - defaults to English */}
             <button 
               className={styles.akashaBtn}
               onClick={() => query.toggle()}
@@ -63,8 +44,8 @@ export default function SiteHeader({ lang, setLang }: SiteHeaderProps) {
                 <a href="/account">Account</a>
               ) : (
                 <>
-                  <a href="#">{t('register', lang)}</a>
-                  <a href="#">{t('login', lang)}</a>
+                  <a href="/register">{t('register', lang)}</a>
+                  <a href="/login">{t('login', lang)}</a>
                 </>
               )}
             </div>
@@ -95,8 +76,8 @@ export default function SiteHeader({ lang, setLang }: SiteHeaderProps) {
               <a href="/account" onClick={() => setMobileMenuOpen(false)}>Account</a>
             ) : (
               <>
-                <a href="#" onClick={() => setMobileMenuOpen(false)}>{t('register', lang)}</a>
-                <a href="#" onClick={() => setMobileMenuOpen(false)}>{t('login', lang)}</a>
+                <a href="/register" onClick={() => setMobileMenuOpen(false)}>{t('register', lang)}</a>
+                <a href="/login" onClick={() => setMobileMenuOpen(false)}>{t('login', lang)}</a>
               </>
             )}
           </nav>

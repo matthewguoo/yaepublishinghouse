@@ -81,26 +81,7 @@ export default function YaeBookstore() {
             </div>
           </div>
           <div className={styles.headerRight}>
-            <div className={styles.langSelector}>
-              <button 
-                className={`${styles.langBtn} ${lang === 'ja' ? styles.active : ''}`}
-                onClick={() => setLang('ja')}
-              >
-                JP
-              </button>
-              <button 
-                className={`${styles.langBtn} ${lang === 'zh' ? styles.active : ''}`}
-                onClick={() => setLang('zh')}
-              >
-                CN
-              </button>
-              <button 
-                className={`${styles.langBtn} ${lang === 'en' ? styles.active : ''}`}
-                onClick={() => setLang('en')}
-              >
-                EN
-              </button>
-            </div>
+            {/* Language selector hidden - defaults to English */}
             <button 
               className={styles.akashaBtn}
               onClick={() => query.toggle()}
@@ -480,11 +461,7 @@ export default function YaeBookstore() {
             </>
           )}
         </nav>
-        <div className={styles.mobileLang}>
-          <button className={lang === 'ja' ? styles.active : ''} onClick={() => setLang('ja')}>日本語</button>
-          <button className={lang === 'zh' ? styles.active : ''} onClick={() => setLang('zh')}>中文</button>
-          <button className={lang === 'en' ? styles.active : ''} onClick={() => setLang('en')}>English</button>
-        </div>
+        {/* Mobile language selector hidden - defaults to English */}
       </div>
       <div 
         className={`${styles.mobileMenuBackdrop} ${mobileMenuOpen ? styles.mobileMenuBackdropOpen : ''}`}
