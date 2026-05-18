@@ -211,26 +211,6 @@ export default function YaeBookstore() {
             </p>
           </div>
 
-          {/* Quick nav */}
-          <div className={styles.quickNav}>
-            <a href="#" className={styles.quickNavItem}>
-              <div className={styles.label}>{t('newReleases', lang)}</div>
-              <div className={styles.sub}>{t('thisWeek', lang)}</div>
-            </a>
-            <a href="#" className={styles.quickNavItem}>
-              <div className={styles.label}>{t('bestseller', lang)}</div>
-              <div className={styles.sub}>{t('rankings', lang)}</div>
-            </a>
-            <a href="#" className={styles.quickNavItem}>
-              <div className={styles.label}>{t('withBonus', lang)}</div>
-              <div className={styles.sub}>{t('limitedGoods', lang)}</div>
-            </a>
-            <a href="#" className={styles.quickNavItem}>
-              <div className={styles.label}>{t('ebooks', lang)}</div>
-              <div className={styles.sub}>{t('readNow', lang)}</div>
-            </a>
-          </div>
-
           {/* Book sections container - can be seized */}
           <div 
             className={`${styles.booksContainer} ${glitchPhase === 'glitching' ? styles.glitchingSection : ''} ${glitchPhase === 'seized' ? styles.seizedSection : ''}`}

@@ -42,7 +42,7 @@ export const translations = {
   
   // Announcement
   important: { ja: '重要', zh: '重要', en: 'Important' },
-  announcementText: { ja: '「雷電将軍様、転生してチート能力で無双する」最終巻が予約開始！初回特典は', zh: '"雷电将军大人转生后用作弊能力无双"最终卷开始预约！初回特典为', en: '"Shogun Almighty: Reincarnated with Cheat Powers" final volume pre-order now open! First edition includes' },
+  announcementText: { ja: '「雷電将軍様、転生してチート能力で無双する」最終巻が予約開始！初回特典は', zh: '"雷电将军大人转生后用作弊能力无双"最终卷开始预约！初回特典为', en: '"Shogun Almighty: Reincarnated with Cheat Powers" final volume pre-order now open! First edition includes ' },
   announcementHighlight: { ja: '宮司様書き下ろしあとがき', zh: '宫司大人亲笔后记', en: "the Guuji's exclusive afterword" },
   announcementEnd: { ja: '付き。', zh: '。', en: '.' },
   
