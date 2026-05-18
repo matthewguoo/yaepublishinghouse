@@ -1561,6 +1561,58 @@
   font-weight: bold;
 }
 
+/* Hiring Box */
+.hiringBox {
+  background: linear-gradient(135deg, #f0e6f5 0%, #e8daf0 100%);
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #d4c4e0;
+}
+
+.hiringBadge {
+  display: inline-block;
+  background: #8b5a8c;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+
+.hiringTitle {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  color: #5a3d5a;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+.hiringDesc {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.hiringBtn {
+  display: inline-block;
+  background: #8b5a8c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.hiringBtn:hover {
+  background: #6d446e;
+}
+
 .newsList {
   font-size: 12px;
   line-height: 2;
