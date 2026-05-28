@@ -3,6 +3,7 @@ import SiteLayout from '@/components/SiteLayout';
 import siteStyles from '@/components/SiteLayout.module.css';
 import TravelMapLoader from '@/components/TravelMapLoader';
 import { prisma } from '@/lib/db';
+import type { SerializedTrip } from '@/lib/trips';
 import styles from './travels.module.css';
 
 export const dynamic = 'force-dynamic';
@@ -13,11 +14,51 @@ export const metadata: Metadata = {
 };
 
 export default async function TravelsPage() {
-  const trips = await prisma.trip.findMany({ orderBy: { date: 'desc' } });
+  const trips = await prisma.trip.findMany({
+    orderBy: { date: 'desc' },
+    include: {
+      toLegs: { orderBy: { order: 'asc' } },
+      returnLegs: { orderBy: { order: 'asc' } },
+    },
+  });
 
-  const serialized = trips.map((t) => ({
-    ...t,
+  const serialized: SerializedTrip[] = trips.map((t) => ({
+    id: t.id,
+    tripType: t.tripType as SerializedTrip['tripType'],
+    title: t.title,
+    description: t.description,
+    photos: t.photos,
     date: t.date.toISOString(),
+    toLegs: t.toLegs.map((l) => ({
+      id: l.id,
+      type: l.type as 'flight' | 'car',
+      originCode: l.originCode,
+      originName: l.originName,
+      originLat: l.originLat,
+      originLng: l.originLng,
+      destinationCode: l.destinationCode,
+      destinationName: l.destinationName,
+      destinationLat: l.destinationLat,
+      destinationLng: l.destinationLng,
+      date: l.date.toISOString(),
+      flightNumber: l.flightNumber,
+      order: l.order,
+    })),
+    returnLegs: t.returnLegs.map((l) => ({
+      id: l.id,
+      type: l.type as 'flight' | 'car',
+      originCode: l.originCode,
+      originName: l.originName,
+      originLat: l.originLat,
+      originLng: l.originLng,
+      destinationCode: l.destinationCode,
+      destinationName: l.destinationName,
+      destinationLat: l.destinationLat,
+      destinationLng: l.destinationLng,
+      date: l.date.toISOString(),
+      flightNumber: l.flightNumber,
+      order: l.order,
+    })),
   }));
 
   return (
@@ -32,7 +73,7 @@ export default async function TravelsPage() {
           <p className={styles.eyebrow}>field notes &amp; flight maps</p>
           <h1 className={styles.title}>guuji&apos;s travels</h1>
           <p className={styles.sub}>
-            every flight, every road trip, scribbled onto one map. tap a pin or a line to peek into the story.
+            every flight, every road trip, scribbled onto one map. tap a pin or a line to peek into the story. dotted = planned ✦
           </p>
         </header>
 

@@ -65,10 +65,26 @@ model Article {
 }
 
 model Trip {
+  id          String   @id @default(cuid())
+  tripType    String   // "roundtrip" | "oneway" | "relocation"
+  title       String?
+  description String?
+  photos      String[]
+  date        DateTime // overall trip date for sorting
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  toLegs     TripLeg[] @relation("ToLegs")
+  returnLegs TripLeg[] @relation("ReturnLegs")
+
+  @@index([date])
+}
+
+model TripLeg {
   id              String   @id @default(cuid())
-  type            String   // "flight" or "car"
-  originCode      String   // airport code (SFO) or city slug
-  originName      String   // "San Francisco, CA"
+  type            String   // "flight" | "car"
+  originCode      String
+  originName      String
   originLat       Float
   originLng       Float
   destinationCode String
@@ -76,12 +92,16 @@ model Trip {
   destinationLat  Float
   destinationLng  Float
   date            DateTime
-  title           String?
-  description     String?
-  photos          String[]
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  flightNumber    String?
+  order           Int      @default(0)
 
+  toTrip       Trip?   @relation("ToLegs", fields: [toTripId], references: [id], onDelete: Cascade)
+  toTripId     String?
+  returnTrip   Trip?   @relation("ReturnLegs", fields: [returnTripId], references: [id], onDelete: Cascade)
+  returnTripId String?
+
+  @@index([toTripId])
+  @@index([returnTripId])
   @@index([date])
 }
 
