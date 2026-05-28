@@ -64,6 +64,27 @@ model Article {
   updatedAt DateTime @updatedAt
 }
 
+model Trip {
+  id              String   @id @default(cuid())
+  type            String   // "flight" or "car"
+  originCode      String   // airport code (SFO) or city slug
+  originName      String   // "San Francisco, CA"
+  originLat       Float
+  originLng       Float
+  destinationCode String
+  destinationName String
+  destinationLat  Float
+  destinationLng  Float
+  date            DateTime
+  title           String?
+  description     String?
+  photos          String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([date])
+}
+
 model Voucher {
   id        String    @id @default(cuid())
   code      String    @unique
