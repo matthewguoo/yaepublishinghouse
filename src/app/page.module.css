@@ -186,12 +186,12 @@
 
 .heroTitle {
   font-family: var(--font-noto-sans-jp), sans-serif;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.24em;
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8b4d5c;
-  margin-bottom: 1rem;
+  color: #555;
+  margin-bottom: 0.75rem;
 }
 
 .heroTagline {
@@ -422,72 +422,24 @@
 /* Responsive */
 @media (max-width: 640px) {
   .hero {
-    min-height: 88svh;
-    min-height: 88vh; /* fallback */
-    padding: 0 0 2rem;
-    justify-content: flex-end;
-    align-items: stretch;
-    overflow: hidden;
+    min-height: 40vh;
+    padding: 3rem 1.5rem;
+  }
+  
+  .heroTitle {
+    font-size: 1.25rem;
+  }
+  
+  .heroTagline {
+    font-size: 1rem;
+  }
+  
+  .heroContent {
+    padding: 0 1rem;
   }
 
   .heroSketch {
-    top: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 145%;
-    max-width: none;
-    opacity: 0.32;
-    mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 95%);
-    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 95%);
-  }
-
-  .heroContent {
-    padding: 0 1.5rem;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-  }
-
-  .heroTitle {
-    font-size: 1.5rem;
-    line-height: 1.2;
-    margin-bottom: 0.875rem;
-    letter-spacing: 0.16em;
-    color: #2a1a20;
-  }
-
-  .heroTitle::before {
-    content: '';
-    display: block;
-    width: 2.25rem;
-    height: 2px;
-    background: #8b4d5c;
-    margin-bottom: 1rem;
-  }
-
-  .heroTagline {
-    font-size: 1.0625rem;
-    line-height: 1.45;
-    color: #555;
-    max-width: 18ch;
-  }
-
-  .heroScrollHint {
-    display: flex;
-    margin-top: 2.5rem;
-    align-items: center;
-    gap: 0.625rem;
-    font-family: var(--font-noto-sans-jp), sans-serif;
-    font-size: 0.625rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: #8b4d5c;
-  }
-
-  .heroScrollHint::before {
-    content: '';
-    width: 1.75rem;
-    height: 1px;
-    background: #8b4d5c;
+    opacity: 0.2;
   }
   
   .header {
