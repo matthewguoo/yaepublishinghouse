@@ -147,8 +147,26 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className={styles.missionSection}>
+      {/* Products Section */}
+      <section className={styles.productsSection}>
+        <div className={styles.productsTitleWrap}>
+          <h1 className={styles.productsTitle}>Products</h1>
+          <div className={styles.titleLine} />
+        </div>
+
+        <div className={styles.productsList}>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+
+      {/* What We Do Section */}
+      <section className={styles.whatWeDoSection}>
+        <div className={styles.whatWeDoTitleWrap}>
+          <h2 className={styles.whatWeDoTitle}>What We Do</h2>
+          <div className={styles.titleLine} />
+        </div>
         <div className={styles.missionGrid}>
           <div className={styles.missionItem}>
             <div className={styles.missionVisual}>
@@ -189,20 +207,6 @@ export default async function Home() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Products Section */}
-      <section className={styles.productsSection}>
-        <div className={styles.productsTitleWrap}>
-          <h1 className={styles.productsTitle}>Products</h1>
-          <div className={styles.titleLine} />
-        </div>
-
-        <div className={styles.productsList}>
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
         </div>
       </section>
     </SiteLayout>

@@ -346,11 +346,28 @@
   margin: 0;
 }
 
-/* Mission Section */
-.missionSection {
+/* What We Do Section */
+.whatWeDoSection {
   max-width: 780px;
   margin: 0 auto;
-  padding: 0 2rem 3rem;
+  padding: 3rem 2rem 4rem;
+}
+
+.whatWeDoTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.whatWeDoTitle {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8b4d5c;
+  flex-shrink: 0;
 }
 
 .missionGrid {
