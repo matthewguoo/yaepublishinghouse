@@ -300,13 +300,24 @@
 /* Frame lines */
 
 /* Top horizontal line */
+/* Top horizontal line */
 .horizontalLineTL {
-  display: none;
+  position: absolute;
+  top: 28px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #b0b0b0;
 }
 
-/* Left vertical line - retired */
+/* Left vertical line - from top, stops at footer text bottom */
 .verticalLineTL {
-  display: none;
+  position: absolute;
+  left: 55px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #b0b0b0;
 }
 
 /* Bottom horizontal line - mobile only */
@@ -316,17 +327,16 @@
 
 
 
-/* Desktop header - shown on desktop, hidden on mobile */
+/* Desktop header - original layout with absolute SKU */
 .productHeaderDesktop {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
-  padding-left: 0;
+  gap: 0.75rem;
+  padding-left: 70px;
   margin-bottom: 0.25rem;
-  flex-wrap: wrap;
 }
 
-/* Mobile header - hidden on desktop, shown on mobile */
+/* Mobile header - hidden on desktop */
 .productHeaderMobile {
   display: none;
 }
@@ -336,17 +346,33 @@
   margin-bottom: 0.25rem;
 }
 
-.sku {
+/* Desktop: SKU positioned absolutely to left of frame line */
+.productHeaderDesktop .sku {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.6875rem;
+  color: #999;
+  letter-spacing: 0.01em;
+}
+
+/* Desktop: hide the divider since SKU is separate */
+.productHeaderDesktop .skuDivider {
+  display: none;
+}
+
+/* Mobile header SKU - inline */
+.productHeaderMobile .sku {
   font-family: var(--font-noto-sans-jp), sans-serif;
   font-size: 0.875rem;
   color: #999;
   letter-spacing: 0.01em;
 }
 
-.skuDivider {
+.productHeaderMobile .skuDivider {
   display: inline;
   color: #ccc;
-  font-size: 1rem;
   margin: 0 0.375rem;
 }
 
@@ -373,8 +399,8 @@
   font-size: 0.6875rem;
   color: #888;
   margin-bottom: 0;
-  margin-left: 0;
-  margin-top: 0.25rem;
+  margin-left: 70px;
+  margin-top: 0.125rem;
 }
 
 .specDivider {
@@ -388,7 +414,7 @@
   justify-content: center;
   align-items: center;
   padding: 2rem 0;
-  margin-left: 0;
+  margin-left: 70px;
 }
 
 
@@ -409,7 +435,7 @@
 .productFooter {
   position: absolute;
   bottom: 12px;
-  left: 0;
+  left: 70px;
   right: 0;
   display: flex;
   align-items: center;
