@@ -1,36 +1,39 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import SiteLayout from '@/components/SiteLayout';
 import styles from './page.module.css';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
+    setError('');
+    setMessage('');
 
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || 'Login failed');
+        setError(data.error || 'Something went wrong');
         return;
       }
 
-      // Hard refresh to update auth state
-      const next = new URLSearchParams(window.location.search).get('next');
-      window.location.href = next && next.startsWith('/') ? next : '/';
+      setMessage('Check your email for a magic link to sign in.');
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -39,41 +42,43 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <div className={styles.icon}>八</div>
-        <h1 className={styles.title}>Member Login</h1>
-        
-        {error && <div className={styles.error}>{error}</div>}
-        
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <label className={styles.label}>Email Address</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className={styles.input}
-          />
-          
-          <label className={styles.label}>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className={styles.input}
-          />
-          
-          <button type="submit" disabled={loading} className={styles.submitBtn}>
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-        </form>
-        
-        <p className={styles.switchLink}>
-          Don&apos;t have an account? <a href="/register">Register Free</a>
-        </p>
+    <SiteLayout>
+      <div className={styles.container}>
+        <div className={styles.breadcrumb}>
+          <Link href="/">Home</Link> &gt; Login
+        </div>
+
+        <div className={styles.formCard}>
+          <h1 className={styles.title}>Login</h1>
+          <p className={styles.subtitle}>Enter your email to receive a magic link</p>
+
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <label className={styles.label}>
+              Email
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                required
+                disabled={loading}
+                className={styles.input}
+              />
+            </label>
+
+            {error && <p className={styles.error}>{error}</p>}
+            {message && <p className={styles.success}>{message}</p>}
+
+            <button type="submit" disabled={loading} className={styles.button}>
+              {loading ? 'Sending...' : 'Send Magic Link'}
+            </button>
+          </form>
+
+          <p className={styles.footer}>
+            Don't have an account? <Link href="/register">Register</Link>
+          </p>
+        </div>
       </div>
-    </div>
+    </SiteLayout>
   );
 }

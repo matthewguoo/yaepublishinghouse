@@ -215,20 +215,15 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
 
             <p className={styles.description}>{product.description}</p>
 
-            {/* Specs table */}
-            {product.specs.length > 0 && (
+            {/* Specs */}
+            {product.specs && product.specs.length > 0 && (
               <div className={styles.specs}>
                 <h3>Specifications</h3>
-                <table>
-                  <tbody>
-                    {product.specs.map((spec, i) => (
-                      <tr key={i}>
-                        <td className={styles.specLabel}>{spec.label}</td>
-                        <td className={styles.specValue}>{spec.value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <ul>
+                  {product.specs.split('|').map((spec, i) => (
+                    <li key={i}>{spec.trim()}</li>
+                  ))}
+                </ul>
               </div>
             )}
 

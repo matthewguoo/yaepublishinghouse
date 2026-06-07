@@ -1,0 +1,117 @@
+.footer {
+  padding: 3rem 2rem 2rem;
+  background: transparent;
+  border-top: 1px solid #e0e0e0;
+  margin-top: auto;
+}
+
+.footerContent {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+.brand {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+
+.logoMark {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1.5px solid #8b4d5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-noto-serif-jp), serif;
+  font-size: 0.75rem;
+  color: #8b4d5c;
+  flex-shrink: 0;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandJp {
+  font-family: var(--font-noto-serif-jp), serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #333;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.brandEn {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.5rem;
+  color: #888;
+  letter-spacing: 0.08em;
+}
+
+.footerNav {
+  display: flex;
+  gap: 3rem;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.navGroupTitle {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+}
+
+.footerLink {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.75rem;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footerLink:hover {
+  color: #1a1a1a;
+}
+
+.footerBottom {
+  max-width: 780px;
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.copyright {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.6875rem;
+  color: #999;
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 2rem 1.25rem 1.5rem;
+  }
+  
+  .footerContent {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .footerNav {
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+}

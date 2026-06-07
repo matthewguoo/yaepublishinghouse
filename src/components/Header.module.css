@@ -1,0 +1,79 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+}
+
+.logoMark {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1.5px solid #8b4d5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-noto-serif-jp), serif;
+  font-size: 0.875rem;
+  color: #8b4d5c;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoJp {
+  font-family: var(--font-noto-serif-jp), serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.logoEn {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.5rem;
+  color: #888;
+  letter-spacing: 0.12em;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.navLink {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.875rem;
+  color: #666;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.navLink:hover {
+  color: #1a1a1a;
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0.875rem 1.25rem;
+  }
+  
+  .nav {
+    gap: 1rem;
+  }
+  
+  .navLink {
+    font-size: 0.75rem;
+  }
+}

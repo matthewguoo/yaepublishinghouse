@@ -27,10 +27,10 @@ export default function ProductCard({ product, variant = 'compact' }: ProductCar
         <h3 className={styles.name}>{product.name}</h3>
         {product.subtitle && <p className={styles.subtitle}>{product.subtitle}</p>}
         <p className={styles.description}>{product.description}</p>
-        {product.specs.length > 0 && (
+        {product.specs && product.specs.length > 0 && (
           <div className={styles.specs}>
-            {product.specs.slice(0, 3).map((spec, i) => (
-              <span key={i}>{spec.value}</span>
+            {product.specs.split('|').slice(0, 3).map((spec, i) => (
+              <span key={i}>{spec.trim()}</span>
             ))}
           </div>
         )}

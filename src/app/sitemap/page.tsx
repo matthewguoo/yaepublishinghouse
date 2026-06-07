@@ -1,42 +1,56 @@
 'use client';
 
+import Link from 'next/link';
 import SiteLayout from '@/components/SiteLayout';
-import styles from '@/components/SiteLayout.module.css';
+import styles from './page.module.css';
 
 export default function SitemapPage() {
   return (
     <SiteLayout>
-      <div className={styles.pageContainer}>
+      <div className={styles.container}>
         <div className={styles.breadcrumb}>
-          <a href="/">Home</a> &gt; Sitemap
+          <Link href="/">Home</Link> &gt; Sitemap
         </div>
         
-        <article>
-          <header className={styles.articleHeader}>
-            <h1 className={styles.articleTitle}>Sitemap</h1>
-            <div className={styles.articleMeta}>
-              Navigation guide for Yae Publishing House
-            </div>
-          </header>
-
-          <div className={styles.articleContent}>
-            <h2>Main Pages</h2>
-            <p><a href="/">Home</a> — Return to the main storefront</p>
-            <p><a href="/sitemap">Sitemap</a> — You are here</p>
-            <p><a href="/contact">Contact Us</a> — Inquiries and support</p>
-
-            <h2>News & Announcements</h2>
-            <p><a href="/news/anniversary-dialogue">500th Anniversary Special Dialogue</a> — Interview with Lady Yae Miko and the Raiden Shogun</p>
-            <p><a href="/news/hoyofair-2026">HoYoFair 2026 Report</a> — Coverage from our Los Angeles event attendance</p>
-
-            <h2>Products</h2>
-            <p><a href="/products">All Products</a> — Browse all available merchandise</p>
-            <p><a href="/products/nameless-pass">Nameless Honor Pass</a> — Limited edition gold ENIG collectible</p>
-
-            <h2>Tools</h2>
-            <p><a href="/tools/png-transparency">PNG Transparency Maker</a> — Free background removal tool</p>
+        <div className={styles.titleWrap}>
+          <h1 className={styles.title}>Sitemap</h1>
+          <div className={styles.titleLine} />
+        </div>
+        
+        <div className={styles.columns}>
+          <div className={styles.column}>
+            <h2 className={styles.columnTitle}>Shop</h2>
+            <ul className={styles.linkList}>
+              <li><Link href="/products">Products</Link></li>
+              <li><Link href="/products/nameless-pass">Nameless Honor Pass</Link></li>
+            </ul>
           </div>
-        </article>
+          
+          <div className={styles.column}>
+            <h2 className={styles.columnTitle}>Content</h2>
+            <ul className={styles.linkList}>
+              <li><Link href="/news">Editorial</Link></li>
+              <li><Link href="/tools/png-transparency">PNG Tool</Link></li>
+            </ul>
+          </div>
+          
+          <div className={styles.column}>
+            <h2 className={styles.columnTitle}>Account</h2>
+            <ul className={styles.linkList}>
+              <li><Link href="/login">Login</Link></li>
+              <li><Link href="/register">Register</Link></li>
+              <li><Link href="/account">My Account</Link></li>
+            </ul>
+          </div>
+          
+          <div className={styles.column}>
+            <h2 className={styles.columnTitle}>Info</h2>
+            <ul className={styles.linkList}>
+              <li><Link href="/contact">Contact</Link></li>
+              <li><Link href="/sitemap">Sitemap</Link></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </SiteLayout>
   );

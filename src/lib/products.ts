@@ -4,10 +4,7 @@ export type ProductCTA =
   | { type: 'soldout'; message?: string }
   | { type: 'comingsoon'; message?: string };
 
-export interface ProductSpec {
-  label: string;
-  value: string;
-}
+
 
 export interface TimelineMilestone {
   label: string;
@@ -18,6 +15,7 @@ export interface TimelineMilestone {
 export interface ProductData {
   id: string;
   slug: string;
+  sku?: string;
   name: string;
   subtitle?: string;
   description: string;
@@ -26,13 +24,17 @@ export interface ProductData {
   badge?: string;
   badgeType?: 'new' | 'limited' | 'sale';
   images: string[];
-  specs: ProductSpec[];
+  specs: string; // pipe-separated, e.g. ".999 24k Gold Plating|Ceramic anti-fingerprint coat|Light fiberglass base"
   cta: ProductCTA;
   stock?: number;
+  stockStatus?: string; // "In Stock", "Pre-order", etc.
+  shippingText?: string; // "Ships free from US"
   serialRange?: string;
   featured?: boolean;
   announcementUrl?: string;
-  meta?: Record<string, string>; // arbitrary key-value pairs
+  watermarkTop?: string;
+  watermarkBottom?: string;
+  meta?: Record<string, string>;
   timeline?: TimelineMilestone[];
 }
 
@@ -41,19 +43,15 @@ export const products: Record<string, ProductData> = {
   'nameless-pass': {
     id: 'nameless-pass',
     slug: 'nameless-pass',
-    name: 'Nameless Honor Pass',
-    subtitle: 'Amber Era Commemorative Edition',
+    sku: 'YPH-0001',
+    name: 'Star Rail Special Pass Keychain',
+    subtitle: '24k Gold Plated First Edition',
     description: 'Limited edition gold-plated collectible commemorating the 2158th Year of the Trailblaze and the Nameless\' contributions to the situation in Penacony.',
-    price: '$15.00',
+    price: 'US$15.00',
+    stockStatus: 'In Stock',
+    shippingText: 'Ships free from US',
     images: ['/nameless-pass.png'],
-    specs: [
-      { label: 'Dimensions', value: '100 × 42 mm' },
-      { label: 'Thickness', value: '1.0 mm' },
-      { label: 'Substrate', value: 'FR-4 fiberglass' },
-      { label: 'Surface Finish', value: "Real 2u' gold-nickel plating, etched pattern with UV silkscreen printing for vibrant, fade-resistant colors" },
-      { label: 'Print', value: 'UV Silkscreen' },
-      { label: 'Units', value: '2,158 (Serialized)' },
-    ],
+    specs: '.999 24k Gold Plating|Ceramic anti-fingerprint coat|Light fiberglass base',
     cta: { 
       type: 'email', 
       buttonText: 'Join Waitlist',
@@ -67,22 +65,6 @@ export const products: Record<string, ProductData> = {
       { label: 'Manufacturing', date: 'Late June', status: 'upcoming' },
       { label: 'Ships from US', date: 'Early July', status: 'upcoming' },
     ],
-  },
-  'pompom-pass': {
-    id: 'pompom-pass',
-    slug: 'pompom-pass',
-    name: 'Pom-Pom Express Pass',
-    subtitle: 'Astral Express Crew ID',
-    description: 'Fan-made crew member identification for the Astral Express. Features Pom-Pom design and holographic elements.',
-    price: 'TBA',
-    badge: 'COMING SOON',
-    badgeType: 'new',
-    images: [],
-    specs: [],
-    cta: { 
-      type: 'comingsoon', 
-      message: 'Sign up to be notified when this product launches.' 
-    },
   },
 };
 

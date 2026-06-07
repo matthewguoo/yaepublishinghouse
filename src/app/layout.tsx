@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Noto_Serif_JP, Ma_Shan_Zheng } from "next/font/google";
+import { Noto_Sans_JP, Noto_Serif_JP, Ma_Shan_Zheng, Inter } from "next/font/google";
 import SearchProvider from "@/components/SearchProvider";
 import "./globals.css";
 
@@ -23,9 +23,15 @@ const maShanZheng = Ma_Shan_Zheng({
   display: "swap",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "Yae Publishing House | 八重堂書店",
+    default: "Yae Publishing House",
     template: "%s | Yae Publishing House",
   },
   description: "The official storefront of Yae Publishing House. Limited edition collectibles, editorial coverage of HoYoverse events, and tools for creators.",
@@ -55,7 +61,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Yae Publishing House | 八重堂書店",
+    title: "Yae Publishing House",
     description: "The official storefront of Yae Publishing House. Limited edition collectibles, editorial coverage, and tools for creators.",
     siteName: "Yae Publishing House",
     type: "website",
@@ -72,7 +78,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yae Publishing House | 八重堂書店",
+    title: "Yae Publishing House",
     description: "Limited edition anime collectibles & free tools. Star Rail Nameless Pass available. Free shipping.",
     creator: "@pci_yae",
     site: "@pci_yae",
@@ -101,7 +107,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" translate="no">
-      <body className={`${notoSansJP.variable} ${notoSerifJP.variable} ${maShanZheng.variable}`}>
+      <body className={`${notoSansJP.variable} ${notoSerifJP.variable} ${maShanZheng.variable} ${inter.variable}`}>
         <SearchProvider>
           {children}
         </SearchProvider>
