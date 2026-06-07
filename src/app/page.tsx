@@ -155,7 +155,7 @@ export default async function Home() {
             <span className={styles.missionNumber}>02</span>
             <div className={styles.missionContent}>
               <p className={styles.missionText}>
-                We work with smaller overseas creators to bring their goods stateside, so fans aren't paying import fees on top of retail.
+                The publishing house handles logistics for overseas creators bringing goods to the US. You pay retail, not retail plus import fees.
               </p>
               <p className={styles.missionCta}>
                 Designer or artist? <a href="mailto:hello@yaepublishing.house" className={styles.aboutLink}>Let's talk</a>.
