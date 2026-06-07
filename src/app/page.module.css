@@ -215,25 +215,25 @@
 
 .productsTitleWrap {
   display: flex;
-  align-items: baseline;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .productsTitle {
-  font-family: var(--font-inter), sans-serif;
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: -0.1em;
-  color: #1a1a1a;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8b4d5c;
   flex-shrink: 0;
 }
 
 .titleLine {
   flex: 1;
   height: 1px;
-  background: #ccc;
-  margin-bottom: 0.5rem;
+  background: #d8d8d8;
 }
 
 /* Shipping Banner */
@@ -564,11 +564,12 @@
   }
   
   .productsTitle {
-    font-size: 2rem;
+    font-size: 0.625rem;
   }
   
   .productsTitleWrap {
-    gap: 1rem;
+    gap: 0.875rem;
+    margin-bottom: 1.5rem;
   }
   
   .shippingBanner {
