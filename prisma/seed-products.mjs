@@ -8,8 +8,7 @@ const products = [
     sku: 'YPH-0001',
     name: 'Star Rail Special Pass Keychain',
     subtitle: '24k Gold Plated First Edition',
-    description:
-      "Limited edition gold-plated collectible commemorating the 2158th Year of the Trailblaze and the Nameless' contributions to the situation in Penacony.",
+    description: '100x40x1mm',
     price: 'US$15.00',
     stockStatus: 'In Stock',
     shippingText: 'Ships free from US',
@@ -21,7 +20,7 @@ const products = [
     serialRange: '0001-2158',
     featured: true,
     published: true,
-    announcementUrl: '/news/nameless-pass-announcement',
+    announcementUrl: '/news/star-rail-pass-announcement',
     timeline: [
       { label: 'Order Period', date: 'Jun 1 – Jun 15', status: 'upcoming' },
       { label: 'Manufacturing', date: 'Late June', status: 'upcoming' },

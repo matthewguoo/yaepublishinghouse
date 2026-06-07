@@ -35,28 +35,28 @@ We look forward to welcoming new voices to the Yae Publishing House family. May 
 — The Editorial Department`,
   },
   {
-    slug: 'nameless-pass-announcement',
-    title: 'Introducing the Nameless Honor Pass',
+    slug: 'star-rail-pass-announcement',
+    title: 'Introducing the Star Rail Special Pass',
     date: '2026-05-17',
     category: 'Product Launch',
     excerpt: 'Limited edition gold-plated collectible commemorating the 2158th Year of the Trailblaze.',
     published: true,
     featured: true,
-    content: `![Nameless Honor Pass Banner](/banner-ipc.png)
+    content: `![Star Rail Special Pass Banner](/banner-ipc.png)
 
-We are pleased to announce the Nameless Honor Pass, a limited edition collectible commemorating the 2158th Year of the Trailblaze and the Nameless' extraordinary contributions during the Penacony incident.
+We are pleased to announce the Star Rail Special Pass, a limited edition gold-plated collectible commemorating the 2158th Year of the Trailblaze.
 
 [View Product Details](/products/nameless-pass)
 
 ## About This Edition
 
-Each Nameless Honor Pass is manufactured using premium materials and processes typically reserved for aerospace-grade electronics.
+Each Star Rail Special Pass is manufactured using premium materials and processes typically reserved for aerospace-grade electronics.
 
 The pass features an ENIG finish, with real gold plating covering over 50% of the surface area. Each unit is individually serialized from 0001 to 2158, ensuring every piece is unique.
 
 ## Manufacturing Specifications
 
-Dimensions: 100 × 42 × 1.0 mm. Surface finish: ENIG with UV silkscreen printing for vibrant, fade-resistant colors.
+Dimensions: 100 × 40 × 1.0 mm. Surface finish: ENIG with UV silkscreen printing for vibrant, fade-resistant colors.
 
 ## The Stellaron Hunters Collaboration
 
@@ -66,7 +66,7 @@ A portion of proceeds supports Astral Express operational costs, including but n
 
 ## Availability
 
-The Nameless Honor Pass will be available for pre-order starting at the Seattle HoYo Community Event on May 30th. Online orders will open shortly after.
+The Star Rail Special Pass will be available for pre-order starting at the Seattle HoYo Community Event on May 30th. Online orders will open shortly after.
 
 Due to the limited production run of 2,158 units, we recommend joining the waitlist to secure your serial number.`,
   },
