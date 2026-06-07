@@ -28,7 +28,7 @@ export default function SiteFooter() {
           </div>
           <div className={styles.navGroup}>
             <span className={styles.navGroupTitle}>Connect</span>
-            <a href="https://twitter.com/pci_yae" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>Twitter</a>
+            <Link href="/contact" className={styles.footerLink}>Contact</Link>
             <a href="https://instagram.com/yaepublishing.house" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>Instagram</a>
           </div>
         </nav>

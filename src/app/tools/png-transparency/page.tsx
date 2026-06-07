@@ -306,9 +306,8 @@ export default function PngToolPage() {
               {outputDataUrl && <button onClick={() => copyToClipboard(outputDataUrl)}>Copy</button>}
             </div>
             <div className={`${styles.canvasWrap} ${styles.checkerboard}`}>
-              {outputDataUrl ? (
-                <canvas ref={outputCanvasRef} className={styles.canvas} />
-              ) : (
+              <canvas ref={outputCanvasRef} className={styles.canvas} style={{ display: outputDataUrl ? 'block' : 'none' }} />
+              {!outputDataUrl && (
                 <div className={styles.placeholder}>
                   <p>Load an image, then click a color to remove</p>
                 </div>
