@@ -13,7 +13,24 @@ function ProductCard({ product }: { product: ProductData }) {
         <div className={styles.horizontalLineTL} />
         <div className={styles.verticalLineTL} />
         <div className={styles.horizontalLineBR} />
-        <div className={styles.productHeader}>
+        
+        {/* Desktop layout: SKU | Title · Subtitle (all inline) */}
+        <div className={styles.productHeaderDesktop}>
+          {product.sku && <span className={styles.sku}>{product.sku}</span>}
+          {product.sku && <span className={styles.skuDivider}>|</span>}
+          <h2 className={styles.productTitle}>
+            {product.name}
+            {product.subtitle && (
+              <>
+                <span className={styles.titleDot}>·</span>
+                <span className={styles.productSubtitle}>{product.subtitle}</span>
+              </>
+            )}
+          </h2>
+        </div>
+        
+        {/* Mobile layout: SKU | Subtitle on line 1, Title on line 2 */}
+        <div className={styles.productHeaderMobile}>
           <span className={styles.metaLine}>
             {product.sku && <span className={styles.sku}>{product.sku}</span>}
             {product.sku && product.subtitle && (
