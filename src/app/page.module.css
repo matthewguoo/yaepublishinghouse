@@ -445,6 +445,10 @@
   .heroContent {
     padding: 0 1rem;
   }
+
+  .heroSketch {
+    opacity: 0.2;
+  }
   
   .header {
     padding: 0.875rem 1.25rem;
