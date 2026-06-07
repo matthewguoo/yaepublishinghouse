@@ -221,8 +221,8 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
         </div>
 
         <div className={styles.productLayout}>
-          {/* Product info */}
-          <div className={styles.info}>
+          {/* Left column - Product info */}
+          <div className={styles.infoLeft}>
             <h1 className={styles.title}>{product.name}</h1>
             {product.subtitle && (
               <p className={styles.subtitle}>{product.subtitle}</p>
@@ -233,10 +233,6 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
               {product.originalPrice && (
                 <span className={styles.originalPrice}>{product.originalPrice}</span>
               )}
-            </div>
-            <div className={styles.shippingNote}>
-              <img src="/komaniya-logo.png" alt="Komaniya Express" className={styles.komaniyaLogo} />
-              <span>All Yae Publishing House products ship for free — courtesy of Komaniya Express</span>
             </div>
 
             <p className={styles.description}>{product.description}</p>
@@ -252,6 +248,26 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
                 </ul>
               </div>
             )}
+
+            {product.serialRange && (
+              <p className={styles.serialNote}>
+                Serial numbers {product.serialRange}
+              </p>
+            )}
+
+            {product.announcementUrl && (
+              <a href={product.announcementUrl} className={styles.announcementLink}>
+                Read the full announcement →
+              </a>
+            )}
+          </div>
+
+          {/* Right column - CTA */}
+          <div className={styles.infoRight}>
+            <div className={styles.shippingNote}>
+              <img src="/komaniya-logo.png" alt="Komaniya Express" className={styles.komaniyaLogo} />
+              <span>All Yae Publishing House products ship for free — courtesy of Komaniya Express</span>
+            </div>
 
             {/* CTA */}
             <div className={styles.ctaSection}>
@@ -274,18 +290,6 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
                   ))}
                 </div>
               </div>
-            )}
-
-            {product.serialRange && (
-              <p className={styles.serialNote}>
-                Serial numbers {product.serialRange}
-              </p>
-            )}
-
-            {product.announcementUrl && (
-              <a href={product.announcementUrl} className={styles.announcementLink}>
-                Read the full announcement →
-              </a>
             )}
           </div>
         </div>

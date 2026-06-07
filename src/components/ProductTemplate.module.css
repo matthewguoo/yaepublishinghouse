@@ -144,12 +144,20 @@
 }
 
 .productLayout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 3rem;
   margin-bottom: 3rem;
 }
 
-/* Info */
-.info {
-  padding-top: 0.5rem;
+.infoLeft {
+  min-width: 0;
+}
+
+.infoRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .title {
@@ -561,6 +569,11 @@
 
   .carouselNext {
     right: 0.5rem;
+  }
+
+  .productLayout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .title {
