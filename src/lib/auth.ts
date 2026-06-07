@@ -3,7 +3,14 @@ import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 import { prisma } from './db';
 
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'fallback-secret-change-me');
+function getJwtSecret() {
+  const secret = process.env.NEXTAUTH_SECRET || process.env.JWT_SECRET;
+  if (!secret && process.env.NODE_ENV === 'production') {
+    throw new Error('NEXTAUTH_SECRET is not set');
+  }
+  return new TextEncoder().encode(secret || 'dev-secret-change-me');
+}
+
 const SESSION_COOKIE = 'yph_session';
 
 // Rate limiting - simple in-memory for now
@@ -22,7 +29,7 @@ export async function createSessionToken(userId: string): Promise<string> {
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime('7d')
-    .sign(JWT_SECRET);
+    .sign(getJwtSecret());
   
   // Store session in DB
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
@@ -39,7 +46,7 @@ export async function createSessionToken(userId: string): Promise<string> {
 
 export async function verifySessionToken(token: string): Promise<string | null> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, getJwtSecret());
     
     // Check if session exists and isn't expired
     const session = await prisma.session.findUnique({
