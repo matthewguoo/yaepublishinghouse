@@ -525,27 +525,31 @@
   }
   
   .productHeader {
-    flex-direction: row;
-    align-items: baseline;
+    display: block;
     padding-left: 0;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
   }
   
   .sku {
     position: static;
-    font-size: 0.75rem;
+    display: inline;
+    font-size: 0.875rem;
+    color: #999;
+    margin-right: 0.5rem;
+    vertical-align: baseline;
   }
 
   .skuDivider {
     display: inline;
     color: #ccc;
-    font-size: 0.875rem;
+    margin-right: 0.5rem;
   }
   
   .productTitle {
-    font-size: 1.1875rem;
     display: inline;
+    font-size: 1.0625rem;
+    font-weight: 500;
   }
   
   .titleDot {
