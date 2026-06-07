@@ -19,6 +19,13 @@
   right: 0;
   height: 3px;
   background: #8b4d5c;
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .header::before {
+    display: block;
+  }
 }
 
 .logoWrap {
