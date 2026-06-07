@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Link from 'next/link';
 import styles from './Breadcrumb.module.css';
 
@@ -12,14 +13,14 @@ export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
       {items.map((item, i) => {
         const isLast = i === items.length - 1;
         return (
-          <span key={`${item.label}-${i}`}>
+          <Fragment key={`${item.label}-${i}`}>
             {item.href && !isLast ? (
               <Link href={item.href}>{item.label}</Link>
             ) : (
-              <span>{item.label}</span>
+              item.label
             )}
-            {!isLast && <span className={styles.sep}> &gt; </span>}
-          </span>
+            {!isLast && ' > '}
+          </Fragment>
         );
       })}
     </div>

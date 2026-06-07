@@ -13,7 +13,3 @@
 .breadcrumb :global(a:hover) {
   color: var(--color-ink);
 }
-
-.sep {
-  margin: 0 0.25rem;
-}
