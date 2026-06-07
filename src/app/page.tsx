@@ -152,7 +152,7 @@ export default async function Home() {
             Designer or artist? <a href="mailto:hello@yaepublishing.house" className={styles.aboutLink}>Let's talk</a>.
           </p>
           <div className={styles.emailSignup}>
-            <span className={styles.emailLabel}>Get notified about new drops</span>
+            <span className={styles.emailLabel}>Hear when we make something new</span>
             <form className={styles.emailForm}>
               <input type="email" placeholder="your@email.com" className={styles.emailInput} />
               <button type="submit" className={styles.emailButton}>Subscribe</button>
