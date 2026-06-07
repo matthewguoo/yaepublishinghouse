@@ -198,10 +198,7 @@ export default async function Home() {
               </p>
               <div className={styles.emailSignup}>
                 <span className={styles.emailLabel}>Be first to join bulk imports</span>
-                <form className={styles.emailForm}>
-                  <input type="email" placeholder="your@email.com" className={styles.emailInput} />
-                  <button type="submit" className={styles.emailButton}>Subscribe</button>
-                </form>
+                <Link href="/register" className={styles.emailButton}>Create an account</Link>
               </div>
             </div>
           </div>
