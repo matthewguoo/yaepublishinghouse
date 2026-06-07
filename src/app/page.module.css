@@ -299,22 +299,18 @@
   max-width: 780px;
   margin: 0 auto;
   padding: 2rem 2rem 3rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
 }
 
-.locationVisual {
+.locationHeader {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .locationIcon {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: #8b4d5c;
   opacity: 0.6;
 }
@@ -330,11 +326,6 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #8b4d5c;
-  white-space: nowrap;
-}
-
-.locationContent {
-  flex: 1;
 }
 
 .locationText {
@@ -343,22 +334,52 @@
   font-style: italic;
   line-height: 1.7;
   color: #666;
-  margin: 0 0 1.25rem;
+  margin: 0 0 2rem;
+  max-width: 540px;
 }
 
-.locationValues {
+/* Mission Grid */
+.missionGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.missionItem {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.missionNumber {
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #8b4d5c;
+  opacity: 0.4;
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 3rem;
+}
+
+.missionContent {
+  flex: 1;
+}
+
+.missionText {
   font-family: var(--font-noto-sans-jp), sans-serif;
   font-size: 0.875rem;
   line-height: 1.8;
   color: #555;
-  margin: 0 0 1rem;
+  margin: 0;
+  max-width: 480px;
 }
 
-.locationCta {
+.missionCta {
   font-family: var(--font-noto-sans-jp), sans-serif;
   font-size: 0.875rem;
   color: #555;
-  margin: 0 0 1.5rem;
+  margin: 1rem 0;
 }
 
 .emailSignup {
@@ -418,16 +439,17 @@
 }
 
 @media (max-width: 640px) {
+  .missionItem {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .missionNumber {
+    font-size: 1.5rem;
+  }
+
   .emailForm {
     flex-direction: column;
-  }
-}
-
-@media (max-width: 640px) {
-  .locationSection {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
   }
 }
 

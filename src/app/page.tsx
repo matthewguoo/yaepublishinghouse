@@ -129,7 +129,7 @@ export default async function Home() {
 
       {/* Location Section */}
       <section className={styles.locationSection}>
-        <div className={styles.locationVisual}>
+        <div className={styles.locationHeader}>
           <div className={styles.locationIcon}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
@@ -138,25 +138,36 @@ export default async function Home() {
           </div>
           <span className={styles.locationLabel}>Northern California</span>
         </div>
-        <div className={styles.locationContent}>
-          <p className={styles.locationText}>
-            This branch of the publishing house currently operates quite far from Narukami. 
-            But according to the Guuji, the fog rolling over these hills reminds her of home. 
-            And the eternal sunshine makes for excellent reading weather.
-          </p>
-          <p className={styles.locationValues}>
-            We care about making things that feel worth keeping. We also work with smaller overseas 
-            creators to bring their goods stateside, so fans aren't paying import fees on top of retail.
-          </p>
-          <p className={styles.locationCta}>
-            Designer or artist? <a href="mailto:hello@yaepublishing.house" className={styles.aboutLink}>Let's talk</a>.
-          </p>
-          <div className={styles.emailSignup}>
-            <span className={styles.emailLabel}>Be first to join bulk imports</span>
-            <form className={styles.emailForm}>
-              <input type="email" placeholder="your@email.com" className={styles.emailInput} />
-              <button type="submit" className={styles.emailButton}>Subscribe</button>
-            </form>
+        <p className={styles.locationText}>
+          This branch of the publishing house currently operates quite far from Narukami. 
+          But according to the Guuji, the fog rolling over these hills reminds her of home. 
+          And the eternal sunshine makes for excellent reading weather.
+        </p>
+
+        <div className={styles.missionGrid}>
+          <div className={styles.missionItem}>
+            <span className={styles.missionNumber}>01</span>
+            <p className={styles.missionText}>
+              We design original goods with manufacturing processes you won't find elsewhere. Real gold plating, aerospace-grade materials, and details that reward a closer look.
+            </p>
+          </div>
+          <div className={styles.missionItem}>
+            <span className={styles.missionNumber}>02</span>
+            <div className={styles.missionContent}>
+              <p className={styles.missionText}>
+                We work with smaller overseas creators to bring their goods stateside, so fans aren't paying import fees on top of retail.
+              </p>
+              <p className={styles.missionCta}>
+                Designer or artist? <a href="mailto:hello@yaepublishing.house" className={styles.aboutLink}>Let's talk</a>.
+              </p>
+              <div className={styles.emailSignup}>
+                <span className={styles.emailLabel}>Be first to join bulk imports</span>
+                <form className={styles.emailForm}>
+                  <input type="email" placeholder="your@email.com" className={styles.emailInput} />
+                  <button type="submit" className={styles.emailButton}>Subscribe</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </section>
