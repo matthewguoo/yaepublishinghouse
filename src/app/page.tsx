@@ -144,27 +144,19 @@ export default async function Home() {
             But according to the Guuji, the fog rolling over these hills reminds her of home. 
             And the eternal sunshine makes for excellent reading weather.
           </p>
-        </div>
-      </section>
-
-      {/* Mission Section */}
-      <section className={styles.missionSection}>
-        <div className={styles.missionTitleWrap}>
-          <h2 className={styles.missionTitle}>What We Do</h2>
-          <div className={styles.titleLine} />
-        </div>
-        <div className={styles.missionGrid}>
-          <div className={styles.missionItem}>
-            <span className={styles.missionNumber}>01</span>
-            <p className={styles.missionText}>
-              Design and produce collector goods with real craftsmanship. Gold plating, quality materials, thoughtful details.
-            </p>
-          </div>
-          <div className={styles.missionItem}>
-            <span className={styles.missionNumber}>02</span>
-            <p className={styles.missionText}>
-              Partner with smaller overseas creators and handle bulk shipping to the US. You pay the same price as fans in Asia, no import markup.
-            </p>
+          <p className={styles.locationValues}>
+            We care about making things that feel worth keeping. We also work with smaller overseas 
+            creators to bring their goods stateside, so fans aren't paying import fees on top of retail.
+          </p>
+          <p className={styles.locationCta}>
+            Designer or artist? <a href="mailto:hello@yaepublishing.house" className={styles.aboutLink}>Let's talk</a>.
+          </p>
+          <div className={styles.emailSignup}>
+            <span className={styles.emailLabel}>Get notified about new drops</span>
+            <form className={styles.emailForm}>
+              <input type="email" placeholder="your@email.com" className={styles.emailInput} />
+              <button type="submit" className={styles.emailButton}>Subscribe</button>
+            </form>
           </div>
         </div>
       </section>
