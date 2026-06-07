@@ -284,6 +284,66 @@
   text-transform: uppercase;
 }
 
+/* Location Section */
+.locationSection {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 2rem 3rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.locationVisual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.locationIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #8b4d5c;
+  opacity: 0.6;
+}
+
+.locationIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.locationLabel {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8b4d5c;
+  white-space: nowrap;
+}
+
+.locationContent {
+  flex: 1;
+}
+
+.locationText {
+  font-family: Georgia, serif;
+  font-size: 0.9375rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: #666;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .locationSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
 /* Products Section */
 .productsSection {
   max-width: 780px;

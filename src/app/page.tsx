@@ -127,6 +127,26 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Location Section */}
+      <section className={styles.locationSection}>
+        <div className={styles.locationVisual}>
+          <div className={styles.locationIcon}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+          </div>
+          <span className={styles.locationLabel}>Northern California</span>
+        </div>
+        <div className={styles.locationContent}>
+          <p className={styles.locationText}>
+            This branch of the publishing house currently operates quite far from Narukami. 
+            But according to the Guuji, the fog rolling over these hills reminds her of home—and 
+            the eternal sunshine makes for excellent reading weather.
+          </p>
+        </div>
+      </section>
+
       {/* Products Section */}
       <section className={styles.productsSection}>
         <div className={styles.productsTitleWrap}>
