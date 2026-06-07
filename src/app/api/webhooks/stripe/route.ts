@@ -1,7 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { headers } from 'next/headers';
 import { getStripe } from '@/lib/stripe';
 import { prisma } from '@/lib/db';
+import { ORDER_STATUS } from '@/lib/api/constants';
+import { apiError, ok } from '@/lib/api/responses';
 import Stripe from 'stripe';
 
 export async function POST(req: NextRequest) {
@@ -9,12 +11,12 @@ export async function POST(req: NextRequest) {
   const headersList = await headers();
   const signature = headersList.get('stripe-signature');
 
-  if (!signature) return NextResponse.json({ error: 'Missing signature' }, { status: 400 });
+  if (!signature) return apiError('Missing signature', 400);
 
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!webhookSecret) {
     console.error('STRIPE_WEBHOOK_SECRET not set');
-    return NextResponse.json({ error: 'Webhook not configured' }, { status: 500 });
+    return apiError('Webhook not configured', 500);
   }
 
   let event: Stripe.Event;
@@ -22,7 +24,7 @@ export async function POST(req: NextRequest) {
     event = getStripe().webhooks.constructEvent(body, signature, webhookSecret);
   } catch (err) {
     console.error('Webhook signature verification failed:', err);
-    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
+    return apiError('Invalid signature', 400);
   }
 
   try {
@@ -40,10 +42,10 @@ export async function POST(req: NextRequest) {
         console.log(`Unhandled event type: ${event.type}`);
     }
 
-    return NextResponse.json({ received: true });
+    return ok({ received: true });
   } catch (error) {
     console.error('Webhook handler error:', error);
-    return NextResponse.json({ error: 'Webhook handler failed' }, { status: 500 });
+    return apiError('Webhook handler failed', 500);
   }
 }
 
@@ -64,7 +66,7 @@ async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
   await prisma.$transaction(async (tx) => {
     const order = await tx.order.findUnique({ where: { id: orderId }, include: { items: true } });
     if (!order) throw new Error(`Order not found: ${orderId}`);
-    if (order.status === 'paid') return;
+    if (order.status === ORDER_STATUS.paid) return;
 
     for (const item of order.items) {
       const product = await tx.product.findUnique({ where: { id: item.productId }, select: { stock: true } });
@@ -76,15 +78,13 @@ async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
         data: { stock: { decrement: item.quantity } },
       });
 
-      if (result.count !== 1) {
-        throw new Error(`Insufficient stock for product ${item.productId}`);
-      }
+      if (result.count !== 1) throw new Error(`Insufficient stock for product ${item.productId}`);
     }
 
     await tx.order.update({
       where: { id: orderId },
       data: {
-        status: 'paid',
+        status: ORDER_STATUS.paid,
         email: customerEmail,
         stripePaymentIntent: typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id,
         paidAt: new Date(),
@@ -111,8 +111,8 @@ async function handleCheckoutExpired(session: Stripe.Checkout.Session) {
   if (!orderId) return;
 
   await prisma.order.updateMany({
-    where: { id: orderId, status: 'pending' },
-    data: { status: 'cancelled' },
+    where: { id: orderId, status: ORDER_STATUS.pending },
+    data: { status: ORDER_STATUS.cancelled },
   });
 
   console.log(`Order ${orderId} expired/cancelled`);

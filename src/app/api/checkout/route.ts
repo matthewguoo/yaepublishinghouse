@@ -1,80 +1,50 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { NextRequest } from 'next/server';
 import { prisma } from '@/lib/db';
 import { getStripe } from '@/lib/stripe';
-import { verifySessionToken, checkRateLimit } from '@/lib/auth';
-
-const SESSION_COOKIE = 'yph_session';
-const MAX_CHECKOUT_ITEMS = 20;
-
-function getClientIp(req: NextRequest) {
-  return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
-}
-
-function getSiteUrl() {
-  const configured = process.env.NEXT_PUBLIC_SITE_URL;
-  if (!configured) return 'http://localhost:3456';
-
-  try {
-    return new URL(configured).origin;
-  } catch {
-    console.error('Invalid NEXT_PUBLIC_SITE_URL:', configured);
-    return 'http://localhost:3456';
-  }
-}
+import { CART_LIMITS, DEFAULTS, PRODUCT_CTA, RATE_LIMITS, STRIPE_CHECKOUT } from '@/lib/api/constants';
+import { getSiteUrl } from '@/lib/api/env';
+import { badRequest, ok, serverError } from '@/lib/api/responses';
+import { enforceRateLimit, getAuthContext } from '@/lib/api/request';
+import { cartWithItemsArgs } from '@/lib/api/cart';
 
 export async function POST(req: NextRequest) {
   try {
-    const ip = getClientIp(req);
-    const rateLimit = checkRateLimit(`checkout:${ip}`, 10, 15 * 60 * 1000);
-    if (!rateLimit.allowed) {
-      return NextResponse.json({ error: 'Too many checkout attempts. Please try again later.' }, { status: 429 });
-    }
+    const limited = enforceRateLimit(req, 'checkout', RATE_LIMITS.checkout.attempts, RATE_LIMITS.checkout.windowMs, 'Too many checkout attempts. Please try again later.');
+    if (limited) return limited;
 
     const stripe = getStripe();
-    const cookieStore = await cookies();
-    const token = cookieStore.get(SESSION_COOKIE)?.value;
-    const guestId = cookieStore.get('guestId')?.value;
-
-    let userId: string | null = null;
+    const { userId, guestId } = await getAuthContext();
     let userEmail: string | null = null;
 
-    if (token) {
-      userId = await verifySessionToken(token);
-      if (userId) {
-        const user = await prisma.user.findUnique({ where: { id: userId }, select: { email: true } });
-        userEmail = user?.email || null;
-      }
+    if (userId) {
+      const user = await prisma.user.findUnique({ where: { id: userId }, select: { email: true } });
+      userEmail = user?.email || null;
     }
 
     const cart = userId
-      ? await prisma.cart.findUnique({ where: { userId }, include: { items: { include: { product: true } } } })
+      ? await prisma.cart.findUnique({ where: { userId }, ...cartWithItemsArgs })
       : guestId
-        ? await prisma.cart.findFirst({ where: { guestId, userId: null }, include: { items: { include: { product: true } } } })
+        ? await prisma.cart.findFirst({ where: { guestId, userId: null }, ...cartWithItemsArgs })
         : null;
 
-    if (!cart || cart.items.length === 0) {
-      return NextResponse.json({ error: 'Cart is empty' }, { status: 400 });
-    }
-    if (cart.items.length > MAX_CHECKOUT_ITEMS) {
-      return NextResponse.json({ error: 'Too many items in cart' }, { status: 400 });
-    }
+    if (!cart || cart.items.length === 0) return badRequest('Cart is empty');
+    if (cart.items.length > CART_LIMITS.maxCheckoutItems) return badRequest('Too many items in cart');
 
     for (const item of cart.items) {
-      if (item.quantity < 1 || item.quantity > 10) {
-        return NextResponse.json({ error: `Invalid quantity for "${item.product.name}"` }, { status: 400 });
+      if (item.quantity < 1 || item.quantity > CART_LIMITS.maxQuantityPerItem) {
+        return badRequest(`Invalid quantity for "${item.product.name}"`);
       }
-      if (!item.product.published || item.product.ctaType !== 'stripe' || item.product.priceInCents <= 0) {
-        return NextResponse.json({ error: `Product "${item.product.name}" is no longer available` }, { status: 400 });
+      if (!item.product.published || item.product.ctaType !== PRODUCT_CTA.stripe || item.product.priceInCents <= 0) {
+        return badRequest(`Product "${item.product.name}" is no longer available`);
       }
       if (item.product.stock !== null && item.product.stock < item.quantity) {
-        return NextResponse.json({ error: `Not enough stock for "${item.product.name}"` }, { status: 400 });
+        return badRequest(`Not enough stock for "${item.product.name}"`);
       }
     }
 
     const lineItems = cart.items.map((item) => ({
       price_data: {
-        currency: 'usd',
+        currency: STRIPE_CHECKOUT.currency,
         product_data: {
           name: item.product.name,
           description: item.product.subtitle || undefined,
@@ -93,7 +63,7 @@ export async function POST(req: NextRequest) {
     const order = await prisma.order.create({
       data: {
         userId,
-        email: userEmail || 'pending@checkout.local',
+        email: userEmail || DEFAULTS.pendingCheckoutEmail,
         subtotalInCents,
         totalInCents: subtotalInCents,
         items: {
@@ -110,10 +80,10 @@ export async function POST(req: NextRequest) {
 
     const baseUrl = getSiteUrl();
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      mode: 'payment',
+      payment_method_types: [...STRIPE_CHECKOUT.paymentMethodTypes],
+      mode: STRIPE_CHECKOUT.mode,
       line_items: lineItems,
-      shipping_address_collection: { allowed_countries: ['US', 'CA'] },
+      shipping_address_collection: { allowed_countries: [...STRIPE_CHECKOUT.allowedShippingCountries] },
       customer_email: userEmail || undefined,
       client_reference_id: order.id,
       success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
@@ -123,12 +93,12 @@ export async function POST(req: NextRequest) {
 
     await prisma.order.update({ where: { id: order.id }, data: { stripeSessionId: session.id } });
 
-    return NextResponse.json({ url: session.url, sessionId: session.id });
+    return ok({ url: session.url, sessionId: session.id });
   } catch (error) {
     console.error('Checkout error:', error);
     const message = error instanceof Error && error.message.includes('STRIPE_SECRET_KEY')
       ? 'Checkout is not configured yet'
       : 'Failed to create checkout session';
-    return NextResponse.json({ error: message }, { status: 500 });
+    return serverError(message);
   }
 }

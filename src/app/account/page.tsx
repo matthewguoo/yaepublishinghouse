@@ -65,13 +65,13 @@ export default function AccountPage() {
         const res = await fetch('/api/auth/me');
         const data = await res.json();
         if (!data.user) {
-          router.push('/');
+          router.push('/login');
           return;
         }
         setUser(data.user);
         await loadRewards();
       } catch {
-        router.push('/');
+        router.push('/login');
       } finally {
         setLoading(false);
       }
