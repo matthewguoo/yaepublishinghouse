@@ -16,15 +16,10 @@ function ProductCard({ product }: { product: ProductData }) {
         <div className={styles.productHeader}>
           {product.sku && <span className={styles.sku}>{product.sku}</span>}
           {product.sku && <span className={styles.skuDivider}>|</span>}
-          <h2 className={styles.productTitle}>
-            {product.name}
-            {product.subtitle && (
-              <>
-                <span className={styles.titleDot}>·</span>
-                <span className={styles.productSubtitle}>{product.subtitle}</span>
-              </>
-            )}
-          </h2>
+          {product.subtitle && (
+            <span className={styles.productSubtitle}>{product.subtitle}</span>
+          )}
+          <h2 className={styles.productTitle}>{product.name}</h2>
         </div>
 
         {product.specs && (

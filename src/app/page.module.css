@@ -327,6 +327,7 @@
 
 .sku {
   position: static;
+  order: 1;
   font-family: var(--font-noto-sans-jp), sans-serif;
   font-size: 0.875rem;
   color: #999;
@@ -336,6 +337,7 @@
 
 .skuDivider {
   display: inline;
+  order: 2;
   color: #ccc;
   font-size: 1rem;
 }
@@ -345,15 +347,22 @@
   font-size: 1.25rem;
   font-weight: 500;
   color: #1a1a1a;
+  order: 3;
 }
 
 .titleDot {
-  margin: 0 0.5rem;
-  opacity: 0.3;
+  display: none;
 }
 
 .productSubtitle {
   opacity: 0.5;
+  order: 4;
+}
+
+.productSubtitle::before {
+  content: '· ';
+  margin-right: 0.125rem;
+  opacity: 0.6;
 }
 
 
@@ -525,36 +534,45 @@
   }
   
   .productHeader {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
     padding-left: 0;
     margin-bottom: 0.5rem;
+    gap: 0.5rem;
     line-height: 1.4;
   }
   
   .sku {
     position: static;
-    display: block;
-    font-size: 0.75rem;
+    order: 1;
+    font-size: 0.875rem;
     color: #999;
-    margin-bottom: 0.25rem;
   }
 
   .skuDivider {
-    display: none;
-  }
-  
-  .productTitle {
-    display: block;
-    font-size: 1.0625rem;
-    font-weight: 500;
-  }
-  
-  .titleDot {
     display: inline;
+    order: 2;
+    color: #ccc;
   }
   
   .productSubtitle {
-    margin-left: 0;
+    order: 3;
+    opacity: 0.6;
+    font-size: 0.875rem;
+  }
+
+  .productSubtitle::before {
+    content: '';
+    margin: 0;
+  }
+  
+  .productTitle {
+    order: 4;
+    flex-basis: 100%;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    margin: 0;
   }
   
   .verticalLineTL {
