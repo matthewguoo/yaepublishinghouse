@@ -1,0 +1,71 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.successCard {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 3rem;
+  text-align: center;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  background: #7cb587;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.title {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0 0 1rem;
+}
+
+.message {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 1rem;
+  color: #555;
+  margin: 0 0 1rem;
+  line-height: 1.6;
+}
+
+.note {
+  font-family: Georgia, serif;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #888;
+  margin: 0 0 2rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background: #8b4d5c;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: #6d3d4a;
+}
