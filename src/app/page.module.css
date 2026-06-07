@@ -344,6 +344,65 @@
   }
 }
 
+/* Mission Section */
+.missionSection {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 2rem 3rem;
+}
+
+.missionTitleWrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.missionTitle {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8b4d5c;
+  flex-shrink: 0;
+}
+
+.missionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.missionItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.missionNumber {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #8b4d5c;
+  opacity: 0.5;
+}
+
+.missionText {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #555;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .missionGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
 /* Products Section */
 .productsSection {
   max-width: 780px;

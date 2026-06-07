@@ -147,6 +147,28 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Mission Section */}
+      <section className={styles.missionSection}>
+        <div className={styles.missionTitleWrap}>
+          <h2 className={styles.missionTitle}>What We Do</h2>
+          <div className={styles.titleLine} />
+        </div>
+        <div className={styles.missionGrid}>
+          <div className={styles.missionItem}>
+            <span className={styles.missionNumber}>01</span>
+            <p className={styles.missionText}>
+              Design and produce collector goods with real craftsmanship. Gold plating, quality materials, thoughtful details.
+            </p>
+          </div>
+          <div className={styles.missionItem}>
+            <span className={styles.missionNumber}>02</span>
+            <p className={styles.missionText}>
+              Partner with smaller overseas creators and handle bulk shipping to the US. You pay the same price as fans in Asia, no import markup.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Products Section */}
       <section className={styles.productsSection}>
         <div className={styles.productsTitleWrap}>
