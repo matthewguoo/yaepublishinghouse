@@ -164,22 +164,24 @@ export default async function Home() {
             <span className={styles.missionNumber}>01</span>
             <div className={styles.missionContent}>
               <p className={styles.missionText}>
-                We design original goods with manufacturing processes you won't find elsewhere. Real gold plating, aerospace-grade materials, details that reward a closer look.
+                A product should be of sufficient quality to obsess over. A surface that scratches is a finish that needs to be redesigned.
               </p>
-              <div className={styles.missionPoints}>
-                <div className={styles.missionPoint}>
-                  <span className={styles.pointLetter}>a.</span>
-                  <p>A product should be of sufficient quality to obsess over. A surface that scratches is a finish that needs to be redesigned.</p>
-                </div>
-                <div className={styles.missionPoint}>
-                  <span className={styles.pointLetter}>b.</span>
-                  <p>High technology, high connection. Even when our products are milled with precision instruments finer than Yae's silky tail-fur, necessary finishing touches are meticulously done by hand.</p>
-                </div>
-                <div className={styles.missionPoint}>
-                  <span className={styles.pointLetter}>c.</span>
-                  <p>A good product is a piece of art. True art is human. The publishing house will never use matrix multiplication to create artwork. That said, the Guuji is seeking talented designers and artists for new wares. <a href="mailto:hello@yaepublishing.house" className={styles.aboutLink}>Get in touch</a>.</p>
-                </div>
-              </div>
+            </div>
+          </div>
+          <div className={styles.missionItem}>
+            <span className={styles.missionNumber}>02</span>
+            <div className={styles.missionContent}>
+              <p className={styles.missionText}>
+                High technology, high connection. Even when our products are milled with precision instruments finer than Yae's silky tail-fur, necessary finishing touches are meticulously done by hand.
+              </p>
+            </div>
+          </div>
+          <div className={styles.missionItem}>
+            <span className={styles.missionNumber}>03</span>
+            <div className={styles.missionContent}>
+              <p className={styles.missionText}>
+                A good product is a piece of art. True art is human. The publishing house will never use matrix multiplication to create artwork. That said, the Guuji is seeking talented designers and artists for new wares. <a href="mailto:hello@yaepublishing.house" className={styles.aboutLink}>Get in touch</a>.
+              </p>
             </div>
           </div>
         </div>
