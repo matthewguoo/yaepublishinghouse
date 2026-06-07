@@ -186,12 +186,12 @@
 
 .heroTitle {
   font-family: var(--font-noto-sans-jp), sans-serif;
-  font-size: 1.75rem;
-  font-weight: 400;
-  letter-spacing: 0.12em;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #555;
-  margin-bottom: 0.75rem;
+  color: #8b4d5c;
+  margin-bottom: 1rem;
 }
 
 .heroTagline {
@@ -199,10 +199,6 @@
   font-size: 1.125rem;
   font-style: italic;
   color: #666;
-}
-
-.heroScrollHint {
-  display: none;
 }
 
 /* Products Section */
@@ -305,22 +301,12 @@
 
 /* Top horizontal line */
 .horizontalLineTL {
-  position: absolute;
-  top: 28px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: #b0b0b0;
+  display: none;
 }
 
-/* Left vertical line - from top, stops at footer text bottom */
+/* Left vertical line - retired */
 .verticalLineTL {
-  position: absolute;
-  left: 55px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: #b0b0b0;
+  display: none;
 }
 
 /* Bottom horizontal line - mobile only */
@@ -333,24 +319,25 @@
 .productHeader {
   display: flex;
   align-items: baseline;
-  gap: 0.625rem;
-  padding-left: 70px;
+  gap: 0.5rem;
+  padding-left: 0;
   margin-bottom: 0.25rem;
   flex-wrap: wrap;
 }
 
 .sku {
-  position: absolute;
-  left: 0;
-  top: 4px;
+  position: static;
   font-family: var(--font-noto-sans-jp), sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #999;
   letter-spacing: 0.01em;
+  flex-shrink: 0;
 }
 
 .skuDivider {
-  display: none;
+  display: inline;
+  color: #ccc;
+  font-size: 1rem;
 }
 
 .productTitle {
@@ -376,8 +363,8 @@
   font-size: 0.6875rem;
   color: #888;
   margin-bottom: 0;
-  margin-left: 70px;
-  margin-top: 0.125rem;
+  margin-left: 0;
+  margin-top: 0.25rem;
 }
 
 .specDivider {
@@ -391,7 +378,7 @@
   justify-content: center;
   align-items: center;
   padding: 2rem 0;
-  margin-left: 70px;
+  margin-left: 0;
 }
 
 
@@ -412,7 +399,7 @@
 .productFooter {
   position: absolute;
   bottom: 12px;
-  left: 70px;
+  left: 0;
   right: 0;
   display: flex;
   align-items: center;
