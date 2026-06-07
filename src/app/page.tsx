@@ -14,11 +14,15 @@ function ProductCard({ product }: { product: ProductData }) {
         <div className={styles.verticalLineTL} />
         <div className={styles.horizontalLineBR} />
         <div className={styles.productHeader}>
-          {product.sku && <span className={styles.sku}>{product.sku}</span>}
-          {product.sku && <span className={styles.skuDivider}>|</span>}
-          {product.subtitle && (
-            <span className={styles.productSubtitle}>{product.subtitle}</span>
-          )}
+          <span className={styles.metaLine}>
+            {product.sku && <span className={styles.sku}>{product.sku}</span>}
+            {product.sku && product.subtitle && (
+              <span className={styles.skuDivider}>|</span>
+            )}
+            {product.subtitle && (
+              <span className={styles.productSubtitle}>{product.subtitle}</span>
+            )}
+          </span>
           <h2 className={styles.productTitle}>{product.name}</h2>
         </div>
 
