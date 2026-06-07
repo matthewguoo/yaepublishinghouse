@@ -156,9 +156,16 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
 
   return (
     <SiteLayout>
+      {/* Free Shipping Banner */}
+      <div className={styles.shippingBanner}>
+        <img src="/komaniya-logo.png" alt="Komaniya Express" className={styles.komaniyaLogo} />
+        <span>All Yae Publishing House products ship for free — courtesy of Komaniya Express</span>
+      </div>
+
       <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-          <a href="/">Home</a> &gt; <a href="/products">Products</a> &gt; {product.name}
+        <div className={styles.titleWrap}>
+          <span className={styles.titleBreadcrumb}>Product › {product.name}</span>
+          <div className={styles.titleLine} />
         </div>
 
         {/* Image Carousel */}
@@ -264,11 +271,6 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
 
           {/* Right column - CTA */}
           <div className={styles.infoRight}>
-            <div className={styles.shippingNote}>
-              <img src="/komaniya-logo.png" alt="Komaniya Express" className={styles.komaniyaLogo} />
-              <span>All Yae Publishing House products ship for free — courtesy of Komaniya Express</span>
-            </div>
-
             {/* CTA */}
             <div className={styles.ctaSection}>
               {renderCTA()}

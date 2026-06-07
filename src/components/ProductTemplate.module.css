@@ -1,23 +1,50 @@
+/* Shipping Banner */
+.shippingBanner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  font-family: Georgia, serif;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: #000;
+  background: #e8b76c;
+  padding: 0.625rem 1rem;
+}
+
+.komaniyaLogo {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+}
+
 .container {
   max-width: 960px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-.breadcrumb {
+.titleWrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.titleBreadcrumb {
   font-family: var(--font-noto-sans-jp), sans-serif;
-  font-size: 0.75rem;
-  color: #888;
-  margin-bottom: 2rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8b4d5c;
+  flex-shrink: 0;
 }
 
-.breadcrumb a {
-  color: #666;
-  text-decoration: none;
-}
-
-.breadcrumb a:hover {
-  color: #1a1a1a;
+.titleLine {
+  flex: 1;
+  height: 1px;
+  background: #d8d8d8;
 }
 
 /* Carousel */
@@ -196,25 +223,6 @@
   font-size: 1rem;
   color: #999;
   text-decoration: line-through;
-}
-
-.shippingNote {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  font-family: Georgia, serif;
-  font-size: 0.8125rem;
-  font-style: italic;
-  color: #000;
-  margin: 0 0 1.5rem;
-  background: #e8b76c;
-  padding: 0.75rem 1rem;
-}
-
-.komaniyaLogo {
-  width: 1.75rem;
-  height: 1.75rem;
-  object-fit: contain;
 }
 
 .description {
