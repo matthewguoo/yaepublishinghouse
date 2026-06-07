@@ -20,6 +20,8 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
   const [loading, setLoading] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [user, setUser] = useState<User | null>(null);
+  const [addedToCart, setAddedToCart] = useState(false);
+  const [cartLoading, setCartLoading] = useState(false);
 
   useEffect(() => {
     fetch('/api/auth/me')
@@ -60,9 +62,31 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
     }
   };
 
-  const handleStripeCheckout = async () => {
-    // TODO: integrate with Stripe
-    console.log('Stripe checkout for:', product.id);
+  const handleAddToCart = async () => {
+    setCartLoading(true);
+    setError('');
+    
+    try {
+      const res = await fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: product.id, quantity: 1 }),
+      });
+      
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.error || 'Failed to add to cart');
+        return;
+      }
+      
+      setAddedToCart(true);
+      // Reset after a few seconds
+      setTimeout(() => setAddedToCart(false), 3000);
+    } catch {
+      setError('Failed to add to cart');
+    } finally {
+      setCartLoading(false);
+    }
   };
 
   const renderCTA = () => {
@@ -111,9 +135,18 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
 
       case 'stripe':
         return (
-          <button onClick={handleStripeCheckout} className={styles.ctaButton}>
-            {product.cta.buttonText || 'Buy Now'} — {product.price}
-          </button>
+          <div className={styles.stripeActions}>
+            <button 
+              onClick={handleAddToCart} 
+              className={`${styles.ctaButton} ${addedToCart ? styles.ctaButtonSuccess : ''}`}
+              disabled={cartLoading || addedToCart}
+            >
+              {cartLoading ? 'Adding...' : addedToCart ? 'Added to Cart ✓' : (product.cta.buttonText || 'Add to Cart')}
+            </button>
+            <a href="/cart" className={styles.viewCartLink}>
+              View Cart
+            </a>
+          </div>
         );
 
       case 'soldout':

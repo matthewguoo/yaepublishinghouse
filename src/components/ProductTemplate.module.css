@@ -324,6 +324,37 @@
   background: #6d3d4a;
 }
 
+.ctaButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ctaButtonSuccess {
+  background: #7cb587;
+}
+
+.ctaButtonSuccess:hover {
+  background: #6aa573;
+}
+
+.stripeActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.viewCartLink {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.8125rem;
+  color: #8b4d5c;
+  text-decoration: none;
+  text-align: center;
+}
+
+.viewCartLink:hover {
+  text-decoration: underline;
+}
+
 .ctaButtonFull {
   width: 100%;
   padding: 1rem 1.5rem;
