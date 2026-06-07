@@ -7,6 +7,7 @@
 
 .main {
   flex: 1;
+  padding-top: 5rem;
 }
 
 /* Page styles */
@@ -152,4 +153,69 @@
   font-size: 0.8125rem;
   color: #666;
   font-style: italic;
+}
+
+/* Article content */
+.articleContent {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.articleContent h1 {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+  color: #1a1a1a;
+}
+
+.articleContent h2 {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.75rem;
+  color: #1a1a1a;
+}
+
+.articleContent p {
+  margin: 0 0 1.25rem;
+}
+
+.articleContent a {
+  color: #8b4d5c;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.articleContent a:hover {
+  color: #6d3a47;
+}
+
+.articleContent blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 3px solid #8b4d5c;
+  background: #faf9f9;
+  font-style: italic;
+  color: #555;
+}
+
+.articleContent ul {
+  margin: 1rem 0 1.5rem 1.25rem;
+}
+
+.articleContent li {
+  margin-bottom: 0.5rem;
+}
+
+.articleImage {
+  margin: 1.5rem 0;
+}
+
+.articleImage img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
 }
