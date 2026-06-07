@@ -1,6 +1,7 @@
 import styles from './page.module.css';
 import Link from 'next/link';
 import SiteLayout from '@/components/SiteLayout';
+import SectionHeader from '@/components/SectionHeader';
 import { getAllProducts, ProductData } from '@/lib/products';
 
 export const dynamic = 'force-dynamic';
@@ -104,10 +105,7 @@ export default async function Home() {
 
       {/* Who We Are Section */}
       <section className={styles.aboutSection}>
-        <div className={styles.aboutTitleWrap}>
-          <h2 className={styles.aboutTitle}>Who We Are</h2>
-          <div className={styles.titleLine} />
-        </div>
+        <SectionHeader title="Who We Are" marginBottom="1.5rem" />
         <div className={styles.aboutContent}>
           <blockquote className={styles.aboutQuote}>
             <span className={styles.quoteMark}>"</span>
@@ -149,10 +147,7 @@ export default async function Home() {
 
       {/* Products Section */}
       <section className={styles.productsSection}>
-        <div className={styles.productsTitleWrap}>
-          <h1 className={styles.productsTitle}>Products</h1>
-          <div className={styles.titleLine} />
-        </div>
+        <SectionHeader title="Products" as="h1" />
 
         <div className={styles.productsList}>
           {products.map((product) => (
@@ -163,10 +158,7 @@ export default async function Home() {
 
       {/* What We Do Section */}
       <section className={styles.whatWeDoSection}>
-        <div className={styles.whatWeDoTitleWrap}>
-          <h2 className={styles.whatWeDoTitle}>What We Do</h2>
-          <div className={styles.titleLine} />
-        </div>
+        <SectionHeader title="What We Do" />
         <div className={styles.missionGrid}>
           <div className={styles.missionItem}>
             <span className={styles.missionNumber}>01</span>

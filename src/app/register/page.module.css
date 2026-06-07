@@ -1,11 +1,11 @@
 .container {
-  max-width: 780px;
+  max-width: var(--container-narrow);
   margin: 0 auto;
   padding: 2rem;
 }
 
 .breadcrumb {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #888;
   margin-bottom: 2rem;
@@ -17,7 +17,7 @@
 }
 
 .breadcrumb a:hover {
-  color: #1a1a1a;
+  color: var(--color-ink);
 }
 
 .formCard {
@@ -25,19 +25,19 @@
   margin: 0 auto;
   padding: 2.5rem;
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-line-soft);
 }
 
 .title {
   font-family: var(--font-inter), sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-ink);
   margin: 0 0 0.5rem;
 }
 
 .subtitle {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   color: #666;
   margin: 0 0 2rem;
@@ -53,7 +53,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: #555;
 }
@@ -61,22 +61,22 @@
 .input {
   padding: 0.875rem 1rem;
   border: 1px solid #ddd;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   background: #fff;
 }
 
 .input:focus {
   outline: none;
-  border-color: #8b4d5c;
+  border-color: var(--color-sakura);
 }
 
 .button {
   padding: 0.875rem 1.5rem;
-  background: #8b4d5c;
+  background: var(--color-sakura);
   color: #fff;
   border: none;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
@@ -85,25 +85,25 @@
 }
 
 .button:hover {
-  background: #6d3d4a;
+  background: var(--color-sakura-dark);
 }
 
 .button:disabled {
-  background: #c9a3ac;
+  background: var(--color-sakura-soft);
   cursor: not-allowed;
 }
 
 .error {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
-  color: #b91c1c;
+  color: var(--color-error);
   margin: 0;
   padding: 0.75rem;
-  background: #fef2f2;
+  background: var(--color-error-bg);
 }
 
 .success {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: #166534;
   margin: 0;
@@ -112,7 +112,7 @@
 }
 
 .footer {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: #666;
   margin: 1.5rem 0 0;
@@ -120,7 +120,7 @@
 }
 
 .footer a {
-  color: #8b4d5c;
+  color: var(--color-sakura);
   text-decoration: none;
 }
 

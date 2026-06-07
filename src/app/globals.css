@@ -2,6 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Brand palette */
+  --color-sakura: #8b4d5c;
+  --color-sakura-dark: #6d3d4a;
+  --color-sakura-soft: #c9a3ac;
+
+  /* Surface */
+  --color-bg: #f5f5f5;
+  --color-surface: #fff;
+  --color-surface-alt: #f8f8f8;
+  --color-surface-soft: #f9f5f9;
+
+  /* Ink */
+  --color-ink: #1a1a1a;
+  --color-ink-2: #333;
+  --color-muted-1: #555;
+  --color-muted-2: #666;
+  --color-muted-3: #888;
+  --color-muted-4: #999;
+  --color-line: #d8d8d8;
+  --color-line-soft: #e0e0e0;
+  --color-ccc: #ccc;
+
+  /* Status */
+  --color-error: #b91c1c;
+  --color-error-bg: #fef2f2;
+  --color-success: #7cb587;
+
+  /* Layout */
+  --container-narrow: 780px;
+  --container-wide: 960px;
+  --container-max: 1200px;
+
+  /* Typography stacks */
+  --font-body: var(--font-noto-sans-jp), sans-serif;
+  --font-serif: Georgia, serif;
+  --font-display: Inter, sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,11 +49,11 @@
 
 html,
 body {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   overflow-x: hidden;
   max-width: 100vw;
-  background: #f5f5f5;
-  color: #1a1a1a;
+  background: var(--color-bg);
+  color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,14 +64,14 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #8b4d5c;
+  outline: 2px solid var(--color-sakura);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
 /* Selection */
 ::selection {
-  background: #8b4d5c;
+  background: var(--color-sakura);
   color: #fff;
 }
 

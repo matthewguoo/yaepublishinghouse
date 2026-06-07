@@ -1,0 +1,23 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-sakura);
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-line);
+}

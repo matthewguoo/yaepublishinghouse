@@ -1,11 +1,11 @@
 .container {
-  max-width: 780px;
+  max-width: var(--container-narrow);
   margin: 0 auto;
   padding: 2rem;
 }
 
 .breadcrumb {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #888;
   margin-bottom: 2rem;
@@ -17,7 +17,7 @@
 }
 
 .breadcrumb a:hover {
-  color: #1a1a1a;
+  color: var(--color-ink);
 }
 
 .titleWrap {
@@ -28,19 +28,19 @@
 }
 
 .title {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #8b4d5c;
+  color: var(--color-sakura);
   flex-shrink: 0;
 }
 
 .titleLine {
   flex: 1;
   height: 1px;
-  background: #d8d8d8;
+  background: var(--color-line);
 }
 
 .content {
@@ -51,7 +51,7 @@
 
 .section {
   padding-bottom: 2rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-line-soft);
 }
 
 .section:last-child {
@@ -60,15 +60,15 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--color-ink);
   margin: 0 0 0.75rem;
 }
 
 .text {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   color: #555;
   line-height: 1.7;
@@ -80,9 +80,9 @@
 }
 
 .link {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
-  color: #8b4d5c;
+  color: var(--color-sakura);
   text-decoration: none;
 }
 

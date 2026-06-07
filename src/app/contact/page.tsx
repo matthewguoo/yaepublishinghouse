@@ -1,21 +1,16 @@
 'use client';
 
-import Link from 'next/link';
 import SiteLayout from '@/components/SiteLayout';
+import Breadcrumb from '@/components/Breadcrumb';
+import SectionHeader from '@/components/SectionHeader';
 import styles from './page.module.css';
 
 export default function ContactPage() {
   return (
     <SiteLayout>
       <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-          <Link href="/">Home</Link> &gt; Contact
-        </div>
-
-        <div className={styles.titleWrap}>
-          <h1 className={styles.title}>Contact</h1>
-          <div className={styles.titleLine} />
-        </div>
+        <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
+        <SectionHeader title="Contact" as="h1" marginBottom="2.5rem" />
 
         <div className={styles.content}>
           <section className={styles.section}>

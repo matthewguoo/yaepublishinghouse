@@ -8,13 +8,13 @@
   font-family: var(--font-inter), sans-serif;
   font-size: 2rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--color-ink);
   margin: 0 0 0.5rem;
   text-align: center;
 }
 
 .subtitle {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   color: #666;
   text-align: center;
@@ -22,7 +22,7 @@
 }
 
 .note {
-  font-family: Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 0.875rem;
   font-style: italic;
   color: #888;
@@ -38,19 +38,19 @@
   margin-bottom: 2rem;
   padding: 1.5rem;
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-line-soft);
 }
 
 .controlGroup h4 {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--color-ink);
   margin: 0 0 0.5rem;
 }
 
 .controlHint {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #888;
   margin: 0.25rem 0 0;
@@ -73,7 +73,7 @@
   width: 3rem;
   padding: 0.375rem;
   border: 1px solid #ddd;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   text-align: center;
 }
@@ -84,10 +84,10 @@
 }
 
 .toleranceValue {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--color-ink);
 }
 
 .checkbox {
@@ -104,14 +104,14 @@
 }
 
 .checkbox span {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: #333;
 }
 
 .optionHint {
   width: 100%;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   color: #999;
   margin: 0;
@@ -128,7 +128,7 @@
 
 .panel {
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-line-soft);
 }
 
 .panelHeader {
@@ -136,19 +136,19 @@
   align-items: baseline;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-line-soft);
 }
 
 .panelHeader h2 {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--color-ink);
   margin: 0;
 }
 
 .panelHint {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #888;
 }
@@ -162,9 +162,9 @@
 
 .panelButtons button {
   padding: 0.375rem 0.75rem;
-  background: #f5f5f5;
+  background: var(--color-bg);
   border: 1px solid #ddd;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #333;
   cursor: pointer;
@@ -204,7 +204,7 @@
 }
 
 .placeholder p {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   color: #888;
   margin: 0 0 0.25rem;
@@ -216,7 +216,7 @@
 }
 
 .privacy {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #999;
   text-align: center;

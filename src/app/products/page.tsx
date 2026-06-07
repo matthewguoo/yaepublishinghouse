@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import SiteLayout from '@/components/SiteLayout';
+import Breadcrumb from '@/components/Breadcrumb';
+import SectionHeader from '@/components/SectionHeader';
 import { getAllProducts, ProductData } from '@/lib/products';
 import styles from './page.module.css';
 
@@ -48,14 +50,8 @@ export default async function ProductsPage() {
   return (
     <SiteLayout>
       <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-          <Link href="/">Home</Link> &gt; Products
-        </div>
-
-        <div className={styles.titleWrap}>
-          <h1 className={styles.title}>Products</h1>
-          <div className={styles.titleLine} />
-        </div>
+        <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Products' }]} />
+        <SectionHeader title="Products" as="h1" />
 
         <p className={styles.subtitle}>Limited edition collectibles and merchandise from across the stars</p>
 

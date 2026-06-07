@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import SiteLayout from '@/components/SiteLayout';
+import Breadcrumb from '@/components/Breadcrumb';
 import styles from './page.module.css';
 
 export default function RegisterPage() {
@@ -42,9 +43,7 @@ export default function RegisterPage() {
   return (
     <SiteLayout>
       <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-          <Link href="/">Home</Link> &gt; Register
-        </div>
+        <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Register' }]} />
 
         <div className={styles.formCard}>
           <h1 className={styles.title}>Register</h1>

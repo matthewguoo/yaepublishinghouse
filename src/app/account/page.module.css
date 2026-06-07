@@ -1,5 +1,5 @@
 .container {
-  max-width: 960px;
+  max-width: var(--container-wide);
   margin: 0 auto;
   padding: 34px 20px 70px;
 }
@@ -319,7 +319,7 @@
 
 .voucherDenom {
   margin-left: 8px;
-  font-family: Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;

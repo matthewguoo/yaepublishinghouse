@@ -1,11 +1,11 @@
 .container {
-  max-width: 960px;
+  max-width: var(--container-wide);
   margin: 0 auto;
   padding: 2rem;
 }
 
 .breadcrumb {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #888;
   margin-bottom: 2rem;
@@ -17,7 +17,7 @@
 }
 
 .breadcrumb a:hover {
-  color: #1a1a1a;
+  color: var(--color-ink);
 }
 
 .titleWrap {
@@ -28,23 +28,23 @@
 }
 
 .title {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #8b4d5c;
+  color: var(--color-sakura);
   flex-shrink: 0;
 }
 
 .titleLine {
   flex: 1;
   height: 1px;
-  background: #d8d8d8;
+  background: var(--color-line);
 }
 
 .loading {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   color: #888;
   text-align: center;
   padding: 3rem 0;
@@ -52,9 +52,9 @@
 
 .error {
   padding: 1rem;
-  background: #fef2f2;
-  color: #b91c1c;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   margin-bottom: 1.5rem;
 }
@@ -63,11 +63,11 @@
   text-align: center;
   padding: 4rem 2rem;
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-line-soft);
 }
 
 .emptyCart p {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   color: #666;
   margin: 0 0 1.5rem;
@@ -76,17 +76,17 @@
 .continueShopping {
   display: inline-block;
   padding: 0.875rem 2rem;
-  background: #8b4d5c;
+  background: var(--color-sakura);
   color: #fff;
   text-decoration: none;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
   transition: background 0.2s;
 }
 
 .continueShopping:hover {
-  background: #6d3d4a;
+  background: var(--color-sakura-dark);
 }
 
 .cartLayout {
@@ -108,13 +108,13 @@
   align-items: center;
   padding: 1rem;
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-line-soft);
 }
 
 .itemImage {
   width: 80px;
   height: 80px;
-  background: #f8f8f8;
+  background: var(--color-surface-alt);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,7 +127,7 @@
 }
 
 .noImage {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.625rem;
   color: #999;
 }
@@ -138,20 +138,20 @@
 
 .itemName {
   display: block;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--color-ink);
   text-decoration: none;
   margin-bottom: 0.25rem;
 }
 
 .itemName:hover {
-  color: #8b4d5c;
+  color: var(--color-sakura);
 }
 
 .itemPrice {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: #666;
   margin: 0;
@@ -166,8 +166,8 @@
 .quantityBtn {
   width: 28px;
   height: 28px;
-  background: #f5f5f5;
-  border: 1px solid #e0e0e0;
+  background: var(--color-bg);
+  border: 1px solid var(--color-line-soft);
   font-size: 1rem;
   cursor: pointer;
   display: flex;
@@ -187,17 +187,17 @@
 }
 
 .quantityValue {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   min-width: 1.5rem;
   text-align: center;
 }
 
 .itemTotal {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--color-ink);
   min-width: 60px;
   text-align: right;
 }
@@ -217,12 +217,12 @@
 }
 
 .removeBtn:hover {
-  color: #b91c1c;
+  color: var(--color-error);
 }
 
 .cartSummary {
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-line-soft);
   padding: 1.5rem;
   height: fit-content;
   position: sticky;
@@ -230,7 +230,7 @@
 }
 
 .summaryTitle {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -238,42 +238,42 @@
   color: #999;
   margin: 0 0 1.25rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-line-soft);
 }
 
 .summaryRow {
   display: flex;
   justify-content: space-between;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   color: #555;
   margin-bottom: 0.75rem;
 }
 
 .freeShipping {
-  color: #7cb587;
+  color: var(--color-success);
   font-weight: 500;
 }
 
 .summaryTotal {
   display: flex;
   justify-content: space-between;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--color-ink);
   padding-top: 0.75rem;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--color-line-soft);
   margin-bottom: 1.5rem;
 }
 
 .checkoutBtn {
   width: 100%;
   padding: 1rem;
-  background: #8b4d5c;
+  background: var(--color-sakura);
   color: #fff;
   border: none;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 500;
   cursor: pointer;
@@ -281,16 +281,16 @@
 }
 
 .checkoutBtn:hover:not(:disabled) {
-  background: #6d3d4a;
+  background: var(--color-sakura-dark);
 }
 
 .checkoutBtn:disabled {
-  background: #c9a3ac;
+  background: var(--color-sakura-soft);
   cursor: not-allowed;
 }
 
 .shippingNote {
-  font-family: Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 0.75rem;
   font-style: italic;
   color: #888;

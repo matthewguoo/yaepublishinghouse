@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import SiteLayout from '@/components/SiteLayout';
+import Breadcrumb from '@/components/Breadcrumb';
 import styles from './page.module.css';
 
 interface User {
@@ -123,9 +124,7 @@ export default function AccountPage() {
   return (
     <SiteLayout>
       <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-          <Link href="/">Home</Link> &gt; Account
-        </div>
+        <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Account' }]} />
 
         <header className={styles.header}>
           <p className={styles.eyebrow}>Shrine ledger</p>

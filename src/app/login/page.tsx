@@ -4,6 +4,7 @@ import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import SiteLayout from '@/components/SiteLayout';
+import Breadcrumb from '@/components/Breadcrumb';
 import styles from './page.module.css';
 
 export default function LoginPage() {
@@ -44,9 +45,7 @@ export default function LoginPage() {
   return (
     <SiteLayout>
       <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-          <Link href="/">Home</Link> &gt; Login
-        </div>
+        <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Login' }]} />
 
         <div className={styles.formCard}>
           <h1 className={styles.title}>Login</h1>

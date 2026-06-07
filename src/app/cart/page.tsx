@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import SiteLayout from '@/components/SiteLayout';
+import Breadcrumb from '@/components/Breadcrumb';
+import SectionHeader from '@/components/SectionHeader';
 import styles from './page.module.css';
 
 interface CartItem {
@@ -106,14 +108,8 @@ export default function CartPage() {
   return (
     <SiteLayout>
       <div className={styles.container}>
-        <div className={styles.breadcrumb}>
-          <Link href="/">Home</Link> › Cart
-        </div>
-
-        <div className={styles.titleWrap}>
-          <h1 className={styles.title}>Cart</h1>
-          <div className={styles.titleLine} />
-        </div>
+        <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Cart' }]} />
+        <SectionHeader title="Cart" as="h1" />
 
         {error && <div className={styles.error}>{error}</div>}
 

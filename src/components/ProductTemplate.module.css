@@ -1,11 +1,11 @@
 .container {
-  max-width: 960px;
+  max-width: var(--container-wide);
   margin: 0 auto;
   padding: 2rem;
 }
 
 .breadcrumb {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #888;
   margin-bottom: 2rem;
@@ -17,7 +17,7 @@
 }
 
 .breadcrumb a:hover {
-  color: #1a1a1a;
+  color: var(--color-ink);
 }
 
 .titleWrap {
@@ -28,19 +28,19 @@
 }
 
 .titleBreadcrumb {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #8b4d5c;
+  color: var(--color-sakura);
   flex-shrink: 0;
 }
 
 .titleLine {
   flex: 1;
   height: 1px;
-  background: #d8d8d8;
+  background: var(--color-line);
 }
 
 /* Shipping Banner */
@@ -49,7 +49,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.625rem;
-  font-family: Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 0.8125rem;
   font-style: italic;
   color: #000;
@@ -72,7 +72,7 @@
 .carouselTrack {
   position: relative;
   overflow: hidden;
-  background: #f8f8f8;
+  background: var(--color-surface-alt);
 }
 
 .carouselSlides {
@@ -103,7 +103,7 @@
   width: 40px;
   height: 40px;
   background: rgba(255,255,255,0.9);
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-line-soft);
   font-size: 1.5rem;
   color: #666;
   cursor: pointer;
@@ -116,8 +116,8 @@
 
 .carouselArrow:hover {
   background: #fff;
-  border-color: #8b4d5c;
-  color: #8b4d5c;
+  border-color: var(--color-sakura);
+  color: var(--color-sakura);
 }
 
 .carouselPrev {
@@ -146,7 +146,7 @@
 }
 
 .carouselDot.active {
-  background: #8b4d5c;
+  background: var(--color-sakura);
 }
 
 .badge {
@@ -154,7 +154,7 @@
   top: 1rem;
   left: 1rem;
   padding: 0.25rem 0.75rem;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.625rem;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -162,12 +162,12 @@
 }
 
 .badge.new {
-  background: #8b4d5c;
+  background: var(--color-sakura);
   color: #fff;
 }
 
 .badge.limited {
-  background: #1a1a1a;
+  background: var(--color-ink);
   color: #fff;
 }
 
@@ -177,13 +177,13 @@
 }
 
 .noImage {
-  background: #f8f8f8;
+  background: var(--color-surface-alt);
   min-height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #999;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
 }
 
@@ -205,16 +205,16 @@
 }
 
 .title {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 1.5rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--color-ink);
   margin: 0 0 0.5rem;
   letter-spacing: -0.01em;
 }
 
 .subtitle {
-  font-family: Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 0.9375rem;
   font-style: italic;
   color: #666;
@@ -229,21 +229,21 @@
 }
 
 .price {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 1.25rem;
   font-weight: 500;
-  color: #1a1a1a;
+  color: var(--color-ink);
 }
 
 .originalPrice {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   color: #999;
   text-decoration: line-through;
 }
 
 .description {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   line-height: 1.7;
   color: #555;
@@ -256,7 +256,7 @@
 }
 
 .specs h3 {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   color: #999;
@@ -272,7 +272,7 @@
 }
 
 .specs li {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: #555;
   padding: 0.5rem 0;
@@ -297,22 +297,22 @@
   flex: 1;
   padding: 0.875rem 1rem;
   border: 1px solid #ddd;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   background: #fff;
 }
 
 .emailInput:focus {
   outline: none;
-  border-color: #8b4d5c;
+  border-color: var(--color-sakura);
 }
 
 .ctaButton {
   padding: 0.875rem 1.5rem;
-  background: #8b4d5c;
+  background: var(--color-sakura);
   color: #fff;
   border: none;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
@@ -321,7 +321,7 @@
 }
 
 .ctaButton:hover {
-  background: #6d3d4a;
+  background: var(--color-sakura-dark);
 }
 
 .ctaButton:disabled {
@@ -330,7 +330,7 @@
 }
 
 .ctaButtonSuccess {
-  background: #7cb587;
+  background: var(--color-success);
 }
 
 .ctaButtonSuccess:hover {
@@ -344,9 +344,9 @@
 }
 
 .viewCartLink {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
-  color: #8b4d5c;
+  color: var(--color-sakura);
   text-decoration: none;
   text-align: center;
 }
@@ -358,10 +358,10 @@
 .ctaButtonFull {
   width: 100%;
   padding: 1rem 1.5rem;
-  background: #8b4d5c;
+  background: var(--color-sakura);
   color: #fff;
   border: none;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 500;
   cursor: pointer;
@@ -369,20 +369,20 @@
 }
 
 .ctaButtonFull:hover {
-  background: #6d3d4a;
+  background: var(--color-sakura-dark);
 }
 
 .ctaButtonFull:disabled {
-  background: #c9a3ac;
+  background: var(--color-sakura-soft);
   cursor: not-allowed;
 }
 
 .ctaButtonSecondary {
   padding: 0.75rem 1.25rem;
   background: transparent;
-  color: #8b4d5c;
-  border: 1px solid #8b4d5c;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  color: var(--color-sakura);
+  border: 1px solid var(--color-sakura);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
@@ -390,7 +390,7 @@
 }
 
 .ctaButtonSecondary:hover {
-  background: #8b4d5c;
+  background: var(--color-sakura);
   color: #fff;
 }
 
@@ -398,16 +398,16 @@
   padding: 1rem;
   background: #e8f5e9;
   color: #2e7d32;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   text-align: center;
 }
 
 .errorMessage {
   padding: 0.75rem;
-  background: #fef2f2;
-  color: #b91c1c;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   margin-bottom: 0.75rem;
 }
@@ -416,21 +416,21 @@
   padding: 0.875rem 1.5rem;
   background: #e8e8e8;
   color: #999;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
   text-align: center;
 }
 
 .comingsoon p {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   color: #666;
   font-size: 0.875rem;
   margin: 0 0 1rem;
 }
 
 .serialNote {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #999;
   margin: 0;
@@ -440,25 +440,25 @@
   display: block;
   margin-top: 1.25rem;
   padding: 0.75rem 0;
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
-  color: #8b4d5c;
+  color: var(--color-sakura);
   text-decoration: none;
   border-top: 1px solid #eee;
 }
 
 .announcementLink:hover {
-  color: #6d3d4a;
+  color: var(--color-sakura-dark);
 }
 
 /* Image Gallery */
 .imageGallery {
   padding: 2.5rem 0;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--color-line-soft);
 }
 
 .imageGallery h3 {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   color: #999;
@@ -480,7 +480,7 @@
   height: 60px;
   padding: 0.25rem;
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-line-soft);
   cursor: pointer;
   transition: border-color 0.2s;
 }
@@ -490,7 +490,7 @@
 }
 
 .galleryThumb.active {
-  border-color: #8b4d5c;
+  border-color: var(--color-sakura);
 }
 
 .galleryThumb img {
@@ -504,11 +504,11 @@
   margin: 1.5rem 0;
   padding: 1.25rem;
   background: #fff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-line-soft);
 }
 
 .timeline h3 {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.6875rem;
   font-weight: 500;
   color: #999;
@@ -539,14 +539,14 @@
   top: 1.5rem;
   bottom: -0.75rem;
   width: 1px;
-  background: #e0e0e0;
+  background: var(--color-line-soft);
 }
 
 .timelineDot {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: #e0e0e0;
+  background: var(--color-line-soft);
   flex-shrink: 0;
   margin-top: 2px;
   position: relative;
@@ -554,15 +554,15 @@
 }
 
 .timelineMilestone.completed .timelineDot {
-  background: #7cb587;
+  background: var(--color-success);
 }
 
 .timelineMilestone.completed::before {
-  background: #7cb587;
+  background: var(--color-success);
 }
 
 .timelineMilestone.active .timelineDot {
-  background: #8b4d5c;
+  background: var(--color-sakura);
   box-shadow: 0 0 0 3px rgba(139, 77, 92, 0.2);
 }
 
@@ -573,7 +573,7 @@
 }
 
 .timelineLabel {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 500;
   color: #333;
@@ -584,18 +584,18 @@
 }
 
 .timelineMilestone.active .timelineLabel {
-  color: #8b4d5c;
+  color: var(--color-sakura);
   font-weight: 500;
 }
 
 .timelineDate {
-  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8125rem;
   color: #888;
 }
 
 .timelineMilestone.active .timelineDate {
-  color: #8b4d5c;
+  color: var(--color-sakura);
 }
 
 /* Responsive */
