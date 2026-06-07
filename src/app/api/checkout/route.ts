@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/db';
 import { stripe } from '@/lib/stripe';
-import { verifySession } from '@/lib/auth';
+import { verifySessionToken } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   try {
@@ -14,9 +14,8 @@ export async function POST(req: NextRequest) {
     let userEmail: string | null = null;
 
     if (token) {
-      const session = await verifySession(token);
-      if (session) {
-        userId = session.userId;
+      userId = await verifySessionToken(token);
+      if (userId) {
         const user = await prisma.user.findUnique({ where: { id: userId } });
         userEmail = user?.email || null;
       }

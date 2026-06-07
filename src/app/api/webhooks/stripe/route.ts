@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { stripe } from '@/lib/stripe';
-import { prisma } from '@/lib/prisma';
+import { prisma } from '@/lib/db';
 import Stripe from 'stripe';
 
 export async function POST(req: NextRequest) {
@@ -68,8 +68,9 @@ async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
     return;
   }
 
-  // Get shipping details
-  const shippingDetails = session.shipping_details;
+  // Get shipping details - using 'any' to access shipping_details which may not be in type def
+  const sessionAny = session as Stripe.Checkout.Session & { shipping_details?: { name?: string | null; address?: Stripe.Address | null } };
+  const shippingDetails = sessionAny.shipping_details || null;
   const customerEmail = session.customer_details?.email || session.customer_email;
 
   // Update order
@@ -88,7 +89,7 @@ async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
         state: shippingDetails.address.state,
         postal_code: shippingDetails.address.postal_code,
         country: shippingDetails.address.country,
-      } : null,
+      } : undefined,
     },
   });
 

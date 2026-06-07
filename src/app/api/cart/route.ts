@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { prisma } from '@/lib/prisma';
-import { verifySession } from '@/lib/auth';
+import { prisma } from '@/lib/db';
+import { verifySessionToken } from '@/lib/auth';
 import { randomBytes } from 'crypto';
 
 // Get or create cart for user/guest
@@ -72,11 +72,10 @@ export async function GET(req: NextRequest) {
 
     let userId: string | null = null;
     if (token) {
-      const session = await verifySession(token);
-      userId = session?.userId || null;
+      userId = await verifySessionToken(token);
     }
 
-    const cart = await getOrCreateCart(userId, guestId);
+    const cart = await getOrCreateCart(userId, guestId || null);
 
     if (!cart) {
       return NextResponse.json({ items: [], total: 0 });
@@ -132,8 +131,7 @@ export async function POST(req: NextRequest) {
 
     let userId: string | null = null;
     if (token) {
-      const session = await verifySession(token);
-      userId = session?.userId || null;
+      userId = await verifySessionToken(token);
     }
 
     // Create guest ID if needed
@@ -148,7 +146,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const cart = await getOrCreateCart(userId, guestId!);
+    const cart = await getOrCreateCart(userId, guestId || null);
     if (!cart) {
       return NextResponse.json({ error: 'Failed to create cart' }, { status: 500 });
     }
@@ -197,11 +195,10 @@ export async function DELETE(req: NextRequest) {
 
     let userId: string | null = null;
     if (token) {
-      const session = await verifySession(token);
-      userId = session?.userId || null;
+      userId = await verifySessionToken(token);
     }
 
-    const cart = await getOrCreateCart(userId, guestId);
+    const cart = await getOrCreateCart(userId, guestId || null);
     if (!cart) {
       return NextResponse.json({ error: 'Cart not found' }, { status: 404 });
     }
@@ -244,11 +241,10 @@ export async function PATCH(req: NextRequest) {
 
     let userId: string | null = null;
     if (token) {
-      const session = await verifySession(token);
-      userId = session?.userId || null;
+      userId = await verifySessionToken(token);
     }
 
-    const cart = await getOrCreateCart(userId, guestId);
+    const cart = await getOrCreateCart(userId, guestId || null);
     if (!cart) {
       return NextResponse.json({ error: 'Cart not found' }, { status: 404 });
     }
