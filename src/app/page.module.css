@@ -533,21 +533,18 @@
   
   .sku {
     position: static;
-    display: inline;
-    font-size: 0.875rem;
+    display: block;
+    font-size: 0.75rem;
     color: #999;
-    margin-right: 0.5rem;
-    vertical-align: baseline;
+    margin-bottom: 0.25rem;
   }
 
   .skuDivider {
-    display: inline;
-    color: #ccc;
-    margin-right: 0.5rem;
+    display: none;
   }
   
   .productTitle {
-    display: inline;
+    display: block;
     font-size: 1.0625rem;
     font-weight: 500;
   }
