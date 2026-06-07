@@ -83,6 +83,7 @@ export default async function Home() {
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>Yae Publishing House</h1>
           <p className={styles.heroTagline}>Collector goods for worlds worth keeping close</p>
+          <span className={styles.heroScrollHint} aria-hidden="true">Catalog below</span>
         </div>
       </section>
 
