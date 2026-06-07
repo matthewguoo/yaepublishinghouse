@@ -98,8 +98,6 @@
   white-space: nowrap;
 }
 
-
-
 .logoWrap {
   position: relative;
   z-index: 10;
@@ -170,8 +168,6 @@
   -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
 }
 
-
-
 .heroContent {
   position: relative;
   z-index: 1;
@@ -207,23 +203,6 @@
   max-width: var(--container-narrow);
   margin: 0 auto;
   padding: 2rem 2rem 3rem;
-}
-
-.aboutTitleWrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.aboutTitle {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--color-sakura);
-  flex-shrink: 0;
 }
 
 .aboutContent {
@@ -351,23 +330,6 @@
   max-width: var(--container-narrow);
   margin: 0 auto;
   padding: 3rem 2rem 4rem;
-}
-
-.whatWeDoTitleWrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.whatWeDoTitle {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--color-sakura);
-  flex-shrink: 0;
 }
 
 .missionGrid {
@@ -628,29 +590,6 @@
   overflow: visible;
 }
 
-.productsTitleWrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.productsTitle {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--color-sakura);
-  flex-shrink: 0;
-}
-
-.titleLine {
-  flex: 1;
-  height: 1px;
-  background: var(--color-line);
-}
-
 /* Shipping Banner */
 .shippingBanner {
   display: flex;
@@ -744,8 +683,6 @@
   display: none;
 }
 
-
-
 /* Desktop header - original layout with absolute SKU */
 .productHeaderDesktop {
   display: flex;
@@ -812,8 +749,6 @@
   opacity: 0.5;
 }
 
-
-
 .specs {
   font-family: var(--font-body);
   font-size: 0.6875rem;
@@ -836,8 +771,6 @@
   padding: 2rem 0;
   margin-left: 70px;
 }
-
-
 
 .productImageWrap {
   display: flex;
@@ -965,15 +898,6 @@
   
   .productsSection {
     padding: 1.5rem 1.25rem 3rem;
-  }
-  
-  .productsTitle {
-    font-size: 0.625rem;
-  }
-  
-  .productsTitleWrap {
-    gap: 0.875rem;
-    margin-bottom: 1.5rem;
   }
   
   .shippingBanner {
@@ -1178,8 +1102,6 @@
   font-size: 0.6875rem;
   color: #999;
 }
-
-
 
 @media (max-width: 640px) {
   .footer {

@@ -4,22 +4,6 @@
   padding: 2rem;
 }
 
-.breadcrumb {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: #888;
-  margin-bottom: 2rem;
-}
-
-.breadcrumb a {
-  color: #666;
-  text-decoration: none;
-}
-
-.breadcrumb a:hover {
-  color: var(--color-ink);
-}
-
 .formCard {
   max-width: 400px;
   margin: 0 auto;

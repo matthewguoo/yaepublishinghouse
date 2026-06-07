@@ -4,29 +4,6 @@
   padding: 2rem;
 }
 
-.breadcrumb {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: #888;
-  margin-bottom: 2rem;
-}
-
-.breadcrumb a {
-  color: #666;
-  text-decoration: none;
-}
-
-.breadcrumb a:hover {
-  color: var(--color-ink);
-}
-
-.titleWrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-}
-
 .title {
   font-family: var(--font-body);
   font-size: 0.6875rem;
@@ -35,12 +12,6 @@
   text-transform: uppercase;
   color: var(--color-sakura);
   flex-shrink: 0;
-}
-
-.titleLine {
-  flex: 1;
-  height: 1px;
-  background: var(--color-line);
 }
 
 .content {
