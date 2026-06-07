@@ -196,47 +196,6 @@ export default async function Home() {
               <p className={styles.missionText}>
                 The publishing house handles logistics for overseas creators bringing goods to the US. Our network lets us bring wares from afar and still profit while offering retail price.
               </p>
-              <div className={styles.shippingCompare}>
-                <div className={styles.shippingOption}>
-                  <span className={styles.shippingLabel}>Ordering yourself</span>
-                  <div className={styles.shippingBreakdown}>
-                    <span>Product</span>
-                    <span>$15</span>
-                  </div>
-                  <div className={styles.shippingBreakdown}>
-                    <span>International shipping</span>
-                    <span>$25</span>
-                  </div>
-                  <div className={styles.shippingBreakdown}>
-                    <span>Import fees</span>
-                    <span>$8</span>
-                  </div>
-                  <div className={styles.shippingBreakdown}>
-                    <span>Hassle</span>
-                    <span>∞</span>
-                  </div>
-                  <div className={styles.shippingTotal}>
-                    <span>Total</span>
-                    <span>~$48+</span>
-                  </div>
-                </div>
-                <div className={styles.shippingVs}>vs</div>
-                <div className={`${styles.shippingOption} ${styles.shippingOptionGood}`}>
-                  <span className={styles.shippingLabel}>Through us</span>
-                  <div className={styles.shippingBreakdown}>
-                    <span>Product</span>
-                    <span>$15</span>
-                  </div>
-                  <div className={styles.shippingBreakdown}>
-                    <span>US shipping</span>
-                    <span>$5</span>
-                  </div>
-                  <div className={styles.shippingTotal}>
-                    <span>Total</span>
-                    <span>$20</span>
-                  </div>
-                </div>
-              </div>
               <div className={styles.emailSignup}>
                 <span className={styles.emailLabel}>Be first to join bulk imports</span>
                 <form className={styles.emailForm}>
