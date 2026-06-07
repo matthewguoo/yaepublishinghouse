@@ -194,7 +194,7 @@ export default async function Home() {
             <span className={styles.missionNumber}>02</span>
             <div className={styles.missionContent}>
               <p className={styles.missionText}>
-                The publishing house handles logistics for overseas creators bringing goods to the US. Our network lets us bring wares from afar and still profit while offering retail price.
+                The publishing house handles logistics for overseas creators bringing goods to the US. Our network lets us bring wares from afar and still profit while undercutting dropshippers run by Zagreus.
               </p>
               <div className={styles.emailSignup}>
                 <span className={styles.emailLabel}>Be first to join bulk imports</span>
