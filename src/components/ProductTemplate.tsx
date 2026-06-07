@@ -161,40 +161,66 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
           <a href="/">Home</a> &gt; <a href="/products">Products</a> &gt; {product.name}
         </div>
 
-        <div className={styles.productLayout}>
-          {/* Image gallery */}
-          <div className={styles.gallery}>
-            {product.images.length > 0 ? (
-              <>
-                <div className={styles.mainImage}>
-                  {product.badge && (
-                    <span className={`${styles.badge} ${styles[product.badgeType || 'default']}`}>
-                      {product.badge}
-                    </span>
-                  )}
-                  <img src={product.images[currentImage]} alt={product.name} />
+        {/* Image Carousel */}
+        <div className={styles.carouselSection}>
+          {product.images.length > 0 ? (
+            <>
+              <div className={styles.carouselTrack}>
+                <div 
+                  className={styles.carouselSlides} 
+                  style={{ transform: `translateX(-${currentImage * 100}%)` }}
+                >
+                  {product.images.map((img, i) => (
+                    <div key={i} className={styles.carouselSlide}>
+                      {product.badge && i === 0 && (
+                        <span className={`${styles.badge} ${styles[product.badgeType || 'default']}`}>
+                          {product.badge}
+                        </span>
+                      )}
+                      <img src={img} alt={`${product.name} ${i + 1}`} />
+                    </div>
+                  ))}
                 </div>
                 {product.images.length > 1 && (
-                  <div className={styles.thumbnails}>
-                    {product.images.map((img, i) => (
-                      <button
-                        key={i}
-                        className={`${styles.thumbnail} ${i === currentImage ? styles.active : ''}`}
-                        onClick={() => setCurrentImage(i)}
-                      >
-                        <img src={img} alt={`${product.name} ${i + 1}`} />
-                      </button>
-                    ))}
-                  </div>
+                  <>
+                    <button 
+                      className={`${styles.carouselArrow} ${styles.carouselPrev}`}
+                      onClick={() => setCurrentImage(i => i === 0 ? product.images.length - 1 : i - 1)}
+                      aria-label="Previous image"
+                    >
+                      ‹
+                    </button>
+                    <button 
+                      className={`${styles.carouselArrow} ${styles.carouselNext}`}
+                      onClick={() => setCurrentImage(i => i === product.images.length - 1 ? 0 : i + 1)}
+                      aria-label="Next image"
+                    >
+                      ›
+                    </button>
+                  </>
                 )}
-              </>
-            ) : (
-              <div className={styles.noImage}>
-                <span>Image Coming Soon</span>
               </div>
-            )}
-          </div>
+              {product.images.length > 1 && (
+                <div className={styles.carouselDots}>
+                  {product.images.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`${styles.carouselDot} ${i === currentImage ? styles.active : ''}`}
+                      onClick={() => setCurrentImage(i)}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
+          ) : (
+            <div className={styles.noImage}>
+              <span>Image Coming Soon</span>
+            </div>
+          )}
+        </div>
 
+        <div className={styles.productLayout}>
           {/* Product info */}
           <div className={styles.info}>
             <h1 className={styles.title}>{product.name}</h1>
@@ -263,24 +289,6 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
             )}
           </div>
         </div>
-
-        {/* Product images gallery */}
-        {product.images.length > 1 && (
-          <div className={styles.imageGallery}>
-            <h3>Product Images</h3>
-            <div className={styles.imageRow}>
-              {product.images.map((img, i) => (
-                <button
-                  key={i}
-                  className={`${styles.galleryThumb} ${i === currentImage ? styles.active : ''}`}
-                  onClick={() => setCurrentImage(i)}
-                >
-                  <img src={img} alt={`${product.name} ${i + 1}`} />
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </SiteLayout>
   );
