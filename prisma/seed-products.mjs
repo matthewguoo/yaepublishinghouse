@@ -10,6 +10,8 @@ const products = [
     subtitle: '24k Gold Plated First Edition',
     description: '100x40x1mm',
     price: 'US$15.00',
+    priceInCents: 1500,
+    isLive: false, // set to true when ready to sell
     stockStatus: 'In Stock',
     shippingText: 'Ships free from US',
     images: ['/nameless-pass.png'],

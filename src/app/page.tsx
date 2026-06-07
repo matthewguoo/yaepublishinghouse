@@ -102,6 +102,23 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Who We Are Section */}
+      <section className={styles.aboutSection}>
+        <div className={styles.aboutTitleWrap}>
+          <h2 className={styles.aboutTitle}>Who We Are</h2>
+          <div className={styles.titleLine} />
+        </div>
+        <div className={styles.aboutContent}>
+          <p className={styles.aboutText}>
+            We make collector goods for the games we love. Gold-plated keychains, 
+            art prints, and small treasures designed by fans who care about the details.
+          </p>
+          <p className={styles.aboutDisclaimer}>
+            Yae Publishing House is a fan project. We are not affiliated with or endorsed by HoYoverse, miHoYo, or COGNOSPHERE.
+          </p>
+        </div>
+      </section>
+
       {/* Products Section */}
       <section className={styles.productsSection}>
         <div className={styles.productsTitleWrap}>

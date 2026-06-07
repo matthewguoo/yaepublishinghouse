@@ -279,7 +279,7 @@
   letter-spacing: 0.06em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .header {
     padding: 0.875rem 1.25rem;
   }

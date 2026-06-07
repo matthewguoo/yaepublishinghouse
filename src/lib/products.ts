@@ -21,11 +21,13 @@ export interface ProductData {
   subtitle?: string;
   description: string;
   price: string;
+  priceInCents: number;
   originalPrice?: string;
   badge?: string;
   badgeType?: 'new' | 'limited' | 'sale';
   images: string[];
   specs: string;
+  isLive: boolean; // false = email waitlist, true = checkout
   cta: ProductCTA;
   stock?: number;
   stockStatus?: string;
@@ -66,11 +68,13 @@ export function fromDb(p: DbProduct): ProductData {
     subtitle: p.subtitle || undefined,
     description: p.description,
     price: p.price,
+    priceInCents: p.priceInCents,
     originalPrice: p.originalPrice || undefined,
     badge: p.badge || undefined,
     badgeType: (p.badgeType as ProductData['badgeType']) || undefined,
     images: p.images,
     specs: p.specs,
+    isLive: p.isLive,
     cta: ctaFromDb(p),
     stock: p.stock ?? undefined,
     stockStatus: p.stockStatus || undefined,

@@ -21,6 +21,8 @@ model User {
   sessions         Session[]
   vouchers         Voucher[]
   mediaSubmissions MediaSubmission[]
+  carts            Cart[]
+  orders           Order[]
 }
 
 model Session {
@@ -144,15 +146,17 @@ model Product {
   subtitle        String?
   description     String
   price           String
+  priceInCents    Int      @default(0) // actual price for Stripe
   originalPrice   String?
   badge           String?
   badgeType       String?
   images          String[]
   specs           String   // pipe-separated
+  isLive          Boolean  @default(false) // false = email waitlist, true = checkout
   ctaType         String   @default("email") // "email" | "stripe" | "soldout" | "comingsoon"
   ctaButtonText   String?
   ctaSuccessText  String?
-  ctaPriceId      String?
+  ctaPriceId      String?  // Stripe Price ID
   ctaMessage      String?
   stock           Int?
   stockStatus     String?
@@ -169,5 +173,80 @@ model Product {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
+  cartItems       CartItem[]
+  orderItems      OrderItem[]
+
   @@index([published, sortOrder])
+}
+
+// Cart for both guest and logged-in users
+model Cart {
+  id        String   @id @default(cuid())
+  userId    String?  // null for guest carts
+  guestId   String?  // cookie-based ID for guests
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     CartItem[]
+
+  @@unique([userId])
+  @@index([guestId])
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cartId    String
+  productId String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, productId])
+}
+
+model Order {
+  id                 String   @id @default(cuid())
+  userId             String?  // null for guest orders
+  email              String
+  stripeSessionId    String?  @unique
+  stripePaymentIntent String?
+  status             String   @default("pending") // pending, paid, shipped, delivered, cancelled
+  subtotalInCents    Int
+  shippingInCents    Int      @default(0)
+  taxInCents         Int      @default(0)
+  totalInCents       Int
+  shippingName       String?
+  shippingAddress    Json?    // {line1, line2, city, state, postal_code, country}
+  notes              String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  paidAt             DateTime?
+  shippedAt          DateTime?
+
+  user               User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  items              OrderItem[]
+
+  @@index([userId])
+  @@index([email])
+  @@index([status])
+}
+
+model OrderItem {
+  id           String   @id @default(cuid())
+  orderId      String
+  productId    String
+  productName  String   // snapshot at time of order
+  productSku   String?
+  priceInCents Int
+  quantity     Int
+  createdAt    DateTime @default(now())
+
+  order        Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product      Product @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([orderId])
 }
