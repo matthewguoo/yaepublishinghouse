@@ -333,17 +333,18 @@
 .productHeader {
   display: flex;
   align-items: baseline;
-  gap: 0.75rem;
+  gap: 0.625rem;
   padding-left: 70px;
   margin-bottom: 0.25rem;
+  flex-wrap: wrap;
 }
 
 .sku {
   position: absolute;
   left: 0;
-  top: 2px;
+  top: 4px;
   font-family: var(--font-noto-sans-jp), sans-serif;
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   color: #999;
   letter-spacing: 0.01em;
 }
@@ -354,7 +355,7 @@
 
 .productTitle {
   font-family: var(--font-noto-sans-jp), sans-serif;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 500;
   color: #1a1a1a;
 }
@@ -585,24 +586,31 @@
   }
   
   .productHeader {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: baseline;
     padding-left: 0;
-    gap: 0.25rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
   
   .sku {
     position: static;
+    font-size: 0.75rem;
+  }
+
+  .skuDivider {
+    display: inline;
+    color: #ccc;
+    font-size: 0.875rem;
   }
   
   .productTitle {
-    font-size: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    font-size: 1.1875rem;
+    display: inline;
   }
   
   .titleDot {
-    display: none;
+    display: inline;
   }
   
   .productSubtitle {
