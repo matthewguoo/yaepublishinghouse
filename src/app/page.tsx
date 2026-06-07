@@ -169,28 +169,13 @@ export default async function Home() {
         </div>
         <div className={styles.missionGrid}>
           <div className={styles.missionItem}>
-            <div className={styles.missionVisual}>
-              <span className={styles.missionNumber}>01</span>
-              <div className={styles.missionIcon}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16"/>
-                </svg>
-              </div>
-            </div>
+            <span className={styles.missionNumber}>01</span>
             <p className={styles.missionText}>
               We design original goods with manufacturing processes you won't find elsewhere. Real gold plating, aerospace-grade materials, details that reward a closer look.
             </p>
           </div>
           <div className={styles.missionItem}>
-            <div className={styles.missionVisual}>
-              <span className={styles.missionNumber}>02</span>
-              <div className={styles.missionIcon}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-                  <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
-                </svg>
-              </div>
-            </div>
+            <span className={styles.missionNumber}>02</span>
             <div className={styles.missionContent}>
               <p className={styles.missionText}>
                 The publishing house handles logistics for overseas creators bringing goods to the US. You pay retail, not retail plus import fees.
