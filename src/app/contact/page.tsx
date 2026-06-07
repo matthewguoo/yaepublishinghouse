@@ -21,13 +21,8 @@ export default function ContactPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>General Inquiries</h2>
             <p className={styles.text}>
-              For questions about orders, products, or general support, reach out via Twitter DM or email.
+              For questions about orders, products, or general support, reach out via email.
             </p>
-            <div className={styles.links}>
-              <a href="https://twitter.com/pci_yae" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                @pci_yae on Twitter
-              </a>
-            </div>
           </section>
 
           <section className={styles.section}>
