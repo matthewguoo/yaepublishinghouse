@@ -156,16 +156,16 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
 
   return (
     <SiteLayout>
-      {/* Free Shipping Banner */}
-      <div className={styles.shippingBanner}>
-        <img src="/komaniya-logo.png" alt="Komaniya Express" className={styles.komaniyaLogo} />
-        <span>All Yae Publishing House products ship for free — courtesy of Komaniya Express</span>
-      </div>
-
       <div className={styles.container}>
         <div className={styles.titleWrap}>
           <span className={styles.titleBreadcrumb}>Product › {product.name}</span>
           <div className={styles.titleLine} />
+        </div>
+
+        {/* Free Shipping Banner */}
+        <div className={styles.shippingBanner}>
+          <img src="/komaniya-logo.png" alt="Komaniya Express" className={styles.komaniyaLogo} />
+          <span>All Yae Publishing House products ship for free — courtesy of Komaniya Express</span>
         </div>
 
         {/* Image Carousel */}
