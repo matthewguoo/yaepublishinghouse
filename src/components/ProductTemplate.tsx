@@ -157,8 +157,12 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
   return (
     <SiteLayout>
       <div className={styles.container}>
+        <div className={styles.breadcrumb}>
+          <a href="/">Home</a> › <a href="/products">Products</a> › {product.name}
+        </div>
+
         <div className={styles.titleWrap}>
-          <span className={styles.titleBreadcrumb}>Product › {product.name}</span>
+          <span className={styles.titleBreadcrumb}>Product</span>
           <div className={styles.titleLine} />
         </div>
 

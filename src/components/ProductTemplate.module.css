@@ -4,11 +4,27 @@
   padding: 2rem;
 }
 
+.breadcrumb {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+  color: #666;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #1a1a1a;
+}
+
 .titleWrap {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .titleBreadcrumb {
