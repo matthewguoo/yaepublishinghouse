@@ -135,3 +135,39 @@ model MediaSubmission {
   @@index([userId])
   @@index([status, createdAt])
 }
+
+model Product {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  sku             String?
+  name            String
+  subtitle        String?
+  description     String
+  price           String
+  originalPrice   String?
+  badge           String?
+  badgeType       String?
+  images          String[]
+  specs           String   // pipe-separated
+  ctaType         String   @default("email") // "email" | "stripe" | "soldout" | "comingsoon"
+  ctaButtonText   String?
+  ctaSuccessText  String?
+  ctaPriceId      String?
+  ctaMessage      String?
+  stock           Int?
+  stockStatus     String?
+  shippingText    String?
+  serialRange     String?
+  featured        Boolean  @default(false)
+  published       Boolean  @default(true)
+  announcementUrl String?
+  watermarkTop    String?
+  watermarkBottom String?
+  timeline        Json?    // [{label, date, status}]
+  meta            Json?
+  sortOrder       Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([published, sortOrder])
+}

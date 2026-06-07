@@ -1,10 +1,11 @@
-export type ProductCTA = 
+import { prisma } from './db';
+import type { Product as DbProduct } from '@prisma/client';
+
+export type ProductCTA =
   | { type: 'email'; buttonText?: string; successMessage?: string }
   | { type: 'stripe'; priceId?: string; buttonText?: string }
   | { type: 'soldout'; message?: string }
   | { type: 'comingsoon'; message?: string };
-
-
 
 export interface TimelineMilestone {
   label: string;
@@ -24,11 +25,11 @@ export interface ProductData {
   badge?: string;
   badgeType?: 'new' | 'limited' | 'sale';
   images: string[];
-  specs: string; // pipe-separated, e.g. ".999 24k Gold Plating|Ceramic anti-fingerprint coat|Light fiberglass base"
+  specs: string;
   cta: ProductCTA;
   stock?: number;
-  stockStatus?: string; // "In Stock", "Pre-order", etc.
-  shippingText?: string; // "Ships free from US"
+  stockStatus?: string;
+  shippingText?: string;
   serialRange?: string;
   featured?: boolean;
   announcementUrl?: string;
@@ -38,44 +39,70 @@ export interface ProductData {
   timeline?: TimelineMilestone[];
 }
 
-// Product registry
-export const products: Record<string, ProductData> = {
-  'nameless-pass': {
-    id: 'nameless-pass',
-    slug: 'nameless-pass',
-    sku: 'YPH-0001',
-    name: 'Star Rail Special Pass Keychain',
-    subtitle: '24k Gold Plated First Edition',
-    description: 'Limited edition gold-plated collectible commemorating the 2158th Year of the Trailblaze and the Nameless\' contributions to the situation in Penacony.',
-    price: 'US$15.00',
-    stockStatus: 'In Stock',
-    shippingText: 'Ships free from US',
-    images: ['/nameless-pass.png'],
-    specs: '.999 24k Gold Plating|Ceramic anti-fingerprint coat|Light fiberglass base',
-    cta: { 
-      type: 'email', 
-      buttonText: 'Join Waitlist',
-      successMessage: 'You\'re on the list! We\'ll notify you when orders open.'
-    },
-    serialRange: '0001-2158',
-    featured: true,
-    announcementUrl: '/news/nameless-pass-announcement',
-    timeline: [
-      { label: 'Order Period', date: 'Jun 1 – Jun 15', status: 'upcoming' },
-      { label: 'Manufacturing', date: 'Late June', status: 'upcoming' },
-      { label: 'Ships from US', date: 'Early July', status: 'upcoming' },
-    ],
-  },
-};
-
-export function getProduct(slug: string): ProductData | undefined {
-  return products[slug];
+function ctaFromDb(p: DbProduct): ProductCTA {
+  switch (p.ctaType) {
+    case 'stripe':
+      return { type: 'stripe', priceId: p.ctaPriceId || undefined, buttonText: p.ctaButtonText || undefined };
+    case 'soldout':
+      return { type: 'soldout', message: p.ctaMessage || undefined };
+    case 'comingsoon':
+      return { type: 'comingsoon', message: p.ctaMessage || undefined };
+    case 'email':
+    default:
+      return {
+        type: 'email',
+        buttonText: p.ctaButtonText || undefined,
+        successMessage: p.ctaSuccessText || undefined,
+      };
+  }
 }
 
-export function getAllProducts(): ProductData[] {
-  return Object.values(products);
+export function fromDb(p: DbProduct): ProductData {
+  return {
+    id: p.id,
+    slug: p.slug,
+    sku: p.sku || undefined,
+    name: p.name,
+    subtitle: p.subtitle || undefined,
+    description: p.description,
+    price: p.price,
+    originalPrice: p.originalPrice || undefined,
+    badge: p.badge || undefined,
+    badgeType: (p.badgeType as ProductData['badgeType']) || undefined,
+    images: p.images,
+    specs: p.specs,
+    cta: ctaFromDb(p),
+    stock: p.stock ?? undefined,
+    stockStatus: p.stockStatus || undefined,
+    shippingText: p.shippingText || undefined,
+    serialRange: p.serialRange || undefined,
+    featured: p.featured,
+    announcementUrl: p.announcementUrl || undefined,
+    watermarkTop: p.watermarkTop || undefined,
+    watermarkBottom: p.watermarkBottom || undefined,
+    timeline: (p.timeline as TimelineMilestone[] | null) || undefined,
+    meta: (p.meta as Record<string, string> | null) || undefined,
+  };
 }
 
-export function getFeaturedProducts(): ProductData[] {
-  return Object.values(products).filter(p => p.featured);
+export async function getProduct(slug: string): Promise<ProductData | undefined> {
+  const p = await prisma.product.findUnique({ where: { slug } });
+  if (!p || !p.published) return undefined;
+  return fromDb(p);
+}
+
+export async function getAllProducts(): Promise<ProductData[]> {
+  const rows = await prisma.product.findMany({
+    where: { published: true },
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+  });
+  return rows.map(fromDb);
+}
+
+export async function getFeaturedProducts(): Promise<ProductData[]> {
+  const rows = await prisma.product.findMany({
+    where: { published: true, featured: true },
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'asc' }],
+  });
+  return rows.map(fromDb);
 }

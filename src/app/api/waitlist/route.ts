@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get product info
-    const product = getProduct(productId);
+    const product = await getProduct(productId);
     if (!product) {
       return NextResponse.json(
         { error: 'Product not found' },

@@ -1,12 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from './SiteHeader.module.css';
 
 export default function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
+  // Lock body scroll when overlay is open
   useEffect(() => {
     if (mobileOpen) {
       const prev = document.body.style.overflow;
@@ -17,6 +20,7 @@ export default function SiteHeader() {
     }
   }, [mobileOpen]);
 
+  // Close on ESC
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setMobileOpen(false);
@@ -25,11 +29,14 @@ export default function SiteHeader() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const close = () => setMobileOpen(false);
+  // Close when route changes
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   return (
     <header className={styles.header}>
-      <Link href="/" className={styles.logoWrap} onClick={close}>
+      <Link href="/" className={styles.logoWrap}>
         <div className={styles.logoMark}>八</div>
         <div className={styles.logoText}>
           <span className={styles.logoJp}>八重堂書店</span>
@@ -63,67 +70,52 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      {/* Mobile trigger */}
+      {/* Mobile hamburger / close (animates into X when open) */}
       <button
         type="button"
-        className={styles.mobileTrigger}
-        aria-label="Open menu"
+        className={`${styles.mobileTrigger} ${mobileOpen ? styles.mobileTriggerOpen : ''}`}
+        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         aria-expanded={mobileOpen}
-        onClick={() => setMobileOpen(true)}
+        aria-controls="mobile-overlay-nav"
+        onClick={() => setMobileOpen((v) => !v)}
       >
         <span className={styles.mobileTriggerBar} />
         <span className={styles.mobileTriggerBar} />
         <span className={styles.mobileTriggerBar} />
       </button>
 
-      {/* Mobile drawer */}
+      {/* Mobile full-screen overlay */}
       <div
-        className={`${styles.backdrop} ${mobileOpen ? styles.backdropOpen : ''}`}
-        onClick={close}
-        aria-hidden="true"
-      />
-      <aside
-        className={`${styles.drawer} ${mobileOpen ? styles.drawerOpen : ''}`}
+        id="mobile-overlay-nav"
+        className={`${styles.overlay} ${mobileOpen ? styles.overlayOpen : ''}`}
         role="dialog"
         aria-modal="true"
         aria-label="Site menu"
       >
-        <div className={styles.drawerHeader}>
-          <span className={styles.drawerTitle}>Menu</span>
-          <button
-            type="button"
-            className={styles.closeBtn}
-            aria-label="Close menu"
-            onClick={close}
-          >
-            ×
-          </button>
-        </div>
+        <nav className={styles.overlayInner}>
+          <div className={styles.overlaySection}>
+            <span className={styles.overlaySectionTitle}>Shop</span>
+            <Link href="/products" className={styles.overlayLink}>Products</Link>
+            <Link href="/news" className={styles.overlayLink}>Editorial</Link>
+            <Link href="/tools/png-transparency" className={styles.overlayLink}>Tools</Link>
+          </div>
+          <div className={styles.overlaySection}>
+            <span className={styles.overlaySectionTitle}>Info</span>
+            <Link href="/sitemap" className={styles.overlayLink}>Sitemap</Link>
+            <Link href="/contact" className={styles.overlayLink}>Contact</Link>
+          </div>
+          <div className={styles.overlaySection}>
+            <span className={styles.overlaySectionTitle}>Account</span>
+            <Link href="/login" className={styles.overlayLink}>Login</Link>
+            <Link href="/register" className={styles.overlayLink}>Register</Link>
+          </div>
 
-        <nav className={styles.drawerNav}>
-          <div className={styles.drawerSection}>
-            <span className={styles.drawerSectionTitle}>Shop</span>
-            <Link href="/products" className={styles.drawerLink} onClick={close}>Products</Link>
-            <Link href="/news" className={styles.drawerLink} onClick={close}>Editorial</Link>
-            <Link href="/tools/png-transparency" className={styles.drawerLink} onClick={close}>Tools</Link>
-          </div>
-          <div className={styles.drawerSection}>
-            <span className={styles.drawerSectionTitle}>Info</span>
-            <Link href="/sitemap" className={styles.drawerLink} onClick={close}>Sitemap</Link>
-            <Link href="/contact" className={styles.drawerLink} onClick={close}>Contact</Link>
-          </div>
-          <div className={styles.drawerSection}>
-            <span className={styles.drawerSectionTitle}>Account</span>
-            <Link href="/login" className={styles.drawerLink} onClick={close}>Login</Link>
-            <Link href="/register" className={styles.drawerLink} onClick={close}>Register</Link>
+          <div className={styles.overlayFooter}>
+            <span className={styles.overlayBadge}>Free US Shipping</span>
+            <span className={styles.overlayBadge}>Secure Checkout</span>
           </div>
         </nav>
-
-        <div className={styles.drawerFooter}>
-          <span className={styles.drawerBadge}>Free US Shipping</span>
-          <span className={styles.drawerBadge}>Secure Checkout</span>
-        </div>
-      </aside>
+      </div>
     </header>
   );
 }
