@@ -422,6 +422,105 @@
   margin: 0;
 }
 
+.missionPoints {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.missionPoint {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.missionPoint p {
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: #666;
+  margin: 0;
+}
+
+.pointLetter {
+  font-family: Georgia, serif;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #8b4d5c;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* Shipping Comparison */
+.shippingCompare {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.shippingOption {
+  flex: 1;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+.shippingOptionGood {
+  border-color: #8b4d5c;
+  background: #faf8f8;
+}
+
+.shippingLabel {
+  display: block;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.75rem;
+}
+
+.shippingOptionGood .shippingLabel {
+  color: #8b4d5c;
+}
+
+.shippingBreakdown {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.8125rem;
+  color: #666;
+  padding: 0.25rem 0;
+}
+
+.shippingTotal {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-noto-sans-jp), sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid #e5e5e5;
+}
+
+.shippingOptionGood .shippingTotal {
+  color: #8b4d5c;
+  border-top-color: #d4b8be;
+}
+
+.shippingVs {
+  font-family: Georgia, serif;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: #aaa;
+  flex-shrink: 0;
+}
+
 .missionCta {
   font-family: var(--font-noto-sans-jp), sans-serif;
   font-size: 0.875rem;
@@ -494,6 +593,15 @@
   .missionItem {
     flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .shippingCompare {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .shippingVs {
+    display: none;
   }
 
   .emailForm {

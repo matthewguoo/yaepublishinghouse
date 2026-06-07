@@ -170,19 +170,73 @@ export default async function Home() {
         <div className={styles.missionGrid}>
           <div className={styles.missionItem}>
             <span className={styles.missionNumber}>01</span>
-            <p className={styles.missionText}>
-              We design original goods with manufacturing processes you won't find elsewhere. Real gold plating, aerospace-grade materials, details that reward a closer look.
-            </p>
+            <div className={styles.missionContent}>
+              <p className={styles.missionText}>
+                We design original goods with manufacturing processes you won't find elsewhere. Real gold plating, aerospace-grade materials, details that reward a closer look.
+              </p>
+              <div className={styles.missionPoints}>
+                <div className={styles.missionPoint}>
+                  <span className={styles.pointLetter}>a.</span>
+                  <p>A product should be of sufficient quality to obsess over. A surface that scratches is a finish that needs to be redesigned.</p>
+                </div>
+                <div className={styles.missionPoint}>
+                  <span className={styles.pointLetter}>b.</span>
+                  <p>High technology, high connection. Even when our products are milled with precision instruments finer than Yae's silky tail-fur, necessary finishing touches are meticulously done by hand.</p>
+                </div>
+                <div className={styles.missionPoint}>
+                  <span className={styles.pointLetter}>c.</span>
+                  <p>A good product is a piece of art. True art is human. The publishing house will never use matrix multiplication to create artwork. That said, the Guuji is seeking talented designers and artists for new wares. <a href="mailto:hello@yaepublishing.house" className={styles.aboutLink}>Get in touch</a>.</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div className={styles.missionItem}>
             <span className={styles.missionNumber}>02</span>
             <div className={styles.missionContent}>
               <p className={styles.missionText}>
-                The publishing house handles logistics for overseas creators bringing goods to the US. You pay retail, not retail plus import fees.
+                The publishing house handles logistics for overseas creators bringing goods to the US. Our network lets us bring wares from afar and still profit while offering retail price.
               </p>
-              <p className={styles.missionCta}>
-                Designer or artist? <a href="mailto:hello@yaepublishing.house" className={styles.aboutLink}>Let's talk</a>.
-              </p>
+              <div className={styles.shippingCompare}>
+                <div className={styles.shippingOption}>
+                  <span className={styles.shippingLabel}>Ordering yourself</span>
+                  <div className={styles.shippingBreakdown}>
+                    <span>Product</span>
+                    <span>$15</span>
+                  </div>
+                  <div className={styles.shippingBreakdown}>
+                    <span>International shipping</span>
+                    <span>$25</span>
+                  </div>
+                  <div className={styles.shippingBreakdown}>
+                    <span>Import fees</span>
+                    <span>$8</span>
+                  </div>
+                  <div className={styles.shippingBreakdown}>
+                    <span>Hassle</span>
+                    <span>∞</span>
+                  </div>
+                  <div className={styles.shippingTotal}>
+                    <span>Total</span>
+                    <span>~$48+</span>
+                  </div>
+                </div>
+                <div className={styles.shippingVs}>vs</div>
+                <div className={`${styles.shippingOption} ${styles.shippingOptionGood}`}>
+                  <span className={styles.shippingLabel}>Through us</span>
+                  <div className={styles.shippingBreakdown}>
+                    <span>Product</span>
+                    <span>$15</span>
+                  </div>
+                  <div className={styles.shippingBreakdown}>
+                    <span>US shipping</span>
+                    <span>$5</span>
+                  </div>
+                  <div className={styles.shippingTotal}>
+                    <span>Total</span>
+                    <span>$20</span>
+                  </div>
+                </div>
+              </div>
               <div className={styles.emailSignup}>
                 <span className={styles.emailLabel}>Be first to join bulk imports</span>
                 <form className={styles.emailForm}>
