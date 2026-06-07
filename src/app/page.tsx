@@ -182,18 +182,6 @@ export default async function Home() {
               </div>
             </div>
           </div>
-          <div className={styles.missionItem}>
-            <span className={styles.missionNumber}>02</span>
-            <div className={styles.missionContent}>
-              <p className={styles.missionText}>
-                The publishing house handles logistics for overseas creators bringing goods to the US. Our network lets us bring wares from afar and still profit while undercutting dropshippers run by Zagreus, or something definitely related to the trickery titan.
-              </p>
-              <div className={styles.emailSignup}>
-                <span className={styles.emailLabel}>Be first to join bulk imports</span>
-                <Link href="/register" className={styles.emailButton}>Create an account</Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </SiteLayout>
