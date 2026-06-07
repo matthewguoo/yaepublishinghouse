@@ -129,7 +129,7 @@ export default async function Home() {
 
       {/* Location Section */}
       <section className={styles.locationSection}>
-        <div className={styles.locationHeader}>
+        <div className={styles.locationVisual}>
           <div className={styles.locationIcon}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
@@ -138,21 +138,41 @@ export default async function Home() {
           </div>
           <span className={styles.locationLabel}>Northern California</span>
         </div>
-        <p className={styles.locationText}>
-          This branch of the publishing house currently operates quite far from Narukami. 
-          But according to the Guuji, the fog rolling over these hills reminds her of home. 
-          And the eternal sunshine makes for excellent reading weather.
-        </p>
+        <div className={styles.locationContent}>
+          <p className={styles.locationText}>
+            This branch of the publishing house currently operates quite far from Narukami. 
+            But according to the Guuji, the fog rolling over these hills reminds her of home. 
+            And the eternal sunshine makes for excellent reading weather.
+          </p>
+        </div>
+      </section>
 
+      {/* Mission Section */}
+      <section className={styles.missionSection}>
         <div className={styles.missionGrid}>
           <div className={styles.missionItem}>
-            <span className={styles.missionNumber}>01</span>
+            <div className={styles.missionVisual}>
+              <span className={styles.missionNumber}>01</span>
+              <div className={styles.missionIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 21h18M9 8h1M9 12h1M9 16h1M14 8h1M14 12h1M14 16h1M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16"/>
+                </svg>
+              </div>
+            </div>
             <p className={styles.missionText}>
-              We design original goods with manufacturing processes you won't find elsewhere. Real gold plating, aerospace-grade materials, and details that reward a closer look.
+              We design original goods with manufacturing processes you won't find elsewhere. Real gold plating, aerospace-grade materials, details that reward a closer look.
             </p>
           </div>
           <div className={styles.missionItem}>
-            <span className={styles.missionNumber}>02</span>
+            <div className={styles.missionVisual}>
+              <span className={styles.missionNumber}>02</span>
+              <div className={styles.missionIcon}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                  <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+                </svg>
+              </div>
+            </div>
             <div className={styles.missionContent}>
               <p className={styles.missionText}>
                 The publishing house handles logistics for overseas creators bringing goods to the US. You pay retail, not retail plus import fees.
