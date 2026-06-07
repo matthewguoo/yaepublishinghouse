@@ -109,12 +109,20 @@ export default async function Home() {
           <div className={styles.titleLine} />
         </div>
         <div className={styles.aboutContent}>
-          <p className={styles.aboutText}>
-            We make collector goods for the games we love. Gold-plated keychains, 
-            art prints, and small treasures designed by fans who care about the details.
+          <blockquote className={styles.aboutQuote}>
+            <span className={styles.quoteMark}>"</span>
+            <p className={styles.quoteText}>
+              <span className={styles.quoteLight}>The best stories</span>{' '}
+              <span className={styles.quoteBold}>deserve to be held.</span>
+            </p>
+          </blockquote>
+          <p className={styles.aboutStory}>
+            The Guuji's publishing house has always dealt in tales worth treasuring. 
+            Now we bring that same care to the things you carry with you—small 
+            artifacts from worlds that matter to you.
           </p>
           <p className={styles.aboutDisclaimer}>
-            Yae Publishing House is a fan project. We are not affiliated with or endorsed by HoYoverse, miHoYo, or COGNOSPHERE.
+            A fan project. Not affiliated with HoYoverse.
           </p>
         </div>
       </section>
