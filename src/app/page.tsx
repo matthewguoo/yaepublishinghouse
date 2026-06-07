@@ -118,7 +118,7 @@ export default async function Home() {
           </blockquote>
           <p className={styles.aboutStory}>
             The Guuji's publishing house has always dealt in tales worth treasuring. 
-            Now we bring that same care to the things you carry with you—small 
+            Now we bring that same care to the things you carry with you. Small 
             artifacts from worlds that matter to you.
           </p>
           <p className={styles.aboutDisclaimer}>
@@ -141,8 +141,8 @@ export default async function Home() {
         <div className={styles.locationContent}>
           <p className={styles.locationText}>
             This branch of the publishing house currently operates quite far from Narukami. 
-            But according to the Guuji, the fog rolling over these hills reminds her of home—and 
-            the eternal sunshine makes for excellent reading weather.
+            But according to the Guuji, the fog rolling over these hills reminds her of home. 
+            And the eternal sunshine makes for excellent reading weather.
           </p>
         </div>
       </section>
