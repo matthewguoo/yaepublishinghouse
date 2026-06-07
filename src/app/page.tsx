@@ -103,6 +103,17 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Products Section */}
+      <section className={styles.productsSection}>
+        <SectionHeader title="Products" as="h1" />
+
+        <div className={styles.productsList}>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+
       {/* Who We Are Section */}
       <section className={styles.aboutSection}>
         <SectionHeader title="Who We Are" marginBottom="1.5rem" />
@@ -142,17 +153,6 @@ export default async function Home() {
             But according to the Guuji, the fog rolling over these hills reminds her of home. 
             And the eternal sunshine makes for excellent reading weather.
           </p>
-        </div>
-      </section>
-
-      {/* Products Section */}
-      <section className={styles.productsSection}>
-        <SectionHeader title="Products" as="h1" />
-
-        <div className={styles.productsList}>
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
         </div>
       </section>
 
