@@ -22,7 +22,12 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { email, password } = body;
+    const { email, password, website } = body;
+
+    // Honeypot check - bots fill this hidden field
+    if (website) {
+      return NextResponse.json({ success: true });
+    }
 
     if (!email || !password) {
       return NextResponse.json(

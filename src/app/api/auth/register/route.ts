@@ -23,7 +23,13 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { email, password } = body;
+    const { email, password, website } = body;
+
+    // Honeypot check - bots fill this hidden field
+    if (website) {
+      // Silently reject but return success to not tip off bots
+      return NextResponse.json({ success: true });
+    }
 
     // Validate input
     if (!email || !password) {

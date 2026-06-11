@@ -10,6 +10,7 @@ import styles from './page.module.css';
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [website, setWebsite] = useState(''); // honeypot
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -24,7 +25,7 @@ export default function LoginPage() {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, website }),
       });
 
       const data = await res.json();
@@ -52,6 +53,16 @@ export default function LoginPage() {
           <p className={styles.subtitle}>Enter your email to receive a magic link</p>
 
           <form onSubmit={handleSubmit} className={styles.form}>
+            {/* Honeypot field - hidden from humans, bots fill it */}
+            <input
+              type="text"
+              name="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ position: 'absolute', left: '-9999px', opacity: 0 }}
+            />
             <label className={styles.label}>
               Email
               <input
