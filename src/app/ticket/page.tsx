@@ -29,12 +29,12 @@ export default function TicketPage() {
           </p>
 
           <a 
-            href="https://instagram.com/yaepublishinghouse" 
+            href="https://instagram.com/yaepublishing.house" 
             target="_blank" 
             rel="noopener noreferrer"
             className={styles.cta}
           >
-            @yaepublishinghouse
+            @yaepublishing.house
           </a>
 
           <p className={styles.footer}>
