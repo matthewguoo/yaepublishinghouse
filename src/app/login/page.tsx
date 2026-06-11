@@ -10,22 +10,21 @@ import styles from './page.module.css';
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [website, setWebsite] = useState(''); // honeypot
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    setMessage('');
 
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, website }),
+        body: JSON.stringify({ email, password, website }),
       });
 
       const data = await res.json();
@@ -35,7 +34,7 @@ export default function LoginPage() {
         return;
       }
 
-      setMessage('Check your email for a magic link to sign in.');
+      router.push('/account');
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -50,7 +49,7 @@ export default function LoginPage() {
 
         <div className={styles.formCard}>
           <h1 className={styles.title}>Login</h1>
-          <p className={styles.subtitle}>Enter your email to receive a magic link</p>
+          <p className={styles.subtitle}>Sign in to your account</p>
 
           <form onSubmit={handleSubmit} className={styles.form}>
             {/* Honeypot field - hidden from humans, bots fill it */}
@@ -76,11 +75,23 @@ export default function LoginPage() {
               />
             </label>
 
+            <label className={styles.label}>
+              Password
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                disabled={loading}
+                className={styles.input}
+              />
+            </label>
+
             {error && <p className={styles.error}>{error}</p>}
-            {message && <p className={styles.success}>{message}</p>}
 
             <button type="submit" disabled={loading} className={styles.button}>
-              {loading ? 'Sending...' : 'Send Magic Link'}
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 

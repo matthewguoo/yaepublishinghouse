@@ -8,6 +8,7 @@ import styles from './page.module.css';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [website, setWebsite] = useState(''); // honeypot
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -23,7 +24,7 @@ export default function RegisterPage() {
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, website }),
+        body: JSON.stringify({ email, password, website }),
       });
 
       const data = await res.json();
@@ -69,6 +70,20 @@ export default function RegisterPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
                 required
+                disabled={loading}
+                className={styles.input}
+              />
+            </label>
+
+            <label className={styles.label}>
+              Password
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="At least 8 characters"
+                required
+                minLength={8}
                 disabled={loading}
                 className={styles.input}
               />
