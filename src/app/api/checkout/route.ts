@@ -4,8 +4,37 @@ import { getStripe } from '@/lib/stripe';
 import { CART_LIMITS, DEFAULTS, PRODUCT_CTA, RATE_LIMITS, STRIPE_CHECKOUT } from '@/lib/api/constants';
 import { getSiteUrl } from '@/lib/api/env';
 import { badRequest, ok, serverError } from '@/lib/api/responses';
-import { enforceRateLimit, getAuthContext } from '@/lib/api/request';
+import { enforceRateLimit, getAuthContext, getIntegerField, getStringField, readJson } from '@/lib/api/request';
 import { cartWithItemsArgs } from '@/lib/api/cart';
+
+type CheckoutItem = {
+  product: {
+    id: string;
+    name: string;
+    slug: string;
+    sku: string | null;
+    subtitle: string | null;
+    images: string[];
+    published: boolean;
+    ctaType: string;
+    priceInCents: number;
+    stock: number | null;
+  };
+  quantity: number;
+};
+
+function validateCheckoutItem(item: CheckoutItem) {
+  if (item.quantity < 1 || item.quantity > CART_LIMITS.maxQuantityPerItem) {
+    return `Invalid quantity for "${item.product.name}"`;
+  }
+  if (!item.product.published || item.product.ctaType !== PRODUCT_CTA.stripe || item.product.priceInCents <= 0) {
+    return `Product "${item.product.name}" is no longer available`;
+  }
+  if (item.product.stock !== null && item.product.stock < item.quantity) {
+    return `Not enough stock for "${item.product.name}"`;
+  }
+  return null;
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,6 +42,9 @@ export async function POST(req: NextRequest) {
     if (limited) return limited;
 
     const stripe = getStripe();
+    const body = await readJson(req);
+    const productId = getStringField(body, 'productId');
+    const quantity = getIntegerField(body, 'quantity', 1);
     const { userId, guestId } = await getAuthContext();
     let userEmail: string | null = null;
 
@@ -21,28 +53,54 @@ export async function POST(req: NextRequest) {
       userEmail = user?.email || null;
     }
 
-    const cart = userId
-      ? await prisma.cart.findUnique({ where: { userId }, ...cartWithItemsArgs })
-      : guestId
-        ? await prisma.cart.findFirst({ where: { guestId, userId: null }, ...cartWithItemsArgs })
-        : null;
+    let items: CheckoutItem[] = [];
+    let cancelPath = '/cart?cancelled=true';
+    let cartId: string | undefined;
 
-    if (!cart || cart.items.length === 0) return badRequest('Cart is empty');
-    if (cart.items.length > CART_LIMITS.maxCheckoutItems) return badRequest('Too many items in cart');
+    if (productId) {
+      if (quantity < 1 || quantity > CART_LIMITS.maxQuantityPerItem) {
+        return badRequest(`Quantity must be between 1 and ${CART_LIMITS.maxQuantityPerItem}`);
+      }
 
-    for (const item of cart.items) {
-      if (item.quantity < 1 || item.quantity > CART_LIMITS.maxQuantityPerItem) {
-        return badRequest(`Invalid quantity for "${item.product.name}"`);
-      }
-      if (!item.product.published || item.product.ctaType !== PRODUCT_CTA.stripe || item.product.priceInCents <= 0) {
-        return badRequest(`Product "${item.product.name}" is no longer available`);
-      }
-      if (item.product.stock !== null && item.product.stock < item.quantity) {
-        return badRequest(`Not enough stock for "${item.product.name}"`);
-      }
+      const product = await prisma.product.findUnique({
+        where: { id: productId },
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          sku: true,
+          subtitle: true,
+          images: true,
+          published: true,
+          ctaType: true,
+          priceInCents: true,
+          stock: true,
+        },
+      });
+
+      if (!product) return badRequest('Product not found');
+      items = [{ product, quantity }];
+      cancelPath = `/products/${product.slug}?cancelled=true`;
+    } else {
+      const cart = userId
+        ? await prisma.cart.findUnique({ where: { userId }, ...cartWithItemsArgs })
+        : guestId
+          ? await prisma.cart.findFirst({ where: { guestId, userId: null }, ...cartWithItemsArgs })
+          : null;
+
+      if (!cart || cart.items.length === 0) return badRequest('Cart is empty');
+      if (cart.items.length > CART_LIMITS.maxCheckoutItems) return badRequest('Too many items in cart');
+
+      items = cart.items.map((item) => ({ product: item.product, quantity: item.quantity }));
+      cartId = cart.id;
     }
 
-    const lineItems = cart.items.map((item) => ({
+    for (const item of items) {
+      const error = validateCheckoutItem(item);
+      if (error) return badRequest(error);
+    }
+
+    const lineItems = items.map((item) => ({
       price_data: {
         currency: STRIPE_CHECKOUT.currency,
         product_data: {
@@ -55,7 +113,7 @@ export async function POST(req: NextRequest) {
       quantity: item.quantity,
     }));
 
-    const subtotalInCents = cart.items.reduce(
+    const subtotalInCents = items.reduce(
       (sum, item) => sum + item.product.priceInCents * item.quantity,
       0
     );
@@ -67,7 +125,7 @@ export async function POST(req: NextRequest) {
         subtotalInCents,
         totalInCents: subtotalInCents,
         items: {
-          create: cart.items.map((item) => ({
+          create: items.map((item) => ({
             productId: item.product.id,
             productName: item.product.name,
             productSku: item.product.sku,
@@ -87,8 +145,12 @@ export async function POST(req: NextRequest) {
       customer_email: userEmail || undefined,
       client_reference_id: order.id,
       success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/cart?cancelled=true`,
-      metadata: { orderId: order.id, cartId: cart.id },
+      cancel_url: `${baseUrl}${cancelPath}`,
+      metadata: {
+        orderId: order.id,
+        ...(cartId ? { cartId } : {}),
+        ...(productId ? { productId } : {}),
+      },
     });
 
     await prisma.order.update({ where: { id: order.id }, data: { stripeSessionId: session.id } });

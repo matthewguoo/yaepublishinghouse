@@ -62,30 +62,56 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
     }
   };
 
-  const handleAddToCart = async () => {
+  const handleBuyNow = async () => {
     setCartLoading(true);
     setError('');
-    
+
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: product.id, quantity: 1 }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        setError(data.error || 'Failed to start checkout');
+        return;
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      setError('Failed to start checkout');
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+  const handleAddToCart = async () => {
+    setLoading(true);
+    setError('');
+
     try {
       const res = await fetch('/api/cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productId: product.id, quantity: 1 }),
       });
-      
+
       if (!res.ok) {
         const data = await res.json();
         setError(data.error || 'Failed to add to cart');
         return;
       }
-      
+
       setAddedToCart(true);
-      // Reset after a few seconds
       setTimeout(() => setAddedToCart(false), 3000);
     } catch {
       setError('Failed to add to cart');
     } finally {
-      setCartLoading(false);
+      setLoading(false);
     }
   };
 
@@ -136,12 +162,20 @@ export default function ProductTemplate({ product }: ProductTemplateProps) {
       case 'stripe':
         return (
           <div className={styles.stripeActions}>
-            <button 
-              onClick={handleAddToCart} 
-              className={`${styles.ctaButton} ${addedToCart ? styles.ctaButtonSuccess : ''}`}
-              disabled={cartLoading || addedToCart}
+            {error && <div className={styles.errorMessage}>{error}</div>}
+            <button
+              onClick={handleBuyNow}
+              className={styles.ctaButtonFull}
+              disabled={cartLoading}
             >
-              {cartLoading ? 'Adding...' : addedToCart ? 'Added to Cart ✓' : (product.cta.buttonText || 'Add to Cart')}
+              {cartLoading ? 'Opening checkout...' : (product.cta.buttonText || 'Buy Now')}
+            </button>
+            <button
+              onClick={handleAddToCart}
+              className={`${styles.cartButton} ${addedToCart ? styles.ctaButtonSuccess : ''}`}
+              disabled={loading || addedToCart}
+            >
+              {loading ? 'Adding...' : addedToCart ? 'Added to Cart ✓' : 'Add to Cart'}
             </button>
             <a href="/cart" className={styles.viewCartLink}>
               View Cart
