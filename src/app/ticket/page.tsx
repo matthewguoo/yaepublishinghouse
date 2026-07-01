@@ -6,7 +6,6 @@ import SiteLayout from '@/components/SiteLayout';
 import styles from './page.module.css';
 
 export default function TicketPage() {
-  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -18,7 +17,7 @@ export default function TicketPage() {
       const res = await fetch('/api/ticket', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email || undefined }),
+        body: JSON.stringify({}),
       });
 
       const data = await res.json();
@@ -71,22 +70,13 @@ export default function TicketPage() {
           </div>
 
           <div className={styles.right}>
-            <div className={styles.checkoutBox}>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.emailInput}
-              />
-              <button
-                onClick={handleCheckout}
-                disabled={loading}
-                className={styles.buyButton}
-              >
-                {loading ? '...' : 'Buy Now'}
-              </button>
-            </div>
+            <button
+              onClick={handleCheckout}
+              disabled={loading}
+              className={styles.buyButton}
+            >
+              {loading ? '...' : 'Buy Now'}
+            </button>
             {error && <p className={styles.error}>{error}</p>}
 
             <div className={styles.timeline}>

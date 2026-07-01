@@ -116,42 +116,17 @@
   gap: 1.5rem;
 }
 
-.checkoutBox {
-  display: flex;
-  gap: 0;
-  border: 1px solid var(--color-line);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.emailInput {
-  flex: 1;
-  padding: 1rem;
-  border: none;
-  font-size: 0.9rem;
-  font-family: inherit;
-  background: #fff;
-  color: var(--color-ink);
-}
-
-.emailInput::placeholder {
-  color: var(--color-muted-3);
-}
-
-.emailInput:focus {
-  outline: none;
-}
-
 .buyButton {
+  width: 100%;
   padding: 1rem 1.5rem;
   background: var(--color-sakura);
   color: #fff;
   border: none;
+  border-radius: 4px;
   font-size: 0.9rem;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s ease;
-  white-space: nowrap;
 }
 
 .buyButton:hover {
