@@ -1,70 +1,56 @@
 'use client';
 
+import SiteLayout from '@/components/SiteLayout';
 import styles from './page.module.css';
 
 const links = [
   {
-    title: 'Yae Publishing House',
-    subtitle: 'Home',
+    title: 'Shop',
     url: 'https://yaepublishing.house',
-    icon: '🏠',
   },
   {
-    title: 'Yae Publishing House',
+    title: 'Instagram',
     subtitle: '@yae.trades',
     url: 'https://instagram.com/yae.trades',
-    icon: '📸',
   },
   {
     title: 'Cosplay',
     subtitle: '@yuuko.koro',
     url: 'https://instagram.com/yuuko.koro',
-    icon: '🦊',
+  },
+  {
+    title: 'Twitter',
+    subtitle: '@pci_yae',
+    url: 'https://twitter.com/pci_yae',
   },
 ];
 
 export default function LinksPage() {
   return (
-    <main className={styles.main}>
-      {/* Ambient background */}
-      <div className={styles.bgGlow} />
-      <div className={styles.bgNoise} />
-
+    <SiteLayout>
       <div className={styles.container}>
-        {/* Profile section */}
-        <div className={styles.profile}>
-          <div className={styles.avatar}>
-            <span className={styles.avatarEmoji}>🦊</span>
-          </div>
-          <h1 className={styles.name}>Yae Publishing House</h1>
-          <p className={styles.bio}>cosplay · pcb art · mischief</p>
-        </div>
+        <header className={styles.header}>
+          <h1 className={styles.title}>Links</h1>
+          <p className={styles.subtitle}>Find us elsewhere</p>
+        </header>
 
-        {/* Links */}
         <div className={styles.links}>
           {links.map((link, i) => (
             <a
               key={i}
               href={link.url}
-              className={styles.linkCard}
-              target={link.url.startsWith('http') ? '_blank' : undefined}
-              rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className={styles.link}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <span className={styles.linkIcon}>{link.icon}</span>
-              <div className={styles.linkText}>
-                <span className={styles.linkTitle}>{link.title}</span>
+              <span className={styles.linkTitle}>{link.title}</span>
+              {link.subtitle && (
                 <span className={styles.linkSubtitle}>{link.subtitle}</span>
-              </div>
-              <span className={styles.linkArrow}>→</span>
+              )}
             </a>
           ))}
         </div>
-
-        {/* Footer */}
-        <footer className={styles.footer}>
-          <span>© 2158 AE Yae Publishing House</span>
-        </footer>
       </div>
-    </main>
+    </SiteLayout>
   );
 }
