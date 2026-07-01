@@ -11,8 +11,8 @@ const links = [
   },
   {
     title: 'Instagram',
-    subtitle: '@yae.trades',
-    url: 'https://instagram.com/yae.trades',
+    subtitle: '@yaepublishing.house',
+    url: 'https://instagram.com/yaepublishing.house',
   },
   {
     title: 'Cosplay',
@@ -38,7 +38,7 @@ export default function LinksPage() {
         <div className={styles.content}>
           <header className={styles.header}>
             <h1 className={styles.title}>八重堂書店</h1>
-            <p className={styles.subtitle}>Collector goods for worlds worth keeping close</p>
+            <p className={styles.subtitle}>follow for giveaways</p>
           </header>
 
           <div className={styles.links}>
