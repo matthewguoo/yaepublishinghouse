@@ -46,7 +46,7 @@ We look forward to welcoming new voices to the Yae Publishing House family. May 
 
 We are pleased to announce the Star Rail Special Pass, a limited edition gold-plated collectible commemorating the 2158th Year of the Trailblaze.
 
-[View Product Details](/products/nameless-pass)
+[View Product Details](/products/star-rail-pass)
 
 ## About This Edition
 

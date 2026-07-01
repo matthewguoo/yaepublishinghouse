@@ -118,13 +118,13 @@ export default function SearchProvider({ children }: { children: React.ReactNode
       perform: () => router.push('/products'),
     },
     {
-      id: 'product-nameless-pass',
+      id: 'product-star-rail-pass',
       name: 'Nameless Honor Pass',
       subtitle: 'Limited Edition Gold ENIG - 2,158 units',
       keywords: 'nameless honor pass star rail ipc limited edition collectible',
       icon: '◈',
       section: 'Products',
-      perform: () => router.push('/products/nameless-pass'),
+      perform: () => router.push('/products/star-rail-pass'),
     },
     // Tools
     {

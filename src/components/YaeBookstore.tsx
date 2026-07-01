@@ -17,7 +17,7 @@ type FeaturedArticle = {
 
 const fallbackFeaturedArticles: FeaturedArticle[] = [
   { slug: 'hiring-writers', title: 'The Guuji seeks editorial staff, reporters, and writers', date: '2026.05.18', category: 'Hiring' },
-  { slug: 'nameless-pass-announcement', title: 'Nameless Honor Pass now available for pre-order', date: '2026.05.17', category: 'Product' },
+  { slug: 'star-rail-pass-announcement', title: 'Nameless Honor Pass now available for pre-order', date: '2026.05.17', category: 'Product' },
   { slug: 'hoyofair-2026', title: 'HoYoFair 2026 Los Angeles: A Report from the Front Row', date: '2026.05.03', category: 'Report' },
 ];
 
@@ -122,7 +122,7 @@ export default function YaeBookstore() {
       title: t('ipcTitle', lang),
       desc: t('ipcDesc', lang),
       isIpc: true,
-      href: '/products/nameless-pass',
+      href: '/products/star-rail-pass',
     },
   ];
 
@@ -326,15 +326,15 @@ export default function YaeBookstore() {
                   and the Nameless' contributions to the situation in Penacony (and to acquire credits for fuel).
                 </p>
                 <div className={styles.seizedCtaRow}>
-                  <a href="/products/nameless-pass" className={styles.seizedCtaPrimary}>
+                  <a href="/products/star-rail-pass" className={styles.seizedCtaPrimary}>
                     View Product
                   </a>
-                  <a href="/news/nameless-pass-announcement" className={styles.seizedCtaSecondary}>
+                  <a href="/news/star-rail-pass-announcement" className={styles.seizedCtaSecondary}>
                     See Announcement →
                   </a>
                 </div>
                 <div className={styles.seizedProduct}>
-                  <img src="/nameless-pass.png" alt="Nameless Honor Pass" />
+                  <img src="/star-rail-pass.png" alt="Nameless Honor Pass" />
                 </div>
               </div>
             ) : (

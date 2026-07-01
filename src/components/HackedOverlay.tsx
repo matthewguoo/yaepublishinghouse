@@ -75,13 +75,13 @@ export default function HackedOverlay({ isGlitching, isHacked }: HackedOverlayPr
                   <li>UV silkscreen printing</li>
                   <li>Corrosion-proof, reflective</li>
                 </ul>
-                <a href="/products/nameless-pass" className={styles.cta}>
+                <a href="/products/star-rail-pass" className={styles.cta}>
                   VIEW PRODUCT
                   <span className={styles.arrow}>→</span>
                 </a>
               </div>
               <div className={styles.productImage}>
-                <img src="/nameless-pass.png" alt="Nameless Honor Pass" />
+                <img src="/star-rail-pass.png" alt="Nameless Honor Pass" />
               </div>
             </div>
           </div>

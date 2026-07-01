@@ -18,7 +18,7 @@ export default function SitemapPage() {
             <h2 className={styles.columnTitle}>Shop</h2>
             <ul className={styles.linkList}>
               <li><Link href="/products">Products</Link></li>
-              <li><Link href="/products/nameless-pass">Nameless Honor Pass</Link></li>
+              <li><Link href="/products/star-rail-pass">Nameless Honor Pass</Link></li>
             </ul>
           </div>
           

@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 const products = [
   {
-    slug: 'nameless-pass',
+    slug: 'star-rail-pass',
     sku: 'YPH-0001',
     name: 'Star Rail Special Pass Keychain',
     subtitle: '24k Gold Plated First Edition',
@@ -14,7 +14,7 @@ const products = [
     isLive: false, // set to true when ready to sell
     stockStatus: 'In Stock',
     shippingText: 'Ships free from US',
-    images: ['/nameless-pass.png'],
+    images: ['/star-rail-pass.png'],
     specs: '.999 24k Gold Plating|Ceramic anti-fingerprint coat|Light fiberglass base',
     ctaType: 'email',
     ctaButtonText: 'Join Waitlist',
