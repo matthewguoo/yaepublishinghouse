@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'ticket.yaepublishing.house' }],
-        destination: 'https://yaepublishing.house/ticket',
+        destination: 'https://yaepublishing.house/links',
         permanent: true,
       },
     ];
