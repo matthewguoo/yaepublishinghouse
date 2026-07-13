@@ -1,0 +1,280 @@
+.shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-sakura);
+  margin-bottom: 0.35rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin: 0;
+  color: var(--color-ink);
+}
+
+.backLink {
+  font-size: 0.85rem;
+  color: var(--color-sakura);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-sakura-soft);
+}
+.backLink:hover { border-bottom-color: var(--color-sakura); }
+
+.section { margin-bottom: 3rem; }
+
+.sectionTitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted-2);
+  margin: 0 0 1rem;
+  font-weight: 400;
+}
+
+.empty {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: var(--color-muted-3);
+  padding: 2rem;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-line);
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-soft);
+  font-size: 0.88rem;
+}
+
+.table th, .table td {
+  text-align: left;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--color-line-soft);
+  vertical-align: top;
+}
+
+.table th {
+  background: var(--color-surface-alt);
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted-2);
+}
+
+.table tr:last-child td { border-bottom: 0; }
+
+.muted { color: var(--color-muted-3); font-size: 0.8rem; }
+.mono { font-family: ui-monospace, Menlo, monospace; }
+
+.chip {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-line);
+  color: var(--color-muted-1);
+  background: var(--color-surface);
+}
+.chip_new { background: #fbf1f1; color: #8b1c1c; border-color: #ecc5c5; }
+.chip_confirmed { background: #f4faf5; color: #386c48; border-color: #cfe1d4; }
+.chip_in_production { background: #fbf6ea; color: #7a5a10; border-color: #eadfbf; }
+.chip_shipped { background: #eef4fb; color: #1d4b7a; border-color: #c5d7ec; }
+.chip_delivered { background: #f0f0f0; color: #333; border-color: #ddd; }
+.chip_cancelled { background: #fafafa; color: #888; border-color: #ddd; text-decoration: line-through; }
+
+.rowLink {
+  color: var(--color-sakura);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+.rowLink:hover { text-decoration: underline; }
+
+.dangerBtn {
+  padding: 0.3rem 0.7rem;
+  background: transparent;
+  border: 1px solid #ecc5c5;
+  color: #8b1c1c;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+.dangerBtn:hover { background: #fbf1f1; }
+
+/* Promo form */
+
+.promoForm {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-soft);
+}
+
+.formTitle {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted-2);
+  font-weight: 400;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 700px) { .formGrid { grid-template-columns: 1fr 1fr; } }
+
+.formGrid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.formGrid label span {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted-2);
+}
+.formGrid input {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  font: inherit;
+  outline: none;
+}
+.formGrid input:focus { border-color: var(--color-sakura); }
+.formFull { grid-column: 1 / -1; }
+
+.submitBtn {
+  padding: 0.6rem 1.25rem;
+  background: var(--color-sakura);
+  color: #fff;
+  border: 0;
+  font-family: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.submitBtn:hover { background: var(--color-sakura-dark); }
+
+/* Order detail */
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+}
+@media (max-width: 800px) { .detailGrid { grid-template-columns: 1fr; } }
+
+.previewFrame {
+  aspect-ratio: 1 / 1;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-line-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.previewFrame img { width: 100%; height: 100%; object-fit: contain; }
+
+.previewEmpty {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: var(--color-muted-3);
+}
+
+.dl {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+}
+.dl > div {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-line-soft);
+  font-size: 0.9rem;
+}
+.dl dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted-2);
+  margin: 0;
+}
+.dl dd { margin: 0; color: var(--color-ink-2); }
+
+.notesBlock {
+  padding: 0.9rem 1rem;
+  background: var(--color-surface-alt);
+  border-left: 3px solid var(--color-sakura);
+  margin-bottom: 1.5rem;
+}
+.notesLabel {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted-2);
+  margin-bottom: 0.4rem;
+}
+.notesBlock p {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: var(--color-ink-2);
+  line-height: 1.55;
+}
+
+.statusForm {
+  padding: 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-soft);
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+}
+.statusForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+.statusForm label span {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted-2);
+}
+.statusForm select {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  font: inherit;
+}

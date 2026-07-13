@@ -5,10 +5,12 @@ import styles from './admin.module.css';
 export const dynamic = 'force-dynamic';
 
 export default async function AdminPage() {
-  const [productCount, articleCount, pendingMedia] = await Promise.all([
+  const [productCount, articleCount, pendingMedia, keychainNew, keychainTotal] = await Promise.all([
     prisma.product.count(),
     prisma.article.count(),
     prisma.mediaSubmission.count({ where: { status: 'pending' } }),
+    prisma.keychainOrder.count({ where: { status: 'new' } }),
+    prisma.keychainOrder.count(),
   ]);
 
   return (
@@ -26,6 +28,11 @@ export default async function AdminPage() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
+          <Link href="/admin/keychains" className={styles.panel} style={{ padding: '1.5rem', textDecoration: 'none', display: 'block' }}>
+            <p className={styles.eyebrow}>Custom orders</p>
+            <h2 className={styles.title} style={{ fontSize: '1.25rem' }}>Keychains ({keychainNew} new / {keychainTotal})</h2>
+            <p className={styles.subtitle}>Manage orders and promo codes</p>
+          </Link>
           <Link href="/admin/products" className={styles.panel} style={{ padding: '1.5rem', textDecoration: 'none', display: 'block' }}>
             <p className={styles.eyebrow}>Catalog</p>
             <h2 className={styles.title} style={{ fontSize: '1.25rem' }}>Products ({productCount})</h2>
