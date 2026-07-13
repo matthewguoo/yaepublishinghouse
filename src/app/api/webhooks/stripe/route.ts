@@ -50,6 +50,18 @@ export async function POST(req: NextRequest) {
 }
 
 async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
+  // Keychain custom order path
+  const keychainOrderId = session.metadata?.keychainOrderId;
+  if (keychainOrderId || session.metadata?.kind === 'keychain') {
+    if (!keychainOrderId) return;
+    await prisma.keychainOrder.update({
+      where: { id: keychainOrderId },
+      data: { status: 'confirmed' },
+    }).catch((e) => console.error('keychain order update failed', e));
+    console.log(`Keychain order ${keychainOrderId} confirmed`);
+    return;
+  }
+
   const orderId = session.metadata?.orderId;
   const cartId = session.metadata?.cartId;
   if (!orderId) {

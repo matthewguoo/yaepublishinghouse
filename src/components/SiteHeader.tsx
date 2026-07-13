@@ -49,6 +49,7 @@ export default function SiteHeader() {
         <div className={styles.navExpanded}>
           <div className={styles.navColumn}>
             <span className={styles.navColumnTitle}>Shop</span>
+            <Link href="/keychains" className={styles.navLink}>Keychains</Link>
             <Link href="/products" className={styles.navLink}>Products</Link>
             <Link href="/news" className={styles.navLink}>Editorial</Link>
             <Link href="/tools/png-transparency" className={styles.navLink}>Tools</Link>
@@ -95,6 +96,7 @@ export default function SiteHeader() {
         <nav className={styles.overlayInner}>
           <div className={styles.overlaySection}>
             <span className={styles.overlaySectionTitle}>Shop</span>
+            <Link href="/keychains" className={styles.overlayLink}>Keychains</Link>
             <Link href="/products" className={styles.overlayLink}>Products</Link>
             <Link href="/news" className={styles.overlayLink}>Editorial</Link>
             <Link href="/tools/png-transparency" className={styles.overlayLink}>Tools</Link>

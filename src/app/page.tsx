@@ -94,18 +94,31 @@ export default async function Home() {
 
   return (
     <SiteLayout>
-      {/* Hero */}
+      {/* Hero — keychain studio CTA */}
       <section className={styles.hero}>
         <img src="/hero-sketch.png" alt="" className={styles.heroSketch} />
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>Yae Publishing House</h1>
-          <p className={styles.heroTagline}>Collector goods for worlds worth keeping close</p>
+          <div className={styles.heroEyebrow}>Yae Publishing House · Custom Keychains</div>
+          <h1 className={styles.heroTitle}>Real gold. On your art.</h1>
+          <p className={styles.heroTagline}>
+            Small-batch keychains plated in real gold. Upload your PSD, see it rendered, order the run.
+          </p>
+          <div className={styles.heroActions}>
+            <Link href="/keychains" className={styles.heroCta}>Open the studio →</Link>
+            <Link href="/keychains/how-to" className={styles.heroCtaAlt}>Artwork guide</Link>
+          </div>
+          <div className={styles.heroFinePrint}>
+            Launch promo · 50 pcs, 5 designs, US$100 with code <b>LAUNCH50</b>
+          </div>
         </div>
       </section>
 
-      {/* Products Section */}
+      {/* Products Section — reframed as portfolio */}
       <section className={styles.productsSection}>
-        <SectionHeader title="Products" as="h1" />
+        <SectionHeader title="Selected work" as="h2" />
+        <p className={styles.portfolioIntro}>
+          Small runs we&rsquo;ve made. Each one shipped to an artist.
+        </p>
 
         <div className={styles.productsList}>
           {products.map((product) => (

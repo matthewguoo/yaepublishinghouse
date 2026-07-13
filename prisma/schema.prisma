@@ -23,6 +23,7 @@ model User {
   mediaSubmissions MediaSubmission[]
   carts            Cart[]
   orders           Order[]
+  keychainOrders   KeychainOrder[]
 }
 
 model Session {
@@ -249,4 +250,41 @@ model OrderItem {
   product      Product @relation(fields: [productId], references: [id], onDelete: SetNull)
 
   @@index([orderId])
+}
+
+model KeychainOrder {
+  id           String   @id @default(cuid())
+  userId       String?
+  name         String
+  email        String
+  handle       String?
+  notes        String?
+  fileName     String?
+  quantity     Int
+  designs      Int
+  priceInCents Int
+  previewPng   String?  @db.Text
+  status       String   @default("new") // new | confirmed | in_production | shipped | cancelled
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user         User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model KeychainPromo {
+  id            String    @id @default(cuid())
+  code          String    @unique
+  discountPct   Int       @default(50)
+  maxUses       Int?
+  timesUsed     Int       @default(0)
+  expiresAt     DateTime?
+  note          String?
+  createdAt     DateTime  @default(now())
+
+  @@index([code])
 }
